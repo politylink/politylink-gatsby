@@ -1,0 +1,23 @@
+.container {
+    width: 650px;
+    margin: 0 auto;
+}
+
+.name {
+    margin: 10px 0;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.number {
+    margin: 10px 0;
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.reason {
+    padding: 0px 15px;
+    margin: 10px 0;
+    border-left: 3px solid rgba(0, 0, 0, .15);
+    font-style: italic;
+}
