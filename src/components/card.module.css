@@ -1,0 +1,19 @@
+.card {
+    align-items: center;
+    margin: 0 12px 12px 12px;
+    width: 300px;
+    background: #fff;
+    box-shadow: 0 2px 5px #ccc;
+  }
+  
+.title {
+    padding: 5px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.description {
+    padding: 0px 8px 5px 8px;
+    margin: 0;
+    font-size: small;
+}
