@@ -13,12 +13,12 @@ export default function Bill({ data }) {
 }
 
 export const query = graphql`
-{
+query($billId: ID!){
   politylink {
-    allBills(filter:{id:"Bill:WdefPalfunUEElfjYpFx3Q"}){
-      name
-      billNumber
-      reason
+    allBills(filter: { id:$billId }) {
+        name
+        billNumber
+        reason
     }
   }
 }
