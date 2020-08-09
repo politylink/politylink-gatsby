@@ -1,6 +1,8 @@
 import React from "react"
 import styles from "./bill.module.css"
 import ProgressBadge from "../components/progress"
+import Container from "../components/container"
+import LinkCard from "../components/linkCard"
 
 export const formatDate = (date) => {
   if (date == null || date.year == null || date.month == null || date.day == null) {
@@ -25,6 +27,12 @@ export default function Bill({ data }) {
             <h3 className={styles.number}>{ bill.billNumber }</h3>
             <p className={styles.reason}>{ bill.reason }</p>
             <ProgressBadge arrows={arrows}/>
+            <p className={styles.section}>公式リンク</p>
+            <Container>
+              {bill.urls.map((url) => {
+                  return <LinkCard href={url.url} title={url.title} domain={url.domain} />
+              })}
+            </Container>
         </div>
     )
 }
@@ -36,6 +44,11 @@ query($billId: ID!){
       name
       billNumber
       reason
+      urls {
+        url
+        title
+        domain
+      }
       submittedDate{
         year
         month

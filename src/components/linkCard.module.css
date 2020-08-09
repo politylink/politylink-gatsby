@@ -1,0 +1,36 @@
+.card {
+    width: 80px;
+    height: 80px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #bbb;
+    margin: 5px;
+    text-decoration: none;
+    color:#333;
+    text-align: center;
+}
+
+.icon {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.title {
+    height: 30%;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.domain {
+    height: 20%;
+    margin: 0;
+    padding: 0;
+    font-size: small;
+    text-align: center;
+}
