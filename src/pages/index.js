@@ -2,18 +2,19 @@ import React from "react"
 import Card from "../components/card"
 import Container from "../components/container"
 import { SearchBox, SearchResult } from "../components/search"
+import SEO from "../components/seo"
 
 export default class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            filterText: localStorage.getItem('bq') || '',
+            filterText: (typeof window !== 'undefined' && localStorage.getItem('bq')) || '',
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        localStorage.setItem('bq', event.target.value);
+        typeof window !== 'undefined' && localStorage.setItem('bq', event.target.value);
         this.setState({filterText: event.target.value});
     }
 
@@ -29,6 +30,7 @@ export default class App extends React.Component {
         const filteredBills = this.filterBills(this.props.data.politylink.allBills, this.state.filterText)
         return (
             <div>
+                <SEO/>
                 <Container>
                     <SearchBox handleChange={this.handleChange} value={this.state.filterText}/>
                     <SearchResult value={filteredBills.length + '件表示'}/>
