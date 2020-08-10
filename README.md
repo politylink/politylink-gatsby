@@ -23,3 +23,8 @@ npm install
 ```
 gatsby develop -H 0.0.0.0
 ```
+
+```
+gatsby build
+gatsby serve -H 0.0.0.0
+```

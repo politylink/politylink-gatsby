@@ -18,16 +18,16 @@ export default class App extends React.Component {
         this.setState({filterText: event.target.value});
     }
 
-    filterBills(bills, text) {
+    filterBills(bills) {
       return (bills
         .filter((bill) => {
-            return (bill.billNumber+bill.name+bill.reason).indexOf(text) !== -1
+            return (bill.billNumber+bill.name+bill.reason).indexOf(this.state.filterText) !== -1
         })
       );
     }
 
     render() {
-        const filteredBills = this.filterBills(this.props.data.politylink.allBills, this.state.filterText)
+        const filteredBills = this.filterBills(this.props.data.politylink.allBills)
         return (
             <div>
                 <SEO/>
