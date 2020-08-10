@@ -1,12 +1,18 @@
-.input {
+.box {
     width: 100%;
     font-size: 1.3rem;
     height: 3rem;
-    margin: 20px auto;
+    margin: 20px auto 0px auto;
     padding: 0 1rem;
     box-shadow: inset 0 0 3px #ccc;
     background: #fff;
     border-radius: 3px;
     border: none;
     color:#333;
+}
+
+.result {
+    margin: 0px 5px 20px auto;
+    color: #333;
+    font-size: small;
 }
