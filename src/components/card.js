@@ -1,11 +1,13 @@
 import React from "react"
 import styles from "./card.module.css"
+import { Link } from "gatsby"
 
 export default function Card(props) {
     return (
-        <a className={styles.card} href={props.href}>
+        <Link className={styles.card} to={props.to}>
+            <p>{props.id}</p>
             <p className={styles.title}>{props.title}</p>
             <p className={styles.description}>{props.description}</p>
-        </a>
+        </Link>
     )
 }
