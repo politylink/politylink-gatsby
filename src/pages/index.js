@@ -38,7 +38,6 @@ export default class App extends React.Component {
                 <Container>
                     {filteredBills.map((bill) => {
                         return <Card
-                          id={bill.id}
                           title={bill.billNumber}
                           description={bill.name}
                           to={"/bill/" + bill.id.split(':').pop()}

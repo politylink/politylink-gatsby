@@ -5,7 +5,6 @@ import { Link } from "gatsby"
 export default function Card(props) {
     return (
         <Link className={styles.card} to={props.to}>
-            <p>{props.id}</p>
             <p className={styles.title}>{props.title}</p>
             <p className={styles.description}>{props.description}</p>
         </Link>
