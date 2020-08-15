@@ -1,8 +1,8 @@
 import React from "react"
-import { graphql } from 'gatsby'
+import {graphql} from 'gatsby'
 import Card from "../components/card"
-import { Container, FlexContainer } from "../components/container"
-import { SearchBox, SearchResult } from "../components/search"
+import {FlexContainer} from "../components/container"
+import {SearchBox, SearchResult} from "../components/search"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 
@@ -21,11 +21,11 @@ export default class App extends React.Component {
     }
 
     filterBills(bills) {
-      return (bills
-        .filter((bill) => {
-            return (bill.billNumber+bill.name+bill.reason).indexOf(this.state.filterText) !== -1
-        })
-      );
+        return (bills
+                .filter((bill) => {
+                    return (bill.billNumber + bill.name + bill.reason).indexOf(this.state.filterText) !== -1
+                })
+        );
     }
 
     render() {
@@ -40,9 +40,9 @@ export default class App extends React.Component {
                 <FlexContainer>
                     {filteredBills.map((bill) => {
                         return <Card
-                          title={bill.billNumber}
-                          description={bill.name}
-                          to={"/bill/" + bill.id.split(':').pop()}
+                            title={bill.billNumber}
+                            description={bill.name}
+                            to={"/bill/" + bill.id.split(':').pop()}
                         />;
                     })}
                 </FlexContainer>
@@ -52,14 +52,14 @@ export default class App extends React.Component {
 }
 
 export const query = graphql`
-{
-  politylink {
-    allBills {
-      id
-      name
-      billNumber
-      reason
+    {
+        politylink {
+            allBills {
+                id
+                name
+                billNumber
+                reason
+            }
+        }
     }
-  }
-}
 `
