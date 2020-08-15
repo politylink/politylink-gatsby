@@ -1,8 +1,10 @@
 import React from "react"
+import { graphql } from 'gatsby'
 import Card from "../components/card"
-import Container from "../components/container"
+import { Container, FlexContainer } from "../components/container"
 import { SearchBox, SearchResult } from "../components/search"
 import SEO from "../components/seo"
+import Layout from "../components/layout"
 
 export default class App extends React.Component {
     constructor(props) {
@@ -29,13 +31,13 @@ export default class App extends React.Component {
     render() {
         const filteredBills = this.filterBills(this.props.data.politylink.allBills)
         return (
-            <div>
+            <Layout>
                 <SEO/>
-                <Container>
+                <FlexContainer>
                     <SearchBox handleChange={this.handleChange} value={this.state.filterText}/>
                     <SearchResult value={filteredBills.length + '件表示'}/>
-                </Container>
-                <Container>
+                </FlexContainer>
+                <FlexContainer>
                     {filteredBills.map((bill) => {
                         return <Card
                           title={bill.billNumber}
@@ -43,8 +45,8 @@ export default class App extends React.Component {
                           to={"/bill/" + bill.id.split(':').pop()}
                         />;
                     })}
-                </Container>
-            </div>
+                </FlexContainer>
+            </Layout>
         )
     }
 }

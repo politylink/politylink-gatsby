@@ -1,7 +1,11 @@
-.container {
+.default {
     width: 100%;
     max-width: 650px;
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
+}
+
+.flex {
+    composes: default;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

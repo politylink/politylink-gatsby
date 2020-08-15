@@ -1,0 +1,61 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: auto;
+    width: 100%;
+    background-color: #174a5c;
+    display: flex;
+}
+
+.main {
+    flex-grow: 1;
+}
+
+.footer {
+    height: auto;
+    width: 100%;
+    background-color: #174a5c;
+    color: white;
+    text-align: center;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.home {
+}
+
+.hometext {
+    color: white;
+    margin: 0.5rem 0 0.5rem 1rem;
+    font-size: 1.5em;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    margin-left: auto;
+}
+
+.navtext {
+    color: white;
+    margin: 1rem 1rem 0.5rem 1rem;
+    font-size: 0.8rem;
+}
+
+.fnav {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.fnavtext {
+    color: white;
+    margin: 0.2rem;
+    font-size: 0.7rem;
+}

@@ -1,13 +1,15 @@
 .card {
     width: 80px;
     height: 80px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: #bbb;
     margin: 5px;
-    text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #bbb;
     color:#333;
     text-align: center;
+    text-decoration: none;
+    box-shadow: 0 1px 3px #ccc;
+    background: #fff;
 }
 
 .icon {
@@ -21,15 +23,14 @@
     height: 30%;
     margin: 0;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1rem;
+    text-align: center;
 }
 
 .domain {
     height: 20%;
     margin: 0;
     padding: 0;
-    font-size: small;
+    font-size: 0.6rem;
     text-align: center;
 }
