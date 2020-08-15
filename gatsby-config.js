@@ -4,6 +4,11 @@
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
+console.log(process.env.GOOGLE_ANALYTICS_TRACKING_ID)
+
 module.exports = {
     siteMetadata: {
         title: `PolityLink`,
@@ -38,5 +43,12 @@ module.exports = {
         },
         `gatsby-plugin-offline`,
         `gatsby-plugin-react-helmet`,
+        {
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+                trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
+                head: true,
+            }
+        }
     ]
 }
