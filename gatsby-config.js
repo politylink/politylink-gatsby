@@ -24,7 +24,7 @@ module.exports = {
                 // This is the field under which it's accessible
                 fieldName: "politylink",
                 // URL to query from
-                url: "http://www.politylink.jp:4000/",
+                url: "http://www.politylink.jp:4000/",  // ToDo: switch to localhost on local
             },
         },
         {
