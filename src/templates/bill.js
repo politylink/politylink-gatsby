@@ -27,7 +27,7 @@ export default function Bill({data}) {
         {"title": "衆議院\n本会議", "value": formatArrowDate(bill.passedRepresentativesDate), "color": 2},
         {"title": "参議院\n委員会", "value": formatArrowDate(bill.passedCouncilorsCommitteeDate), "color": 3},
         {"title": "参議院\n本会議", "value": formatArrowDate(bill.passedCouncilorsDate), "color": 4},
-        {"title": "交付", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
+        {"title": "公布", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
     ]
     const description = bill.name + "（" + bill.billNumber + "）に関する公式情報（議案本文、理由、概要、審議状況、国会会議録など）をまとめています。"
     const minutes = bill.beDiscussedByMinutes.sort((a, b) => {
