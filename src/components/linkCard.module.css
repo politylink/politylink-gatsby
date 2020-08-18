@@ -13,18 +13,25 @@
 }
 
 .icon {
-    height: 50%;
+    height: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
   
 .title {
-    height: 30%;
+    height: 40%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titletext {
     margin: 0;
     padding: 0;
-    font-size: 1rem;
-    text-align: center;
+    font-size: 0.9rem;
+    line-height: 0.9rem;
 }
 
 .domain {

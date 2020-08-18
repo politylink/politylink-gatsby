@@ -9,9 +9,11 @@ export default function LinkCard(props) {
     return (
         <a className={styles.card} href={props.href} target="_blank" rel="noopener noreferrer">
             <div  className={styles.icon}>
-                <FontAwesomeIcon icon={faExternalLinkAlt} size="2x"/>
+                <FontAwesomeIcon icon={faExternalLinkAlt} size="lg"/>
             </div>
-            <p className={styles.title}>{props.title}</p>
+            <div className={styles.title}>
+                <p className={styles.titletext}>{props.title}</p>
+            </div>
             <p className={styles.domain}>{props.domain}</p>
         </a>
     );
