@@ -11,8 +11,13 @@
     color:#333;
 }
 
+.filter {
+    margin: 10px auto 10px 8px;
+    color: #333;
+}
+
 .result {
-    margin: 0px 8px 20px auto;
+    margin: 0 8px 10px auto;
     color: #333;
     font-size: small;
 }

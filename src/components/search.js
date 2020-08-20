@@ -13,6 +13,19 @@ export const SearchBox = (props) => {
     )
 }
 
+export const SearchFilter = (props) => {
+    return (
+        <label className={styles.filter}>
+            <input
+                type="checkbox"
+                defaultChecked={props.checked}
+                onChange={props.handleChange}
+            />
+            {props.label}
+        </label>
+    )
+}
+
 export const SearchResult = (props) => {
     return <p className={styles.result}>{props.value}</p>;
 }

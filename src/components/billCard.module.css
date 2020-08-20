@@ -5,13 +5,26 @@
     background: #fff;
     box-shadow: 0 2px 5px #ccc;
     text-decoration: none;
-    color:#333;
-  }
-  
+    color: #333;
+}
+
+.header {
+    display: flex;
+}
+
 .title {
-    padding: 5px;
-    margin: 0;
+    margin: 5px;
     font-weight: bold;
+    flex-grow: 1;
+}
+
+.status {
+    margin: 3px 0 auto 0;
+    padding: 0 5px;
+    color: white;
+    background-color: #c27ba0ff;
+    font-size: small;
+    text-align: right;
 }
 
 .description {

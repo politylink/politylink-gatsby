@@ -4,7 +4,7 @@ exports.createPages = async ({actions, graphql}) => {
     const {data} = await graphql(`
     {
         politylink {
-            allBills {
+            Bill {
                 id
             }
         }
@@ -12,7 +12,7 @@ exports.createPages = async ({actions, graphql}) => {
   `)
 
     console.log(JSON.stringify(data, null, 4))
-    data.politylink.allBills.forEach(({id}) => {
+    data.politylink.Bill.forEach(({id}) => {
         actions.createPage({
             path: "/bill/" + id.split(':').pop(),
             component: path.resolve(`./src/templates/bill.js`),
