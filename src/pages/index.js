@@ -1,23 +1,35 @@
 import React from "react"
 import {graphql} from 'gatsby'
-import Card from "../components/card"
+import BillCard from "../components/billCard"
 import {FlexContainer} from "../components/container"
-import {SearchBox, SearchResult} from "../components/search"
+import {SearchBox, SearchFilter, SearchResult} from "../components/search"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
+
+const isPassedBill = (bill) => {
+    return bill.proclaimedDate.year != null
+}
 
 export default class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             filterText: (typeof window !== 'undefined' && localStorage.getItem('bq')) || '',
+            filterPassed: (typeof window !== 'undefined' && localStorage.getItem('bp') === 'true') || false,
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleTextInput = this.handleTextInput.bind(this);
+        this.handleFilterClick = this.handleFilterClick.bind(this)
     }
 
-    handleChange(event) {
+    handleTextInput(event) {
         typeof window !== 'undefined' && localStorage.setItem('bq', event.target.value);
         this.setState({filterText: event.target.value});
+    }
+
+    handleFilterClick() {
+        const newVal = !this.state.filterPassed
+        typeof window !== 'undefined' && localStorage.setItem('bp', newVal.toString());
+        this.setState({filterPassed: newVal})
     }
 
     filterBills(bills) {
@@ -25,23 +37,35 @@ export default class App extends React.Component {
                 .filter((bill) => {
                     return (bill.billNumber + bill.name + bill.reason).indexOf(this.state.filterText) !== -1
                 })
+                .filter((bill) => {
+                    return isPassedBill(bill) || !this.state.filterPassed
+                })
         );
     }
 
     render() {
-        const filteredBills = this.filterBills(this.props.data.politylink.allBills)
+        const filteredBills = this.filterBills(this.props.data.politylink.Bill)
         return (
             <Layout>
                 <SEO/>
                 <FlexContainer>
-                    <SearchBox handleChange={this.handleChange} value={this.state.filterText}/>
+                    <SearchBox
+                        handleChange={this.handleTextInput}
+                        value={this.state.filterText}
+                    />
+                    <SearchFilter
+                        handleChange={this.handleFilterClick}
+                        checked={this.state.filterPassed}
+                        label={'成立した議案のみを表示'}
+                    />
                     <SearchResult value={filteredBills.length + '件表示'}/>
                 </FlexContainer>
                 <FlexContainer>
                     {filteredBills.map((bill) => {
-                        return <Card
+                        return <BillCard
                             title={bill.billNumber}
                             description={bill.name}
+                            isPassed={isPassedBill(bill)}
                             to={"/bill/" + bill.id.split(':').pop()}
                         />;
                     })}
@@ -54,11 +78,14 @@ export default class App extends React.Component {
 export const query = graphql`
     {
         politylink {
-            allBills {
+            Bill {
                 id
                 name
                 billNumber
                 reason
+                proclaimedDate {
+                    year
+                }
             }
         }
     }

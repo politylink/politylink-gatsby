@@ -20,7 +20,7 @@ export const formatMinutesDate = (date) => {
 }
 
 export default function Bill({data}) {
-    const bill = data.politylink.allBills[0]
+    const bill = data.politylink.Bill[0]
     const arrows = [
         {"title": "提出", "value": formatArrowDate(bill.submittedDate), "color": 0},
         {"title": '衆議院\n委員会', "value": formatArrowDate(bill.passedRepresentativesCommitteeDate), "color": 1},
@@ -74,7 +74,7 @@ export default function Bill({data}) {
 export const query = graphql`
     query($billId: ID!){
         politylink {
-            allBills(filter:{id:$billId}){
+            Bill(filter:{id:$billId}){
                 name
                 billNumber
                 reason
