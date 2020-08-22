@@ -35,7 +35,7 @@ export default class App extends React.Component {
     filterBills(bills) {
         return (bills
                 .filter((bill) => {
-                    return (bill.billNumber + bill.name + bill.reason).indexOf(this.state.filterText) !== -1
+                    return (bill.billNumber + bill.name + bill.alias + bill.reason).indexOf(this.state.filterText) !== -1
                 })
                 .filter((bill) => {
                     return isPassedBill(bill) || !this.state.filterPassed
@@ -83,6 +83,7 @@ export const query = graphql`
                 name
                 billNumber
                 reason
+                alias
                 proclaimedDate {
                     year
                 }
