@@ -3,12 +3,14 @@ import {graphql} from "gatsby"
 import Layout from "../components/layout";
 import {Container} from "../components/container";
 import styles from "./markdown.module.css"
+import SEO from "../components/seo";
 
 export default function Template({data}) {
     const {markdownRemark} = data
-    const {html} = markdownRemark
+    const {frontmatter, html} = markdownRemark
     return (
         <Layout>
+            <SEO title={frontmatter.title} description={frontmatter.description}/>
             <Container>
                 <div className={styles.div}
                      dangerouslySetInnerHTML={{__html: html}}
@@ -23,6 +25,8 @@ export const query = graphql`
             html
             frontmatter {
                 slug
+                title
+                description
             }
         }
     }
