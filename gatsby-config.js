@@ -49,6 +49,14 @@ module.exports = {
                 trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
                 head: true,
             }
-        }
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `markdowns`,
+                path: `${__dirname}/src/markdowns`,
+            },
+        },
+        `gatsby-transformer-remark`,
     ]
 }
