@@ -21,14 +21,28 @@ export const formatMinutesDate = (date) => {
 
 export default function Bill({data}) {
     const bill = data.politylink.Bill[0]
-    const arrows = [
-        {"title": "提出", "value": formatArrowDate(bill.submittedDate), "color": 0},
-        {"title": '衆議院\n委員会', "value": formatArrowDate(bill.passedRepresentativesCommitteeDate), "color": 1},
-        {"title": "衆議院\n本会議", "value": formatArrowDate(bill.passedRepresentativesDate), "color": 2},
-        {"title": "参議院\n委員会", "value": formatArrowDate(bill.passedCouncilorsCommitteeDate), "color": 3},
-        {"title": "参議院\n本会議", "value": formatArrowDate(bill.passedCouncilorsDate), "color": 4},
-        {"title": "公布", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
-    ]
+    let arrows
+    if (bill.firstHouse === "REPRESENTATIVES") {
+        arrows = [
+            {"title": "提出", "value": formatArrowDate(bill.submittedDate), "color": 0},
+            {"title": '衆議院\n委員会', "value": formatArrowDate(bill.passedRepresentativesCommitteeDate), "color": 1},
+            {"title": "衆議院\n本会議", "value": formatArrowDate(bill.passedRepresentativesDate), "color": 2},
+            {"title": "参議院\n委員会", "value": formatArrowDate(bill.passedCouncilorsCommitteeDate), "color": 3},
+            {"title": "参議院\n本会議", "value": formatArrowDate(bill.passedCouncilorsDate), "color": 4},
+            {"title": "公布", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
+        ]
+    }
+    else {
+        arrows = [
+            {"title": "提出", "value": formatArrowDate(bill.submittedDate), "color": 0},
+            {"title": "参議院\n委員会", "value": formatArrowDate(bill.passedCouncilorsCommitteeDate), "color": 1},
+            {"title": "参議院\n本会議", "value": formatArrowDate(bill.passedCouncilorsDate), "color": 2},
+            {"title": '衆議院\n委員会', "value": formatArrowDate(bill.passedRepresentativesCommitteeDate), "color": 3},
+            {"title": "衆議院\n本会議", "value": formatArrowDate(bill.passedRepresentativesDate), "color": 4},
+            {"title": "公布", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
+        ]
+    }
+
     const description = bill.name + "（" + bill.billNumber + "）に関する公式情報（議案本文、理由、概要、審議状況、国会会議録など）をまとめています。"
     const minutes = bill.beDiscussedByMinutes.sort((a, b) => {
         const adt = formatMinutesDate(a.startDateTime)
@@ -98,6 +112,7 @@ export const query = graphql`
                     month
                     day
                 }
+                firstHouse
                 passedRepresentativesCommitteeDate{
                     year
                     month
