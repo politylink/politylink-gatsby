@@ -1,0 +1,44 @@
+.name {
+    margin: 10px;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.number {
+    margin: 10px;
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.summary {
+    padding: 0 15px;
+    margin: 10px;
+    border-left: 3px solid rgba(0, 0, 0, .15);
+    color: rgba(0, 0, 0, .8);
+}
+
+.topic {
+    padding: 0 15px;
+    margin: 10px;
+    border-left: 3px solid rgba(0, 0, 0, .15);
+    color: rgba(0, 0, 0, .8);
+}
+
+.section {
+    margin: 20px 10px 5px 10px;
+    padding: 0;
+    font-weight: 700;
+    font-size: 1em;
+}
+
+.links {
+    margin: 0 10px;
+}
+
+.minutes {
+    margin: 0 10px;
+}
+
+.bills {
+    margin: 0 10px;
+}

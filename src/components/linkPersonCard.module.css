@@ -13,12 +13,12 @@
 }
 
 .icon {
-    height: 40%;
+    height: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-  
+
 .title {
     height: 40%;
     text-align: center;
@@ -32,12 +32,4 @@
     padding: 0;
     font-size: 0.8rem;
     line-height: 0.9rem;
-}
-
-.domain {
-    height: 20%;
-    margin: 0;
-    padding: 0;
-    font-size: 0.6rem;
-    text-align: center;
 }
