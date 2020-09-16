@@ -10,3 +10,8 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.space {
+    composes: flex;
+    justify-content: space-between;
+}
