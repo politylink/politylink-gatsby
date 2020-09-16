@@ -1,7 +1,7 @@
 import React from "react"
 import {graphql} from 'gatsby'
 import BillCard from "../components/billCard"
-import {FlexContainer, SpaceContainer} from "../components/container"
+import {FlexContainer} from "../components/container"
 import {SearchBox, SearchFilter, SearchResult} from "../components/search"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
@@ -60,7 +60,7 @@ export default class App extends React.Component {
                     />
                     <SearchResult value={filteredBills.length + '件表示'}/>
                 </FlexContainer>
-                <SpaceContainer>
+                <FlexContainer>
                     {filteredBills.map((bill) => {
                         return <BillCard
                             title={bill.billNumber}
@@ -69,7 +69,7 @@ export default class App extends React.Component {
                             to={"/bill/" + bill.id.split(':').pop()}
                         />;
                     })}
-                </SpaceContainer>
+                </FlexContainer>
             </Layout>
         )
     }

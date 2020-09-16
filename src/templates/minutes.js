@@ -52,6 +52,7 @@ export default function Minutes({data}) {
                                 title={bill.billNumber}
                                 description={bill.name}
                                 to={"/bill/" + bill.id.split(':').pop()}
+                                left={true}
                             />
                         })}
                     </FlexContainer>

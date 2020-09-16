@@ -1,11 +1,19 @@
 .card {
     align-items: center;
-    margin: 0 5px 12px 5px;
+    margin: 0 auto 12px auto;
     width: 300px;
     background: #fff;
-    box-shadow: 0 2px 5px #ccc;
+    box-shadow: 0 1px 3px #ccc;
     text-decoration: none;
     color: #333;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ddd;
+}
+
+.leftCard {
+    composes: card;
+    margin: 0 5px 12px 5px
 }
 
 .header {

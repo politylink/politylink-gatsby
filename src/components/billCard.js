@@ -4,7 +4,7 @@ import {Link} from "gatsby"
 
 export default function BillCard(props) {
     return (
-        <Link className={styles.card} to={props.to}>
+        <Link className={props.left ? styles.leftCard : styles.card} to={props.to}>
             <div className={styles.header}>
                 <div className={styles.title}>{props.title}</div>
                 {props.isPassed && <div className={styles.status}>{'成立'}</div>}

@@ -8,7 +8,3 @@ export const Container = ({children}) => {
 export const FlexContainer = ({children}) => {
     return <div className={styles.flex}>{children}</div>
 }
-
-export const SpaceContainer = ({children}) => {
-    return <div className={styles.space}>{children}</div>
-}
