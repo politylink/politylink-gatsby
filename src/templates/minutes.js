@@ -27,12 +27,12 @@ export default function Minutes({data}) {
                 <h2 className={styles.name}>{minutes.name}</h2>
                 <h3 className={styles.number}>{formatStartDate(minutes.startDateTime)}</h3>
                 <div className={styles.summary}>
-                <p>{minutes.summary}</p>
-                <Container>
-                    {minutes.topics.filter(topic => topic != null).map((topic) => {
-                        return <p className={styles.topic}> {formatTopic(topic)} </p>
-                    })}
-                </Container>
+                    <p>{minutes.summary}</p>
+                    <Container>
+                        {minutes.topics.filter(topic => topic != null).map((topic) => {
+                            return <p className={styles.topic}> {formatTopic(topic)} </p>
+                        })}
+                    </Container>
                 </div>
 
                 <p className={styles.section}>公式リンク</p>
@@ -52,6 +52,7 @@ export default function Minutes({data}) {
                                 title={bill.billNumber}
                                 description={bill.name}
                                 to={"/bill/" + bill.id.split(':').pop()}
+                                left={true}
                             />
                         })}
                     </FlexContainer>
@@ -66,11 +67,6 @@ export const query = graphql`
         politylink {
             Minutes(filter:{id:$minutesId}){
                 name
-                startDateTime{
-                    year
-                    month
-                    day
-                }
                 summary
                 topics
                 urls{
@@ -83,6 +79,7 @@ export const query = graphql`
                     name
                     billNumber
                 }
+                startDateTime { year, month, day }
             }
         }
     }

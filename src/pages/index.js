@@ -84,9 +84,7 @@ export const query = graphql`
                 billNumber
                 reason
                 alias
-                proclaimedDate {
-                    year
-                }
+                proclaimedDate { year, month, day }
             }
         }
     }

@@ -31,8 +31,7 @@ export default function Bill({data}) {
             {"title": "参議院\n本会議", "value": formatArrowDate(bill.passedCouncilorsDate), "color": 4},
             {"title": "公布", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
         ]
-    }
-    else {
+    } else {
         arrows = [
             {"title": "提出", "value": formatArrowDate(bill.submittedDate), "color": 0},
             {"title": "参議院\n委員会", "value": formatArrowDate(bill.passedCouncilorsCommitteeDate), "color": 1},
@@ -92,6 +91,7 @@ export const query = graphql`
                 name
                 billNumber
                 reason
+                firstHouse
                 urls {
                     url
                     title
@@ -101,43 +101,14 @@ export const query = graphql`
                     name
                     url
                     topics
-                    startDateTime{
-                        year
-                        month
-                        day
-                    }
+                    startDateTime { year, month, day }
                 }
-                submittedDate{
-                    year
-                    month
-                    day
-                }
-                firstHouse
-                passedRepresentativesCommitteeDate{
-                    year
-                    month
-                    day
-                }
-                passedRepresentativesDate{
-                    year
-                    month
-                    day
-                }
-                passedCouncilorsCommitteeDate{
-                    year
-                    month
-                    day
-                }
-                passedCouncilorsDate{
-                    year
-                    month
-                    day
-                }
-                proclaimedDate{
-                    year
-                    month
-                    day
-                }
+                submittedDate { year, month, day }
+                passedRepresentativesCommitteeDate { year, month, day }
+                passedRepresentativesDate { year, month, day }
+                passedCouncilorsCommitteeDate { year, month, day }
+                passedCouncilorsDate { year, month, day }
+                proclaimedDate { year, month, day }
             }
         }
     }
