@@ -52,6 +52,7 @@ export default class App extends React.Component {
                     <SearchBox
                         handleChange={this.handleTextInput}
                         value={this.state.filterText}
+                        placeholder="第201回国会の議案から検索"
                     />
                     <SearchFilter
                         handleChange={this.handleFilterClick}

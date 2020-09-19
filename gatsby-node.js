@@ -2,6 +2,8 @@ const path = require(`path`)
 
 exports.createPages = async ({actions, graphql}) => {
     const {createPage} = actions
+
+    // 議案詳細ページ
     const billResult = await graphql(`
     {
         politylink {
@@ -21,6 +23,7 @@ exports.createPages = async ({actions, graphql}) => {
         })
     })
 
+    // 会議録詳細ページ
     const minutesResult = await graphql(`
     {
         politylink {
