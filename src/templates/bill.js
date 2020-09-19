@@ -6,17 +6,15 @@ import {Container, FlexContainer} from "../components/container"
 import LinkCard from "../components/linkCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import MinutesCard from "../components/minutesCard";
+import MinutesCard from "../components/minutesCard"
+import {formatDate} from "../utils/format"
+import {SortByStartDateTime} from "../utils/sort"
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {
         return '-'
     }
     return String(date.year) + "\n" + String(date.month).padStart(2, '0') + "/" + String(date.day).padStart(2, '0')
-}
-
-export const formatMinutesDate = (date) => {
-    return String(date.year) + "/" + String(date.month).padStart(2, '0') + "/" + String(date.day).padStart(2, '0')
 }
 
 export default function Bill({data}) {
@@ -43,13 +41,8 @@ export default function Bill({data}) {
     }
 
     const description = bill.name + "（" + bill.billNumber + "）に関する公式情報（議案本文、理由、概要、審議状況、国会会議録など）をまとめています。"
-    const minutes = bill.beDiscussedByMinutes.sort((a, b) => {
-        const adt = formatMinutesDate(a.startDateTime)
-        const bdt = formatMinutesDate(b.startDateTime)
-        if (adt < bdt) return 1;
-        if (adt > bdt) return -1;
-        return 0;
-    })
+    const minutes = SortByStartDateTime(bill.beDiscussedByMinutes, true)
+
     return (
         <Layout>
             <SEO title={bill.name} description={description}/>
@@ -71,10 +64,10 @@ export default function Bill({data}) {
                     <FlexContainer>
                         {minutes.map((minutes) => {
                             return <MinutesCard
-                                href={minutes.url}
+                                to={"/minutes/" + minutes.id.split(':').pop()}
                                 name={minutes.name}
                                 topics={minutes.topics}
-                                date={formatMinutesDate(minutes.startDateTime)}
+                                date={formatDate(minutes.startDateTime)}
                             />
                         })}
                     </FlexContainer>
@@ -98,6 +91,7 @@ export const query = graphql`
                     domain
                 }
                 beDiscussedByMinutes{
+                    id
                     name
                     url
                     topics

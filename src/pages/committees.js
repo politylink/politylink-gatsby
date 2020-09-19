@@ -51,7 +51,7 @@ export default class App extends React.Component {
                     {filteredCommittees.map((committees) => {
                         return <CommitteeCard
                             title={committees.name}
-                            to={"/committees/"}
+                            to={"/committee/" + committees.id.split(':').pop()}
                         />;
                     })}
                 </FlexContainer>

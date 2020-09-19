@@ -1,10 +1,11 @@
 import React from "react"
 import styles from "./minutesCard.module.css"
+import {Link} from "gatsby"
 
 
 export default function MinutesCard(props) {
     return (
-        <a className={styles.card} href={props.href} target="_blank" rel="noopener noreferrer">
+        <Link className={styles.card} to={props.to}>
             <div className={styles.header}>
                 <div className={styles.date}>{props.date}</div>
                 <div className={styles.name}>{props.name}</div>
@@ -14,6 +15,6 @@ export default function MinutesCard(props) {
                     return <li className={styles.topic}>{topic}</li>
                 })}
             </ul>
-        </a>
+        </Link>
     );
 }
