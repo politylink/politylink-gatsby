@@ -6,8 +6,9 @@ import {Container, FlexContainer} from "../components/container"
 import LinkCard from "../components/linkCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import MinutesCard from "../components/minutesCard";
-import {formatMinutesDate, SortByStartDateTime} from "./utils";
+import MinutesCard from "../components/minutesCard"
+import {formatDate} from "../utils/format"
+import {SortByStartDateTime} from "../utils/sort"
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {
@@ -66,7 +67,7 @@ export default function Bill({data}) {
                                 to={"/minutes/" + minutes.id.split(':').pop()}
                                 name={minutes.name}
                                 topics={minutes.topics}
-                                date={formatMinutesDate(minutes.startDateTime)}
+                                date={formatDate(minutes.startDateTime)}
                             />
                         })}
                     </FlexContainer>
