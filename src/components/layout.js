@@ -15,6 +15,9 @@ export default function Layout({ children }) {
                 <Link to='/' className={styles.link}>
                     <p className={styles.navtext}>議案一覧</p>
                 </Link>
+                <Link to='/committees' className={styles.link}>
+                    <p className={styles.navtext}>委員会一覧</p>
+                </Link>
                 <Link to='/members' className={styles.link}>
                     <p className={styles.navtext}>議員一覧</p>
                 </Link>

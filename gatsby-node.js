@@ -23,32 +23,6 @@ exports.createPages = async ({actions, graphql}) => {
         })
     })
 
-    // 委員会一覧ページ
-    createPage({
-        path: "/committees",
-        component: path.resolve(`./src/pages/committees.js`)
-    })
-
-    //委員会詳細ページ
-    const committeesResult = await graphql(`
-    {
-        politylink {
-            Committee {
-                id
-            }
-        }
-    }
-    `)
-    committeesResult.data.politylink.Committee.forEach(({id}) => {
-        createPage({
-            path: "/committees/" + id.split(':').pop(),
-            component: path.resolve(`./src/templates/committee.js`),
-            context: {
-                committeeId: id,
-        }
-        })
-    })
-
     // 会議録詳細ページ
     const minutesResult = await graphql(`
     {
