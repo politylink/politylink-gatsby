@@ -9,6 +9,8 @@ import SEO from "../components/seo"
 import MinutesCard from "../components/minutesCard"
 import {formatDate} from "../utils/format"
 import {SortByStartDateTime} from "../utils/sort"
+import {buildPath} from "../utils/url";
+import {getBillDescription} from "../utils/seoutils";
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {
@@ -39,13 +41,11 @@ export default function Bill({data}) {
             {"title": "公布", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
         ]
     }
-
-    const description = bill.name + "（" + bill.billNumber + "）に関する公式情報（議案本文、理由、概要、審議状況、国会会議録など）をまとめています。"
-    const minutes = SortByStartDateTime(bill.beDiscussedByMinutes, true)
+    const minutesList = SortByStartDateTime(bill.beDiscussedByMinutes, true)
 
     return (
         <Layout>
-            <SEO title={bill.name} description={description}/>
+            <SEO title={bill.name} description={getBillDescription(bill)}/>
             <Container>
                 <h2 className={styles.name}>{bill.name}</h2>
                 <h3 className={styles.number}>{bill.billNumber}</h3>
@@ -62,9 +62,9 @@ export default function Bill({data}) {
                 <p className={styles.section}>会議録</p>
                 <div className={styles.minutes}>
                     <FlexContainer>
-                        {minutes.map((minutes) => {
+                        {minutesList.map((minutes) => {
                             return <MinutesCard
-                                to={"/minutes/" + minutes.id.split(':').pop()}
+                                to={buildPath(minutes.id)}
                                 name={minutes.name}
                                 topics={minutes.topics}
                                 date={formatDate(minutes.startDateTime)}

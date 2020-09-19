@@ -5,18 +5,19 @@ import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
-import {formatSentence, formatDate} from "../utils/format";
+import {formatDate, formatSentence} from "../utils/format";
 import {SortByStartDateTime} from "../utils/sort";
+import {buildPath} from "../utils/url";
+import {getCommitteeDescription} from "../utils/seoutils";
 
 
 export default function Committees({data}) {
     const committee = data.politylink.Committee[0]
-    const description = committee.name + "に関する情報をまとめています。"
-    const minutes = SortByStartDateTime(committee.minutes, true)
+    const minutesList = SortByStartDateTime(committee.minutes, true)
 
     return (
         <Layout>
-            <SEO title={committee.name} description={description}/>
+            <SEO title={committee.name} description={getCommitteeDescription(committee)}/>
             <Container>
                 <h2 className={styles.name}>{committee.name}</h2>
                 <div className={styles.matters}>
@@ -31,9 +32,9 @@ export default function Committees({data}) {
                 <p className={styles.section}>会議録一覧</p>
                 <div className={styles.committees}>
                     <FlexContainer>
-                        {minutes.map((minutes) => {
+                        {minutesList.map((minutes) => {
                             return <MinutesCard
-                                to={"/minutes/" + minutes.id.split(':').pop()}
+                                to={buildPath(minutes.id)}
                                 name={minutes.name}
                                 topics={minutes.topics}
                                 date={formatDate(minutes.startDateTime)}

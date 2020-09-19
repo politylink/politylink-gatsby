@@ -5,30 +5,32 @@ import {FlexContainer} from "../components/container"
 import {SearchBox, SearchResult} from "../components/search"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
+import {buildPath} from "../utils/url";
+import {COMMITTEE_QUERY_KEY} from "../utils/constants";
+import {getCommitteesDescription} from "../utils/seoutils";
 
 
 export default class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            filterText: (typeof window !== 'undefined' && localStorage.getItem(this.localStorageKey)) || '',
+            filterText: (typeof window !== 'undefined' && localStorage.getItem(COMMITTEE_QUERY_KEY)) || '',
         }
         this.handleTextInput = this.handleTextInput.bind(this);
-        this.localStorageKey = 'cq';
     }
 
     handleTextInput(event) {
-        typeof window !== 'undefined' && localStorage.setItem(this.localStorageKey, event.target.value);
+        typeof window !== 'undefined' && localStorage.setItem(COMMITTEE_QUERY_KEY, event.target.value);
         this.setState({filterText: event.target.value});
     }
 
     filterCommittees(committees) {
         return (committees
-                .filter((committee) =>  {
+                .filter((committee) => {
                     let aliases;
-                    committee.aliases != null ? aliases=committee.aliases.join('') : aliases='';
+                    committee.aliases != null ? aliases = committee.aliases.join('') : aliases = '';
                     let matters;
-                    committee.matters != null ? matters=committee.matters.join('') : matters='';
+                    committee.matters != null ? matters = committee.matters.join('') : matters = '';
                     return (committee.name + aliases + matters).indexOf(this.state.filterText) !== -1
                 })
         );
@@ -38,7 +40,7 @@ export default class App extends React.Component {
         const filteredCommittees = this.filterCommittees(this.props.data.politylink.Committee)
         return (
             <Layout>
-                <SEO/>
+                <SEO title={getCommitteesDescription()}/>
                 <FlexContainer>
                     <SearchBox
                         handleChange={this.handleTextInput}
@@ -48,10 +50,10 @@ export default class App extends React.Component {
                     <SearchResult value={filteredCommittees.length + '件表示'}/>
                 </FlexContainer>
                 <FlexContainer>
-                    {filteredCommittees.map((committees) => {
+                    {filteredCommittees.map((committee) => {
                         return <CommitteeCard
-                            title={committees.name}
-                            to={"/committee/" + committees.id.split(':').pop()}
+                            title={committee.name}
+                            to={buildPath(committee.id)}
                         />;
                     })}
                 </FlexContainer>

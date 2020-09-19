@@ -7,7 +7,7 @@ import {faUser} from "@fortawesome/free-solid-svg-icons";
 export default function MemberCard(props) {
     return (
         <Link className={styles.card} to={props.to}>
-            <div  className={styles.icon}>
+            <div className={styles.icon}>
                 <FontAwesomeIcon icon={faUser} size="lg"/>
             </div>
             <div className={styles.title}>

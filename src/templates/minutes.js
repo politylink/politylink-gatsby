@@ -7,15 +7,16 @@ import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
 import {formatDate, formatSentence} from "../utils/format"
+import {buildPath} from "../utils/url";
+import {getMinutesDescription} from "../utils/seoutils";
 
 
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
-    const description = formatDate(minutes.startDateTime) + "開催の" + minutes.name + "に関する情報をまとめています。"
 
     return (
         <Layout>
-            <SEO title={minutes.name} description={description}/>
+            <SEO title={minutes.name} description={getMinutesDescription(minutes)}/>
             <Container>
                 <h2 className={styles.name}>{minutes.name}</h2>
                 <h3 className={styles.number}>{formatDate(minutes.startDateTime)}</h3>
@@ -44,7 +45,7 @@ export default function Minutes({data}) {
                             return <BillCard
                                 title={bill.billNumber}
                                 description={bill.name}
-                                to={"/bill/" + bill.id.split(':').pop()}
+                                to={buildPath(bill.id)}
                                 left={true}
                             />
                         })}
