@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./committeesCard.module.css"
+import styles from "./committeeCard.module.css"
 import {Link} from "gatsby"
 
 export default function CommitteesCard(props) {

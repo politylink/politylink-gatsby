@@ -23,12 +23,6 @@ exports.createPages = async ({actions, graphql}) => {
         })
     })
 
-    // 委員会一覧ページ
-    createPage({
-        path: "/committees",
-        component: path.resolve(`./src/pages/committees.js`)
-    })
-
     // 会議録詳細ページ
     const minutesResult = await graphql(`
     {
