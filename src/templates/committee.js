@@ -5,7 +5,8 @@ import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
-import {formatMatter, formatMinutesDate, SortByStartDateTime} from "./utils";
+import {formatSentence, formatDate} from "../utils/format";
+import {SortByStartDateTime} from "../utils/sort";
 
 
 export default function Committees({data}) {
@@ -21,7 +22,7 @@ export default function Committees({data}) {
                 <div className={styles.matters}>
                     <Container>
                         {committee.matters.filter(matter => matter != null).map((matter) => {
-                            return <p className={styles.matter}>{formatMatter(matter)}</p>
+                            return <p className={styles.matter}>{formatSentence(matter)}</p>
                         })}
                     </Container>
                 </div>
@@ -35,7 +36,7 @@ export default function Committees({data}) {
                                 to={"/minutes/" + minutes.id.split(':').pop()}
                                 name={minutes.name}
                                 topics={minutes.topics}
-                                date={formatMinutesDate(minutes.startDateTime)}
+                                date={formatDate(minutes.startDateTime)}
                             />
                         })}
                     </FlexContainer>
