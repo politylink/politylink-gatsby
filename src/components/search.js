@@ -7,7 +7,7 @@ export const SearchBox = (props) => {
             className={styles.box}
             type="text"
             value={props.value}
-            placeholder="第201回国会の議案から検索"
+            placeholder={props.placeholder}
             onChange={props.handleChange}
         />
     )

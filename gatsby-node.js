@@ -2,6 +2,8 @@ const path = require(`path`)
 
 exports.createPages = async ({actions, graphql}) => {
     const {createPage} = actions
+
+    // 議案詳細ページ
     const billResult = await graphql(`
     {
         politylink {
@@ -21,6 +23,13 @@ exports.createPages = async ({actions, graphql}) => {
         })
     })
 
+    // 委員会一覧ページ
+    createPage({
+        path: "/committees",
+        component: path.resolve(`./src/pages/committees.js`)
+    })
+
+    // 会議録詳細ページ
     const minutesResult = await graphql(`
     {
         politylink {
