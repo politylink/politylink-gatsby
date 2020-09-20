@@ -28,7 +28,7 @@ export default function ProgressBadge(props) {
     return (
         <div className={styles.badge}>
             {props.arrows.map(({title, value, color}) => {
-                return <ProgressArrow title={title} value={value} color={color} />;
+                return <ProgressArrow title={title} value={value} color={color}/>;
             })}
         </div>
     );

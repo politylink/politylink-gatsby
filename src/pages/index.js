@@ -5,6 +5,9 @@ import {FlexContainer} from "../components/container"
 import {SearchBox, SearchFilter, SearchResult} from "../components/search"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
+import {buildPath} from "../utils/url";
+import {BILL_PASSED_KEY, BILL_QUERY_KEY} from "../utils/constants";
+import {getBillsDescription} from "../utils/seoutils";
 
 const isPassedBill = (bill) => {
     return bill.proclaimedDate.year != null
@@ -14,21 +17,21 @@ export default class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            filterText: (typeof window !== 'undefined' && localStorage.getItem('bq')) || '',
-            filterPassed: (typeof window !== 'undefined' && localStorage.getItem('bp') === 'true') || false,
+            filterText: (typeof window !== 'undefined' && localStorage.getItem(BILL_QUERY_KEY)) || '',
+            filterPassed: (typeof window !== 'undefined' && localStorage.getItem(BILL_PASSED_KEY) === 'true') || false,
         }
         this.handleTextInput = this.handleTextInput.bind(this);
         this.handleFilterClick = this.handleFilterClick.bind(this)
     }
 
     handleTextInput(event) {
-        typeof window !== 'undefined' && localStorage.setItem('bq', event.target.value);
+        typeof window !== 'undefined' && localStorage.setItem(BILL_QUERY_KEY, event.target.value);
         this.setState({filterText: event.target.value});
     }
 
     handleFilterClick() {
         const newVal = !this.state.filterPassed
-        typeof window !== 'undefined' && localStorage.setItem('bp', newVal.toString());
+        typeof window !== 'undefined' && localStorage.setItem(BILL_PASSED_KEY, newVal.toString());
         this.setState({filterPassed: newVal})
     }
 
@@ -47,7 +50,7 @@ export default class App extends React.Component {
         const filteredBills = this.filterBills(this.props.data.politylink.Bill)
         return (
             <Layout>
-                <SEO/>
+                <SEO title={getBillsDescription()}/>
                 <FlexContainer>
                     <SearchBox
                         handleChange={this.handleTextInput}
@@ -67,7 +70,7 @@ export default class App extends React.Component {
                             title={bill.billNumber}
                             description={bill.name}
                             isPassed={isPassedBill(bill)}
-                            to={"/bill/" + bill.id.split(':').pop()}
+                            to={buildPath(bill.id)}
                         />;
                     })}
                 </FlexContainer>

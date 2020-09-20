@@ -1,3 +1,5 @@
+const {buildPath} = require(`./src/utils/url`)
+
 const path = require(`path`)
 
 exports.createPages = async ({actions, graphql}) => {
@@ -15,7 +17,7 @@ exports.createPages = async ({actions, graphql}) => {
     `)
     billResult.data.politylink.Bill.forEach(({id}) => {
         createPage({
-            path: "/bill/" + id.split(':').pop(),
+            path: buildPath(id),
             component: path.resolve(`./src/templates/bill.js`),
             context: {
                 billId: id,
@@ -35,7 +37,7 @@ exports.createPages = async ({actions, graphql}) => {
     `)
     committeesResult.data.politylink.Committee.forEach(({id}) => {
         createPage({
-            path: "/committee/" + id.split(':').pop(),
+            path: buildPath(id),
             component: path.resolve(`./src/templates/committee.js`),
             context: {
                 committeeId: id,
@@ -55,7 +57,7 @@ exports.createPages = async ({actions, graphql}) => {
     `)
     minutesResult.data.politylink.Minutes.forEach(({id}) => {
         createPage({
-            path: "/minutes/" + id.split(':').pop(),
+            path: buildPath(id),
             component: path.resolve(`./src/templates/minutes.js`),
             context: {
                 minutesId: id,
