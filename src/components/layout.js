@@ -30,7 +30,7 @@ export default function Layout({children}) {
                         <p className={styles.fnavtext}>議案一覧</p>
                     </Link>
                     <Link to='/committees' className={styles.link}>
-                        <p className={styles.navtext}>委員会一覧</p>
+                        <p className={styles.fnavtext}>委員会一覧</p>
                     </Link>
                     <Link to='/about' className={styles.link}>
                         <p className={styles.fnavtext}>PolityLinkについて</p>
