@@ -40,7 +40,7 @@ export default class App extends React.Component {
         const filteredCommittees = this.filterCommittees(this.props.data.politylink.Committee)
         return (
             <Layout>
-                <SEO title={getCommitteesDescription()}/>
+                <SEO description={getCommitteesDescription()}/>
                 <FlexContainer>
                     <SearchBox
                         handleChange={this.handleTextInput}

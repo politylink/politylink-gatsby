@@ -50,7 +50,7 @@ export default class App extends React.Component {
         const filteredBills = this.filterBills(this.props.data.politylink.Bill)
         return (
             <Layout>
-                <SEO title={getBillsDescription()}/>
+                <SEO description={getBillsDescription()}/>
                 <FlexContainer>
                     <SearchBox
                         handleChange={this.handleTextInput}
