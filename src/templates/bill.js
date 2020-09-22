@@ -93,7 +93,6 @@ export const query = graphql`
                 beDiscussedByMinutes{
                     id
                     name
-                    url
                     topics
                     startDateTime { year, month, day }
                 }

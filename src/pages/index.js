@@ -8,10 +8,7 @@ import Layout from "../components/layout"
 import {buildPath} from "../utils/url";
 import {BILL_PASSED_KEY, BILL_QUERY_KEY} from "../utils/constants";
 import {getBillsDescription} from "../utils/seoutils";
-
-const isPassedBill = (bill) => {
-    return bill.proclaimedDate.year != null
-}
+import {joinNullableStringList} from "../utils/format";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -38,10 +35,11 @@ export default class App extends React.Component {
     filterBills(bills) {
         return (bills
                 .filter((bill) => {
-                    return (bill.billNumber + bill.name + bill.alias + bill.reason).indexOf(this.state.filterText) !== -1
+                    const joinedText = bill.billNumber + bill.name + bill.reason + joinNullableStringList(bill.aliases)
+                    return joinedText.indexOf(this.state.filterText) !== -1
                 })
                 .filter((bill) => {
-                    return isPassedBill(bill) || !this.state.filterPassed
+                    return bill.isPassed || !this.state.filterPassed
                 })
         );
     }
@@ -69,7 +67,7 @@ export default class App extends React.Component {
                         return <BillCard
                             title={bill.billNumber}
                             description={bill.name}
-                            isPassed={isPassedBill(bill)}
+                            isPassed={bill.isPassed}
                             to={buildPath(bill.id)}
                         />;
                     })}
@@ -87,8 +85,8 @@ export const query = graphql`
                 name
                 billNumber
                 reason
-                alias
-                proclaimedDate { year, month, day }
+                aliases
+                isPassed
             }
         }
     }

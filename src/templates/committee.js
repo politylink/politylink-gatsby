@@ -20,12 +20,14 @@ export default function Committees({data}) {
             <SEO title={committee.name} description={getCommitteeDescription(committee)}/>
             <Container>
                 <h2 className={styles.name}>{committee.name}</h2>
-                <div className={styles.matters}>
+                <div className={styles.description}>
+                    <p>{committee.description}</p>
+                    {committee.topics != null &&
                     <Container>
-                        {committee.matters.filter(matter => matter != null).map((matter) => {
-                            return <p className={styles.matter}>{formatSentence(matter)}</p>
+                        {committee.topics.map((topic) => {
+                            return <p className={styles.topic}>{formatSentence(topic)}</p>
                         })}
-                    </Container>
+                    </Container>}
                 </div>
 
 
@@ -54,7 +56,8 @@ export const query = graphql`
                 id
                 name
                 aliases
-                matters
+                description
+                topics
                 minutes{
                     id
                     name

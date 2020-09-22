@@ -22,11 +22,12 @@ export default function Minutes({data}) {
                 <h3 className={styles.number}>{formatDate(minutes.startDateTime)}</h3>
                 <div className={styles.summary}>
                     <p>{minutes.summary}</p>
+                    {minutes.topics != null &&
                     <Container>
-                        {minutes.topics.filter(topic => topic != null).map((topic) => {
+                        {minutes.topics.map((topic) => {
                             return <p className={styles.topic}> {formatSentence(topic)} </p>
                         })}
-                    </Container>
+                    </Container>}
                 </div>
 
                 <p className={styles.section}>公式リンク</p>
@@ -46,6 +47,7 @@ export default function Minutes({data}) {
                                 title={bill.billNumber}
                                 description={bill.name}
                                 to={buildPath(bill.id)}
+                                isPassed={bill.isPassed}
                                 left={true}
                             />
                         })}
@@ -72,6 +74,7 @@ export const query = graphql`
                     id
                     name
                     billNumber
+                    isPassed
                 }
                 startDateTime { year, month, day }
             }

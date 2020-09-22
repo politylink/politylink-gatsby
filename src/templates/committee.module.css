@@ -5,14 +5,14 @@
 }
 
 
-.matters {
+.description {
     padding: 0 15px;
     margin: 10px;
     border-left: 3px solid rgba(0, 0, 0, .15);
     color: rgba(0, 0, 0, .8);
 }
 
-.matter {
+.topic {
     margin: 3px 0;
     color: rgba(0, 0, 0, .8);
 }
