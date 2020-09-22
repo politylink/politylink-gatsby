@@ -8,6 +8,7 @@ import Layout from "../components/layout"
 import {buildPath} from "../utils/url";
 import {COMMITTEE_QUERY_KEY} from "../utils/constants";
 import {getCommitteesDescription} from "../utils/seoutils";
+import {joinNullableStringList} from "../utils/format";
 
 
 export default class App extends React.Component {
@@ -27,11 +28,9 @@ export default class App extends React.Component {
     filterCommittees(committees) {
         return (committees
                 .filter((committee) => {
-                    let aliases;
-                    committee.aliases != null ? aliases = committee.aliases.join('') : aliases = '';
-                    let matters;
-                    committee.matters != null ? matters = committee.matters.join('') : matters = '';
-                    return (committee.name + aliases + matters).indexOf(this.state.filterText) !== -1
+                    const joinedText = committee.name + committee.description
+                        + joinNullableStringList(committee.aliases) + joinNullableStringList(committee.topics)
+                    return joinedText.indexOf(this.state.filterText) !== -1
                 })
         );
     }
@@ -69,7 +68,8 @@ export const query = graphql`
                 id
                 name
                 aliases
-                matters
+                description
+                topics
             }
         }
     }
