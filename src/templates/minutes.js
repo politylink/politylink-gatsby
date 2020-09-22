@@ -39,6 +39,17 @@ export default function Minutes({data}) {
                     </FlexContainer>
                 </div>
 
+                <p className={styles.section}>所属委員会</p>
+                <div className={styles.committee}>
+                    <FlexContainer>
+                        <BillCard
+                            title={minutes.belongedToCommittee.name}
+                            to={buildPath(minutes.belongedToCommittee.id)}
+                            left={true}
+                        />
+                    </FlexContainer>
+                </div>
+
                 <p className={styles.section}>関連議案</p>
                 <div className={styles.bills}>
                     <FlexContainer>
@@ -69,6 +80,10 @@ export const query = graphql`
                     url
                     title
                     domain
+                }
+                belongedToCommittee{
+                    id
+                    name
                 }
                 discussedBills{
                     id
