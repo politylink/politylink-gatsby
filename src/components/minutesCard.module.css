@@ -13,17 +13,20 @@
 
 .header {
     display: flex;
-    margin: 0.5rem 1rem;
-}
-
-.name {
-    text-align: right;
-    flex-grow: 1;
-    font-weight: bold;
 }
 
 .date {
+    text-align: right;
+    flex-grow: 1;
     font-weight: bold;
+    margin: 0 1rem;
+}
+
+.name {
+    text-align: left;
+    flex-grow: 1;
+    font-weight: bold;
+    margin: 0.5rem 1rem 0 1rem;
 }
 
 .topic {
