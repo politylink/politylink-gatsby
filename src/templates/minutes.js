@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
+import CommitteeCard from "../components/committeeCard";
 import {formatDate, formatSentence} from "../utils/format"
 import {buildPath} from "../utils/url";
 import {getMinutesDescription} from "../utils/seoutils";
@@ -39,6 +40,17 @@ export default function Minutes({data}) {
                     </FlexContainer>
                 </div>
 
+                <p className={styles.section}>所属委員会</p>
+                <div className={styles.committee}>
+                    <FlexContainer>
+                        <CommitteeCard
+                            title={minutes.belongedToCommittee.name}
+                            to={buildPath(minutes.belongedToCommittee.id)}
+                            left={true}
+                        />
+                    </FlexContainer>
+                </div>
+
                 <p className={styles.section}>関連議案</p>
                 <div className={styles.bills}>
                     <FlexContainer>
@@ -69,6 +81,10 @@ export const query = graphql`
                     url
                     title
                     domain
+                }
+                belongedToCommittee{
+                    id
+                    name
                 }
                 discussedBills{
                     id
