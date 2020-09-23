@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
-import CommitteesCard from "../components/committeeCard";
+import CommitteeCard from "../components/committeeCard";
 import {formatDate, formatSentence} from "../utils/format"
 import {buildPath} from "../utils/url";
 import {getMinutesDescription} from "../utils/seoutils";
@@ -43,7 +43,7 @@ export default function Minutes({data}) {
                 <p className={styles.section}>所属委員会</p>
                 <div className={styles.committee}>
                     <FlexContainer>
-                        <CommitteesCard
+                        <CommitteeCard
                             title={minutes.belongedToCommittee.name}
                             to={buildPath(minutes.belongedToCommittee.id)}
                             left={true}
