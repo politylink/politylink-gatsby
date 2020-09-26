@@ -3,8 +3,8 @@
  https://github.com/gatsbyjs/gatsby/issues/7810#issuecomment-457010663
 */
 
-const buildPath = (id) => {
-    const res = id.split(':')
+const buildPath = (politylink_id) => {
+    const res = politylink_id.split(':')
     return '/' + res[0].toLowerCase() + '/' + res[1]
 }
 module.exports.buildPath = buildPath
