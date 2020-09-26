@@ -49,6 +49,7 @@ export default function Bill({data}) {
             <Container>
                 <h2 className={styles.name}>{bill.name}</h2>
                 <h3 className={styles.number}>{bill.billNumber}</h3>
+                {bill.aliases && <p className={styles.aliases}>通称：{bill.aliases.join(", ")}</p>}
                 <p className={styles.reason}>{bill.reason}</p>
                 <ProgressBadge arrows={arrows}/>
                 <p className={styles.section}>公式リンク</p>
@@ -82,6 +83,7 @@ export const query = graphql`
         politylink {
             Bill(filter:{id:$billId}){
                 name
+                aliases
                 billNumber
                 reason
                 firstHouse
