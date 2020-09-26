@@ -67,6 +67,7 @@ export default class App extends React.Component {
                         return <BillCard
                             title={bill.billNumber}
                             description={bill.name}
+                            aliases={bill.aliases}
                             isPassed={bill.isPassed}
                             to={buildPath(bill.id)}
                         />;

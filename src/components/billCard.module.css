@@ -36,7 +36,12 @@
 }
 
 .description {
-    padding: 0px 8px 5px 8px;
+    padding: 0 8px 5px 8px;
     margin: 0;
     font-size: small;
+}
+
+.aliases {
+    composes: description;
+    text-align: right;
 }

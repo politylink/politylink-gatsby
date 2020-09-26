@@ -10,6 +10,7 @@ export default function BillCard(props) {
                 {props.isPassed && <div className={styles.status}>{'成立'}</div>}
             </div>
             <p className={styles.description}>{props.description}</p>
+            {props.aliases && <p className={styles.aliases}>（{props.aliases.join(", ")}）</p>}
         </Link>
     )
 }

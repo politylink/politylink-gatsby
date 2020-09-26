@@ -58,6 +58,7 @@ export default function Minutes({data}) {
                             return <BillCard
                                 title={bill.billNumber}
                                 description={bill.name}
+                                aliases={bill.aliases}
                                 to={buildPath(bill.id)}
                                 isPassed={bill.isPassed}
                                 left={true}
@@ -91,6 +92,7 @@ export const query = graphql`
                     name
                     billNumber
                     isPassed
+                    aliases
                 }
                 startDateTime { year, month, day }
             }
