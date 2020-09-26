@@ -51,7 +51,9 @@ export default function Minutes({data}) {
                     </FlexContainer>
                 </div>
 
+                {minutes.discussedBills.length > 0 &&
                 <p className={styles.section}>関連議案</p>
+                }
                 <div className={styles.bills}>
                     <FlexContainer>
                         {minutes.discussedBills.map((bill) => {
@@ -66,6 +68,17 @@ export default function Minutes({data}) {
                         })}
                     </FlexContainer>
                 </div>
+
+                {minutes.news.length > 0 &&
+                <p className={styles.section}>関連ニュース</p>
+                }
+                <ul>
+                    {minutes.news.map((news) => {
+                        return <li><a className={styles.news} href={news.url}
+                                      target="_blank" rel="noopener noreferrer">
+                            {news.title}</a></li>
+                    })}
+                </ul>
             </Container>
         </Layout>
     )
@@ -93,6 +106,10 @@ export const query = graphql`
                     billNumber
                     isPassed
                     aliases
+                }
+                news {
+                    title
+                    url
                 }
                 startDateTime { year, month, day }
             }
