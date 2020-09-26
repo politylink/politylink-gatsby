@@ -5,8 +5,9 @@
 }
 
 .aliases {
-    margin: 10px;
+    margin: 0 10px 10px 10px;
     font-size: 1em;
+    text-align: right;
 }
 
 .number {

@@ -9,6 +9,7 @@ import {buildPath} from "../utils/url";
 import {BILL_PASSED_KEY, BILL_QUERY_KEY} from "../utils/constants";
 import {getBillsDescription} from "../utils/seoutils";
 import {joinNullableStringList} from "../utils/format";
+import {isMatch} from "../utils/search";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -35,8 +36,9 @@ export default class App extends React.Component {
     filterBills(bills) {
         return (bills
                 .filter((bill) => {
-                    const joinedText = bill.billNumber + bill.name + bill.reason + joinNullableStringList(bill.aliases)
-                    return joinedText.indexOf(this.state.filterText) !== -1
+                    const joinedText = bill.billNumber + bill.name + bill.reason
+                        + joinNullableStringList(bill.aliases) + joinNullableStringList(bill.tags)
+                    return isMatch(this.state.filterText, joinedText)
                 })
                 .filter((bill) => {
                     return bill.isPassed || !this.state.filterPassed
@@ -81,12 +83,13 @@ export default class App extends React.Component {
 export const query = graphql`
     {
         politylink {
-            Bill {
+            Bill (orderBy:[submittedDate_desc]) {
                 id
                 name
                 billNumber
                 reason
                 aliases
+                tags
                 isPassed
             }
         }
