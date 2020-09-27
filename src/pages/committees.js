@@ -9,6 +9,7 @@ import {buildPath} from "../utils/url";
 import {COMMITTEE_QUERY_KEY} from "../utils/constants";
 import {getCommitteesDescription} from "../utils/seoutils";
 import {joinNullableStringList} from "../utils/format";
+import {isMatch} from "../utils/search";
 
 
 export default class App extends React.Component {
@@ -30,7 +31,7 @@ export default class App extends React.Component {
                 .filter((committee) => {
                     const joinedText = committee.name + committee.description
                         + joinNullableStringList(committee.aliases) + joinNullableStringList(committee.topics)
-                    return joinedText.indexOf(this.state.filterText) !== -1
+                    return isMatch(this.state.filterText, joinedText)
                 })
         );
     }
