@@ -10,10 +10,13 @@ import CommitteeCard from "../components/committeeCard";
 import {formatDate, formatSentence} from "../utils/format"
 import {buildPath} from "../utils/url";
 import {getMinutesDescription} from "../utils/seoutils";
+import NewsCard from "../components/newsCard";
+import {sortNewsList} from "../utils/sort";
 
 
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
+    const newsList = sortNewsList(minutes.news, true)
 
     return (
         <Layout>
@@ -69,16 +72,24 @@ export default function Minutes({data}) {
                     </FlexContainer>
                 </div>
 
-                {minutes.news.length > 0 &&
+                {newsList.length > 0 &&
                 <p className={styles.section}>関連ニュース</p>
                 }
-                <ul>
-                    {minutes.news.map((news) => {
-                        return <li><a className={styles.news} href={news.url}
-                                      target="_blank" rel="noopener noreferrer">
-                            {news.title}</a></li>
-                    })}
-                </ul>
+                <div className={styles.news}>
+                    <FlexContainer>
+                        {newsList.map((news) => {
+                            // ToDO: use news.image and news.publisher
+                            return <NewsCard
+                                image={"https://s2.reutersmedia.net/resources/r/?m=02&d=20200928&t=2&i=1535168773&w=200&fh=&fw=&ll=&pl=&sq=&r=LYNXMPEG8R0JG"}
+                                title={news.title}
+                                href={news.url}
+                                publisher="毎日新聞"
+                                publishedAt={formatDate(news.publishedAt)}
+                                isPaid={news.isPaid}
+                            />
+                        })}
+                    </FlexContainer>
+                </div>
             </Container>
         </Layout>
     )
@@ -110,6 +121,9 @@ export const query = graphql`
                 news {
                     title
                     url
+                    isPaid
+                    domain
+                    publishedAt { year, month, day, formatted }
                 }
                 startDateTime { year, month, day }
             }

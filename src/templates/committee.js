@@ -6,14 +6,14 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
 import {formatDate, formatSentence} from "../utils/format";
-import {SortByStartDateTime} from "../utils/sort";
+import {sortMinutesList} from "../utils/sort";
 import {buildPath} from "../utils/url";
 import {getCommitteeDescription} from "../utils/seoutils";
 
 
 export default function Committees({data}) {
     const committee = data.politylink.Committee[0]
-    const minutesList = SortByStartDateTime(committee.minutes, true)
+    const minutesList = sortMinutesList(committee.minutes, true)
 
     return (
         <Layout>
@@ -62,7 +62,7 @@ export const query = graphql`
                     id
                     name
                     topics
-                    startDateTime{ year, month, day }
+                    startDateTime{ year, month, day, formatted }
                 }
             }
         }

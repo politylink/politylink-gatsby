@@ -1,18 +1,13 @@
-import {formatDate} from "./format";
+// descending order of startDateTime
+export const sortMinutesList = (minutesList) => {
+    return minutesList.sort((a, b) => {
+        return b.startDateTime.formatted.localeCompare(a.startDateTime.formatted)
+    });
+}
 
-export const SortByStartDateTime = (data, descending) => {
-    return (data.sort((a, b) => {
-            const adt = formatDate(a.startDateTime)
-            const bdt = formatDate(b.startDateTime)
-            if (descending) {
-                if (adt < bdt) return 1;
-                if (adt > bdt) return -1;
-                return 0;
-            } else {
-                if (adt > bdt) return 1;
-                if (adt < bdt) return -1;
-                return 0;
-            }
-        })
-    )
+// descending order of publishedAt
+export const sortNewsList = (newsList) => {
+    return newsList.sort((a, b) => {
+        return b.publishedAt.formatted.localeCompare(a.publishedAt.formatted)
+    });
 }

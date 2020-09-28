@@ -8,9 +8,9 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import MinutesCard from "../components/minutesCard"
 import {formatDate} from "../utils/format"
-import {SortByStartDateTime} from "../utils/sort"
 import {buildPath} from "../utils/url";
 import {getBillDescription} from "../utils/seoutils";
+import {sortMinutesList} from "../utils/sort";
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {
@@ -41,7 +41,7 @@ export default function Bill({data}) {
             {"title": "公布", "value": formatArrowDate(bill.proclaimedDate), "color": 5},
         ]
     }
-    const minutesList = SortByStartDateTime(bill.beDiscussedByMinutes, true)
+    const minutesList = sortMinutesList(bill.beDiscussedByMinutes)
 
     return (
         <Layout>
@@ -97,7 +97,7 @@ export const query = graphql`
                     id
                     name
                     topics
-                    startDateTime { year, month, day }
+                    startDateTime { year, month, day, formatted }
                 }
                 submittedDate { year, month, day }
                 passedRepresentativesCommitteeDate { year, month, day }
