@@ -10,10 +10,13 @@ import CommitteeCard from "../components/committeeCard";
 import {formatDate, formatSentence} from "../utils/format"
 import {buildPath} from "../utils/url";
 import {getMinutesDescription} from "../utils/seoutils";
+import NewsCard from "../components/newsCard";
+import {sortNewsList} from "../utils/sort";
 
 
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
+    const newsList = sortNewsList(minutes.news, true)
 
     return (
         <Layout>
@@ -51,7 +54,9 @@ export default function Minutes({data}) {
                     </FlexContainer>
                 </div>
 
+                {minutes.discussedBills.length > 0 &&
                 <p className={styles.section}>関連議案</p>
+                }
                 <div className={styles.bills}>
                     <FlexContainer>
                         {minutes.discussedBills.map((bill) => {
@@ -62,6 +67,25 @@ export default function Minutes({data}) {
                                 to={buildPath(bill.id)}
                                 isPassed={bill.isPassed}
                                 left={true}
+                            />
+                        })}
+                    </FlexContainer>
+                </div>
+
+                {newsList.length > 0 &&
+                <p className={styles.section}>関連ニュース</p>
+                }
+                <div className={styles.news}>
+                    <FlexContainer>
+                        {newsList.map((news) => {
+                            // ToDO: use news.image and news.publisher
+                            return <NewsCard
+                                image={"https://s2.reutersmedia.net/resources/r/?m=02&d=20200928&t=2&i=1535168773&w=200&fh=&fw=&ll=&pl=&sq=&r=LYNXMPEG8R0JG"}
+                                title={news.title}
+                                href={news.url}
+                                publisher="毎日新聞"
+                                publishedAt={formatDate(news.publishedAt)}
+                                isPaid={news.isPaid}
                             />
                         })}
                     </FlexContainer>
@@ -93,6 +117,13 @@ export const query = graphql`
                     billNumber
                     isPassed
                     aliases
+                }
+                news {
+                    title
+                    url
+                    isPaid
+                    domain
+                    publishedAt { year, month, day, formatted }
                 }
                 startDateTime { year, month, day }
             }
