@@ -78,12 +78,11 @@ export default function Minutes({data}) {
                 <div className={styles.news}>
                     <FlexContainer>
                         {newsList.map((news) => {
-                            // ToDO: use news.image and news.publisher
                             return <NewsCard
-                                image={"https://s2.reutersmedia.net/resources/r/?m=02&d=20200928&t=2&i=1535168773&w=200&fh=&fw=&ll=&pl=&sq=&r=LYNXMPEG8R0JG"}
-                                title={news.title}
                                 href={news.url}
-                                publisher="毎日新聞"
+                                thumbnail={news.thumbnail}
+                                title={news.title}
+                                publisher={news.publisher}
                                 publishedAt={formatDate(news.publishedAt)}
                                 isPaid={news.isPaid}
                             />
@@ -122,7 +121,8 @@ export const query = graphql`
                     title
                     url
                     isPaid
-                    domain
+                    publisher
+                    thumbnail
                     publishedAt { year, month, day, formatted }
                 }
                 startDateTime { year, month, day }

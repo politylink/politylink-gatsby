@@ -11,7 +11,7 @@
     display: flex;
 }
 
-.thumb {
+.thumbnail {
     width: 20%;
     min-width: 100px;
     object-fit: cover;
