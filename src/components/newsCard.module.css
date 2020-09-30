@@ -1,5 +1,5 @@
 .card {
-    margin: auto;
+    margin: 5px;
     width: 100%;
     background: #fff;
     box-shadow: 0 1px 3px #ccc;
@@ -13,6 +13,7 @@
 
 .thumbnail {
     width: 20%;
+    height: 100px;
     min-width: 100px;
     object-fit: cover;
 }
