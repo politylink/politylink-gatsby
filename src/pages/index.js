@@ -71,6 +71,7 @@ export default class App extends React.Component {
                             description={bill.name}
                             aliases={bill.aliases}
                             isPassed={bill.isPassed}
+                            hasNews={bill.totalNews > 0}
                             to={buildPath(bill.id)}
                         />;
                     })}
@@ -91,6 +92,7 @@ export const query = graphql`
                 aliases
                 tags
                 isPassed
+                totalNews
             }
         }
     }
