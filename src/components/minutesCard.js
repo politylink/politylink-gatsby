@@ -7,10 +7,15 @@ export default function MinutesCard(props) {
     return (
         <Link className={styles.card} to={props.to}>
             <div className={styles.header}>
-                <div className={styles.date}>{props.date}</div>
-                <div className={styles.name}>{props.name}</div>
+                <div>
+                    <p className={styles.name}>{props.name}</p>
+                    <p className={styles.date}>{props.date}</p>
+                </div>
+                <div className={styles.headerBadge}>
+                    {props.hasNews && <div className={styles.newsBadge}>{'ニュース'}</div>}
+                </div>
             </div>
-            <ul>
+            <ul className={styles.topics}>
                 {props.topics.map((topic) => {
                     return <li className={styles.topic}>{topic}</li>
                 })}

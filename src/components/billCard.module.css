@@ -16,7 +16,7 @@
     margin: 0 5px 12px 5px
 }
 
-.header {
+.flex {
     display: flex;
 }
 
@@ -26,13 +26,24 @@
     flex-grow: 1;
 }
 
-.status {
-    margin: 3px 0 auto 0;
+.badge {
+    margin: 3px 1px auto 0;
     padding: 0 5px;
-    color: white;
-    background-color: #c27ba0ff;
     font-size: small;
     text-align: right;
+}
+
+.passedBadge {
+    composes: badge;
+    color: white;
+    background-color: #c27ba0ff;
+
+}
+
+.newsBadge {
+    composes: badge;
+    color: white;
+    background-color: teal;
 }
 
 .description {

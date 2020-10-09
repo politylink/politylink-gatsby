@@ -13,17 +13,40 @@
 
 .header {
     display: flex;
-    margin: 0.5rem 1rem;
+    justify-content: space-between;
+}
+
+.headerBadge {
+    display: flex;
 }
 
 .name {
-    text-align: right;
-    flex-grow: 1;
     font-weight: bold;
+    margin: 5px 5px 1px 5px;
 }
 
 .date {
     font-weight: bold;
+    font-size: small;
+    margin: 1px 5px 1px 10px;
+}
+
+.badge {
+    margin: 3px 1px auto 0;
+    padding: 0 5px;
+    font-size: small;
+    text-align: right;
+}
+
+.newsBadge {
+    composes: badge;
+    color: white;
+    background-color: teal;
+}
+
+.topics {
+    margin: 10px 20px;
+    padding: 0;
 }
 
 .topic {

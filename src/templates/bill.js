@@ -74,6 +74,7 @@ export default function Bill({data}) {
                                 to={buildPath(minutes.id)}
                                 name={minutes.name}
                                 topics={minutes.topics}
+                                hasNews={minutes.totalNews > 0}
                                 date={formatDate(minutes.startDateTime)}
                             />
                         })}
@@ -120,6 +121,7 @@ export const query = graphql`
                     id
                     name
                     topics
+                    totalNews
                     startDateTime { year, month, day, formatted }
                 }
                 news {
