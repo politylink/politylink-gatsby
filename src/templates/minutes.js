@@ -16,7 +16,7 @@ import {sortNewsList} from "../utils/sort";
 
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
-    const newsList = sortNewsList(minutes.news, true)
+    const newsList = sortNewsList(minutes.news)
 
     return (
         <Layout>

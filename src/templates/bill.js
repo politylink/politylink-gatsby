@@ -10,7 +10,8 @@ import MinutesCard from "../components/minutesCard"
 import {formatDate} from "../utils/format"
 import {buildPath} from "../utils/url";
 import {getBillDescription} from "../utils/seoutils";
-import {sortMinutesList} from "../utils/sort";
+import {sortMinutesList, sortNewsList} from "../utils/sort";
+import NewsCard from "../components/newsCard";
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {
@@ -42,6 +43,7 @@ export default function Bill({data}) {
         ]
     }
     const minutesList = sortMinutesList(bill.beDiscussedByMinutes)
+    const newsList = sortNewsList(bill.news)
 
     return (
         <Layout>
@@ -61,7 +63,10 @@ export default function Bill({data}) {
                         })}
                     </FlexContainer>
                 </div>
+
+                {minutesList.length > 0 &&
                 <p className={styles.section}>会議録</p>
+                }
                 <div className={styles.minutes}>
                     <FlexContainer>
                         {minutesList.map((minutes) => {
@@ -70,6 +75,24 @@ export default function Bill({data}) {
                                 name={minutes.name}
                                 topics={minutes.topics}
                                 date={formatDate(minutes.startDateTime)}
+                            />
+                        })}
+                    </FlexContainer>
+                </div>
+
+                {newsList.length > 0 &&
+                <p className={styles.section}>関連ニュース</p>
+                }
+                <div className={styles.news}>
+                    <FlexContainer>
+                        {newsList.map((news) => {
+                            return <NewsCard
+                                href={news.url}
+                                thumbnail={news.thumbnail}
+                                title={news.title}
+                                publisher={news.publisher}
+                                publishedAt={formatDate(news.publishedAt)}
+                                isPaid={news.isPaid}
                             />
                         })}
                     </FlexContainer>
@@ -98,6 +121,14 @@ export const query = graphql`
                     name
                     topics
                     startDateTime { year, month, day, formatted }
+                }
+                news {
+                    title
+                    url
+                    isPaid
+                    publisher
+                    thumbnail
+                    publishedAt { year, month, day, formatted }
                 }
                 submittedDate { year, month, day }
                 passedRepresentativesCommitteeDate { year, month, day }
