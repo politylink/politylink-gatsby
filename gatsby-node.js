@@ -65,6 +65,26 @@ exports.createPages = async ({actions, graphql}) => {
         })
     })
 
+    //タイムラインページ
+    const timelineResult = await graphql(`
+    {
+        politylink {
+            Timeline {
+                id
+            }
+        }
+    }
+    `)
+    timelineResult.data.politylink.Timeline.forEach(({id}) => {
+        createPage({
+            path: buildPath(id),
+            component: path.resolve(`./src/templates/timeline.js`),
+            context: {
+                timelineId: id,
+            },
+        })
+    })
+
     const markdownTemplate = require.resolve(`./src/templates/markdown.js`)
     const markdownResult = await graphql(`
     {
