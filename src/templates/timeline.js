@@ -4,7 +4,7 @@ import styles from "./timeline.module.css"
 import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout"
 import BillCard from "../components/billCard"
-import {formatDate} from "../utils/format"
+import {formatDate, formatDateWithDay} from "../utils/format"
 import {buildPath} from "../utils/url";
 import NewsCard from "../components/newsCard";
 import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sort";
@@ -30,7 +30,7 @@ export default function Timeline({data}) {
                     <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
                         <FontAwesomeIcon icon={faAngleDoubleLeft} className={styles.navicon}/>
                     </Link>
-                    <h3 className={styles.name}>{formatDate(timeline.date)}</h3>
+                    <h3 className={styles.name}>{formatDateWithDay(timeline.date)}</h3>
                     <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
                         <FontAwesomeIcon icon={faAngleDoubleRight}/>
                     </Link>

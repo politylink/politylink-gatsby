@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
 import CommitteeCard from "../components/committeeCard";
-import {formatDate, formatSentence} from "../utils/format"
+import {formatDate, formatDateWithDay, formatSentence} from "../utils/format"
 import {buildPath} from "../utils/url";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
@@ -25,7 +25,7 @@ export default function Minutes({data}) {
             <Container>
                 <h2 className={styles.name}>{minutes.name}</h2>
                 <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
-                    <p className={styles.date}>{formatDate(minutes.startDateTime)}</p>
+                    <p className={styles.date}>{formatDateWithDay(minutes.startDateTime)}</p>
                 </Link>
                 <div className={styles.summary}>
                     <p>{minutes.summary}</p>
