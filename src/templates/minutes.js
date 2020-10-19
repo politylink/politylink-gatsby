@@ -1,5 +1,5 @@
 import React from "react"
-import {graphql} from "gatsby"
+import {graphql, Link} from "gatsby"
 import styles from "./minutes.module.css"
 import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout"
@@ -12,6 +12,7 @@ import {buildPath} from "../utils/url";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
 import {sortNewsList} from "../utils/sort";
+import {toJsDate, toTimelineId} from "../utils/dateutils";
 
 
 export default function Minutes({data}) {
@@ -23,7 +24,9 @@ export default function Minutes({data}) {
             <SEO title={minutes.name} description={getMinutesDescription(minutes)}/>
             <Container>
                 <h2 className={styles.name}>{minutes.name}</h2>
-                <h3 className={styles.number}>{formatDate(minutes.startDateTime)}</h3>
+                <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
+                    <p className={styles.date}>{formatDate(minutes.startDateTime)}</p>
+                </Link>
                 <div className={styles.summary}>
                     <p>{minutes.summary}</p>
                     {minutes.topics != null &&

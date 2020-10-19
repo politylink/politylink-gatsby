@@ -12,19 +12,13 @@ import MinutesCard from "../components/minutesCard";
 import {faAngleDoubleLeft, faAngleDoubleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
+import {offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
 
-
-const getTimelineId = (dt) => {
-    return 'Timeline:'
-        + String(dt.getFullYear()).padStart(4, '0')
-        + String(dt.getMonth() + 1).padStart(2, '0')
-        + String(dt.getDate()).padStart(2, '0')
-}
 
 export default function Timeline({data}) {
     const timeline = data.politylink.Timeline[0]
-    const prevDate = new Date(timeline.date.year, timeline.date.month - 1, timeline.date.day - 1)
-    const nextDate = new Date(timeline.date.year, timeline.date.month - 1, timeline.date.day + 1)
+    const prevDate = offsetDate(toJsDate(timeline.date), -1);
+    const nextDate = offsetDate(toJsDate(timeline.date), 1);
     const minutesList = sortMinutesList(timeline.minutes)
     const billList = sortBillList(timeline.bills)
     const newsList = sortNewsList(timeline.news)
@@ -33,11 +27,11 @@ export default function Timeline({data}) {
         <Layout>
             <Container>
                 <div className={styles.header}>
-                    <Link to={buildPath(getTimelineId(prevDate))} className={styles.nav}>
+                    <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
                         <FontAwesomeIcon icon={faAngleDoubleLeft} className={styles.navicon}/>
                     </Link>
                     <h3 className={styles.name}>{formatDate(timeline.date)}</h3>
-                    <Link to={buildPath(getTimelineId(nextDate))} className={styles.nav}>
+                    <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
                         <FontAwesomeIcon icon={faAngleDoubleRight}/>
                     </Link>
                 </div>

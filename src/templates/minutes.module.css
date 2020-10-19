@@ -1,13 +1,17 @@
 .name {
     margin: 10px;
     font-weight: 700;
-    font-size: 2em;
+    font-size: 2rem;
 }
 
-.number {
+.timeline {
+    color: #333;
+}
+
+.date {
     margin: 10px;
     font-weight: 700;
-    font-size: 1em;
+    font-size: 1.3rem;
 }
 
 .summary {

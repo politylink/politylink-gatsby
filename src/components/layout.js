@@ -26,6 +26,9 @@ export default function Layout({children}) {
             <footer className={styles.footer}>
                 <p>© 2020 PolityLink</p>
                 <div className={styles.fnav}>
+                    <Link to='/timelines' className={styles.link}>
+                        <p className={styles.fnavtext}>国会タイムライン</p>
+                    </Link>
                     <Link to='/' className={styles.link}>
                         <p className={styles.fnavtext}>議案一覧</p>
                     </Link>
