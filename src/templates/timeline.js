@@ -33,13 +33,15 @@ export default function Timeline({data}) {
                     <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
                         <FontAwesomeIcon icon={faAngleDoubleLeft} className={styles.navicon}/>
                     </Link>
-                    <h3 className={styles.name}>{formatDateWithDay(timeline.date)}</h3>
+                    <h3 className={styles.date}>{formatDateWithDay(timeline.date)}</h3>
                     <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
                         <FontAwesomeIcon icon={faAngleDoubleRight}/>
                     </Link>
                 </div>
 
-                <p className={styles.section}>{`会議録（${timeline.totalMinutes}件）`}</p>
+                <p className={styles.section}>会議録
+                    <span className={styles.subtext}>{`（${timeline.totalMinutes}件）`}</span>
+                </p>
                 <div className={styles.minutes}>
                     <ExpandableContainer
                         localStorageKey={EXPAND_MINUTES_KEY}
@@ -57,7 +59,9 @@ export default function Timeline({data}) {
                     </ExpandableContainer>
                 </div>
 
-                <p className={styles.section}>{`関連議案（${timeline.totalBills}件）`}</p>
+                <p className={styles.section}>関連議案
+                    <span className={styles.subtext}>{`（${timeline.totalBills}件）`}</span>
+                </p>
                 <div className={styles.bills}>
                     <ExpandableContainer
                         localStorageKey={EXPAND_BILL_KEY}
@@ -77,7 +81,9 @@ export default function Timeline({data}) {
                     </ExpandableContainer>
                 </div>
 
-                <p className={styles.section}>{`関連ニュース（${timeline.totalNews}件）`}</p>
+                <p className={styles.section}>関連ニュース
+                    <span className={styles.subtext}>{`（${timeline.totalNews}件）`}</span>
+                </p>
                 <div className={styles.news}>
                     <ExpandableContainer
                         localStorageKey={EXPAND_NEWS_KEY}
