@@ -13,6 +13,8 @@ import {faAngleDoubleLeft, faAngleDoubleRight} from "@fortawesome/free-solid-svg
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import {offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
+import {getTimelineDescription, getTimelineTitle} from "../utils/seoutils";
+import SEO from "../components/seo";
 
 
 export default function Timeline({data}) {
@@ -25,6 +27,7 @@ export default function Timeline({data}) {
 
     return (
         <Layout>
+            <SEO title={getTimelineTitle(timeline)} description={getTimelineDescription(timeline)}/>
             <Container>
                 <div className={styles.header}>
                     <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
