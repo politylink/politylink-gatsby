@@ -1,5 +1,5 @@
 import React from "react"
-import {graphql} from "gatsby"
+import {graphql, Link} from "gatsby"
 import styles from "./timeline.module.css"
 import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout"
@@ -9,18 +9,37 @@ import {buildPath} from "../utils/url";
 import NewsCard from "../components/newsCard";
 import {sortMinutesList, sortNewsList} from "../utils/sort";
 import MinutesCard from "../components/minutesCard";
+import {faAngleDoubleLeft, faAngleDoubleRight} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
+
+const getTimelineId = (dt) => {
+    return 'Timeline:'
+        + String(dt.getFullYear()).padStart(4, '0')
+        + String(dt.getMonth() + 1).padStart(2, '0')
+        + String(dt.getDate()).padStart(2, '0')
+}
 
 export default function Timeline({data}) {
     const timeline = data.politylink.Timeline[0]
     const billList = timeline.bills
     const minutesList = sortMinutesList(timeline.minutes)
     const newsList = sortNewsList(timeline.news)
+    const prevDate = new Date(timeline.date.year, timeline.date.month - 1, timeline.date.day - 1)
+    const nextDate = new Date(timeline.date.year, timeline.date.month - 1, timeline.date.day + 1)
 
     return (
         <Layout>
             <Container>
-                <h2 className={styles.name}>{formatDate(timeline.date)}</h2>
+                <div className={styles.header}>
+                    <Link to={buildPath(getTimelineId(prevDate))} className={styles.nav}>
+                        <FontAwesomeIcon icon={faAngleDoubleLeft} className={styles.navicon}/>
+                    </Link>
+                    <h3 className={styles.name}>{formatDate(timeline.date)}</h3>
+                    <Link to={buildPath(getTimelineId(nextDate))} className={styles.nav}>
+                        <FontAwesomeIcon icon={faAngleDoubleRight}/>
+                    </Link>
+                </div>
 
                 {minutesList.length > 0 &&
                 <p className={styles.section}>会議録</p>
@@ -59,7 +78,7 @@ export default function Timeline({data}) {
                 </div>
 
                 {newsList.length > 0 &&
-                <p className={styles.section}>関連ニュース</p>
+                <p className={styles.section}>国会関連ニュース</p>
                 }
                 <div className={styles.news}>
                     <FlexContainer>
