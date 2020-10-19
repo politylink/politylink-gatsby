@@ -10,3 +10,13 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.button {
+    margin: 0 auto;
+    width: 30%;
+    height: 35px;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ddd;
+}

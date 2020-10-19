@@ -1,13 +1,17 @@
-// descending order of startDateTime
 export const sortMinutesList = (minutesList) => {
-    return minutesList.sort((a, b) => {
-        return b.startDateTime.formatted.localeCompare(a.startDateTime.formatted)
-    });
+    return sortDesc(minutesList, minutes => minutes.startDateTime.formatted)
 }
 
-// descending order of publishedAt
 export const sortNewsList = (newsList) => {
-    return newsList.sort((a, b) => {
-        return b.publishedAt.formatted.localeCompare(a.publishedAt.formatted)
-    });
+    return sortDesc(newsList, news => news.publishedAt.formatted)
+}
+
+export const sortBillList = (billList) => {
+    return sortDesc(billList, bill => bill.submittedDate.formatted)
+}
+
+const sortDesc = (list, mapFunc) => {
+    return list.sort((a, b) => {
+        return mapFunc(b).localeCompare(mapFunc(a))
+    })
 }

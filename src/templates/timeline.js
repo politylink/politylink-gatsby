@@ -1,16 +1,17 @@
 import React from "react"
 import {graphql, Link} from "gatsby"
 import styles from "./timeline.module.css"
-import {Container, FlexContainer} from "../components/container"
+import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout"
 import BillCard from "../components/billCard"
 import {formatDate} from "../utils/format"
 import {buildPath} from "../utils/url";
 import NewsCard from "../components/newsCard";
-import {sortMinutesList, sortNewsList} from "../utils/sort";
+import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sort";
 import MinutesCard from "../components/minutesCard";
 import {faAngleDoubleLeft, faAngleDoubleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 
 
 const getTimelineId = (dt) => {
@@ -22,11 +23,11 @@ const getTimelineId = (dt) => {
 
 export default function Timeline({data}) {
     const timeline = data.politylink.Timeline[0]
-    const billList = timeline.bills
-    const minutesList = sortMinutesList(timeline.minutes)
-    const newsList = sortNewsList(timeline.news)
     const prevDate = new Date(timeline.date.year, timeline.date.month - 1, timeline.date.day - 1)
     const nextDate = new Date(timeline.date.year, timeline.date.month - 1, timeline.date.day + 1)
+    const minutesList = sortMinutesList(timeline.minutes)
+    const billList = sortBillList(timeline.bills)
+    const newsList = sortNewsList(timeline.news)
 
     return (
         <Layout>
@@ -41,11 +42,12 @@ export default function Timeline({data}) {
                     </Link>
                 </div>
 
-                {minutesList.length > 0 &&
-                <p className={styles.section}>会議録</p>
-                }
+                <p className={styles.section}>{`会議録（${timeline.totalMinutes}件）`}</p>
                 <div className={styles.minutes}>
-                    <FlexContainer>
+                    <ExpandableContainer
+                        localStorageKey={EXPAND_MINUTES_KEY}
+                        sizeLimit={2}
+                    >
                         {minutesList.map((minutes) => {
                             return <MinutesCard
                                 to={buildPath(minutes.id)}
@@ -55,14 +57,15 @@ export default function Timeline({data}) {
                                 date={formatDate(minutes.startDateTime)}
                             />
                         })}
-                    </FlexContainer>
+                    </ExpandableContainer>
                 </div>
 
-                {billList.length > 0 &&
-                <p className={styles.section}>関連議案</p>
-                }
+                <p className={styles.section}>{`関連議案（${timeline.totalBills}件）`}</p>
                 <div className={styles.bills}>
-                    <FlexContainer>
+                    <ExpandableContainer
+                        localStorageKey={EXPAND_BILL_KEY}
+                        sizeLimit={2}
+                    >
                         {billList.map((bill) => {
                             return <BillCard
                                 title={bill.billNumber}
@@ -74,14 +77,15 @@ export default function Timeline({data}) {
                                 left={true}
                             />
                         })}
-                    </FlexContainer>
+                    </ExpandableContainer>
                 </div>
 
-                {newsList.length > 0 &&
-                <p className={styles.section}>国会関連ニュース</p>
-                }
+                <p className={styles.section}>{`関連ニュース（${timeline.totalNews}件）`}</p>
                 <div className={styles.news}>
-                    <FlexContainer>
+                    <ExpandableContainer
+                        localStorageKey={EXPAND_NEWS_KEY}
+                        sizeLimit={3}
+                    >
                         {newsList.map((news) => {
                             return <NewsCard
                                 href={news.url}
@@ -92,7 +96,7 @@ export default function Timeline({data}) {
                                 isPaid={news.isPaid}
                             />
                         })}
-                    </FlexContainer>
+                    </ExpandableContainer>
                 </div>
             </Container>
         </Layout>
@@ -104,6 +108,9 @@ export const query = graphql`
         politylink {
             Timeline(filter:{id:$timelineId}){
                 date { year, month, day }
+                totalBills
+                totalMinutes
+                totalNews
                 bills {
                     id
                     name
@@ -111,6 +118,7 @@ export const query = graphql`
                     isPassed
                     aliases
                     totalNews
+                    submittedDate { formatted }
                 }
                 minutes {
                     id
