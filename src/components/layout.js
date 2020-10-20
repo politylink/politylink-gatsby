@@ -1,22 +1,16 @@
 import React from "react"
 import {Link} from "gatsby"
 import styles from "./layout.module.css"
+import HamburgerMenu from "./menu";
 
 export default function Layout({children}) {
     return (
         <div className={styles.page}>
+            <HamburgerMenu/>
             <header className={styles.header}>
                 <div className={styles.home}>
                     <Link to='/' className={styles.link}>
                         <p className={styles.hometext}>PolityLink</p>
-                    </Link>
-                </div>
-                <div className={styles.nav}>
-                    <Link to='/' className={styles.link}>
-                        <p className={styles.navtext}>議案一覧</p>
-                    </Link>
-                    <Link to='/committees' className={styles.link}>
-                        <p className={styles.navtext}>委員会一覧</p>
                     </Link>
                 </div>
             </header>
