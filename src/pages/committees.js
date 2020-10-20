@@ -5,11 +5,11 @@ import {FlexContainer} from "../components/container"
 import {SearchBox, SearchResult} from "../components/search"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
-import {buildPath} from "../utils/url";
+import {buildPath} from "../utils/urlutils";
 import {COMMITTEE_QUERY_KEY} from "../utils/constants";
 import {getCommitteesDescription} from "../utils/seoutils";
-import {joinNullableStringList} from "../utils/format";
-import {isMatch} from "../utils/search";
+import {joinNullableStringList} from "../utils/formatutils";
+import {isMatch} from "../utils/searchutils";
 
 
 export default class App extends React.Component {

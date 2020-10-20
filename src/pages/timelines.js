@@ -3,9 +3,9 @@ import {graphql, Link} from 'gatsby'
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import {getTimelinesDescription} from "../utils/seoutils";
-import {formatDateWithDay} from "../utils/format";
+import {formatDateWithDay} from "../utils/formatutils";
 import {Container} from "../components/container";
-import {buildPath} from "../utils/url";
+import {buildPath} from "../utils/urlutils";
 
 
 export default class App extends React.Component {

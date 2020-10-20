@@ -4,10 +4,10 @@ import styles from "./timeline.module.css"
 import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout"
 import BillCard from "../components/billCard"
-import {formatDate, formatDateWithDay} from "../utils/format"
-import {buildPath} from "../utils/url";
+import {formatDate, formatDateWithDay} from "../utils/formatutils"
+import {buildPath} from "../utils/urlutils";
 import NewsCard from "../components/newsCard";
-import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sort";
+import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sortutils";
 import MinutesCard from "../components/minutesCard";
 import {faAngleDoubleLeft, faAngleDoubleRight, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

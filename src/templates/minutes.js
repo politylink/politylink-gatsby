@@ -7,11 +7,11 @@ import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
 import CommitteeCard from "../components/committeeCard";
-import {formatDate, formatDateWithDay, formatSentence} from "../utils/format"
-import {buildPath} from "../utils/url";
+import {formatDate, formatDateWithDay, formatSentence} from "../utils/formatutils"
+import {buildPath} from "../utils/urlutils";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
-import {sortNewsList} from "../utils/sort";
+import {sortNewsList} from "../utils/sortutils";
 import {toJsDate, toTimelineId} from "../utils/dateutils";
 import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

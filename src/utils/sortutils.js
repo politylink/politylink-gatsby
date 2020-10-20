@@ -1,5 +1,5 @@
 export const sortMinutesList = (minutesList) => {
-    return sortDesc(minutesList, minutes => minutes.startDateTime.formatted)
+    return sortDesc(minutesList, minutes => minutes.startDateTime.formatted + minutes.totalNews)
 }
 
 export const sortNewsList = (newsList) => {

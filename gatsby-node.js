@@ -1,4 +1,4 @@
-const {buildPath} = require(`./src/utils/url`)
+const {buildPath} = require(`./src/utils/urlutils`)
 
 const path = require(`path`)
 
