@@ -5,11 +5,11 @@ import {FlexContainer} from "../components/container"
 import {SearchBox, SearchFilter, SearchResult} from "../components/search"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
-import {buildPath} from "../utils/url";
+import {buildPath} from "../utils/urlutils";
 import {BILL_PASSED_KEY, BILL_QUERY_KEY} from "../utils/constants";
 import {getBillsDescription} from "../utils/seoutils";
-import {joinNullableStringList} from "../utils/format";
-import {isMatch} from "../utils/search";
+import {joinNullableStringList} from "../utils/formatutils";
+import {isMatch} from "../utils/searchutils";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -55,7 +55,7 @@ export default class App extends React.Component {
                     <SearchBox
                         handleChange={this.handleTextInput}
                         value={this.state.filterText}
-                        placeholder="第201回国会の議案から検索"
+                        placeholder="第201回以降の議案から検索"
                     />
                     <SearchFilter
                         handleChange={this.handleFilterClick}

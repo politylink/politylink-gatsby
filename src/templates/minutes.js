@@ -1,5 +1,5 @@
 import React from "react"
-import {graphql} from "gatsby"
+import {graphql, Link} from "gatsby"
 import styles from "./minutes.module.css"
 import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout"
@@ -7,11 +7,14 @@ import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
 import CommitteeCard from "../components/committeeCard";
-import {formatDate, formatSentence} from "../utils/format"
-import {buildPath} from "../utils/url";
+import {formatDate, formatDateWithDay, formatSentence} from "../utils/formatutils"
+import {buildPath} from "../utils/urlutils";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
-import {sortNewsList} from "../utils/sort";
+import {sortNewsList} from "../utils/sortutils";
+import {toJsDate, toTimelineId} from "../utils/dateutils";
+import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function Minutes({data}) {
@@ -23,7 +26,11 @@ export default function Minutes({data}) {
             <SEO title={minutes.name} description={getMinutesDescription(minutes)}/>
             <Container>
                 <h2 className={styles.name}>{minutes.name}</h2>
-                <h3 className={styles.number}>{formatDate(minutes.startDateTime)}</h3>
+                <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
+                    <p className={styles.date}>
+                        <FontAwesomeIcon icon={faCalendarAlt}/> {formatDateWithDay(minutes.startDateTime)}
+                    </p>
+                </Link>
                 <div className={styles.summary}>
                     <p>{minutes.summary}</p>
                     {minutes.topics != null &&

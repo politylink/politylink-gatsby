@@ -7,10 +7,10 @@ import LinkCard from "../components/linkCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import MinutesCard from "../components/minutesCard"
-import {formatDate} from "../utils/format"
-import {buildPath} from "../utils/url";
+import {formatDate} from "../utils/formatutils"
+import {buildPath} from "../utils/urlutils";
 import {getBillDescription} from "../utils/seoutils";
-import {sortMinutesList, sortNewsList} from "../utils/sort";
+import {sortMinutesList, sortNewsList} from "../utils/sortutils";
 import NewsCard from "../components/newsCard";
 
 export const formatArrowDate = (date) => {

@@ -1,4 +1,4 @@
-const {buildPath} = require(`./src/utils/url`)
+const {buildPath} = require(`./src/utils/urlutils`)
 
 const path = require(`path`)
 
@@ -61,6 +61,26 @@ exports.createPages = async ({actions, graphql}) => {
             component: path.resolve(`./src/templates/minutes.js`),
             context: {
                 minutesId: id,
+            },
+        })
+    })
+
+    //タイムラインページ
+    const timelineResult = await graphql(`
+    {
+        politylink {
+            Timeline {
+                id
+            }
+        }
+    }
+    `)
+    timelineResult.data.politylink.Timeline.forEach(({id}) => {
+        createPage({
+            path: buildPath(id),
+            component: path.resolve(`./src/templates/timeline.js`),
+            context: {
+                timelineId: id,
             },
         })
     })

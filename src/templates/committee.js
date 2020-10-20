@@ -5,9 +5,9 @@ import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
-import {formatDate, formatSentence} from "../utils/format";
-import {sortMinutesList} from "../utils/sort";
-import {buildPath} from "../utils/url";
+import {formatDate, formatSentence} from "../utils/formatutils";
+import {sortMinutesList} from "../utils/sortutils";
+import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";
 
 
