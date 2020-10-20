@@ -9,7 +9,7 @@ export const formatDate = (gqlDate) => {
 }
 
 export const formatDateWithDay = (gqlDate) => {
-    return `${formatDate(gqlDate)}（${toDayOfWeek(toJsDate(gqlDate))}）`
+    return `${formatDate(gqlDate)}(${toDayOfWeek(toJsDate(gqlDate))})`
 }
 
 export const joinNullableStringList = (maybeList) => {

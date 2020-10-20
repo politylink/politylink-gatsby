@@ -1,5 +1,5 @@
 import React from "react"
-import {graphql, Link} from "gatsby"
+import {Link} from "gatsby"
 import styles from "./timeline.module.css"
 import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout"
@@ -9,7 +9,7 @@ import {buildPath} from "../utils/url";
 import NewsCard from "../components/newsCard";
 import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sort";
 import MinutesCard from "../components/minutesCard";
-import {faAngleDoubleLeft, faAngleDoubleRight} from "@fortawesome/free-solid-svg-icons";
+import {faAngleDoubleLeft, faAngleDoubleRight, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import {offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
@@ -31,9 +31,12 @@ export default function Timeline({data}) {
             <Container>
                 <div className={styles.header}>
                     <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
-                        <FontAwesomeIcon icon={faAngleDoubleLeft} className={styles.navicon}/>
+                        <FontAwesomeIcon icon={faAngleDoubleLeft}/>
                     </Link>
-                    <h3 className={styles.date}>{formatDateWithDay(timeline.date)}</h3>
+                    <Link to='/timelines' className={styles.nav}>
+                        <h3 className={styles.date}>
+                            <FontAwesomeIcon icon={faCalendarAlt}/> {formatDateWithDay(timeline.date)}</h3>
+                    </Link>
                     <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
                         <FontAwesomeIcon icon={faAngleDoubleRight}/>
                     </Link>
@@ -110,7 +113,7 @@ export const query = graphql`
     query($timelineId: ID!){
         politylink {
             Timeline(filter:{id:$timelineId}){
-                date { year, month, day }
+                date {year, month, day}
                 totalBills
                 totalMinutes
                 totalNews
@@ -121,14 +124,14 @@ export const query = graphql`
                     isPassed
                     aliases
                     totalNews
-                    submittedDate { formatted }
+                    submittedDate {formatted}
                 }
                 minutes {
                     id
                     name
                     topics
                     totalNews
-                    startDateTime { year, month, day, formatted }
+                    startDateTime {year, month, day, formatted}
                 }
                 news {
                     title
@@ -136,7 +139,7 @@ export const query = graphql`
                     isPaid
                     publisher
                     thumbnail
-                    publishedAt { year, month, day, formatted }
+                    publishedAt {year, month, day, formatted}
                 }
             }
         }

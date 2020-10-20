@@ -6,6 +6,11 @@
 
 .timeline {
     color: #333;
+    text-decoration: none;
+}
+
+.timeline:hover {
+    text-decoration: underline;
 }
 
 .date {

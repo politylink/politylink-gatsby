@@ -25,7 +25,7 @@ export const getMinutesDescription = (minutes) => {
 }
 
 export const getTimelineTitle = (timeline) => {
-    return `${formatDate(timeline.date)}の出来事`
+    return `国会ニュース@${formatDate(timeline.date)}`
 }
 
 export const getTimelineDescription = (timeline) => {
