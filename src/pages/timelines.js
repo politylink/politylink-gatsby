@@ -2,11 +2,11 @@ import React from "react"
 import {graphql, navigate, Link} from 'gatsby'
 import SEO from "../components/seo"
 import Layout from "../components/layout"
-import {getTimelinesDescription} from "../utils/seoutils";
+import {getTimelinesTitle, getTimelinesDescription} from "../utils/seoutils";
 import {Container} from "../components/container";
 import {buildPath} from "../utils/urlutils";
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import './calendar.css';
 
 
 export const formatCalendarDate = (date) => {
@@ -24,13 +24,16 @@ export default class App extends React.Component {
     render() {
         return (
             <Layout>
-                <SEO description={getTimelinesDescription()}/>
+                <SEO title={getTimelinesTitle()} description={getTimelinesDescription()}/>
                 <div>
+                    <p style={{textAlign: `center`}}>タイムライン</p>
                     <Container>
                         <Calendar
                             locale="ja-JP"
                             onChange={this.onChange}
                             value={this.state.date}
+                            minDate={new Date(2019, 12, 1)}
+                            maxDate={new Date()}
                             onClickDay={(value) => navigate(buildPath(`Timeline:${formatCalendarDate(value)}`))}
                         />
                     </Container>
