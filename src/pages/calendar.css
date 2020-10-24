@@ -1,5 +1,4 @@
 .react-calendar {
-  /*width: 350px;*/
   width: 100%;
   max-width: 100%;
   background: white;
@@ -26,6 +25,7 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  text-decoration: none;
 }
 .react-calendar button {
   margin: 0;
@@ -117,4 +117,9 @@
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
+}
+
+.react-calendar-diet-day {
+  color: #00bfff;
+  font-weight: bold;
 }
