@@ -2,62 +2,59 @@ import React from "react"
 import {graphql, navigate} from 'gatsby'
 import SEO from "../components/seo"
 import Layout from "../components/layout"
-import {getTimelinesTitle, getTimelinesDescription} from "../utils/seoutils";
+import {getTimelinesDescription, getTimelinesTitle} from "../utils/seoutils";
 import {Container} from "../components/container";
 import {buildPath} from "../utils/urlutils";
-import {formatDate, formatJSDate} from "../utils/formatutils"
+import {formatDate, formatJsDate} from "../utils/formatutils"
 import Calendar from "react-calendar";
 import "./calendar.css";
 
 
 export const getDietDates = (timelines) => {
-    const dietDate = [];
-    timelines.map((timeline) => {
-        if (timeline.totalMinutes > 0) {
-            dietDate.push(formatDate(timeline.date));
-        }
-    });
-
-    return dietDate;
+    return timelines
+        .filter((timeline) => {
+            return timeline.totalMinutes > 0
+        })
+        .map((timeline) => {
+            return formatDate(timeline.date, "/")
+        });
 }
 
-export const setDietDate = ({date, view }, dietDate) => {
-    const fDate = formatJSDate(date, "/")
-    return (view === "month" && dietDate.includes(fDate)) ?  "react-calendar-diet-day": null;
+export const setDietDate = ({date, view}, dietDates) => {
+    const fDate = formatJsDate(date, "/")
+    return (view === "month" && dietDates.includes(fDate))
+        ? "react-calendar-diet-day" : null;
 }
 
 export default class App extends React.Component {
     state = {
-        date: new Date(),
+        date: new Date(), // ToDo: restore date from LocalStorage
     }
 
-    onChange = date => this.setState({ date })
-
-    dietDate = getDietDates(this.props.data.politylink.Timeline);
+    onChange = date => this.setState({date})
+    dietDates = getDietDates(this.props.data.politylink.Timeline);
 
     render() {
         return (
             <Layout>
                 <SEO title={getTimelinesTitle()} description={getTimelinesDescription()}/>
                 <Container>
-                    <p style={{textAlign: `center`, fontWeight: `bold`}}>タイムライン</p>
-                    <Container style={{textAlign: `right`}}>
+                    <p style={{textAlign: `center`, fontWeight: `bold`}}>国会タイムライン</p>
+                    <div style={{textAlign: `right`, margin: `10px`}}>
                         <p style={{color: `#00bfff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
                         <p style={{fontSize: `0.8em`, display: `inline`}}>国会開催日</p>
-                    </Container>
-                    <Container>
                         <Calendar
                             locale={"ja-JP"}
                             calendarType={"US"}
                             onChange={this.onChange}
                             value={this.state.date}
                             view={"month"}
-                            minDate={new Date(2019, 12, 1)}
+                            minDate={new Date(2020, 0, 1)}
                             maxDate={new Date()}
-                            tileClassName={({date, view }) => setDietDate({date, view}, this.dietDate)}
-                            onClickDay={(value) => navigate(buildPath(`Timeline:${formatJSDate(value, "")}`))}
+                            tileClassName={({date, view}) => setDietDate({date, view}, this.dietDates)}
+                            onClickDay={(value) => navigate(buildPath(`Timeline:${formatJsDate(value, "")}`))}
                         />
-                    </Container>
+                    </div>
                 </Container>
             </Layout>
         )
