@@ -55,12 +55,12 @@ export default class App extends React.Component {
                     <SearchBox
                         handleChange={this.handleTextInput}
                         value={this.state.filterText}
-                        placeholder="第201回国会以降の議案から検索"
+                        placeholder="第201回国会以降の法律案から検索"
                     />
                     <SearchFilter
                         handleChange={this.handleFilterClick}
                         checked={this.state.filterPassed}
-                        label={'成立した議案のみを表示'}
+                        label={'成立した法律案のみを表示'}
                     />
                     <SearchResult value={filteredBills.length + '件表示'}/>
                 </FlexContainer>

@@ -62,7 +62,7 @@ export default function Minutes({data}) {
                 </div>
 
                 {minutes.discussedBills.length > 0 &&
-                <p className={styles.section}>関連議案</p>
+                <p className={styles.section}>法律案</p>
                 }
                 <div className={styles.bills}>
                     <FlexContainer>
