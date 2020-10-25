@@ -6,6 +6,7 @@ import {getTimelinesDescription, getTimelinesTitle} from "../utils/seoutils";
 import {Container} from "../components/container";
 import {buildPath} from "../utils/urlutils";
 import {formatDate, formatJsDate} from "../utils/formatutils"
+import {CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
 import Calendar from "react-calendar";
 import "./calendar.css";
 
@@ -29,11 +30,12 @@ export const setDietDate = ({date, view}, dietDates) => {
 
 export default class App extends React.Component {
     state = {
-        date: (localStorage.getItem("calendarTimestamp") != null) ? new Date(Number(localStorage.getItem("calendarTimestamp"))) : new Date(),
+        date: (typeof window !== 'undefined' &&　sessionStorage.getItem(CALENDAR_TIMESTAMP_KEY) != null)
+            ? new Date(Number(sessionStorage.getItem(CALENDAR_TIMESTAMP_KEY))) : new Date(),
     }
 
     onChange = value => {
-        localStorage.setItem("calendarTimestamp", String(Number(value)));
+        sessionStorage.setItem(CALENDAR_TIMESTAMP_KEY, String(Number(value)));
         this.setState({date: value});
     }
 
@@ -46,7 +48,7 @@ export default class App extends React.Component {
                 <Container>
                     <p style={{textAlign: `center`, fontWeight: `bold`}}>国会タイムライン</p>
                     <div style={{textAlign: `right`, margin: `10px`}}>
-                        <p style={{color: `#2e8b57`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
+                        <p style={{color: `#006edc`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
                         <p style={{fontSize: `0.8em`, display: `inline`}}>国会開催日</p>
                         <Calendar
                             locale={"ja-JP"}

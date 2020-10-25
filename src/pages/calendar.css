@@ -93,10 +93,6 @@
 .react-calendar__tile:enabled:focus {
   background-color: #e6e6e6;
 }
-/*.react-calendar__tile--now:enabled:hover,*/
-/*.react-calendar__tile--now:enabled:focus {*/
-/*  background: #ffffa9;*/
-/*}*/
 .react-calendar__tile--hasActive {
   background: #76baff;
 }
@@ -109,16 +105,16 @@
 }
 
 .react-calendar-today {
-  background: #006edc;
+  background: #00bfff;
   color: white;
 }
 .react-calendar-today:enabled:hover,
 .react-calendar-today:enabled:focus {
-  background: #006edc;
+  background: #00bfff;
   color: white;
 }
 
 .react-calendar-diet-day {
-  color: #2e8b57;
+  color: #00bfff;
   font-weight: bold;
 }
