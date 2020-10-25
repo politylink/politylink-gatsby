@@ -39,6 +39,11 @@
     padding: 20px 20px 0 20px
 }
 
+.contentLink {
+    text-decoration: none;
+    color: black;
+}
+
 @media screen and (max-width: 768px) {
     .top {
         flex-direction: column-reverse;
@@ -89,11 +94,6 @@
     line-height: 1.4;
     font-weight: 500;
     margin: 30px 0;
-}
-
-.contentLink {
-    text-decoration: none;
-    color: black;
 }
 
 .h4:hover {

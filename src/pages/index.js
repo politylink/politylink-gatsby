@@ -2,10 +2,14 @@ import React from "react"
 import Layout from "../components/layout"
 import styles from "./index.module.css"
 import {Link} from "gatsby"
+import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import SEO from "../components/seo";
 
 export default function Landing() {
     return (
         <Layout white>
+            <SEO/>
             <div className={styles.container}>
                 <div className={styles.top}>
                     <div className={styles.topText}>
@@ -35,7 +39,7 @@ export default function Landing() {
                         <div className={styles.contentText}>
                             <Link to={"/bills"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
-                                    法律案ページ
+                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 法律案ページ
                                 </h4>
                             </Link>
                             <p className={styles.p}>
@@ -54,11 +58,11 @@ export default function Landing() {
                         <div className={styles.contentText}>
                             <Link to={"/timelines"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
-                                    国会タイムライン
+                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 国会タイムライン
                                 </h4>
                             </Link>
                             <p className={styles.p}>
-                                どんな会議が開催されたか？成立した法律案はあるか？
+                                今日はどんな会議が開催されたか？成立した法律案はあるか？
                                 <br/>
                                 国会に関する最新情報をその日のニュース記事と一緒にチェックできます。
                                 <br/>
