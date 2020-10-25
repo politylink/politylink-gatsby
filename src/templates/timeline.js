@@ -62,7 +62,7 @@ export default function Timeline({data}) {
                     </ExpandableContainer>
                 </div>
 
-                <p className={styles.section}>関連議案
+                <p className={styles.section}>法律案
                     <span className={styles.subtext}>{`（${timeline.totalBills}件）`}</span>
                 </p>
                 <div className={styles.bills}>

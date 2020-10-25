@@ -21,7 +21,7 @@ export default function Layout(props) {
                 <p>© 2020 PolityLink</p>
                 <div className={styles.fnav}>
                     <Link to='/bills' className={styles.link}>
-                        <p className={styles.fnavtext}>議案一覧</p>
+                        <p className={styles.fnavtext}>法律案一覧</p>
                     </Link>
                     <Link to='/committees' className={styles.link}>
                         <p className={styles.fnavtext}>委員会一覧</p>
