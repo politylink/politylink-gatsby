@@ -84,7 +84,7 @@ export default function Timeline({data}) {
                     </ExpandableContainer>
                 </div>
 
-                <p className={styles.section}>関連ニュース
+                <p className={styles.section}>今日のニュース
                     <span className={styles.subtext}>{`（${timeline.totalNews}件）`}</span>
                 </p>
                 <div className={styles.news}>

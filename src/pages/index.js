@@ -1,99 +1,76 @@
 import React from "react"
-import {graphql} from 'gatsby'
-import BillCard from "../components/billCard"
-import {FlexContainer} from "../components/container"
-import {SearchBox, SearchFilter, SearchResult} from "../components/search"
-import SEO from "../components/seo"
 import Layout from "../components/layout"
-import {buildPath} from "../utils/urlutils";
-import {BILL_PASSED_KEY, BILL_QUERY_KEY} from "../utils/constants";
-import {getBillsDescription} from "../utils/seoutils";
-import {joinNullableStringList} from "../utils/formatutils";
-import {isMatch} from "../utils/searchutils";
+import styles from "./index.module.css"
+import {Link} from "gatsby"
+import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import SEO from "../components/seo";
 
-export default class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            filterText: (typeof window !== 'undefined' && localStorage.getItem(BILL_QUERY_KEY)) || '',
-            filterPassed: (typeof window !== 'undefined' && localStorage.getItem(BILL_PASSED_KEY) === 'true') || false,
-        }
-        this.handleTextInput = this.handleTextInput.bind(this);
-        this.handleFilterClick = this.handleFilterClick.bind(this)
-    }
-
-    handleTextInput(event) {
-        typeof window !== 'undefined' && localStorage.setItem(BILL_QUERY_KEY, event.target.value);
-        this.setState({filterText: event.target.value});
-    }
-
-    handleFilterClick() {
-        const newVal = !this.state.filterPassed
-        typeof window !== 'undefined' && localStorage.setItem(BILL_PASSED_KEY, newVal.toString());
-        this.setState({filterPassed: newVal})
-    }
-
-    filterBills(bills) {
-        return (bills
-                .filter((bill) => {
-                    const joinedText = bill.billNumber + bill.name + bill.reason
-                        + joinNullableStringList(bill.aliases) + joinNullableStringList(bill.tags)
-                    return isMatch(this.state.filterText, joinedText)
-                })
-                .filter((bill) => {
-                    return bill.isPassed || !this.state.filterPassed
-                })
-        );
-    }
-
-    render() {
-        const filteredBills = this.filterBills(this.props.data.politylink.Bill)
-        return (
-            <Layout>
-                <SEO description={getBillsDescription()}/>
-                <FlexContainer>
-                    <SearchBox
-                        handleChange={this.handleTextInput}
-                        value={this.state.filterText}
-                        placeholder="第201回以降の議案から検索"
-                    />
-                    <SearchFilter
-                        handleChange={this.handleFilterClick}
-                        checked={this.state.filterPassed}
-                        label={'成立した議案のみを表示'}
-                    />
-                    <SearchResult value={filteredBills.length + '件表示'}/>
-                </FlexContainer>
-                <FlexContainer>
-                    {filteredBills.map((bill) => {
-                        return <BillCard
-                            title={bill.billNumber}
-                            description={bill.name}
-                            aliases={bill.aliases}
-                            isPassed={bill.isPassed}
-                            hasNews={bill.totalNews > 0}
-                            to={buildPath(bill.id)}
-                        />;
-                    })}
-                </FlexContainer>
-            </Layout>
-        )
-    }
+export default function Landing() {
+    return (
+        <Layout white>
+            <SEO/>
+            <div className={styles.container}>
+                <div className={styles.top}>
+                    <div className={styles.topText}>
+                        <h2 className={styles.h2}>
+                            政治と、
+                            <br/>
+                            向き合おう
+                        </h2>
+                        <p className={styles.p}>
+                            国会で今、何が起こっているのか？どんな法律が成立したのか？
+                            <br/><br/>
+                            政治についてもっと知りたいけれど、どのサイトを見れば良いのか分からない、
+                            知りたい情報がバラバラに散らばっていて大変、というあなたへ。
+                            <br/><br/>
+                            PolityLinkは、政治に関する様々な情報を整理し、アクセスしやすくしたポータルサイトです。
+                            <br/>
+                        </p>
+                    </div>
+                    <img className={styles.topImage} src={"/top.jpg"} alt={"top"}/>
+                </div>
+                <div className={styles.contents}>
+                    <h3 className={styles.h3}>
+                        できること
+                    </h3>
+                    <div className={styles.content}>
+                        <img className={styles.contentImage} src={"/content1.png"} alt={"content1"}/>
+                        <div className={styles.contentText}>
+                            <Link to={"/bills"} className={styles.contentLink}>
+                                <h4 className={styles.h4}>
+                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 法律案ページ
+                                </h4>
+                            </Link>
+                            <p className={styles.p}>
+                                国会に提出された法律案の内容や審議状況を確認できます。
+                                <br/>
+                                <br/>
+                                法律案の本文は衆議院・参議院のサイトから、関連資料は担当省庁のサイトから、
+                                議論された会議録は国会会議録検索システムから、それぞれ取得し、
+                                1つのページに分かりやすくまとめています。
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles.content}>
+                        <img className={styles.contentImage} src={"/content2.png"} alt={"content2"}/>
+                        <div className={styles.contentText}>
+                            <Link to={"/timelines"} className={styles.contentLink}>
+                                <h4 className={styles.h4}>
+                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 国会タイムライン
+                                </h4>
+                            </Link>
+                            <p className={styles.p}>
+                                今日はどんな会議が開催されたか？成立した法律案はあるか？
+                                <br/>
+                                国会に関する最新情報をその日のニュース記事と一緒にチェックできます。
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    )
 }
-
-export const query = graphql`
-    {
-        politylink {
-            Bill (orderBy:[submittedDate_desc]) {
-                id
-                name
-                billNumber
-                reason
-                aliases
-                tags
-                isPassed
-                totalNews
-            }
-        }
-    }
-`

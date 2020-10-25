@@ -15,6 +15,11 @@
     flex-grow: 1;
 }
 
+.whiteMain {
+    composes: main;
+    background-color: white;
+}
+
 .footer {
     height: auto;
     width: 100%;

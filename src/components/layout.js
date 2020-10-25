@@ -3,7 +3,7 @@ import {Link} from "gatsby"
 import styles from "./layout.module.css"
 import HamburgerMenu from "./menu";
 
-export default function Layout({children}) {
+export default function Layout(props) {
     return (
         <div className={styles.page}>
             <HamburgerMenu/>
@@ -14,20 +14,20 @@ export default function Layout({children}) {
                     </Link>
                 </div>
             </header>
-            <main className={styles.main}>
-                {children}
+            <main className={props.white !== undefined ? styles.whiteMain : styles.main}>
+                {props.children}
             </main>
             <footer className={styles.footer}>
                 <p>© 2020 PolityLink</p>
                 <div className={styles.fnav}>
-                    <Link to='/timelines' className={styles.link}>
-                        <p className={styles.fnavtext}>国会タイムライン</p>
-                    </Link>
-                    <Link to='/' className={styles.link}>
+                    <Link to='/bills' className={styles.link}>
                         <p className={styles.fnavtext}>議案一覧</p>
                     </Link>
                     <Link to='/committees' className={styles.link}>
                         <p className={styles.fnavtext}>委員会一覧</p>
+                    </Link>
+                    <Link to='/timelines' className={styles.link}>
+                        <p className={styles.fnavtext}>国会タイムライン</p>
                     </Link>
                     <Link to='/about' className={styles.link}>
                         <p className={styles.fnavtext}>PolityLinkについて</p>

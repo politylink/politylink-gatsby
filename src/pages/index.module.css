@@ -1,0 +1,117 @@
+.container {
+    margin: 0 auto;
+    max-width: 1080px;
+}
+
+.top {
+    margin: 30px auto 50px auto;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.topText {
+    width: 48%;
+}
+
+.topImage {
+    width: 48%;
+    height: 340px;
+}
+
+.contents {
+    margin: 30px auto;
+}
+
+.content {
+    margin: 0 10px 30px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contentText {
+    width: 55%;
+}
+
+.contentImage {
+    width: 40%;
+    padding: 20px 20px 0 20px
+}
+
+.contentLink {
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width: 768px) {
+    .top {
+        flex-direction: column-reverse;
+    }
+
+    .topText {
+        width: 90%;
+        margin-top: 48px;
+    }
+
+    .topImage {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .contentText {
+        width: 90%;
+        padding: 0 30px;
+    }
+
+    .contentImage {
+        width: 80%;
+    }
+}
+
+.h2 {
+    font-size: 40px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    margin-top: 0;
+}
+
+.h3 {
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 500;
+    text-align: center;
+}
+
+.h4 {
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 500;
+    margin: 30px 0;
+}
+
+.h4:hover {
+    font-size: 32px
+}
+
+.p {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    line-height: 1.6;
+    padding: 0 10px;
+    max-width: 500px;
+}
+
+.tile {
+    background-color: #dddddd;
+    height: 400px;
+    margin: 50px 10px;
+    border-radius: 10px;
+}
