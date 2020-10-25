@@ -4,12 +4,21 @@ export const formatSentence = (sentence) => {
     return "- " + sentence
 }
 
-export const formatDate = (gqlDate) => {
-    return String(gqlDate.year) + "/" + String(gqlDate.month).padStart(2, '0') + "/" + String(gqlDate.day).padStart(2, '0')
+export const formatDate = (gqlDate, separator = "/") => {
+    return formatJsDate(toJsDate(gqlDate), separator)
+}
+
+export const formatJsDate = (jsDate, separator = "/") => {
+    return [
+        String(jsDate.getFullYear()),
+        String(jsDate.getMonth() + 1).padStart(2, "0"),
+        String(jsDate.getDate()).padStart(2, "0")
+    ].join(separator)
 }
 
 export const formatDateWithDay = (gqlDate) => {
-    return `${formatDate(gqlDate)}(${toDayOfWeek(toJsDate(gqlDate))})`
+    const jsDate = toJsDate(gqlDate)
+    return `${formatJsDate(jsDate)}(${toDayOfWeek(jsDate)})`
 }
 
 export const joinNullableStringList = (maybeList) => {

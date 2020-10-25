@@ -8,6 +8,10 @@ export const getCommitteesDescription = () => {
     return "衆議院・参議院の委員会・調査会を検索できます。"
 }
 
+export const getTimelinesTitle = () => {
+    return "国会タイムライン"
+}
+
 export const getTimelinesDescription = () => {
     return "国会に関するニュースを日毎に確認できます。"
 }
