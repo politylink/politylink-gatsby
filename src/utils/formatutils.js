@@ -15,3 +15,7 @@ export const formatDateWithDay = (gqlDate) => {
 export const joinNullableStringList = (maybeList) => {
     return maybeList == null ? '' : maybeList.join('')
 }
+
+export const formatJSDate = (date, separator) => {
+    return String(date.getFullYear()) + String(separator)+ String(date.getMonth()+1).padStart(2, "0") + String(separator) + String(date.getDate()).padStart(2, "0")
+}
