@@ -22,16 +22,21 @@ export const getDietDates = (timelines) => {
 
 export const setDietDate = ({date, view}, dietDates) => {
     const fDate = formatJsDate(date, "/")
-    return (view === "month" && dietDates.includes(fDate))
-        ? "react-calendar-diet-day" : null;
+    return (view === "month" && dietDates.includes(fDate)) ? "react-calendar-diet-day"
+        : (date.toDateString() === new Date().toDateString()) ? "react-calendar-today"
+        : null;
 }
 
 export default class App extends React.Component {
     state = {
-        date: new Date(), // ToDo: restore date from LocalStorage
+        date: (localStorage.getItem("calendarTimestamp") != null) ? new Date(Number(localStorage.getItem("calendarTimestamp"))) : new Date(),
     }
 
-    onChange = date => this.setState({date})
+    onChange = value => {
+        localStorage.setItem("calendarTimestamp", String(Number(value)));
+        this.setState({date: value});
+    }
+
     dietDates = getDietDates(this.props.data.politylink.Timeline);
 
     render() {
@@ -41,7 +46,7 @@ export default class App extends React.Component {
                 <Container>
                     <p style={{textAlign: `center`, fontWeight: `bold`}}>国会タイムライン</p>
                     <div style={{textAlign: `right`, margin: `10px`}}>
-                        <p style={{color: `#00bfff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
+                        <p style={{color: `#2e8b57`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
                         <p style={{fontSize: `0.8em`, display: `inline`}}>国会開催日</p>
                         <Calendar
                             locale={"ja-JP"}
