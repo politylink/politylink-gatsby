@@ -28,23 +28,29 @@ PolityLink（ポリティリンク）は政治の「原文」へのポータル�
 
 PolityLinkはこの問題を解決するためのポータルサイトです。
 ここでは様々なサイトから集められた「原文」が相互に紐づいてまとめられています。
-例えば、議案詳細ページ（例:[検察庁法改正案](https://politylink.jp/bill/JS-WqDyU0tM_g8Qvuxj5aA)）からは、
-議案本文、概要、改正対象法、会議録など、その議案に関する全ての情報にアクセスできます。
-一方で議員詳細ページからは、発言、提出議案、質問主意書など、その議員に関する全ての情報にアクセスできます。
+例えば、法律案詳細ページ（例:[検察庁法改正案](https://politylink.jp/bill/JS-WqDyU0tM_g8Qvuxj5aA)）からは、
+法律案本文、概要、改正対象法、会議録など、その法律案に関する全ての情報にアクセスできます。
+一方で議員詳細ページからは、発言、提出法律案、質問主意書など、その議員に関する全ての情報にアクセスできます（実装中）。
 
 PolityLinkを通し、皆さんが政治に関する正確で中立な情報に簡単にアクセスする手助けをできれば幸いです。
 
 ## PolityLinkのデータについて
 現在PolityLinkでは以下のサイトからデータを収集しています。
 
-* [衆議院](http://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm): 議案一覧、本文、提出理由
-* [参議院](https://www.sangiin.go.jp/japanese/joho1/kousei/gian/201/gian.htm): 議案一覧、審議経過
-* [衆議院法制局](http://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/housei/html/h-shuhou201.html): 衆法の議案関連資料（概要PDF、新旧対照表PDF）
-* [参議院法制局](https://houseikyoku.sangiin.go.jp/sanhouichiran/kaijibetu/r-201.htm): 参法の議案関連資料
-* [各省庁の公式サイト](https://www.e-gov.go.jp/law/bill.html): 閣法の議案関連資料
+* [衆議院](http://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm): 法律案一覧、本文、提出理由
+* [参議院](https://www.sangiin.go.jp/japanese/joho1/kousei/gian/201/gian.htm): 法律案一覧、審議経過
+* [衆議院法制局](http://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/housei/html/h-shuhou201.html): 衆法の関連資料（概要PDF、新旧対照表PDF）
+* [参議院法制局](https://houseikyoku.sangiin.go.jp/sanhouichiran/kaijibetu/r-201.htm): 参法の関連資料
+* [各省庁の公式サイト](https://www.e-gov.go.jp/law/bill.html): 閣法の関連資料
 * [国会会議録検索システム](https://kokkai.ndl.go.jp/#/): 国会会議録
 
 なおデータ処理は自動で行われており、PolityLinkはそのデータの完全性及び正確性を保証することはできません。
+
+## ニュース記事との連携機能について
+現在PolityLinkでは、各種ページにおいて関連するニュース記事へのリンクを提供しています。
+関連するニュース記事を検出する目的で、プログラムを用いてニュースサイトから記事を複製し情報解析する行為は著作物の非享受利用に該当し（[著作権法第三十条の四](https://elaws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0500/detail?lawId=345AC0000000048#254)）、
+PolityLinkのページにおいてニュース記事のタイトルとサムネイルをリンクと共に表示する行為は著作物の軽微利用に該当する（[著作権法第四十七条の五](https://elaws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0500/detail?lawId=345AC0000000048#388)）と解釈しています。
+本サービスに関しましては本ページ下部に記載の連絡先からお問い合わせください。
 
 ## PolityLinkチームについて
 PolityLinkは政治に興味を持った3人のエンジニアによって運営されています。
@@ -53,7 +59,3 @@ PolityLinkは政治に興味を持った3人のエンジニアによって運営
 
 もしPolityLinkに興味がありましたら、politylinkあっとgmail.com、
 または[Twitter](https://twitter.com/politylink) まで気軽にご連絡ください。
-
-また、今後の開発の参考にするために、Googleフォームの[アンケート](https://forms.gle/ciDeuv3pSgDjC4P26)にご協力いただけると幸いです。
-
-
