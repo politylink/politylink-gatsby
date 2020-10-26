@@ -4,6 +4,7 @@ import {Link} from "gatsby"
 
 
 export default function MinutesCard(props) {
+    const topics = props.topics ? props.topics : ['議題未登録']
     return (
         <Link className={styles.card} to={props.to}>
             <div className={styles.header}>
@@ -16,7 +17,7 @@ export default function MinutesCard(props) {
                 </div>
             </div>
             <ul className={styles.topics}>
-                {props.topics.map((topic) => {
+                {topics.map((topic) => {
                     return <li className={styles.topic}>{topic}</li>
                 })}
             </ul>
