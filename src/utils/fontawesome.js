@@ -1,13 +1,12 @@
 import { config, library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowCircleRight,
-  faLock,
-  faExternalLinkAlt,
-  faUser,
-  faCalendarAlt,
   faAngleDoubleLeft,
-  faAngleDoubleRight
+  faAngleDoubleRight,
+  faCalendarAlt,
+  faExternalLinkAlt,
+  faLock,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Prevent fontawesome from dynamically adding its css since
@@ -15,12 +14,11 @@ import {
 config.autoAddCss = false;
 
 library.add(
-  fab,
   faArrowCircleRight,
-  faLock,
-  faExternalLinkAlt,
-  faUser,
-  faCalendarAlt,
   faAngleDoubleLeft,
-  faAngleDoubleRight
+  faAngleDoubleRight,
+  faCalendarAlt,
+  faExternalLinkAlt,
+  faLock,
+  faUser,
 );
