@@ -27,14 +27,14 @@ export default function Landing() {
                             <br/>
                         </p>
                     </div>
-                    <img className={styles.topImage} src={"/top.jpg"} alt={"PolityLink"} width={493} height={340} />
+                    <img className={styles.topImage} src={"/top.jpg"} alt={"PolityLink"} width={493} height={340} decoding="async"/>
                 </div>
                 <div className={styles.contents}>
                     <h3 className={styles.h3}>
                         できること
                     </h3>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content1.png"} alt={"法律案ページ"} width={464} height={485} loading="lazy"/>
+                        <img className={styles.contentImage} src={"/content1.png"} alt={"法律案ページ"} width={464} height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
                             <Link to={"/bills"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
@@ -53,7 +53,7 @@ export default function Landing() {
                         </div>
                     </div>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content2.png"} alt={"国会タイムライン"} width={464} height={485} loading="lazy"/>
+                        <img className={styles.contentImage} src={"/content2.png"} alt={"国会タイムライン"} width={464} height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
                             <Link to={"/timelines"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
