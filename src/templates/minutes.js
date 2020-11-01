@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
 import CommitteeCard from "../components/committeeCard";
-import {formatDate, formatDateWithDay, formatSentence} from "../utils/formatutils"
+import {formatDate, formatDateWithDay, formatTopicSentence, formatLongSentence} from "../utils/formatutils"
 import {buildPath} from "../utils/urlutils";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
@@ -32,11 +32,13 @@ export default function Minutes({data}) {
                     </p>
                 </Link>
                 <div className={styles.summary}>
-                    <p>{minutes.summary}</p>
+                    {minutes.summary != null &&
+                    <p>{formatLongSentence(minutes.summary, 150)}</p>
+                    }
                     {minutes.topics != null &&
                     <Container>
                         {minutes.topics.map((topic) => {
-                            return <p className={styles.topic}> {formatSentence(topic)} </p>
+                            return <p className={styles.topic}> {formatTopicSentence(topic)} </p>
                         })}
                     </Container>}
                 </div>
@@ -50,16 +52,20 @@ export default function Minutes({data}) {
                     </FlexContainer>
                 </div>
 
-                <p className={styles.section}>所属委員会</p>
-                <div className={styles.committee}>
-                    <FlexContainer>
-                        <CommitteeCard
-                            title={minutes.belongedToCommittee.name}
-                            to={buildPath(minutes.belongedToCommittee.id)}
-                            left={true}
-                        />
-                    </FlexContainer>
+                {minutes.belongedToCommittee != null &&
+                <div>
+                    <p className={styles.section}>所属委員会</p>
+                    <div className={styles.committee}>
+                        <FlexContainer>
+                            <CommitteeCard
+                                title={minutes.belongedToCommittee.name}
+                                to={buildPath(minutes.belongedToCommittee.id)}
+                                left={true}
+                            />
+                        </FlexContainer>
+                    </div>
                 </div>
+                }
 
                 {minutes.discussedBills.length > 0 &&
                 <p className={styles.section}>法律案</p>

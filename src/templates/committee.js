@@ -5,7 +5,7 @@ import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
-import {formatDate, formatSentence} from "../utils/formatutils";
+import {formatDate, formatTopicSentence} from "../utils/formatutils";
 import {sortMinutesList} from "../utils/sortutils";
 import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";
@@ -25,7 +25,7 @@ export default function Committees({data}) {
                     {committee.topics != null &&
                     <Container>
                         {committee.topics.map((topic) => {
-                            return <p className={styles.topic}>{formatSentence(topic)}</p>
+                            return <p className={styles.topic}>{formatTopicSentence(topic)}</p>
                         })}
                     </Container>}
                 </div>
