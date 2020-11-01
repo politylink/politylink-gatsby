@@ -1,5 +1,6 @@
 import React from "react"
 import {Link} from "gatsby"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "./timeline.module.css"
 import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout"
@@ -9,8 +10,6 @@ import {buildPath} from "../utils/urlutils";
 import NewsCard from "../components/newsCard";
 import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sortutils";
 import MinutesCard from "../components/minutesCard";
-import {faAngleDoubleLeft, faAngleDoubleRight, faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import {offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
 import {getTimelineDescription, getTimelineTitle} from "../utils/seoutils";
@@ -31,14 +30,14 @@ export default function Timeline({data}) {
             <Container>
                 <div className={styles.header}>
                     <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
-                        <FontAwesomeIcon icon={faAngleDoubleLeft}/>
+                        <FontAwesomeIcon icon="angle-double-left"/>
                     </Link>
                     <Link to='/timelines' className={styles.nav}>
                         <h3 className={styles.date}>
-                            <FontAwesomeIcon icon={faCalendarAlt}/> {formatDateWithDay(timeline.date)}</h3>
+                            <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(timeline.date)}</h3>
                     </Link>
                     <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
-                        <FontAwesomeIcon icon={faAngleDoubleRight}/>
+                        <FontAwesomeIcon icon="angle-double-right"/>
                     </Link>
                 </div>
 

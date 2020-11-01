@@ -1,5 +1,6 @@
 import React from "react"
 import {graphql, Link} from "gatsby"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "./minutes.module.css"
 import {Container, FlexContainer} from "../components/container"
 import Layout from "../components/layout"
@@ -13,8 +14,6 @@ import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
 import {sortNewsList} from "../utils/sortutils";
 import {toJsDate, toTimelineId} from "../utils/dateutils";
-import {faCalendarAlt} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function Minutes({data}) {
@@ -28,7 +27,7 @@ export default function Minutes({data}) {
                 <h2 className={styles.name}>{minutes.name}</h2>
                 <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
                     <p className={styles.date}>
-                        <FontAwesomeIcon icon={faCalendarAlt}/> {formatDateWithDay(minutes.startDateTime)}
+                        <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
                     </p>
                 </Link>
                 <div className={styles.summary}>

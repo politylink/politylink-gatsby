@@ -1,9 +1,8 @@
 import React from "react"
+import {Link} from "gatsby"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout"
 import styles from "./index.module.css"
-import {Link} from "gatsby"
-import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import SEO from "../components/seo";
 
 export default function Landing() {
@@ -39,7 +38,7 @@ export default function Landing() {
                         <div className={styles.contentText}>
                             <Link to={"/bills"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
-                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 法律案ページ
+                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 法律案ページ
                                 </h4>
                             </Link>
                             <p className={styles.p}>
@@ -58,7 +57,7 @@ export default function Landing() {
                         <div className={styles.contentText}>
                             <Link to={"/timelines"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
-                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 国会タイムライン
+                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 国会タイムライン
                                 </h4>
                             </Link>
                             <p className={styles.p}>
