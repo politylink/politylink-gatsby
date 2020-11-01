@@ -1,10 +1,11 @@
 import React from "react"
 import styles from "./minutesCard.module.css"
 import {Link} from "gatsby"
+import {trimTopics} from "../utils/formatutils";
 
 
 export default function MinutesCard(props) {
-    const topics = props.topics ? props.topics : ['議題未登録']
+    const topics = props.topics ? trimTopics(props.topics, 5) : ['議題未登録']
     return (
         <Link className={styles.card} to={props.to}>
             <div className={styles.header}>

@@ -12,6 +12,14 @@ export const formatLongSentence = (sentence, limit) => {
     }
 }
 
+export const trimTopics = (topics, length) => {
+    if (topics.length <= length) {
+        return topics
+    } else {
+        return topics.slice(0, length).concat(['...'])
+    }
+}
+
 export const formatDate = (gqlDate, separator = "/") => {
     return formatJsDate(toJsDate(gqlDate), separator)
 }
