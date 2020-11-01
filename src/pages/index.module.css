@@ -15,7 +15,7 @@
 }
 
 .topImage {
-    width: 48%;
+    min-width: 48%;
     height: 340px;
 }
 
@@ -35,7 +35,8 @@
 }
 
 .contentImage {
-    width: 40%;
+    min-width: 40%;
+    height: auto;
     padding: 20px 20px 0 20px
 }
 
@@ -55,8 +56,9 @@
     }
 
     .topImage {
-        width: 90%;
+        max-width: 90%;
         margin: 0 auto;
+        height: auto;
     }
 
     .content {
@@ -69,7 +71,7 @@
     }
 
     .contentImage {
-        width: 80%;
+        max-width: 80%;
     }
 }
 

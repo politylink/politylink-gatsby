@@ -27,14 +27,14 @@ export default function Landing() {
                             <br/>
                         </p>
                     </div>
-                    <img className={styles.topImage} src={"/top.jpg"} alt={"top"}/>
+                    <img className={styles.topImage} src={"/top.jpg"} alt={"PolityLink"} width={493} height={340} />
                 </div>
                 <div className={styles.contents}>
                     <h3 className={styles.h3}>
                         できること
                     </h3>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content1.png"} alt={"content1"}/>
+                        <img className={styles.contentImage} src={"/content1.png"} alt={"法律案ページ"} width={464} height={485} loading="lazy"/>
                         <div className={styles.contentText}>
                             <Link to={"/bills"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
@@ -53,7 +53,7 @@ export default function Landing() {
                         </div>
                     </div>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content2.png"} alt={"content2"}/>
+                        <img className={styles.contentImage} src={"/content2.png"} alt={"国会タイムライン"} width={464} height={485} loading="lazy"/>
                         <div className={styles.contentText}>
                             <Link to={"/timelines"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
