@@ -1,7 +1,23 @@
 import {toDayOfWeek, toJsDate} from "./dateutils";
 
-export const formatSentence = (sentence) => {
+export const formatTopicSentence = (sentence) => {
     return "- " + sentence
+}
+
+export const formatLongSentence = (sentence, limit) => {
+    if (sentence.length < limit) {
+        return sentence;
+    } else {
+        return sentence.substr(0, limit) + "..."
+    }
+}
+
+export const trimTopics = (topics, length) => {
+    if (topics.length <= length) {
+        return topics
+    } else {
+        return topics.slice(0, length).concat(['...'])
+    }
 }
 
 export const formatDate = (gqlDate, separator = "/") => {
