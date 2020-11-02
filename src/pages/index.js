@@ -1,9 +1,8 @@
 import React from "react"
+import {Link} from "gatsby"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout"
 import styles from "./index.module.css"
-import {Link} from "gatsby"
-import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import SEO from "../components/seo";
 
 export default function Landing() {
@@ -28,18 +27,18 @@ export default function Landing() {
                             <br/>
                         </p>
                     </div>
-                    <img className={styles.topImage} src={"/top.jpg"} alt={"top"}/>
+                    <img className={styles.topImage} src={"/top.jpg"} alt={"PolityLink"} width={493} height={340} decoding="async"/>
                 </div>
                 <div className={styles.contents}>
                     <h3 className={styles.h3}>
                         できること
                     </h3>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content1.png"} alt={"content1"}/>
+                        <img className={styles.contentImage} src={"/content1.png"} alt={"法律案ページ"} width={464} height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
                             <Link to={"/bills"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
-                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 法律案ページ
+                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 法律案ページ
                                 </h4>
                             </Link>
                             <p className={styles.p}>
@@ -54,11 +53,11 @@ export default function Landing() {
                         </div>
                     </div>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content2.png"} alt={"content2"}/>
+                        <img className={styles.contentImage} src={"/content2.png"} alt={"国会タイムライン"} width={464} height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
                             <Link to={"/timelines"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
-                                    <FontAwesomeIcon icon={faArrowCircleRight} size="lg" color="#174a5c"/> 国会タイムライン
+                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 国会タイムライン
                                 </h4>
                             </Link>
                             <p className={styles.p}>

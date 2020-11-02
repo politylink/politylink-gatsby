@@ -1,7 +1,6 @@
 import React from "react"
-import styles from "./newsCard.module.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLock} from "@fortawesome/free-solid-svg-icons";
+import styles from "./newsCard.module.css"
 
 export default function NewsCard(props) {
     let thumbnail
@@ -29,7 +28,7 @@ export default function NewsCard(props) {
             <div className={styles.body}>
                 <p className={styles.title}>{props.title}</p>
                 <p className={styles.info}>
-                    {props.isPaid && <FontAwesomeIcon icon={faLock}/>}
+                    {props.isPaid && <FontAwesomeIcon icon="lock"/>}
                     {" " + publisher + " " + props.publishedAt}
                 </p>
             </div>
