@@ -75,12 +75,35 @@ exports.createPages = async ({actions, graphql}) => {
         }
     }
     `)
+
+    const minDate = await graphql(`
+    {
+        politylink {
+            Timeline (orderBy:date_asc, first:1) {
+                date { year, month, day }
+            }
+        }
+    }
+    `)
+
+    const maxDate = await graphql(`
+    {
+        politylink {
+            Timeline (orderBy:date_desc, first:1) {
+                date { year, month, day }
+            }
+        }
+    }
+    `)
+
     timelineResult.data.politylink.Timeline.forEach(({id}) => {
         createPage({
             path: buildPath(id),
             component: path.resolve(`./src/templates/timeline.js`),
             context: {
                 timelineId: id,
+                timelineMinDate: minDate.data.politylink.Timeline[0].date,
+                timelineMaxDate: maxDate.data.politylink.Timeline[0].date,
             },
         })
     })

@@ -16,12 +16,10 @@ import {getTimelineDescription, getTimelineTitle} from "../utils/seoutils";
 import SEO from "../components/seo";
 
 
-export default function Timeline({data}) {
+export default function Timeline({data, pageContext}) {
     const timeline = data.politylink.Timeline[0]
-    const minDate = new Date(2020, 0, 1);
-    console.log(minDate);
-    const maxDate = new Date();
-    console.log(maxDate);
+    const minDate = toJsDate(pageContext.timelineMinDate);
+    const maxDate = toJsDate(pageContext.timelineMaxDate);
     const prevDate = offsetDate(toJsDate(timeline.date), -1);
     const nextDate = offsetDate(toJsDate(timeline.date), 1);
     const minutesList = sortMinutesList(timeline.minutes)
