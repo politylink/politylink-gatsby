@@ -44,7 +44,7 @@ export default class App extends React.Component {
                         <p style={{fontSize: `0.8em`, display: `inline`}}>国会開催日</p>
                         <TimelineCalendar
                             onChange={this.onChange}
-                            value={this.state.date}
+                            date={this.state.date}
                             dietDates={this.dietDates}
                         />
                     </div>
