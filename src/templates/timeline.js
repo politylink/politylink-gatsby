@@ -18,6 +18,10 @@ import SEO from "../components/seo";
 
 export default function Timeline({data}) {
     const timeline = data.politylink.Timeline[0]
+    const minDate = new Date(2020, 0, 1);
+    console.log(minDate);
+    const maxDate = new Date();
+    console.log(maxDate);
     const prevDate = offsetDate(toJsDate(timeline.date), -1);
     const nextDate = offsetDate(toJsDate(timeline.date), 1);
     const minutesList = sortMinutesList(timeline.minutes)
@@ -29,16 +33,26 @@ export default function Timeline({data}) {
             <SEO title={getTimelineTitle(timeline)} description={getTimelineDescription(timeline)}/>
             <Container>
                 <div className={styles.header}>
-                    <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
-                        <FontAwesomeIcon icon="angle-double-left"/>
-                    </Link>
+                    {prevDate >= minDate
+                        ? <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
+                            <FontAwesomeIcon icon="angle-double-left"/>
+                          </Link>
+                        : <div className={styles.invalidNav}>
+                            <FontAwesomeIcon icon="angle-double-left"/>
+                          </div>
+                    }
                     <Link to='/timelines' className={styles.nav}>
                         <h3 className={styles.date}>
                             <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(timeline.date)}</h3>
                     </Link>
-                    <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
-                        <FontAwesomeIcon icon="angle-double-right"/>
-                    </Link>
+                    {maxDate >= nextDate
+                        ? <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
+                            <FontAwesomeIcon icon="angle-double-right"/>
+                          </Link>
+                        : <div className={styles.invalidNav}>
+                            <FontAwesomeIcon icon="angle-double-right"/>
+                          </div>
+                    }
                 </div>
 
                 <p className={styles.section}>会議録
