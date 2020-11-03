@@ -22,6 +22,11 @@
     text-decoration: underline;
 }
 
+.invalidNav {
+    composes: nav;
+    color: #a9a9a9;
+}
+
 .section {
     margin: 20px 10px 5px 10px;
     padding: 0;
