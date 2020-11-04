@@ -1,7 +1,7 @@
 import React from "react"
 import {graphql} from "gatsby"
 import styles from "./committee.module.css"
-import {Container, FlexContainer} from "../components/container"
+import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
@@ -9,6 +9,7 @@ import {formatDate, formatTopicSentence} from "../utils/formatutils";
 import {sortMinutesList} from "../utils/sortutils";
 import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";
+import {EXPAND_MINUTES_KEY} from "../utils/constants";
 
 
 export default function Committees({data}) {
@@ -18,34 +19,40 @@ export default function Committees({data}) {
     return (
         <Layout>
             <SEO title={committee.name} description={getCommitteeDescription(committee)}/>
-            <Container>
-                <h2 className={styles.name}>{committee.name}</h2>
-                <div className={styles.description}>
-                    <p>{committee.description}</p>
-                    {committee.topics != null &&
-                    <Container>
-                        {committee.topics.map((topic) => {
-                            return <p className={styles.topic}>{formatTopicSentence(topic)}</p>
-                        })}
-                    </Container>}
-                </div>
+            <div className={styles.section}>
+                <Container>
+                    <h2 className={styles.name}>{committee.name}</h2>
+                    <div className={styles.description}>
+                        <p>{committee.description}</p>
+                        {committee.topics != null &&
+                        <Container>
+                            {committee.topics.map((topic) => {
+                                return <p className={styles.topic}>{formatTopicSentence(topic)}</p>
+                            })}
+                        </Container>}
+                    </div>
+                </Container>
+            </div>
 
-
-                <p className={styles.section}>会議録一覧</p>
-                <div className={styles.committees}>
-                    <FlexContainer>
-                        {minutesList.map((minutes) => {
-                            return <MinutesCard
-                                to={buildPath(minutes.id)}
-                                name={minutes.name}
-                                topics={minutes.topics}
-                                hasNews={minutes.totalNews > 0}
-                                date={formatDate(minutes.startDateTime)}
-                            />
-                        })}
-                    </FlexContainer>
-                </div>
-            </Container>
+            {minutesList.length > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"会議録一覧"}
+                    localStorageKey={EXPAND_MINUTES_KEY}
+                    sizeLimit={5}
+                >
+                    {minutesList.map((minutes) => {
+                        return <MinutesCard
+                            to={buildPath(minutes.id)}
+                            name={minutes.name}
+                            topics={minutes.topics}
+                            hasNews={minutes.totalNews > 0}
+                            date={formatDate(minutes.startDateTime)}
+                        />
+                    })}
+                </ExpandableContainer>
+            </div>
+            }
         </Layout>
     )
 }

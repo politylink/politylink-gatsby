@@ -29,93 +29,96 @@ export default function Timeline({data, pageContext}) {
     return (
         <Layout>
             <SEO title={getTimelineTitle(timeline)} description={getTimelineDescription(timeline)}/>
-            <Container>
-                <div className={styles.header}>
-                    {prevDate >= minDate
-                        ? <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
-                            <FontAwesomeIcon icon="angle-double-left"/>
-                          </Link>
-                        : <div className={styles.invalidNav}>
-                            <FontAwesomeIcon icon="angle-double-left"/>
-                          </div>
-                    }
-                    <Link to='/timelines' className={styles.nav}>
-                        <h3 className={styles.date}>
-                            <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(timeline.date)}</h3>
-                    </Link>
-                    {maxDate >= nextDate
-                        ? <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
-                            <FontAwesomeIcon icon="angle-double-right"/>
-                          </Link>
-                        : <div className={styles.invalidNav}>
-                            <FontAwesomeIcon icon="angle-double-right"/>
-                          </div>
-                    }
-                </div>
 
-                <p className={styles.section}>会議録
-                    <span className={styles.subtext}>{`（${timeline.totalMinutes}件）`}</span>
-                </p>
-                <div className={styles.minutes}>
-                    <ExpandableContainer
-                        localStorageKey={EXPAND_MINUTES_KEY}
-                        sizeLimit={2}
-                    >
-                        {minutesList.map((minutes) => {
-                            return <MinutesCard
-                                to={buildPath(minutes.id)}
-                                name={minutes.name}
-                                topics={minutes.topics}
-                                hasNews={minutes.totalNews > 0}
-                                date={formatDate(minutes.startDateTime)}
-                            />
-                        })}
-                    </ExpandableContainer>
-                </div>
+            <div className={styles.section}>
+                <Container>
+                    <div className={styles.header}>
+                        {prevDate >= minDate
+                            ? <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
+                                <FontAwesomeIcon icon="angle-double-left"/>
+                            </Link>
+                            : <div className={styles.invalidNav}>
+                                <FontAwesomeIcon icon="angle-double-left"/>
+                            </div>
+                        }
+                        <Link to='/timelines' className={styles.nav}>
+                            <h3 className={styles.date}>
+                                <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(timeline.date)}</h3>
+                        </Link>
+                        {maxDate >= nextDate
+                            ? <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
+                                <FontAwesomeIcon icon="angle-double-right"/>
+                            </Link>
+                            : <div className={styles.invalidNav}>
+                                <FontAwesomeIcon icon="angle-double-right"/>
+                            </div>
+                        }
+                    </div>
+                </Container>
+            </div>
 
-                <p className={styles.section}>法律案
-                    <span className={styles.subtext}>{`（${timeline.totalBills}件）`}</span>
-                </p>
-                <div className={styles.bills}>
-                    <ExpandableContainer
-                        localStorageKey={EXPAND_BILL_KEY}
-                        sizeLimit={2}
-                    >
-                        {billList.map((bill) => {
-                            return <BillCard
-                                title={bill.billNumber}
-                                description={bill.name}
-                                aliases={bill.aliases}
-                                to={buildPath(bill.id)}
-                                isPassed={bill.isPassed}
-                                hasNews={bill.totalNews > 0}
-                                left={true}
-                            />
-                        })}
-                    </ExpandableContainer>
-                </div>
+            {timeline.totalMinutes > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"会議録"}
+                    localStorageKey={EXPAND_MINUTES_KEY}
+                    sizeLimit={2}
+                >
+                    {minutesList.map((minutes) => {
+                        return <MinutesCard
+                            to={buildPath(minutes.id)}
+                            name={minutes.name}
+                            topics={minutes.topics}
+                            hasNews={minutes.totalNews > 0}
+                            date={formatDate(minutes.startDateTime)}
+                        />
+                    })}
+                </ExpandableContainer>
+            </div>
+            }
 
-                <p className={styles.section}>今日のニュース
-                    <span className={styles.subtext}>{`（${timeline.totalNews}件）`}</span>
-                </p>
-                <div className={styles.news}>
-                    <ExpandableContainer
-                        localStorageKey={EXPAND_NEWS_KEY}
-                        sizeLimit={3}
-                    >
-                        {newsList.map((news) => {
-                            return <NewsCard
-                                href={news.url}
-                                thumbnail={news.thumbnail}
-                                title={news.title}
-                                publisher={news.publisher}
-                                publishedAt={formatDate(news.publishedAt)}
-                                isPaid={news.isPaid}
-                            />
-                        })}
-                    </ExpandableContainer>
-                </div>
-            </Container>
+            {timeline.totalBills > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"法律案"}
+                    localStorageKey={EXPAND_BILL_KEY}
+                    sizeLimit={2}
+                >
+                    {billList.map((bill) => {
+                        return <BillCard
+                            title={bill.billNumber}
+                            description={bill.name}
+                            aliases={bill.aliases}
+                            to={buildPath(bill.id)}
+                            isPassed={bill.isPassed}
+                            hasNews={bill.totalNews > 0}
+                            left={true}
+                        />
+                    })}
+                </ExpandableContainer>
+            </div>
+            }
+
+            {timeline.totalNews > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"今日のニュース"}
+                    localStorageKey={EXPAND_NEWS_KEY}
+                    sizeLimit={2}
+                >
+                    {newsList.map((news) => {
+                        return <NewsCard
+                            href={news.url}
+                            thumbnail={news.thumbnail}
+                            title={news.title}
+                            publisher={news.publisher}
+                            publishedAt={formatDate(news.publishedAt)}
+                            isPaid={news.isPaid}
+                        />
+                    })}
+                </ExpandableContainer>
+            </div>
+            }
         </Layout>
     )
 }
