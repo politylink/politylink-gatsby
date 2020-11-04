@@ -1,14 +1,12 @@
 import React from "react"
-import {graphql, navigate} from 'gatsby'
+import {graphql} from 'gatsby'
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import {getTimelinesDescription, getTimelinesTitle} from "../utils/seoutils";
 import {Container} from "../components/container";
-import {buildPath} from "../utils/urlutils";
-import {formatDate, formatJsDate} from "../utils/formatutils"
+import {TimelineCalendar} from "../components/calendar";
+import {formatDate} from "../utils/formatutils"
 import {CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
-import Calendar from "react-calendar";
-import "./calendar.css";
 
 
 export const getDietDates = (timelines) => {
@@ -21,12 +19,6 @@ export const getDietDates = (timelines) => {
         });
 }
 
-export const setDietDate = ({date, view}, dietDates) => {
-    const fDate = formatJsDate(date, "/")
-    return (view === "month" && dietDates.includes(fDate)) ? "react-calendar-diet-day"
-        : (date.toDateString() === new Date().toDateString()) ? "react-calendar-today"
-        : null;
-}
 
 export default class App extends React.Component {
     state = {
@@ -50,16 +42,10 @@ export default class App extends React.Component {
                     <div style={{textAlign: `right`, margin: `10px`}}>
                         <p style={{color: `#006edc`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
                         <p style={{fontSize: `0.8em`, display: `inline`}}>国会開催日</p>
-                        <Calendar
-                            locale={"ja-JP"}
-                            calendarType={"US"}
+                        <TimelineCalendar
                             onChange={this.onChange}
-                            value={this.state.date}
-                            view={"month"}
-                            minDate={new Date(2020, 0, 1)}
-                            maxDate={new Date()}
-                            tileClassName={({date, view}) => setDietDate({date, view}, this.dietDates)}
-                            onClickDay={(value) => navigate(buildPath(`Timeline:${formatJsDate(value, "")}`))}
+                            date={this.state.date}
+                            dietDates={this.dietDates}
                         />
                     </div>
                 </Container>
