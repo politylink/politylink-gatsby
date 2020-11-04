@@ -1,12 +1,23 @@
 import React from "react"
 import styles from "./container.module.css"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export const Container = ({children}) => {
-    return <div className={styles.default}>{children}</div>
+export const Container = ({title, children}) => {
+    return <div className={styles.default}>
+        {title !== undefined &&
+        <p className={styles.title}>{title}</p>
+        }
+        {children}
+    </div>
 }
 
-export const FlexContainer = ({children}) => {
-    return <div className={styles.flex}>{children}</div>
+export const FlexContainer = ({title, children}) => {
+    return (<div className={styles.flex}>
+        {title !== undefined &&
+        <p className={styles.title}>{title}</p>
+        }
+        {children}
+    </div>)
 }
 
 export class ExpandableContainer extends React.Component {
@@ -30,6 +41,16 @@ export class ExpandableContainer extends React.Component {
             : children.slice(0, this.props.sizeLimit);
     }
 
+    isExpandable() {
+        return this.props.children.length > this.props.sizeLimit;
+    }
+
+    getHeaderIcon() {
+        return this.state.expanded
+            ? <FontAwesomeIcon icon="angle-up" size="x" text/>
+            : <FontAwesomeIcon icon="angle-down" size="x" text/>
+    }
+
     getButtonText() {
         return this.state.expanded
             ? "閉じる"
@@ -37,17 +58,30 @@ export class ExpandableContainer extends React.Component {
     }
 
     render() {
+        if (this.props.children.length === 0) {
+            return <FlexContainer/>
+        }
+
         return (
-            <FlexContainer>
-                <FlexContainer>
-                    {this.filterChildren(this.props.children)}
-                </FlexContainer>
-                {this.props.children.length > this.props.sizeLimit &&
-                <button onClick={this.handleClick} className={styles.button}>
-                    {this.getButtonText()}
+            <Container>
+                <button onClick={this.handleClick} className={styles.titleButton}>
+                    <p className={styles.title}>
+                        {this.props.title}
+                        <span className={styles.subtitle}>{`（${this.props.children.length}件）`}</span>
+                        {this.isExpandable() && this.getHeaderIcon()}
+                    </p>
                 </button>
-                }
-            </FlexContainer>
+                <FlexContainer>
+                    <FlexContainer>
+                        {this.filterChildren(this.props.children)}
+                    </FlexContainer>
+                    {this.isExpandable() &&
+                    <button onClick={this.handleClick} className={styles.button}>
+                        {this.getButtonText()}
+                    </button>
+                    }
+                </FlexContainer>
+            </Container>
         )
     }
 }

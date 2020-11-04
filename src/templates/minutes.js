@@ -2,18 +2,19 @@ import React from "react"
 import {graphql, Link} from "gatsby"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "./minutes.module.css"
-import {Container, FlexContainer} from "../components/container"
+import {Container, ExpandableContainer, FlexContainer} from "../components/container"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
 import CommitteeCard from "../components/committeeCard";
-import {formatDate, formatDateWithDay, formatTopicSentence, formatLongSentence} from "../utils/formatutils"
+import {formatDate, formatDateWithDay, formatLongSentence, formatTopicSentence} from "../utils/formatutils"
 import {buildPath} from "../utils/urlutils";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
 import {sortNewsList} from "../utils/sortutils";
 import {toJsDate, toTimelineId} from "../utils/dateutils";
+import {EXPAND_BILL_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 
 
 export default function Minutes({data}) {
@@ -23,85 +24,98 @@ export default function Minutes({data}) {
     return (
         <Layout>
             <SEO title={minutes.name} description={getMinutesDescription(minutes)}/>
-            <Container>
-                <h2 className={styles.name}>{minutes.name}</h2>
-                <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
-                    <p className={styles.date}>
-                        <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
-                    </p>
-                </Link>
-                <div className={styles.summary}>
-                    {minutes.summary != null &&
-                    <p>{formatLongSentence(minutes.summary, 150)}</p>
-                    }
-                    {minutes.topics != null &&
-                    <Container>
-                        {minutes.topics.map((topic) => {
-                            return <p className={styles.topic}> {formatTopicSentence(topic)} </p>
-                        })}
-                    </Container>}
-                </div>
+            <div className={styles.section}>
+                <Container>
+                    <h2 className={styles.name}>{minutes.name}</h2>
+                    <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
+                        <p className={styles.date}>
+                            <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
+                        </p>
+                    </Link>
+                </Container>
+            </div>
 
-                <p className={styles.section}>公式リンク</p>
-                <div className={styles.links}>
-                    <FlexContainer>
-                        {minutes.urls.map((url) => {
-                            return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
-                        })}
-                    </FlexContainer>
-                </div>
-
-                {minutes.belongedToCommittee != null &&
-                <div>
-                    <p className={styles.section}>所属委員会</p>
-                    <div className={styles.committee}>
-                        <FlexContainer>
-                            <CommitteeCard
-                                title={minutes.belongedToCommittee.name}
-                                to={buildPath(minutes.belongedToCommittee.id)}
-                                left={true}
-                            />
-                        </FlexContainer>
+            <div className={styles.section}>
+                <Container className={styles.section}>
+                    <div className={styles.summary}>
+                        {minutes.summary != null &&
+                        <p>{formatLongSentence(minutes.summary, 150)}</p>
+                        }
+                        {minutes.topics != null &&
+                        <Container>
+                            {minutes.topics.map((topic) => {
+                                return <p className={styles.topic}> {formatTopicSentence(topic)} </p>
+                            })}
+                        </Container>}
                     </div>
-                </div>
-                }
+                </Container>
+            </div>
 
-                {minutes.discussedBills.length > 0 &&
-                <p className={styles.section}>法律案</p>
-                }
-                <div className={styles.bills}>
-                    <FlexContainer>
-                        {minutes.discussedBills.map((bill) => {
-                            return <BillCard
-                                title={bill.billNumber}
-                                description={bill.name}
-                                aliases={bill.aliases}
-                                to={buildPath(bill.id)}
-                                isPassed={bill.isPassed}
-                                left={true}
-                            />
-                        })}
-                    </FlexContainer>
-                </div>
+            <div className={styles.section}>
+                <FlexContainer
+                    title={"公式リンク"}
+                >
+                    {minutes.urls.map((url) => {
+                        return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
+                    })}
+                </FlexContainer>
+            </div>
 
-                {newsList.length > 0 &&
-                <p className={styles.section}>関連ニュース</p>
-                }
-                <div className={styles.news}>
-                    <FlexContainer>
-                        {newsList.map((news) => {
-                            return <NewsCard
-                                href={news.url}
-                                thumbnail={news.thumbnail}
-                                title={news.title}
-                                publisher={news.publisher}
-                                publishedAt={formatDate(news.publishedAt)}
-                                isPaid={news.isPaid}
-                            />
-                        })}
-                    </FlexContainer>
-                </div>
-            </Container>
+            {minutes.belongedToCommittee != null &&
+            <div className={styles.section}>
+                <FlexContainer
+                    title={"所属委員会"}
+                >
+                    <CommitteeCard
+                        title={minutes.belongedToCommittee.name}
+                        to={buildPath(minutes.belongedToCommittee.id)}
+                        left={true}
+                    />
+                </FlexContainer>
+            </div>
+            }
+
+            {minutes.discussedBills.length > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"法律案"}
+                    localStorageKey={EXPAND_BILL_KEY}
+                    sizeLimit={2}
+                >
+                    {minutes.discussedBills.map((bill) => {
+                        return <BillCard
+                            title={bill.billNumber}
+                            description={bill.name}
+                            aliases={bill.aliases}
+                            to={buildPath(bill.id)}
+                            isPassed={bill.isPassed}
+                            left={true}
+                        />
+                    })}
+                </ExpandableContainer>
+            </div>
+            }
+
+            {newsList.length > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"関連ニュース"}
+                    localStorageKey={EXPAND_NEWS_KEY}
+                    sizeLimit={2}
+                >
+                    {newsList.map((news) => {
+                        return <NewsCard
+                            href={news.url}
+                            thumbnail={news.thumbnail}
+                            title={news.title}
+                            publisher={news.publisher}
+                            publishedAt={formatDate(news.publishedAt)}
+                            isPaid={news.isPaid}
+                        />
+                    })}
+                </ExpandableContainer>
+            </div>
+            }
         </Layout>
     )
 }
