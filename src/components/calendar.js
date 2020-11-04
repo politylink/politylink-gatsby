@@ -7,10 +7,9 @@ import "./calendar.css";
 
 export const setDietDate = ({date, view}, dietDates) => {
     const fDate = formatJsDate(date, "/")
-    let tileClassName = "";
-    if (view === "month" && dietDates.includes(fDate)) {tileClassName = classNames(tileClassName, "react-calendar-diet-day")}
-    if (date.toDateString() === new Date().toDateString()) {tileClassName = classNames(tileClassName,"react-calendar-today")}
-    return (tileClassName !== "") ? tileClassName : null;
+    return (view === "month" && dietDates.includes(fDate)) ? "react-calendar-diet-day"
+        : (date.toDateString() === new Date().toDateString()) ? "react-calendar-today"
+        : null;
 }
 
 export const TimelineCalendar = props => {
