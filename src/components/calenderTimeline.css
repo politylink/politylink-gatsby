@@ -4,7 +4,7 @@
   .react-calendar-timeline .rct-outer {
     display: block;
     overflow: hidden;
-    padding-top: 172px;
+    margin-top: 182px;
     white-space: nowrap; }
   
   .react-calendar-timeline .rct-scroll {
@@ -118,16 +118,19 @@
   .react-calendar-timeline .syuuhou {
     background: #6d9eeb;
     color: #fff;
+    margin-left: 1px;
   }
 
   .react-calendar-timeline .sanpou {
     background: #8e7cc3;
     color: #fff;
+    margin-left: 1px;
   }
 
   .react-calendar-timeline .kakuhou {
     background: #c27ba0;
     color: #fff;
+    margin-left: 1px;
   }
   
   .react-calendar-timeline .rct-sidebar-row-item {
@@ -141,6 +144,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
+  top: 80px;
   background: "#fafafa";
 }
 

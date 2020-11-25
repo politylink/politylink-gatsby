@@ -15,7 +15,7 @@ export const CalenderTimeline = props => {
             items={props.items}
             visibleTimeStart={props.visibleTimeStart.getTime()}
             visibleTimeEnd={props.visibleTimeEnd.getTime()}
-            sidebarWidth={200}
+            sidebarWidth={210}
             rightSidebarWidth={70}
             traditionalZoom={true}
             lineHeight={25}
@@ -25,7 +25,7 @@ export const CalenderTimeline = props => {
             <TimelineHeaders>
                 <SidebarHeader>
                     {({ getRootProps }) => {
-                        return <div {...getRootProps()} style={{ "margin": "auto" }}><span>第{props.round}回国会提出議案</span></div>
+                        return <div {...getRootProps()} style={{ "margin": "auto" }}><span>第{props.round}回国会提出法律案</span></div>
                     }}
                 </SidebarHeader>
                 <SidebarHeader variant="right">
