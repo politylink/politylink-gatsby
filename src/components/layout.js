@@ -30,6 +30,9 @@ export default function Layout(props) {
                     <Link to='/timelines' className={styles.link}>
                         <p className={styles.fnavtext}>国会タイムライン</p>
                     </Link>
+                    <Link to='/calender' className={styles.link}>
+                        <p className={styles.fnavtext}>法律案カレンダー</p>
+                    </Link>
                     <Link to='/about' className={styles.link}>
                         <p className={styles.fnavtext}>PolityLinkについて</p>
                     </Link>
