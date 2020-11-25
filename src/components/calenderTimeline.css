@@ -4,6 +4,7 @@
   .react-calendar-timeline .rct-outer {
     display: block;
     overflow: hidden;
+    padding-top: 172px;
     white-space: nowrap; }
   
   .react-calendar-timeline .rct-scroll {
@@ -101,11 +102,18 @@
     color: #fff; }
   
   .react-calendar-timeline .rct-header-root {
-    background: #174a5c;
+    background: #fafafa;
+    position: fixed;
+    z-index: 90;
+    max-width: 650px;
+    padding-top: 160px;
+    top: 0px;
     border-bottom: 1px solid #bbb; }
   
   .react-calendar-timeline .rct-calendar-header {
-    border: 1px solid #bbb; }
+    border: 1px solid #bbb; 
+    background: #174a5c;
+  }
 
   .react-calendar-timeline .syuuhou {
     background: #6d9eeb;
@@ -127,4 +135,20 @@
     text-overflow: ellipsis;
     text-align: left;
   }
-  
+
+.calendar-title {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: "#fafafa";
+}
+
+.calendar-title-legend {
+  position: fixed;
+  left: 60%;
+  top: 120px;
+  transform: translateX(-60%);
+  z-index: 100;
+  background: "#fafafa";
+}

@@ -52,10 +52,10 @@ export const getItems = (bills, round) => {
             //const startRepresentativesDate = bill.passedRepresentativesCommitteeDate.day ? toJsDate(bill.passedRepresentativesCommitteeDate) : toJsDate(bill.passedRepresentativesDate);
             //const startCouncilorsDate = bill.passedCouncilorsCommitteeDate.day ? toJsDate(bill.passedCouncilorsCommitteeDate) : toJsDate(bill.passedCouncilorsDate);
             return [
-                { id: null, group: index, title: "提出", start_time: toJsDate(bill.submittedDate), end_time: toJsDate(bill.submittedDate), color: 'rgb(158, 14, 206)', itemProps: { style: {background: '#93c47dff', border: 0, cursor: "none"}} },
-                { id: null, group: index, title: "衆議院本会議", start_time: toJsDate(bill.passedRepresentativesDate), end_time: toJsDate(bill.passedRepresentativesDate), itemProps: { style: {background: '#6d9eebff', border: 0, cursor: "none"}} },
-                { id: null, group: index, title: "参議院本会議", start_time: toJsDate(bill.passedCouncilorsDate), end_time: toJsDate(bill.passedCouncilorsDate), itemProps: { style: {background: '#8e7cc3ff', border: 0, cursor: "none"}}},
-                { id: null, group: index, title: "公布", start_time: toJsDate(bill.proclaimedDate), end_time: toJsDate(bill.proclaimedDate), itemProps: { style: {background: '#c27ba0ff', border: 0, cursor: "none"}} }]
+                { id: null, group: index, title: "", start_time: toJsDate(bill.submittedDate), end_time: toJsDate(bill.submittedDate), color: 'rgb(158, 14, 206)', itemProps: { style: {background: '#93c47dff', border: 0, cursor: "none"}} },
+                { id: null, group: index, title: "", start_time: toJsDate(bill.passedRepresentativesDate), end_time: toJsDate(bill.passedRepresentativesDate), itemProps: { style: {background: '#6d9eebff', border: 0, cursor: "none"}} },
+                { id: null, group: index, title: "", start_time: toJsDate(bill.passedCouncilorsDate), end_time: toJsDate(bill.passedCouncilorsDate), itemProps: { style: {background: '#8e7cc3ff', border: 0, cursor: "none"}}},
+                { id: null, group: index, title: "", start_time: toJsDate(bill.proclaimedDate), end_time: toJsDate(bill.proclaimedDate), itemProps: { style: {background: '#c27ba0ff', border: 0, cursor: "none"}} }]
         });
     const flat_items = [].concat(...nested_items);
     return flat_items.map((bill, index) => {
@@ -76,7 +76,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const latestRound = 201; //getLatestRound(this.props.data.politylink.Bill);
+        const latestRound = getLatestRound(this.props.data.politylink.Bill);
         const groups = getGroups(this.props.data.politylink.Bill, latestRound);
         const items = getItems(this.props.data.politylink.Bill, latestRound);
         let groupRenderer = ({ group, isRightSidebar }) => {
@@ -109,17 +109,21 @@ export default class App extends React.Component {
             <Layout>
                 <SEO title={getCalenderTimelineTitle()} description={getCalenderTimelineDescription()}/>
                 <Container>
-                <p style={{textAlign: `center`, fontWeight: `bold`}}>今国会提出の法律案カレンダー</p>
+                <div className="calendar-title">
+                        <p style={{ textAlign: `center`, fontWeight: `bold` }}>今国会提出の法律案カレンダー</p>
+                </div>
+                <div className="calendar-title-legend">
                     <div style={{ textAlign: `right`, margin: `10px 0` }}>
-                            <p style={{ color: `#93c47dff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline` }}>■ </p>
-                            <p style={{ fontSize: `0.8em`, display: `inline` }}>提出</p>
-                            <p style={{color: `#6d9eebff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
-                            <p style={{ fontSize: `0.8em`, display: `inline` }}>衆議院</p>
-                            <p style={{color: `#8e7cc3ff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
-                            <p style={{ fontSize: `0.8em`, display: `inline` }}>参議院</p>
-                            <p style={{color: `#c27ba0ff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
-                            <p style={{ fontSize: `0.8em`, display: `inline` }}>公布</p>
-                        </div>
+                        <p style={{ color: `#93c47dff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline` }}>■ </p>
+                        <p style={{ fontSize: `0.8em`, display: `inline` }}>提出</p>
+                        <p style={{ color: `#6d9eebff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
+                        <p style={{ fontSize: `0.8em`, display: `inline` }}>衆議院</p>
+                        <p style={{ color: `#8e7cc3ff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
+                        <p style={{ fontSize: `0.8em`, display: `inline` }}>参議院</p>
+                        <p style={{ color: `#c27ba0ff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
+                        <p style={{ fontSize: `0.8em`, display: `inline` }}>公布</p>
+                    </div>
+                </div>
                     <div style={{ textAlign: `right`, margin: `10px 0 10px`, padding: `0` }}>
                         <CalenderTimeline
                             onChange={this.onChange}

@@ -9,6 +9,7 @@
     width: 100%;
     background-color: #174a5c;
     display: flex;
+    z-index: 120;
 }
 
 .main {
