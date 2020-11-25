@@ -41,5 +41,5 @@ export const getCalenderTimelineTitle = () => {
 }
 
 export const getCalenderTimelineDescription = () => {
-    return `国会に提出された議案の審議状況を一覧形式でまとめています。`
+    return `直近の国会に提出された議案の審議状況を、一覧形式で比較することができます。`
 }

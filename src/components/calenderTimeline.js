@@ -47,8 +47,6 @@ export const CalenderTimeline = props => {
             </TimelineHeaders>
             <TimelineMarkers>
                 <TodayMarker  />
-                {/*<CustomMarker date={props.timeStart} />
-                <CustomMarker date={props.timeEnd} />*/}
             </TimelineMarkers>
         </Timeline>
     )

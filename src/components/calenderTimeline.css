@@ -125,5 +125,6 @@
   .react-calendar-timeline .rct-sidebar-row-item {
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: left;
   }
   
