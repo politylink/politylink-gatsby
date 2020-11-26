@@ -20,9 +20,9 @@ export const getLatestRound = (bills) => {
 
 export const getBillClassName = (billType) => {
     if (billType === "参法") {
-        return "sanpou"
+        return "sanhou"
     } else if (billType === "衆法") {
-        return "syuuhou"
+        return "shuhou"
     } else {
         return "kakuhou"
     }
