@@ -7,7 +7,8 @@ import {getCalenderTimelineTitle, getCalenderTimelineDescription} from "../utils
 import {Container} from "../components/container";
 import {CalenderTimeline} from "../components/calenderTimeline";
 import {toJsDate} from "../utils/dateutils"
-import {CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
+import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
+import {SearchFilter} from "../components/search"
 import ReactTooltip from 'react-tooltip';
 import moment from "moment";
 
@@ -31,10 +32,10 @@ export const getType = (bill) => {
     return bill.billNumber.match(/.法/)[0];
 }
 
-export const getGroups = (bills, round) => {
+export const getGroups = (bills, round, filterPassed) => {
     return bills
         .filter((bill) => {
-            return bill.billNumber.indexOf(round) > 0
+            return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
         })
         .map((bill, index) => {
             const deliberationPeriod = bill.proclaimedDate.day ? (toJsDate(bill.proclaimedDate) - toJsDate(bill.submittedDate)) / 86400000 + "日" : "未公布"
@@ -43,10 +44,10 @@ export const getGroups = (bills, round) => {
         });
 }
 
-export const getItems = (bills, round) => {
+export const getItems = (bills, round, filterPassed) => {
     const nested_items = bills
         .filter((bill) => {
-            return bill.billNumber.indexOf(round) > 0
+            return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
         })
         .map((bill, index) => {
             return [
@@ -63,20 +64,32 @@ export const getItems = (bills, round) => {
 }
 
 export default class App extends React.Component {
-    state = {
-        date: (typeof window !== 'undefined' && sessionStorage.getItem(CALENDAR_TIMESTAMP_KEY) != null)
-            ? new Date(Number(sessionStorage.getItem(CALENDAR_TIMESTAMP_KEY))) : new Date(),
+    constructor(props) {
+        super(props)
+        this.state = {
+            date: (typeof window !== 'undefined' && sessionStorage.getItem(CALENDAR_TIMESTAMP_KEY) != null)
+                ? new Date(Number(sessionStorage.getItem(CALENDAR_TIMESTAMP_KEY))) : new Date(),
+            filterPassed: (typeof window !== 'undefined' && localStorage.getItem(CALENDAR_PASSED_KEY) === 'true') || false,
+        }
+        this.handleFilterClick = this.handleFilterClick.bind(this);
     }
+
 
     onChange = value => {
         sessionStorage.setItem(CALENDAR_TIMESTAMP_KEY, String(Number(value)));
         this.setState({date: value});
     }
 
+    handleFilterClick() {
+        const newVal = !this.state.filterPassed
+        typeof window !== 'undefined' && localStorage.setItem(CALENDAR_PASSED_KEY, newVal.toString());
+        this.setState({filterPassed: newVal})
+    }
+
     render() {
         const latestRound = getLatestRound(this.props.data.politylink.Bill);
-        const groups = getGroups(this.props.data.politylink.Bill, latestRound);
-        const items = getItems(this.props.data.politylink.Bill, latestRound);
+        const groups = getGroups(this.props.data.politylink.Bill, latestRound, this.state.filterPassed);
+        const items = getItems(this.props.data.politylink.Bill, latestRound, this.state.filterPassed);
         let groupRenderer = ({ group, isRightSidebar }) => {
             if (isRightSidebar) {
                 return (
@@ -109,6 +122,13 @@ export default class App extends React.Component {
                 <Container>
                 <div className="calendar-title">
                     <p style={{ textAlign: `center`, fontWeight: `bold` }}>今国会提出の法律案カレンダー</p>
+                </div>
+                <div className="calendar-title-filter">
+                    <SearchFilter
+                        handleChange={this.handleFilterClick}
+                        checked={this.state.filterPassed}
+                        label={'成立した法律案のみを表示'}
+                    />
                 </div>
                 <div className="calendar-title-legend">
                     <div style={{ textAlign: `right`, margin: `10px 0` }}>
