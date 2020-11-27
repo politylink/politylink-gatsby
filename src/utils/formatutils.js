@@ -1,5 +1,3 @@
-import {toDayOfWeek, toJsDate} from "./dateutils";
-
 export const formatTopicSentence = (sentence) => {
     return "- " + sentence
 }
