@@ -5,13 +5,12 @@ import styles from "./timeline.module.css"
 import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout"
 import BillCard from "../components/billCard"
-import {formatDate, formatDateWithDay} from "../utils/formatutils"
 import {buildPath} from "../utils/urlutils";
 import NewsCard from "../components/newsCard";
 import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sortutils";
 import MinutesCard from "../components/minutesCard";
 import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
-import {offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
+import {formatDate, formatDateWithDay, offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
 import {getTimelineDescription, getTimelineTitle} from "../utils/seoutils";
 import SEO from "../components/seo";
 
