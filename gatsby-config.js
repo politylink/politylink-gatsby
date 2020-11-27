@@ -13,7 +13,8 @@ module.exports = {
     siteMetadata: {
         title: `PolityLink`,
         description: `PolityLink（ポリティリンク）は政治の「原文」へのポータルサイトです。国会や行政機関の公式サイトに散らばった情報に、まとめてアクセスすることで、政治のイマを一望できます。`,
-        author: `PolityLink`
+        author: `PolityLink`,
+        siteUrl: `https://politylink.jp/`
     },
     plugins: [
         {
@@ -58,5 +59,58 @@ module.exports = {
             },
         },
         `gatsby-transformer-remark`,
-    ]
+        {
+            resolve: `gatsby-plugin-feed`,
+            options: {
+                query: `
+                {
+                  site {
+                    siteMetadata {
+                      title
+                      description
+                      siteUrl
+                      site_url: siteUrl
+                    }
+                  }
+                }
+              `,
+                feeds: [
+                    {
+                        serialize: ({ query: { site, allSitePage } }) => {
+                            return allSitePage.edges.map(({ node }) => {
+                                return {
+                                    title: node.context.title,
+                                    description: node.context.description,
+                                    date: new Date(node.context.date), //(formatString: "ddd, DD MMM YYYY, h:mm:ss +0900")
+                                    url: site.siteMetadata.siteUrl + node.path,
+                                    guid: site.siteMetadata.siteUrl + node.path,
+                                }
+                            })
+                        },
+                        query: `
+                    {
+                      allSitePage(
+                        limit: 15
+                        sort: { fields: context___date, order: DESC }
+                        filter: { context: { rss: { eq: true } } }
+                      ) {
+                        edges {
+                          node {
+                            path
+                            context {
+                                title
+                                date
+                                description
+                            }
+                          }
+                        }
+                      }
+                    }
+                  `,
+                        output: "/rss.xml",
+                        title: "PolityLink RSS Feed",
+                    }
+                ]
+            }
+        }]
 }
