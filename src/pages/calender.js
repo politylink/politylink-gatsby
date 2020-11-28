@@ -32,10 +32,16 @@ export const getType = (bill) => {
     return bill.billNumber.match(/.法/)[0];
 }
 
-export const getGroups = (bills, round, filterPassed) => {
+export const appearAfterRoundStart = (bill, roundStartDate) => {
+    const roundStart = roundStartDate.getTime();
+    return toJsDate(bill.submittedDate).getTime() >= roundStart || toJsDate(bill.proclaimedDate).getTime() >= roundStart || toJsDate(bill.passedRepresentativesDate).getTime() >= roundStart || toJsDate(bill.passedCouncilorsDate).getTime() >= roundStart
+}
+
+export const getGroups = (bills, round, filterPassed, roundStart) => {
     return bills
         .filter((bill) => {
-            return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
+            //return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
+            return appearAfterRoundStart(bill, roundStart) && (!filterPassed || bill.isPassed)
         })
         .map((bill, index) => {
             const deliberationPeriod = bill.proclaimedDate.day ? (toJsDate(bill.proclaimedDate) - toJsDate(bill.submittedDate)) / 86400000 + "日" : "未公布"
@@ -44,10 +50,11 @@ export const getGroups = (bills, round, filterPassed) => {
         });
 }
 
-export const getItems = (bills, round, filterPassed) => {
+export const getItems = (bills, round, filterPassed, roundStart) => {
     const nested_items = bills
         .filter((bill) => {
-            return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
+            //return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
+            return appearAfterRoundStart(bill, roundStart) && (!filterPassed || bill.isPassed)
         })
         .map((bill, index) => {
             return [
@@ -88,8 +95,11 @@ export default class App extends React.Component {
 
     render() {
         const latestRound = getLatestRound(this.props.data.politylink.Bill);
-        const groups = getGroups(this.props.data.politylink.Bill, latestRound, this.state.filterPassed);
-        const items = getItems(this.props.data.politylink.Bill, latestRound, this.state.filterPassed);
+        // 第203回国会
+        const roundStart = new Date(2020, 9, 26);
+        const roundEnd = new Date(2020, 12, 5);
+        const groups = getGroups(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
+        const items = getItems(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
         let groupRenderer = ({ group, isRightSidebar }) => {
             if (isRightSidebar) {
                 return (
@@ -112,7 +122,8 @@ export default class App extends React.Component {
           }
         const timeStart = moment().add(-12, "month");
         const timeEnd = moment();
-        const visibleTimeStart = new Date(Math.min.apply(null, groups.map(bill => bill.startDate).filter(date => date)));
+        //const visibleTimeStart = new Date(Math.min.apply(null, groups.map(bill => bill.startDate).filter(date => date)));
+        const visibleTimeStart = roundStart;
         let visibleTimeEnd = new Date(Math.max.apply(null, items.map(item => item.end_time).filter(date => date)));
         visibleTimeEnd.setDate(visibleTimeEnd.getDate() + 10);
 
@@ -121,7 +132,7 @@ export default class App extends React.Component {
                 <SEO title={getCalenderTimelineTitle()} description={getCalenderTimelineDescription()}/>
                 <Container>
                 <div className="calendar-title">
-                    <p style={{ textAlign: `center`, fontWeight: `bold` }}>今国会提出の法律案カレンダー</p>
+                    <p style={{ textAlign: `center`, fontWeight: `bold` }}>今国会審議の法律案カレンダー</p>
                 </div>
                 <div className="calendar-title-filter">
                     <SearchFilter
