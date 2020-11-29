@@ -10,13 +10,11 @@ import {toJsDate} from "../utils/dateutils"
 import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
 import {SearchFilter} from "../components/search"
 import ReactTooltip from 'react-tooltip';
-import moment from "moment";
 
 export const getLatestRound = (bills) => {
     const latestBillNumber = bills[bills.length - 1].billNumber;
     return latestBillNumber.match(/\d+/)[0];
 }
-
 
 export const getBillClassName = (billType) => {
     if (billType === "参法") {
@@ -40,7 +38,6 @@ export const appearAfterRoundStart = (bill, roundStartDate) => {
 export const getGroups = (bills, round, filterPassed, roundStart) => {
     return bills
         .filter((bill) => {
-            //return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
             return appearAfterRoundStart(bill, roundStart) && (!filterPassed || bill.isPassed)
         })
         .map((bill, index) => {
@@ -53,7 +50,6 @@ export const getGroups = (bills, round, filterPassed, roundStart) => {
 export const getItems = (bills, round, filterPassed, roundStart) => {
     const nested_items = bills
         .filter((bill) => {
-            //return bill.billNumber.indexOf(round) > 0 && (!filterPassed || bill.isPassed)
             return appearAfterRoundStart(bill, roundStart) && (!filterPassed || bill.isPassed)
         })
         .map((bill, index) => {
@@ -94,10 +90,9 @@ export default class App extends React.Component {
     }
 
     render() {
-        const latestRound = getLatestRound(this.props.data.politylink.Bill);
-        // 第203回国会
         const roundStart = new Date(2020, 9, 26);
         const roundEnd = new Date(2020, 12, 5);
+        const latestRound = getLatestRound(this.props.data.politylink.Bill);
         const groups = getGroups(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
         const items = getItems(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
         let groupRenderer = ({ group, isRightSidebar }) => {
@@ -120,12 +115,9 @@ export default class App extends React.Component {
                 )
             }
           }
-        const timeStart = moment().add(-12, "month");
-        const timeEnd = moment();
-        //const visibleTimeStart = new Date(Math.min.apply(null, groups.map(bill => bill.startDate).filter(date => date)));
-        const visibleTimeStart = roundStart;
-        let visibleTimeEnd = new Date(Math.max.apply(null, items.map(item => item.end_time).filter(date => date)));
-        visibleTimeEnd.setDate(visibleTimeEnd.getDate() + 10);
+        const timeStart = roundStart;
+        let timeEnd = new Date(Math.max.apply(null, items.map(item => item.end_time).filter(date => date)));
+        timeEnd.setDate(timeEnd.getDate() + 10);
 
         return (
             <Layout>
@@ -158,10 +150,8 @@ export default class App extends React.Component {
                             onChange={this.onChange}
                             groups={groups}
                             items={items}
-                            timeStart={timeStart}
-                            timeEnd={timeEnd}
-                            visibleTimeStart={visibleTimeStart}
-                            visibleTimeEnd={visibleTimeEnd}
+                            defaultTimeStart={timeStart}
+                            defaultTimeEnd={timeEnd}
                             groupRenderer={groupRenderer}
                             round={latestRound}
                         />
@@ -186,7 +176,6 @@ export const query = graphql`
                 passedCouncilorsDate {year, month, day}
                 proclaimedDate {year, month, day}
                 isPassed
-                totalNews
             }
         }
     }

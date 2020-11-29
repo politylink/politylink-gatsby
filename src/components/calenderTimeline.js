@@ -13,8 +13,8 @@ export const CalenderTimeline = props => {
         <Timeline
             groups={props.groups}
             items={props.items}
-            defaultTimeStart={props.visibleTimeStart.getTime()}
-            defaultTimeEnd={props.visibleTimeEnd.getTime()}
+            defaultTimeStart={props.defaultTimeStart.getTime()}
+            defaultTimeEnd={props.defaultTimeEnd.getTime()}
             sidebarWidth={210}
             rightSidebarWidth={70}
             traditionalZoom={true}
