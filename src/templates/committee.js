@@ -5,7 +5,8 @@ import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
-import {formatDate, formatTopicSentence} from "../utils/formatutils";
+import {formatTopicSentence } from "../utils/formatutils";
+import {formatDate} from "../utils/dateutils";
 import {sortMinutesList} from "../utils/sortutils";
 import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";

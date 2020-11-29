@@ -1,4 +1,5 @@
 const {buildPath} = require(`./src/utils/urlutils`)
+const {toJsDate, formatDateWithDay, formatDate} = require(`./src/utils/dateutils`)
 
 const path = require(`path`)
 
@@ -71,6 +72,9 @@ exports.createPages = async ({actions, graphql}) => {
         politylink {
             Timeline {
                 id
+                date {year, month, day}
+                totalBills
+                totalMinutes
             }
         }
     }
@@ -96,14 +100,18 @@ exports.createPages = async ({actions, graphql}) => {
     }
     `)
 
-    timelineResult.data.politylink.Timeline.forEach(({id}) => {
+    timelineResult.data.politylink.Timeline.forEach((timeline) => {
         createPage({
-            path: buildPath(id),
+            path: buildPath(timeline.id),
             component: path.resolve(`./src/templates/timeline.js`),
             context: {
-                timelineId: id,
+                timelineId: timeline.id,
                 timelineMinDate: minDate.data.politylink.Timeline[0].date,
                 timelineMaxDate: maxDate.data.politylink.Timeline[0].date,
+                title: `国会タイムライン@${formatDateWithDay(timeline.date)}`,
+                description: `${formatDate(timeline.date)}付けの国会に関する最新情報（会議録、成立した法律案、ニュース記事など）をまとめています。現在、${timeline.totalBills}件の法律案と、${timeline.totalMinutes}件の議事録が登録されています。`,
+                date: toJsDate(timeline.date),
+                rss: timeline.totalBills + timeline.totalMinutes > 0
             },
         })
     })

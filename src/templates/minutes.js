@@ -8,12 +8,12 @@ import SEO from "../components/seo"
 import LinkCard from "../components/linkCard"
 import BillCard from "../components/billCard"
 import CommitteeCard from "../components/committeeCard";
-import {formatDate, formatDateWithDay, formatLongSentence, formatTopicSentence} from "../utils/formatutils"
+import {formatLongSentence, formatTopicSentence} from "../utils/formatutils"
 import {buildPath} from "../utils/urlutils";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
 import {sortNewsList} from "../utils/sortutils";
-import {toJsDate, toTimelineId} from "../utils/dateutils";
+import {formatDate, formatDateWithDay, toJsDate, toTimelineId} from "../utils/dateutils";
 import {EXPAND_BILL_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 
 
