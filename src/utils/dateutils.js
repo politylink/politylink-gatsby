@@ -11,10 +11,7 @@ const toDayOfWeek = (jsDate) => {
 }
 
 const toTimelineId = (jsDate) => {
-    return 'Timeline:'
-        + String(jsDate.getFullYear()).padStart(4, '0')
-        + String(jsDate.getMonth() + 1).padStart(2, '0')
-        + String(jsDate.getDate()).padStart(2, '0')
+    return 'Timeline:' + formatJsDate(jsDate, "")
 }
 
 const formatDate = (gqlDate, separator = "/") => {
@@ -23,7 +20,7 @@ const formatDate = (gqlDate, separator = "/") => {
 
 const formatJsDate = (jsDate, separator = "/") => {
     return [
-        String(jsDate.getFullYear()),
+        String(jsDate.getFullYear()).padStart(4, '0'),
         String(jsDate.getMonth() + 1).padStart(2, "0"),
         String(jsDate.getDate()).padStart(2, "0")
     ].join(separator)
