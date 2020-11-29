@@ -91,10 +91,12 @@ export default class App extends React.Component {
 
     render() {
         const roundStart = new Date(2020, 9, 26);
-        const roundEnd = new Date(2020, 12, 5);
+        //const roundEnd = new Date(2020, 12, 5);
         const latestRound = getLatestRound(this.props.data.politylink.Bill);
+
         const groups = getGroups(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
         const items = getItems(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
+
         let groupRenderer = ({ group, isRightSidebar }) => {
             if (isRightSidebar) {
                 return (
