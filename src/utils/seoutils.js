@@ -35,3 +35,11 @@ export const getTimelineTitle = (timeline) => {
 export const getTimelineDescription = (timeline) => {
     return `${formatDate(timeline.date)}付けの国会に関する最新情報（会議録、成立した法律案、ニュース記事など）をまとめています。`
 }
+
+export const getCalenderTimelineTitle = () => {
+    return `法律案カレンダー`
+}
+
+export const getCalenderTimelineDescription = () => {
+    return `直近の国会で審議された議案の進捗状況を、一覧形式で比較できます。`
+}

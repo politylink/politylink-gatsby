@@ -19,7 +19,7 @@ export default class App extends React.Component {
             filterPassed: (typeof window !== 'undefined' && localStorage.getItem(BILL_PASSED_KEY) === 'true') || false,
         }
         this.handleTextInput = this.handleTextInput.bind(this);
-        this.handleFilterClick = this.handleFilterClick.bind(this)
+        this.handleFilterClick = this.handleFilterClick.bind(this);
     }
 
     handleTextInput(event) {
