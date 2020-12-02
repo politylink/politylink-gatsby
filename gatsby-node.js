@@ -73,8 +73,10 @@ exports.createPages = async ({actions, graphql}) => {
             Timeline {
                 id
                 date {year, month, day}
-                totalBills
                 totalMinutes
+                minutes {
+                    name
+                }
             }
         }
     }
@@ -109,9 +111,9 @@ exports.createPages = async ({actions, graphql}) => {
                 timelineMinDate: minDate.data.politylink.Timeline[0].date,
                 timelineMaxDate: maxDate.data.politylink.Timeline[0].date,
                 title: `国会タイムライン@${formatDateWithDay(timeline.date)}`,
-                description: `${formatDate(timeline.date)}付けの国会に関する最新情報（会議録、成立した法律案、ニュース記事など）をまとめています。現在、${timeline.totalBills}件の法律案と、${timeline.totalMinutes}件の議事録が登録されています。`,
+                description: `${formatDate(timeline.date)}付けの国会に関する最新情報（会議録、成立した法律案、ニュース記事など）をまとめています。現時点で登録されている会議録は${timeline.totalMinutes}件で、内訳は${timeline.minutes.map(minute => minute.name).join("、")}です。`,
                 date: toJsDate(timeline.date),
-                rss: timeline.totalBills + timeline.totalMinutes > 0
+                rss: timeline.totalMinutes > 0
             },
         })
     })
