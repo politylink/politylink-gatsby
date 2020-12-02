@@ -1,10 +1,12 @@
 .react-calendar-timeline * {
+    
     box-sizing: border-box; }
   
   .react-calendar-timeline .rct-outer {
     display: block;
     overflow: hidden;
     margin-top: 182px;
+    border: 1px solid #bbb;
     white-space: nowrap; }
   
   .react-calendar-timeline .rct-scroll {
@@ -144,24 +146,20 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  top: 70px;
+  top: 60px;
   background: "#fafafa";
 }
 
 .calendar-title-filter {
   position: fixed;
-  left: 30%;
-  transform: translateX(-30%);
   z-index: 100;
-  top: 130px;
+  top: 105px;
   background: "#fafafa";
 }
 
 .calendar-title-legend {
   position: fixed;
-  left: 60%;
   top: 120px;
-  transform: translateX(-60%);
   z-index: 100;
   background: "#fafafa";
 }

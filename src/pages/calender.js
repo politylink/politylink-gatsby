@@ -126,7 +126,7 @@ export default class App extends React.Component {
                 <SEO title={getCalenderTimelineTitle()} description={getCalenderTimelineDescription()}/>
                 <Container>
                 <div className="calendar-title">
-                    <p style={{ textAlign: `center`, fontWeight: `bold` }}>今国会審議の法律案カレンダー</p>
+                    <p style={{ textAlign: `center`, fontWeight: `bold` }}>法律案カレンダー</p>
                 </div>
                 <div className="calendar-title-filter">
                     <SearchFilter
