@@ -4,10 +4,10 @@ import styles from "./newsCard.module.css"
 
 export default function NewsCard(props) {
     let thumbnail
-    if (props.thumbnail == null) {
-        thumbnail = '/noimage.png'
-    } else if (props.publisher === '日経新聞') { // we have problem accessing nikkei thumbnail
+    if (props.publisher === '日経新聞') { // we have problem accessing nikkei thumbnail
         thumbnail = 'https://assets.nikkei.jp/release/v3.2.118/parts/ds/images/common/icon_ogpnikkei.png'
+    } else if (props.thumbnail == null) {
+        thumbnail = '/noimage.png'
     } else {
         thumbnail = props.thumbnail
     }
