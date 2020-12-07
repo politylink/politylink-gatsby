@@ -76,8 +76,8 @@ module.exports = {
               `,
                 feeds: [
                     {
-                        serialize: ({ query: { site, allSitePage } }) => {
-                            return allSitePage.edges.map(({ node }) => {
+                        serialize: ({query: {site, allSitePage}}) => {
+                            return allSitePage.edges.map(({node}) => {
                                 return {
                                     title: node.context.title,
                                     description: node.context.description,

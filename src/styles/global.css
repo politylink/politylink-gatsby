@@ -3,3 +3,20 @@ body {
     font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
     background-color: #fafafa;
 }
+
+.markdown-table table {
+    background-color: #cdefff;
+    margin: 0 auto;
+}
+
+.markdown-table th {
+    background-color: #00e2cf;
+}
+
+.markdown-table td a {
+    color: black;
+}
+
+.markdown-table p {
+    text-align: right;
+}
