@@ -73,7 +73,7 @@ SEO.defaultProps = {
     lang: `ja`,
     meta: [],
     description: ``,
-    image: `/logo.png`,
+    image: `https://politylink.jp/logo.png`,
     pageType: `article`,
     twitterType: `summary`,
 }
