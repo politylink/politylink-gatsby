@@ -2,7 +2,6 @@
 slug: "/about"
 title: "PolityLinkについて"
 description: "PolityLink（ポリティリンク）は政治の「原文」へのポータルサイトです。私たち国民が、政治に関する「正確」で「中立」な情報に簡単にアクセスできるように、国会や行政機関の公式サイトに散らばった情報を、互いに関連付けてまとめ直しています。"
-image: "https://politylink.jp/logo.png"
 ---
 
 ## PolityLinkとは？
