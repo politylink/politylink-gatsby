@@ -8,7 +8,7 @@ import SEO from "../components/seo";
 export default function Landing() {
     return (
         <Layout white>
-            <SEO/>
+            <SEO image={`https://politylink.jp/landing.png`}/>
             <div className={styles.container}>
                 <div className={styles.top}>
                     <div className={styles.topText}>

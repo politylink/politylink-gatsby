@@ -2,6 +2,7 @@
 slug: "/article/review_203_bills"
 title: "法律案で振り返る第203回国会"
 description: "第203回臨時国会について、提出された・成立した法律案の観点から振り返ります。"
+image: "https://politylink.jp/review_203_bills.png"
 ---
 
 # 法律案で振り返る第203回国会

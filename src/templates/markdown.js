@@ -9,7 +9,7 @@ export default function Template({data}) {
     const {frontmatter, html} = markdownRemark
     return (
         <Layout>
-            <SEO title={frontmatter.title} description={frontmatter.description}/>
+            <SEO title={frontmatter.title} description={frontmatter.description} image={frontmatter.image}/>
             <div className={styles.container}>
                 <div className={styles.div}
                      dangerouslySetInnerHTML={{__html: html}}
@@ -26,6 +26,7 @@ export const query = graphql`
                 slug
                 title
                 description
+                image
             }
         }
     }
