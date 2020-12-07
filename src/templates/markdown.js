@@ -1,7 +1,6 @@
 import React from "react"
 import {graphql} from "gatsby"
 import Layout from "../components/layout";
-import {Container} from "../components/container";
 import styles from "./markdown.module.css"
 import SEO from "../components/seo";
 
@@ -10,12 +9,12 @@ export default function Template({data}) {
     const {frontmatter, html} = markdownRemark
     return (
         <Layout>
-            <SEO title={frontmatter.title} description={frontmatter.description}/>
-            <Container>
+            <SEO title={frontmatter.title} description={frontmatter.description} image={frontmatter.image}/>
+            <div className={styles.container}>
                 <div className={styles.div}
                      dangerouslySetInnerHTML={{__html: html}}
                 />
-            </Container>
+            </div>
         </Layout>
     )
 }
@@ -27,6 +26,7 @@ export const query = graphql`
                 slug
                 title
                 description
+                image
             }
         }
     }
