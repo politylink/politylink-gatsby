@@ -25,7 +25,7 @@ module.exports = {
                 // This is the field under which it's accessible
                 fieldName: "politylink",
                 // URL to query from
-                url: "https://graphql.politylink.jp",  // ToDo: switch to localhost on local
+                url: "http://localhost:4000",  // ToDo: switch to localhost on local
             },
         },
         {

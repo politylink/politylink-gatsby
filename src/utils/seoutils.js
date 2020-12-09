@@ -43,3 +43,11 @@ export const getCalenderTimelineTitle = () => {
 export const getCalenderTimelineDescription = () => {
     return `直近の国会で審議された議案の進捗状況を、一覧形式で比較できます。`
 }
+
+export const getArticlesTitle = () => {
+    return `国会コラム`
+}
+
+export const getArticlesDescription = () => {
+    return `PolityLink開発者が実際にPolityLinkを使ってみて分かったことなどを不定期で記事にしています。`
+}

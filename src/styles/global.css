@@ -4,19 +4,34 @@ body {
     background-color: #fafafa;
 }
 
-.markdown-table table {
-    background-color: #cdefff;
+.bill-table {
+    margin: 10px 0 30px 0;
+}
+
+.bill-table table {
     margin: 0 auto;
+    border-collapse: collapse;
+    border: 1px solid;
+    border-color: #757575;
 }
 
-.markdown-table th {
+.bill-table th {
     background-color: #00e2cf;
+    padding: 3px 5px;
 }
 
-.markdown-table td a {
+.bill-table td {
+    padding: 3px 5px;
+}
+
+.bill-table td a {
     color: black;
 }
 
-.markdown-table p {
+.bill-row-color {
+    background-color: #cdefff;
+}
+
+.bill-table p {
     text-align: right;
 }
