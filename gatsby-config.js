@@ -43,6 +43,12 @@ module.exports = {
             },
         },
         `gatsby-plugin-offline`,
+        {
+            resolve: `gatsby-plugin-sitemap`,
+            options: {
+              sitemapSize: 5000
+            }
+        },
         `gatsby-plugin-react-helmet`,
         {
             resolve: `gatsby-plugin-google-analytics`,
