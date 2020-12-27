@@ -45,7 +45,7 @@ export default class App extends React.Component {
                     <SearchBox
                         handleChange={this.handleTextInput}
                         value={this.state.filterText}
-                        placeholder="委員会から検索"
+                        placeholder="委員会を検索"
                     />
                     <SearchResult value={filteredCommittees.length + '件表示'}/>
                 </FlexContainer>

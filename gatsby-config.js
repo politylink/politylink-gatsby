@@ -25,7 +25,8 @@ module.exports = {
                 // This is the field under which it's accessible
                 fieldName: "politylink",
                 // URL to query from
-                url: "https://graphql.politylink.jp",  // ToDo: switch to localhost on local
+                url: "https://graphql.politylink.jp",
+                // url: "http://localhost:4000",  // for local
             },
         },
         {
@@ -46,7 +47,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
-              sitemapSize: 5000
+                sitemapSize: 5000
             }
         },
         `gatsby-plugin-react-helmet`,

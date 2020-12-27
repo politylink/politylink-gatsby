@@ -46,6 +46,26 @@ exports.createPages = async ({actions, graphql}) => {
         })
     })
 
+    //議員詳細ページ
+    const membersResult = await graphql(`
+    {
+        politylink {
+            Member {
+                id
+            }
+        }
+    }
+    `)
+    membersResult.data.politylink.Member.forEach(({id}) => {
+        createPage({
+            path: buildPath(id),
+            component: path.resolve(`./src/templates/member.js`),
+            context: {
+                memberId: id,
+            }
+        })
+    })
+
     // 会議録詳細ページ
     const minutesResult = await graphql(`
     {

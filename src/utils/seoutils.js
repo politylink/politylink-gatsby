@@ -8,6 +8,10 @@ export const getCommitteesDescription = () => {
     return "衆議院・参議院の委員会・調査会を検索し、開催された会議の要約や議論された法律案を確認できます。"
 }
 
+export const getMembersDescription = () => {
+    return "衆議院・参議院の議員を検索し、国会での発言や提出した法律案を確認できます。"
+}
+
 export const getTimelinesTitle = () => {
     return "国会タイムライン"
 }
@@ -22,6 +26,10 @@ export const getBillDescription = (bill) => {
 
 export const getCommitteeDescription = (committee) => {
     return `${committee.name}に関する情報（所管事項、設置理由、会議録など）をまとめています。`
+}
+
+export const getMemberDescription = (member) => {
+    return `${member.name}に関する情報（経歴、公式サイト、国会での発言など）をまとめています。`
 }
 
 export const getMinutesDescription = (minutes) => {
