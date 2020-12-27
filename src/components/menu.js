@@ -50,10 +50,11 @@ export default function HamburgerMenu() {
     return (
         <Menu right noOverlay styles={styles}>
             <a className="menu-item" href="/bills">法律案一覧</a>
+            <a className="menu-item" href="/members">議員一覧</a>
             <a className="menu-item" href="/committees">委員会一覧</a>
             <a className="menu-item" href="/timelines">国会タイムライン</a>
             <a className="menu-item" href="/calender">法律案カレンダー</a>
-            <a className="menu-item" href="/articles">国会コラム</a>
+            <a className="menu-item" href="/articles">開発者ブログ</a>
             <a className="menu-item" href="/about">PolityLinkについて</a>
         </Menu>
     );

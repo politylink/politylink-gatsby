@@ -1,0 +1,33 @@
+.image {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.imageDiv {
+    text-align: center;
+    margin: 10px;
+}
+
+.name {
+    margin: 10px;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.tags {
+    margin: auto 0 auto 20px;
+    font-size: 1.2em;
+}
+
+.description {
+    padding: 0 15px;
+    margin: 10px;
+    border-left: 3px solid rgba(0, 0, 0, .15);
+    color: rgba(0, 0, 0, .8);
+}
+
+.section {
+    margin: 5px 10px 40px 10px;
+}

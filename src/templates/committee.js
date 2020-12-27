@@ -13,7 +13,7 @@ import {getCommitteeDescription} from "../utils/seoutils";
 import {EXPAND_MINUTES_KEY} from "../utils/constants";
 
 
-export default function Committees({data}) {
+export default function Committee({data}) {
     const committee = data.politylink.Committee[0]
     const minutesList = sortMinutesList(committee.minutes, true)
 
