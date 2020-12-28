@@ -14,7 +14,8 @@ import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
 import {sortNewsList} from "../utils/sortutils";
 import {formatDate, formatDateWithDay, toJsDate, toTimelineId} from "../utils/dateutils";
-import {EXPAND_BILL_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
+import {EXPAND_BILL_KEY, EXPAND_MEMBER_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
+import MemberCard from "../components/memberCard";
 
 
 export default function Minutes({data}) {
@@ -72,6 +73,23 @@ export default function Minutes({data}) {
                         left={true}
                     />
                 </FlexContainer>
+            </div>
+            }
+
+            {minutes.beAttendedByMembers.length > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"発言者"}
+                    localStorageKey={EXPAND_MEMBER_KEY}
+                    sizeLimit={6}
+                >
+                    {minutes.beAttendedByMembers.map((member) => {
+                        return <MemberCard
+                            title={member.name}
+                            to={buildPath(member.id)}
+                        />;
+                    })}
+                </ExpandableContainer>
             </div>
             }
 
@@ -142,6 +160,10 @@ export const query = graphql`
                     billNumber
                     isPassed
                     aliases
+                }
+                beAttendedByMembers{
+                    id
+                    name
                 }
                 news {
                     title
