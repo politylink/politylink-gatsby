@@ -30,8 +30,7 @@ export default class App extends React.Component {
     filterMembers(members) {
         return (members
                 .filter((member) => {
-                    const joinedText = member.name + member.nameHira + member.description
-                        + joinNullableStringList(member.tags)
+                    const joinedText = member.name + member.nameHira + joinNullableStringList(member.tags)
                     return isMatch(this.state.filterText, joinedText)
                 })
         );
@@ -72,8 +71,6 @@ export const query = graphql`
                 id
                 name
                 nameHira
-                description
-                image
                 tags
             }
         }
