@@ -1,17 +1,23 @@
 import React from "react"
 import {graphql} from "gatsby"
 import styles from "./member.module.css"
-import {Container, FlexContainer} from "../components/container"
+import {Container, ExpandableContainer, FlexContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import {getMemberDescription} from "../utils/seoutils";
 import LinkCard from "../components/linkCard";
+import {sortMinutesList} from "../utils/sortutils";
+import {EXPAND_MINUTES_KEY} from "../utils/constants";
+import MinutesCard from "../components/minutesCard";
+import {buildPath} from "../utils/urlutils";
+import {formatDate} from "../utils/dateutils";
 
 
 export default function Member({data}) {
     const member = data.politylink.Member[0]
     const house = member.house === 'REPRESENTATIVES' ? '衆' : '参'
     const tags = [house].concat(member.tags)
+    const minutesList = sortMinutesList(member.attendedMinutes)
 
     return (
         <Layout>
@@ -40,6 +46,26 @@ export default function Member({data}) {
                     })}
                 </FlexContainer>
             </div>
+
+            {minutesList.length > 0 &&
+            <div className={styles.section}>
+                <ExpandableContainer
+                    title={"国会での発言"}
+                    localStorageKey={EXPAND_MINUTES_KEY}
+                    sizeLimit={2}
+                >
+                    {minutesList.map((minutes) => {
+                        return <MinutesCard
+                            to={buildPath(minutes.id)}
+                            name={minutes.name}
+                            topics={minutes.topics}
+                            hasNews={minutes.totalNews > 0}
+                            date={formatDate(minutes.startDateTime)}
+                        />
+                    })}
+                </ExpandableContainer>
+            </div>
+            }
         </Layout>
     )
 }
@@ -58,6 +84,13 @@ export const query = graphql`
                     url
                     title
                     domain
+                }
+                attendedMinutes {
+                    id
+                    name
+                    topics
+                    totalNews
+                    startDateTime { year, month, day, formatted }
                 }
             }
         }
