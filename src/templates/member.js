@@ -1,23 +1,24 @@
 import React from "react"
-import {graphql} from "gatsby"
+import {graphql, Link} from "gatsby"
 import styles from "./member.module.css"
 import {Container, ExpandableContainer, FlexContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import {getMemberDescription} from "../utils/seoutils";
 import LinkCard from "../components/linkCard";
-import {sortMinutesList} from "../utils/sortutils";
-import {EXPAND_MINUTES_KEY} from "../utils/constants";
-import MinutesCard from "../components/minutesCard";
+import {sortActivityList} from "../utils/sortutils";
+import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import {buildPath} from "../utils/urlutils";
 import {formatDate} from "../utils/dateutils";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function Member({data}) {
     const member = data.politylink.Member[0]
     const house = member.house === 'REPRESENTATIVES' ? '衆' : '参'
     const tags = [house].concat(member.tags)
-    const minutesList = sortMinutesList(member.attendedMinutes)
+    const activityList = sortActivityList(member.activities)
+    console.log(activityList)
 
     return (
         <Layout>
@@ -47,21 +48,27 @@ export default function Member({data}) {
                 </FlexContainer>
             </div>
 
-            {minutesList.length > 0 &&
+            {activityList.length > 0 &&
             <div className={styles.section}>
                 <ExpandableContainer
-                    title={"国会での発言"}
-                    localStorageKey={EXPAND_MINUTES_KEY}
-                    sizeLimit={2}
+                    title={"国会での活動"}
+                    localStorageKey={EXPAND_ACTIVITY_KEY}
+                    sizeLimit={5}
                 >
-                    {minutesList.map((minutes) => {
-                        return <MinutesCard
-                            to={buildPath(minutes.id)}
-                            name={minutes.name}
-                            topics={minutes.topics}
-                            hasNews={minutes.totalNews > 0}
-                            date={formatDate(minutes.startDateTime)}
-                        />
+                    {activityList.map((activity) => {
+                        return <p className={styles.activity}>
+                            {formatDate(activity.datetime)}
+                            {' '}<FontAwesomeIcon icon="microphone" size="sm"/>{' '}
+                            <Link className={styles.link}
+                                  to={buildPath(activity.minutes.id)}>{activity.minutes.name}</Link>
+                            で発言しました
+                            （
+                            {activity.urls
+                                .map(url => <a className={styles.link} href={url.url} target="_blank"
+                                               rel="noopener noreferrer">{url.title}</a>)
+                                .reduce((prev, curr) => [prev, '、', curr])}
+                            ）
+                        </p>
                     })}
                 </ExpandableContainer>
             </div>
@@ -85,12 +92,21 @@ export const query = graphql`
                     title
                     domain
                 }
-                attendedMinutes {
-                    id
-                    name
-                    topics
-                    totalNews
-                    startDateTime { year, month, day, formatted }
+                activities {
+                    datetime {year, month, day, formatted }
+                    minutes {
+                        id
+                        name
+                    }
+                    bill {
+                        id
+                        name
+                        billNumber
+                    }
+                    urls {
+                        url
+                        title
+                    }
                 }
             }
         }
