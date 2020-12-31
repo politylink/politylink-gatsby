@@ -18,7 +18,6 @@ export default function Member({data}) {
     const house = member.house === 'REPRESENTATIVES' ? '衆' : '参'
     const tags = [house].concat(member.tags)
     const activityList = sortActivityList(member.activities)
-    console.log(activityList)
 
     return (
         <Layout>
