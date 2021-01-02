@@ -11,11 +11,13 @@ import {sortMinutesList} from "../utils/sortutils";
 import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";
 import {EXPAND_MINUTES_KEY} from "../utils/constants";
+import Share from "../components/share";
 
 
 export default function Committee({data}) {
     const committee = data.politylink.Committee[0]
     const minutesList = sortMinutesList(committee.minutes, true)
+    const siteUrl = data.site.siteMetadata.siteUrl
 
     return (
         <Layout>
@@ -23,6 +25,7 @@ export default function Committee({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{committee.name}</h2>
+                    <Share postPath={buildPath(committee.id)} title={committee.name} siteUrl={siteUrl} />
                     <div className={styles.description}>
                         <p>{committee.description}</p>
                         {committee.topics != null &&
@@ -45,6 +48,7 @@ export default function Committee({data}) {
                     {minutesList.map((minutes) => {
                         return <MinutesCard
                             to={buildPath(minutes.id)}
+                            key={minutes.id}
                             name={minutes.name}
                             topics={minutes.topics}
                             hasNews={minutes.totalNews > 0}
@@ -74,6 +78,11 @@ export const query = graphql`
                     totalNews
                     startDateTime{ year, month, day, formatted }
                 }
+            }
+        }
+        site {
+            siteMetadata {
+                siteUrl
             }
         }
     }

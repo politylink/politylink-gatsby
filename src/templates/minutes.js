@@ -16,11 +16,13 @@ import {sortNewsList} from "../utils/sortutils";
 import {formatDate, formatDateWithDay, toJsDate, toTimelineId} from "../utils/dateutils";
 import {EXPAND_BILL_KEY, EXPAND_MEMBER_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import MemberCard from "../components/memberCard";
+import Share from "../components/share";
 
 
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
     const newsList = sortNewsList(minutes.news)
+    const siteUrl = data.site.siteMetadata.siteUrl
 
     return (
         <Layout>
@@ -28,6 +30,7 @@ export default function Minutes({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{minutes.name}</h2>
+                    <Share postPath={buildPath(minutes.id)} title={minutes.name} siteUrl={siteUrl} />
                     <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
                         <p className={styles.date}>
                             <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
@@ -143,6 +146,7 @@ export const query = graphql`
         politylink {
             Minutes(filter:{id:$minutesId}){
                 name
+                id
                 summary
                 topics
                 urls{
@@ -174,6 +178,11 @@ export const query = graphql`
                     publishedAt { year, month, day, formatted }
                 }
                 startDateTime { year, month, day }
+            }
+        }
+        site {
+            siteMetadata {
+                siteUrl
             }
         }
     }

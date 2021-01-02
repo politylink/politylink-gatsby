@@ -1,0 +1,10 @@
+.socialLinks {
+    flex-wrap: wrap;
+    text-align: right;
+    margin: 0 20px;
+}
+
+.socialLinks > button {
+    margin: 0 5px;
+    cursor: pointer;
+}

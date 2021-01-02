@@ -13,6 +13,7 @@ import {getBillDescription} from "../utils/seoutils";
 import {sortMinutesList, sortNewsList} from "../utils/sortutils";
 import NewsCard from "../components/newsCard";
 import {EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
+import Share from "../components/share";
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {
@@ -21,8 +22,9 @@ export const formatArrowDate = (date) => {
     return String(date.year) + "\n" + String(date.month).padStart(2, '0') + "/" + String(date.day).padStart(2, '0')
 }
 
-export default function Bill({data}) {
+export default function Bill({ data }) {
     const bill = data.politylink.Bill[0]
+    const siteUrl = data.site.siteMetadata.siteUrl
     let arrows
     if (bill.firstHouse === "REPRESENTATIVES") {
         arrows = [
@@ -54,6 +56,7 @@ export default function Bill({data}) {
                     <h2 className={styles.name}>{bill.name}</h2>
                     {bill.aliases && bill.aliases.length > 0 &&
                     <p className={styles.aliases}>通称: {bill.aliases.join(", ")}</p>}
+                    <Share postPath={buildPath(bill.id)} title={bill.name} siteUrl={siteUrl} />
                     <h3 className={styles.number}>{bill.billNumber}</h3>
                     <p className={styles.reason}>{bill.reason}</p>
                     <ProgressBadge arrows={arrows}/>
@@ -122,6 +125,7 @@ export const query = graphql`
                 aliases
                 billNumber
                 reason
+                id
                 firstHouse
                 urls {
                     url
@@ -149,6 +153,11 @@ export const query = graphql`
                 passedCouncilorsCommitteeDate { year, month, day }
                 passedCouncilorsDate { year, month, day }
                 proclaimedDate { year, month, day }
+            }
+        }
+        site {
+            siteMetadata {
+                siteUrl
             }
         }
     }

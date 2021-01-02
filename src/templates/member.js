@@ -11,6 +11,7 @@ import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import {buildPath} from "../utils/urlutils";
 import {formatDate} from "../utils/dateutils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Share from "../components/share";
 
 
 export default function Member({data}) {
@@ -18,10 +19,11 @@ export default function Member({data}) {
     const house = member.house === 'REPRESENTATIVES' ? '衆' : '参'
     const tags = [house].concat(member.tags)
     const activityList = sortActivityList(member.activities)
+    const siteUrl = data.site.siteMetadata.siteUrl
 
     return (
         <Layout>
-            <SEO title={member.name} description={getMemberDescription(member)}/>
+            <SEO title={member.name} description={getMemberDescription(member)} />
             <div className={styles.section}>
                 <Container>
                     <div className={styles.imageDiv}>
@@ -31,6 +33,7 @@ export default function Member({data}) {
                         <h2 className={styles.name}>{member.name}</h2>
                         <p className={styles.tags}>{tags.join('・')}</p>
                     </FlexContainer>
+                    <Share postPath={buildPath(member.id)} title={member.name} siteUrl={siteUrl} />
                     <div className={styles.description}>
                         <p>{member.description}</p>
                     </div>
@@ -107,6 +110,11 @@ export const query = graphql`
                         title
                     }
                 }
+            }
+        }
+        site {
+            siteMetadata {
+                siteUrl
             }
         }
     }
