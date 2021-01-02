@@ -1,5 +1,5 @@
 import React from "react"
-import {graphql, Link} from "gatsby"
+import {graphql} from "gatsby"
 import styles from "./member.module.css"
 import {Container, ExpandableContainer, FlexContainer} from "../components/container"
 import Layout from "../components/layout";
@@ -8,9 +8,7 @@ import {getMemberDescription} from "../utils/seoutils";
 import LinkCard from "../components/linkCard";
 import {sortActivityList} from "../utils/sortutils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
-import {buildPath} from "../utils/urlutils";
-import {formatDate} from "../utils/dateutils";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
 
 
 export default function Member({data}) {
@@ -55,19 +53,19 @@ export default function Member({data}) {
                     sizeLimit={5}
                 >
                     {activityList.map((activity) => {
-                        return <p className={styles.activity}>
-                            {formatDate(activity.datetime)}
-                            {' '}<FontAwesomeIcon icon="microphone" size="sm"/>{' '}
-                            <Link className={styles.link}
-                                  to={buildPath(activity.minutes.id)}>{activity.minutes.name}</Link>
-                            で発言しました
-                            （
-                            {activity.urls
-                                .map(url => <a className={styles.link} href={url.url} target="_blank"
-                                               rel="noopener noreferrer">{url.title}</a>)
-                                .reduce((prev, curr) => [prev, '、', curr])}
-                            ）
-                        </p>
+                        if (activity.minutes != null) {
+                            return <MinutesActivityCard
+                                datetime={activity.datetime}
+                                minutes={activity.minutes}
+                                urls={activity.urls}
+                            />
+                        } else {
+                            return <BillActivityCard
+                                datetime={activity.datetime}
+                                bill={activity.bill}
+                                urls={activity.urls}
+                            />
+                        }
                     })}
                 </ExpandableContainer>
             </div>
