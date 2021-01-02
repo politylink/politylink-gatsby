@@ -59,7 +59,7 @@ export default function Member({data}) {
                                 minutes={activity.minutes}
                                 urls={activity.urls}
                             />
-                        } else {
+                        } else if (activity.bill != null) {
                             return <BillActivityCard
                                 datetime={activity.datetime}
                                 bill={activity.bill}
