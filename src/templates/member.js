@@ -9,8 +9,6 @@ import LinkCard from "../components/linkCard";
 import {sortActivityList} from "../utils/sortutils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import {buildPath} from "../utils/urlutils";
-import {formatDate} from "../utils/dateutils";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
 
@@ -24,7 +22,7 @@ export default function Member({data}) {
 
     return (
         <Layout>
-            <SEO title={member.name} description={getMemberDescription(member)} />
+            <SEO title={member.name} description={getMemberDescription(member)}/>
             <div className={styles.section}>
                 <Container>
                     <div className={styles.imageDiv}>
