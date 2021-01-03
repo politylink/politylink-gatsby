@@ -22,7 +22,6 @@ import Share from "../components/share";
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
     const newsList = sortNewsList(minutes.news)
-    const siteUrl = data.site.siteMetadata.siteUrl
 
     return (
         <Layout>
@@ -30,7 +29,7 @@ export default function Minutes({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{minutes.name}</h2>
-                    <Share postPath={buildPath(minutes.id)} title={minutes.name} siteUrl={siteUrl} />
+                    <Share title={minutes.name} />
                     <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
                         <p className={styles.date}>
                             <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
@@ -178,11 +177,6 @@ export const query = graphql`
                     publishedAt { year, month, day, formatted }
                 }
                 startDateTime { year, month, day }
-            }
-        }
-        site {
-            siteMetadata {
-                siteUrl
             }
         }
     }

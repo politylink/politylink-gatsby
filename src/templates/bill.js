@@ -24,7 +24,6 @@ export const formatArrowDate = (date) => {
 
 export default function Bill({data}) {
     const bill = data.politylink.Bill[0]
-    const siteUrl = data.site.siteMetadata.siteUrl
     let arrows
     if (bill.firstHouse === "REPRESENTATIVES") {
         arrows = [
@@ -56,7 +55,7 @@ export default function Bill({data}) {
                     <h2 className={styles.name}>{bill.name}</h2>
                     {bill.aliases && bill.aliases.length > 0 &&
                     <p className={styles.aliases}>通称: {bill.aliases.join(", ")}</p>}
-                    <Share postPath={buildPath(bill.id)} title={bill.name} siteUrl={siteUrl} />
+                    <Share title={bill.name}/>
                     <h3 className={styles.number}>{bill.billNumber}</h3>
                     <p className={styles.reason}>{bill.reason}</p>
                     <ProgressBadge arrows={arrows}/>
@@ -153,11 +152,6 @@ export const query = graphql`
                 passedCouncilorsCommitteeDate { year, month, day }
                 passedCouncilorsDate { year, month, day }
                 proclaimedDate { year, month, day }
-            }
-        }
-        site {
-            siteMetadata {
-                siteUrl
             }
         }
     }

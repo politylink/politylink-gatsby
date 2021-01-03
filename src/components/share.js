@@ -5,13 +5,11 @@ import {
     TwitterIcon,
     FacebookIcon
 } from "react-share";
-import urljoin from "url-join";
 import styles from "./share.module.css"
 
 
-export default function Share({title, postPath, siteUrl}) {
-
-    const url = urljoin(siteUrl, postPath);
+export default function Share({title}) {
+    const url = document.baseURI;
     const iconSize = 32;
 
     return (
