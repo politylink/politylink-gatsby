@@ -145,7 +145,6 @@ export const query = graphql`
         politylink {
             Minutes(filter:{id:$minutesId}){
                 name
-                id
                 summary
                 topics
                 urls{

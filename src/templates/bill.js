@@ -124,7 +124,6 @@ export const query = graphql`
                 aliases
                 billNumber
                 reason
-                id
                 firstHouse
                 urls {
                     url
