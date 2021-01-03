@@ -22,7 +22,7 @@ export const formatArrowDate = (date) => {
     return String(date.year) + "\n" + String(date.month).padStart(2, '0') + "/" + String(date.day).padStart(2, '0')
 }
 
-export default function Bill({ data }) {
+export default function Bill({data}) {
     const bill = data.politylink.Bill[0]
     const siteUrl = data.site.siteMetadata.siteUrl
     let arrows
