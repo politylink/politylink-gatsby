@@ -8,7 +8,7 @@ import {
 import urljoin from "url-join";
 import styles from "./share.module.css"
 
-//class Share extends Component {
+
 export default function Share({title, postPath, siteUrl}) {
 
     const url = urljoin(siteUrl, postPath);
@@ -17,11 +17,11 @@ export default function Share({title, postPath, siteUrl}) {
     return (
     <div className={styles.socialLinks}>
         <TwitterShareButton url={url} title={title}>
-          <TwitterIcon round size={iconSize} />
+            <TwitterIcon round size={iconSize} />
         </TwitterShareButton>
         <FacebookShareButton url={url} quote={title}>
-          <FacebookIcon round size={iconSize} />
+            <FacebookIcon round size={iconSize} />
         </FacebookShareButton>
-      </div>
+    </div>
     );
 }
