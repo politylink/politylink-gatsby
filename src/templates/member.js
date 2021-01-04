@@ -10,6 +10,7 @@ import {sortActivityList} from "../utils/sortutils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
+import {buildImagePath, buildPath} from "../utils/urlutils";
 
 
 export default function Member({data}) {
@@ -20,17 +21,17 @@ export default function Member({data}) {
 
     return (
         <Layout>
-            <SEO title={member.name} description={getMemberDescription(member)}/>
+            <SEO title={member.name} description={getMemberDescription(member)} image={buildImagePath(member.id)}/>
             <div className={styles.section}>
                 <Container>
                     <div className={styles.imageDiv}>
-                        <img className={styles.image} src={member.image} alt={'顔写真'}/>
+                        <img className={styles.image} src={buildImagePath(member.id)} alt={'顔写真'}/>
                     </div>
                     <FlexContainer>
                         <h2 className={styles.name}>{member.name}</h2>
                         <p className={styles.tags}>{tags.join('・')}</p>
                     </FlexContainer>
-                    <Share title={member.name} />
+                    <Share title={member.name} postPath={buildPath(member.id)}/>
                     <div className={styles.description}>
                         <p>{member.description}</p>
                     </div>

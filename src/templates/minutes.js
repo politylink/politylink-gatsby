@@ -29,7 +29,7 @@ export default function Minutes({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{minutes.name}</h2>
-                    <Share title={minutes.name} />
+                    <Share title={minutes.name} postPath={buildPath(minutes.id)}/>
                     <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
                         <p className={styles.date}>
                             <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
@@ -144,6 +144,7 @@ export const query = graphql`
     query($minutesId: ID!){
         politylink {
             Minutes(filter:{id:$minutesId}){
+                id
                 name
                 summary
                 topics
