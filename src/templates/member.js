@@ -8,6 +8,7 @@ import {getMemberDescription} from "../utils/seoutils";
 import LinkCard from "../components/linkCard";
 import {sortActivityList} from "../utils/sortutils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
+import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
 
 
@@ -29,6 +30,7 @@ export default function Member({data}) {
                         <h2 className={styles.name}>{member.name}</h2>
                         <p className={styles.tags}>{tags.join('・')}</p>
                     </FlexContainer>
+                    <Share title={member.name} />
                     <div className={styles.description}>
                         <p>{member.description}</p>
                     </div>

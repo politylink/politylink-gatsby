@@ -11,6 +11,7 @@ import {sortMinutesList} from "../utils/sortutils";
 import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";
 import {EXPAND_MINUTES_KEY} from "../utils/constants";
+import Share from "../components/share";
 
 
 export default function Committee({data}) {
@@ -23,6 +24,7 @@ export default function Committee({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{committee.name}</h2>
+                    <Share title={committee.name} />
                     <div className={styles.description}>
                         <p>{committee.description}</p>
                         {committee.topics != null &&
@@ -45,6 +47,7 @@ export default function Committee({data}) {
                     {minutesList.map((minutes) => {
                         return <MinutesCard
                             to={buildPath(minutes.id)}
+                            key={minutes.id}
                             name={minutes.name}
                             topics={minutes.topics}
                             hasNews={minutes.totalNews > 0}

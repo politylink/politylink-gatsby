@@ -16,6 +16,7 @@ import {sortNewsList} from "../utils/sortutils";
 import {formatDate, formatDateWithDay, toJsDate, toTimelineId} from "../utils/dateutils";
 import {EXPAND_BILL_KEY, EXPAND_MEMBER_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import MemberCard from "../components/memberCard";
+import Share from "../components/share";
 
 
 export default function Minutes({data}) {
@@ -28,6 +29,7 @@ export default function Minutes({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{minutes.name}</h2>
+                    <Share title={minutes.name} />
                     <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
                         <p className={styles.date}>
                             <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
