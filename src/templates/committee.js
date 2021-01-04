@@ -5,7 +5,7 @@ import {Container, ExpandableContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
-import {formatTopicSentence } from "../utils/formatutils";
+import {formatTopicSentence} from "../utils/formatutils";
 import {formatDate} from "../utils/dateutils";
 import {sortMinutesList} from "../utils/sortutils";
 import {buildPath} from "../utils/urlutils";
@@ -24,7 +24,7 @@ export default function Committee({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{committee.name}</h2>
-                    <Share title={committee.name} />
+                    <Share title={committee.name} postPath={buildPath(committee.id)}/>
                     <div className={styles.description}>
                         <p>{committee.description}</p>
                         {committee.topics != null &&
