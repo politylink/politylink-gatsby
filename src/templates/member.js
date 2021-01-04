@@ -10,6 +10,7 @@ import {sortActivityList} from "../utils/sortutils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
+import {buildImagePath} from "../utils/urlutils";
 
 
 export default function Member({data}) {
@@ -24,7 +25,7 @@ export default function Member({data}) {
             <div className={styles.section}>
                 <Container>
                     <div className={styles.imageDiv}>
-                        <img className={styles.image} src={member.image} alt={'顔写真'}/>
+                        <img className={styles.image} src={buildImagePath(member.id)} alt={'顔写真'}/>
                     </div>
                     <FlexContainer>
                         <h2 className={styles.name}>{member.name}</h2>
