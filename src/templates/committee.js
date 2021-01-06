@@ -24,7 +24,6 @@ export default function Committee({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{committee.name}</h2>
-                    <Share title={committee.name} postPath={buildPath(committee.id)}/>
                     <div className={styles.description}>
                         <p>{committee.description}</p>
                         {committee.topics != null &&
@@ -57,6 +56,8 @@ export default function Committee({data}) {
                 </ExpandableContainer>
             </div>
             }
+
+            <Container><Share title={committee.name} postPath={buildPath(committee.id)}/></Container>
         </Layout>
     )
 }

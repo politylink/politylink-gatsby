@@ -6,15 +6,15 @@ import urljoin from "url-join";
 
 export default function Share({title, postPath}) {
     const url = urljoin('https://politylink.jp/', postPath)
-    const iconSize = 32;
+    const iconSize = 28;
 
     return (
         <div className={styles.socialLinks}>
             <TwitterShareButton url={url} title={title}>
-                <TwitterIcon round size={iconSize}/>
+                <TwitterIcon size={iconSize}/>
             </TwitterShareButton>
             <FacebookShareButton url={url} quote={title}>
-                <FacebookIcon round size={iconSize}/>
+                <FacebookIcon size={iconSize}/>
             </FacebookShareButton>
         </div>
     );

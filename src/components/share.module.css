@@ -1,11 +1,11 @@
 .socialLinks {
     flex-wrap: wrap;
     text-align: right;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .socialLinks > button {
-    margin: 0 5px;
+    margin: 0 2px;
     cursor: pointer;
     outline: none;
 }

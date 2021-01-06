@@ -55,7 +55,6 @@ export default function Bill({data}) {
                     <h2 className={styles.name}>{bill.name}</h2>
                     {bill.aliases && bill.aliases.length > 0 &&
                     <p className={styles.aliases}>通称: {bill.aliases.join(", ")}</p>}
-                    <Share title={bill.name} postPath={buildPath(bill.id)}/>
                     <h3 className={styles.number}>{bill.billNumber}</h3>
                     <p className={styles.reason}>{bill.reason}</p>
                     <ProgressBadge arrows={arrows}/>
@@ -112,6 +111,8 @@ export default function Bill({data}) {
                 </ExpandableContainer>
             </div>
             }
+
+            <Container><Share title={bill.name} postPath={buildPath(bill.id)}/></Container>
         </Layout>
     )
 }

@@ -31,7 +31,6 @@ export default function Member({data}) {
                         <h2 className={styles.name}>{member.name}</h2>
                         <p className={styles.tags}>{tags.join('・')}</p>
                     </FlexContainer>
-                    <Share title={member.name} postPath={buildPath(member.id)}/>
                     <div className={styles.description}>
                         <p>{member.description}</p>
                     </div>
@@ -73,6 +72,8 @@ export default function Member({data}) {
                 </ExpandableContainer>
             </div>
             }
+
+            <Container><Share title={member.name} postPath={buildPath(member.id)}/></Container>
         </Layout>
     )
 }
