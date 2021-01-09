@@ -21,3 +21,7 @@ export const trimTopics = (topics, length) => {
 export const joinNullableStringList = (maybeList) => {
     return maybeList == null ? '' : maybeList.join('')
 }
+
+export const formatDomain = (url) => {
+    return new URL(url).hostname.replace('www.', '')
+}

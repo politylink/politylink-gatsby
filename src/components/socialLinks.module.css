@@ -1,0 +1,11 @@
+.div {
+    flex-wrap: wrap;
+    margin: auto 10px;
+    align-items: center;
+}
+
+.icon {
+    margin: auto 5px;
+    cursor: pointer;
+    outline: none;
+}

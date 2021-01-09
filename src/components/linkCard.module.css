@@ -5,7 +5,7 @@
     border-style: solid;
     border-width: 1px;
     border-color: #ddd;
-    color:#333;
+    color: #333;
     text-align: center;
     text-decoration: none;
     box-shadow: 0 1px 3px #ccc;
@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: center;
 }
-  
+
 .title {
     height: 40%;
     text-align: center;
@@ -36,8 +36,11 @@
 
 .domain {
     height: 20%;
-    margin: 0;
+    margin: 0 2px;
     padding: 0;
     font-size: 0.6rem;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

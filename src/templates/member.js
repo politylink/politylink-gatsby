@@ -11,6 +11,8 @@ import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
 import {buildImagePath, buildPath} from "../utils/urlutils";
+import SocialLinks from "../components/socialLinks";
+import {formatDomain} from "../utils/formatutils";
 
 
 export default function Member({data}) {
@@ -30,6 +32,7 @@ export default function Member({data}) {
                     <FlexContainer>
                         <h2 className={styles.name}>{member.name}</h2>
                         <p className={styles.tags}>{tags.join('・')}</p>
+                        <SocialLinks member={member}/>
                     </FlexContainer>
                     <div className={styles.description}>
                         <p>{member.description}</p>
@@ -41,6 +44,9 @@ export default function Member({data}) {
                 <FlexContainer
                     title={"公式リンク"}
                 >
+                    {member.website &&
+                    <LinkCard href={member.website} title={'公式サイト'} domain={formatDomain(member.website)}/>
+                    }
                     {member.urls.map((url) => {
                         return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
                     })}
@@ -88,6 +94,9 @@ export const query = graphql`
                 description
                 house
                 tags
+                website
+                twitter
+                facebook
                 urls {
                     url
                     title
