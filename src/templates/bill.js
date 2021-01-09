@@ -14,6 +14,7 @@ import {sortMinutesList, sortNewsList} from "../utils/sortutils";
 import NewsCard from "../components/newsCard";
 import {EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import Share from "../components/share";
+import ParentPath from "../components/parentPath";
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {
@@ -50,6 +51,7 @@ export default function Bill({data}) {
     return (
         <Layout>
             <SEO title={bill.name} description={getBillDescription(bill)}/>
+            <Container><ParentPath to={'/bills'} text={'法律案一覧'}/></Container>
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{bill.name}</h2>

@@ -12,6 +12,7 @@ import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";
 import {EXPAND_MINUTES_KEY} from "../utils/constants";
 import Share from "../components/share";
+import ParentPath from "../components/parentPath";
 
 
 export default function Committee({data}) {
@@ -21,6 +22,7 @@ export default function Committee({data}) {
     return (
         <Layout>
             <SEO title={committee.name} description={getCommitteeDescription(committee)}/>
+            <Container><ParentPath to={'/committees'} text={'委員会一覧'}/></Container>
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{committee.name}</h2>
