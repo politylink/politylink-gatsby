@@ -8,4 +8,6 @@
 
 .text {
     color: #333;
+    display: inline-block;
+    text-decoration: underline;
 }
