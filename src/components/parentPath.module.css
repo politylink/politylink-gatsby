@@ -1,0 +1,13 @@
+.container {
+    margin: 0 10px;
+}
+
+.link {
+    color: #333;
+}
+
+.text {
+    color: #333;
+    display: inline-block;
+    text-decoration: underline;
+}

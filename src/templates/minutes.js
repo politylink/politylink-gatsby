@@ -29,7 +29,6 @@ export default function Minutes({data}) {
             <div className={styles.section}>
                 <Container>
                     <h2 className={styles.name}>{minutes.name}</h2>
-                    <Share title={minutes.name} postPath={buildPath(minutes.id)}/>
                     <Link className={styles.timeline} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
                         <p className={styles.date}>
                             <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
@@ -83,7 +82,7 @@ export default function Minutes({data}) {
                 <ExpandableContainer
                     title={"発言者"}
                     localStorageKey={EXPAND_MEMBER_KEY}
-                    sizeLimit={6}
+                    sizeLimit={7}
                 >
                     {minutes.beAttendedByMembers.map((member) => {
                         return <MemberCard
@@ -136,6 +135,8 @@ export default function Minutes({data}) {
                 </ExpandableContainer>
             </div>
             }
+
+            <Container><Share title={minutes.name} postPath={buildPath(minutes.id)}/></Container>
         </Layout>
     )
 }

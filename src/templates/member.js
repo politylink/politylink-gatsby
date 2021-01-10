@@ -11,6 +11,9 @@ import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
 import {buildImagePath, buildPath} from "../utils/urlutils";
+import SocialLinks from "../components/socialLinks";
+import {formatDomain} from "../utils/formatutils";
+import ParentPath from "../components/parentPath";
 
 
 export default function Member({data}) {
@@ -22,6 +25,7 @@ export default function Member({data}) {
     return (
         <Layout>
             <SEO title={member.name} description={getMemberDescription(member)} image={buildImagePath(member.id)}/>
+            <Container><ParentPath to={'/members'} text={'議員一覧'}/></Container>
             <div className={styles.section}>
                 <Container>
                     <div className={styles.imageDiv}>
@@ -30,8 +34,8 @@ export default function Member({data}) {
                     <FlexContainer>
                         <h2 className={styles.name}>{member.name}</h2>
                         <p className={styles.tags}>{tags.join('・')}</p>
+                        <SocialLinks member={member}/>
                     </FlexContainer>
-                    <Share title={member.name} postPath={buildPath(member.id)}/>
                     <div className={styles.description}>
                         <p>{member.description}</p>
                     </div>
@@ -42,6 +46,9 @@ export default function Member({data}) {
                 <FlexContainer
                     title={"公式リンク"}
                 >
+                    {member.website &&
+                    <LinkCard href={member.website} title={'公式サイト'} domain={formatDomain(member.website)}/>
+                    }
                     {member.urls.map((url) => {
                         return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
                     })}
@@ -53,7 +60,7 @@ export default function Member({data}) {
                 <ExpandableContainer
                     title={"国会での活動"}
                     localStorageKey={EXPAND_ACTIVITY_KEY}
-                    sizeLimit={5}
+                    sizeLimit={3}
                 >
                     {activityList.map((activity) => {
                         if (activity.minutes != null) {
@@ -68,11 +75,15 @@ export default function Member({data}) {
                                 bill={activity.bill}
                                 urls={activity.urls}
                             />
+                        } else {
+                            return null;
                         }
                     })}
                 </ExpandableContainer>
             </div>
             }
+
+            <Container><Share title={member.name} postPath={buildPath(member.id)}/></Container>
         </Layout>
     )
 }
@@ -87,6 +98,9 @@ export const query = graphql`
                 description
                 house
                 tags
+                website
+                twitter
+                facebook
                 urls {
                     url
                     title
