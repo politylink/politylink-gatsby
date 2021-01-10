@@ -25,3 +25,8 @@ export const joinNullableStringList = (maybeList) => {
 export const formatDomain = (url) => {
     return new URL(url).hostname.replace('www.', '')
 }
+
+export const getTwitterScreenName = (url) => {
+    const parts = url.split('/');
+    return parts[parts.length - 1];
+}
