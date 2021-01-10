@@ -12,8 +12,9 @@ import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
 import {buildImagePath, buildPath} from "../utils/urlutils";
 import SocialLinks from "../components/socialLinks";
-import {formatDomain} from "../utils/formatutils";
+import {formatDomain, getTwitterScreenName} from "../utils/formatutils";
 import ParentPath from "../components/parentPath";
+import {Timeline} from 'react-twitter-widgets'
 
 
 export default function Member({data}) {
@@ -80,6 +81,23 @@ export default function Member({data}) {
                         }
                     })}
                 </ExpandableContainer>
+            </div>
+            }
+
+            {member.twitter &&
+            <div className={styles.section}>
+                <Container>
+                    <Timeline
+                        dataSource={{
+                            sourceType: 'profile',
+                            screenName: getTwitterScreenName(member.twitter)
+                        }}
+                        options={{
+                            height: '400',
+                            lang: 'ja'
+                        }}
+                    />
+                </Container>
             </div>
             }
 
