@@ -37,7 +37,7 @@ export default function Layout(props) {
                         <p className={styles.fnavtext}>法律案カレンダー</p>
                     </Link>
                     <Link to='/articles' className={styles.link}>
-                        <p className={styles.fnavtext}>開発者ブログ</p>
+                        <p className={styles.fnavtext}>国会コラム</p>
                     </Link>
                     <Link to='/about' className={styles.link}>
                         <p className={styles.fnavtext}>PolityLinkについて</p>
