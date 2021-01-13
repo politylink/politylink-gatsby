@@ -53,7 +53,7 @@ export const getCalenderTimelineDescription = () => {
 }
 
 export const getArticlesTitle = () => {
-    return `国会コラム`
+    return `開発者ブログ`
 }
 
 export const getArticlesDescription = () => {
