@@ -43,6 +43,14 @@ module.exports = {
                 icon: `static/logo.png`, // This path is relative to the root of the site.
             },
         },
+        {
+            resolve: `gatsby-plugin-s3`,
+            options: {
+                bucketName: "politylink-gatsby",
+                protocol: "https",
+                hostname: "politylink.jp",
+            },
+        },
         `gatsby-plugin-offline`,
         {
             resolve: `gatsby-plugin-sitemap`,

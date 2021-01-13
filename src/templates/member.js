@@ -93,7 +93,7 @@ export default function Member({data}) {
                             screenName: getTwitterScreenName(member.twitter)
                         }}
                         options={{
-                            height: '400',
+                            height: '800',
                             lang: 'ja'
                         }}
                     />
