@@ -27,14 +27,16 @@ export default function Landing() {
                             <br/>
                         </p>
                     </div>
-                    <img className={styles.topImage} src={"/top.jpg"} alt={"PolityLink"} width={493} height={340} decoding="async"/>
+                    <img className={styles.topImage} src={"/top.jpg"} alt={"PolityLink"} width={493} height={340}
+                         decoding="async"/>
                 </div>
                 <div className={styles.contents}>
                     <h3 className={styles.h3}>
                         できること
                     </h3>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content1.png"} alt={"法律案ページ"} width={464} height={485} loading="lazy" decoding="async"/>
+                        <img className={styles.contentImage} src={"/content_bill.png"} alt={"法律案ページ"} width={464}
+                             height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
                             <Link to={"/bills"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
@@ -53,7 +55,25 @@ export default function Landing() {
                         </div>
                     </div>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content2.png"} alt={"国会タイムライン"} width={464} height={485} loading="lazy" decoding="async"/>
+                        <img className={styles.contentImage} src={"/content_member.png"} alt={"議員ページ"} width={464}
+                             height={485} loading="lazy" decoding="async"/>
+                        <div className={styles.contentText}>
+                            <Link to={"/members"} className={styles.contentLink}>
+                                <h4 className={styles.h4}>
+                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 議員ページ
+                                </h4>
+                            </Link>
+                            <p className={styles.p}>
+                                私たち国民によって選ばれた国会議員は、国会でどのような活動をしているのでしょうか？
+                                <br/><br/>
+                                会議での発言や法律案の提出など、国会での活動を経歴やSNSとあわせて確認できます。
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles.content}>
+                        <img className={styles.contentImage} src={"/content_timeline.png"} alt={"国会タイムライン"} width={464}
+                             height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
                             <Link to={"/timelines"} className={styles.contentLink}>
                                 <h4 className={styles.h4}>
@@ -62,9 +82,21 @@ export default function Landing() {
                             </Link>
                             <p className={styles.p}>
                                 今日はどんな会議が開催されたか？成立した法律案はあるか？
-                                <br/>
+                                <br/><br/>
                                 国会に関する最新情報をその日のニュース記事と一緒にチェックできます。
                                 <br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles.content}>
+                        <div className={styles.contentText}>
+                            <h4 className={styles.h4}>その他</h4>
+                            <p className={styles.p}>
+                                PolityLinkでは集積・整理した政治データをGraphQL APIとして一般公開しています。
+                                <a href={"https://graphql.politylink.jp/"}>GraphQL Playground</a>から好きなデータをクエリできるほか、
+                                Pythonでデータを取得するためのGraphQLClientも<a href={"https://pypi.org/project/politylink/"}>ライブラリ</a>で公開しています。
+                                <br/><br/>
+                                また<a href={"https://twitter.com/politylink"}>Twitter</a>や<a href={"https://politylink.jp/rss.xml"}>RSS</a>と連携し、国会の最新情報を日々発信しています。
                             </p>
                         </div>
                     </div>
