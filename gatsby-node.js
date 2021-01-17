@@ -131,7 +131,7 @@ exports.createPages = async ({actions, graphql}) => {
                 timelineMinDate: minDate.data.politylink.Timeline[0].date,
                 timelineMaxDate: maxDate.data.politylink.Timeline[0].date,
                 title: `国会タイムライン@${formatDateWithDay(timeline.date)}`,
-                description: `${formatDate(timeline.date)}付けの国会に関する最新情報（会議録、成立した法律案、ニュース記事など）をまとめています。現時点で登録されている会議録は${timeline.totalMinutes}件で、内訳は${timeline.minutes.map(minute => minute.name).join("、")}です。`,
+                description: formatRssText(timeline),
                 date: toJsDate(timeline.date),
                 rss: timeline.totalMinutes > 0
             },
@@ -162,4 +162,15 @@ exports.createPages = async ({actions, graphql}) => {
             },
         })
     })
+}
+
+const formatRssText = (timeline) => {
+    if (timeline.totalMinutes === 0) {
+        return null;
+    }
+    const minutesNameList = timeline.minutes.map(minute => minute.name)
+    const minutesStr = timeline.totalMinutes <= 3
+        ? minutesNameList.join("、")
+        : minutesNameList.slice(0, 2).concat([`他${timeline.totalMinutes - 2}件`]).join("、")
+    return `国会開催日です。現時点で${minutesStr}が登録されています。`
 }
