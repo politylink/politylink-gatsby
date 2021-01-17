@@ -1,7 +1,13 @@
 import React from "react"
 import {graphql} from "gatsby"
 import styles from "./member.module.css"
-import {Container, ExpandableContainer, FlexContainer} from "../components/container"
+import {
+    Container,
+    ExpandableContainer,
+    FlexContainer,
+    SinglePaneContainer,
+    TwoPaneContainer
+} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import {getMemberDescription} from "../utils/seoutils";
@@ -26,82 +32,88 @@ export default function Member({data}) {
     return (
         <Layout>
             <SEO title={member.name} description={getMemberDescription(member)} image={buildImagePath(member.id)}/>
-            <Container><ParentPath to={'/members'} text={'議員一覧'}/></Container>
-            <div className={styles.section}>
+            <SinglePaneContainer>
+                <ParentPath to={'/members'} text={'議員一覧'}/>
+            </SinglePaneContainer>
+            <TwoPaneContainer>
                 <Container>
-                    <div className={styles.imageDiv}>
-                        <img className={styles.image} src={buildImagePath(member.id)} alt={'顔写真'}/>
+                    <div className={styles.section}>
+                        <Container>
+                            <div className={styles.imageDiv}>
+                                <img className={styles.image} src={buildImagePath(member.id)} alt={'顔写真'}/>
+                            </div>
+                            <FlexContainer>
+                                <h2 className={styles.name}>{member.name}</h2>
+                                <p className={styles.tags}>{tags.join('・')}</p>
+                                <SocialLinks member={member}/>
+                            </FlexContainer>
+                            <div className={styles.description}>
+                                <p>{member.description}</p>
+                            </div>
+                        </Container>
                     </div>
-                    <FlexContainer>
-                        <h2 className={styles.name}>{member.name}</h2>
-                        <p className={styles.tags}>{tags.join('・')}</p>
-                        <SocialLinks member={member}/>
-                    </FlexContainer>
-                    <div className={styles.description}>
-                        <p>{member.description}</p>
+
+                    <div className={styles.section}>
+                        <FlexContainer
+                            title={"公式リンク"}
+                        >
+                            {member.website &&
+                            <LinkCard href={member.website} title={'公式サイト'} domain={formatDomain(member.website)}/>
+                            }
+                            {member.urls.map((url) => {
+                                return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
+                            })}
+                        </FlexContainer>
                     </div>
                 </Container>
-            </div>
 
-            <div className={styles.section}>
-                <FlexContainer
-                    title={"公式リンク"}
-                >
-                    {member.website &&
-                    <LinkCard href={member.website} title={'公式サイト'} domain={formatDomain(member.website)}/>
-                    }
-                    {member.urls.map((url) => {
-                        return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
-                    })}
-                </FlexContainer>
-            </div>
-
-            {activityList.length > 0 &&
-            <div className={styles.section}>
-                <ExpandableContainer
-                    title={"国会での活動"}
-                    localStorageKey={EXPAND_ACTIVITY_KEY}
-                    sizeLimit={3}
-                >
-                    {activityList.map((activity) => {
-                        if (activity.minutes != null) {
-                            return <MinutesActivityCard
-                                datetime={activity.datetime}
-                                minutes={activity.minutes}
-                                urls={activity.urls}
-                            />
-                        } else if (activity.bill != null) {
-                            return <BillActivityCard
-                                datetime={activity.datetime}
-                                bill={activity.bill}
-                                urls={activity.urls}
-                            />
-                        } else {
-                            return null;
-                        }
-                    })}
-                </ExpandableContainer>
-            </div>
-            }
-
-            {member.twitter &&
-            <div className={styles.section}>
+                {(activityList.length > 0 || member.twitter) &&
                 <Container>
-                    <Timeline
-                        dataSource={{
-                            sourceType: 'profile',
-                            screenName: getTwitterScreenName(member.twitter)
-                        }}
-                        options={{
-                            height: '800',
-                            lang: 'ja'
-                        }}
-                    />
-                </Container>
-            </div>
-            }
+                    {activityList.length > 0 &&
+                    <div className={styles.section}>
+                        <ExpandableContainer
+                            title={"国会での活動"}
+                            localStorageKey={EXPAND_ACTIVITY_KEY}
+                            sizeLimit={3}
+                        >
+                            {activityList.map((activity) => {
+                                if (activity.minutes != null) {
+                                    return <MinutesActivityCard
+                                        datetime={activity.datetime}
+                                        minutes={activity.minutes}
+                                        urls={activity.urls}
+                                    />
+                                } else if (activity.bill != null) {
+                                    return <BillActivityCard
+                                        datetime={activity.datetime}
+                                        bill={activity.bill}
+                                        urls={activity.urls}
+                                    />
+                                } else {
+                                    return null;
+                                }
+                            })}
+                        </ExpandableContainer>
+                    </div>}
 
-            <Container><Share title={member.name} postPath={buildPath(member.id)}/></Container>
+                    {member.twitter &&
+                    <div className={styles.section}>
+                        <Container>
+                            <Timeline
+                                dataSource={{
+                                    sourceType: 'profile',
+                                    screenName: getTwitterScreenName(member.twitter)
+                                }}
+                                options={{
+                                    height: '800',
+                                    lang: 'ja'
+                                }}
+                            />
+                        </Container>
+                    </div>}
+                </Container>}
+            </TwoPaneContainer>
+            <SinglePaneContainer><Share title={member.name} postPath={buildPath(member.id)}/></SinglePaneContainer>
         </Layout>
     )
 }

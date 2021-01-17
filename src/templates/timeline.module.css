@@ -1,4 +1,9 @@
+.section {
+    margin: 5px 10px 25px 10px;
+}
+
 .header {
+    composes: section;
     display: flex;
     justify-content: center;
 }
@@ -25,8 +30,4 @@
 .invalidNav {
     composes: nav;
     color: #a9a9a9;
-}
-
-.section {
-    margin: 5px 10px 25px 10px;
 }

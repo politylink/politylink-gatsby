@@ -2,7 +2,7 @@ import React from "react"
 import {graphql, Link} from "gatsby"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "./timeline.module.css"
-import {Container, ExpandableContainer} from "../components/container"
+import {Container, ExpandableContainer, SinglePaneContainer, TwoPaneContainer} from "../components/container"
 import Layout from "../components/layout"
 import BillCard from "../components/billCard"
 import {buildPath} from "../utils/urlutils";
@@ -13,6 +13,7 @@ import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/con
 import {formatDate, formatDateWithDay, offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
 import {getTimelineDescription, getTimelineTitle} from "../utils/seoutils";
 import SEO from "../components/seo";
+import Share from "../components/share";
 
 
 export default function Timeline({data, pageContext}) {
@@ -29,95 +30,102 @@ export default function Timeline({data, pageContext}) {
         <Layout>
             <SEO title={getTimelineTitle(timeline)} description={getTimelineDescription(timeline)}/>
 
-            <div className={styles.section}>
-                <Container>
-                    <div className={styles.header}>
-                        {prevDate >= minDate
-                            ? <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
-                                <FontAwesomeIcon icon="angle-double-left"/>
-                            </Link>
-                            : <div className={styles.invalidNav}>
-                                <FontAwesomeIcon icon="angle-double-left"/>
-                            </div>
-                        }
-                        <Link to='/timelines' className={styles.nav}>
-                            <h3 className={styles.date}>
-                                <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(timeline.date)}</h3>
+            <SinglePaneContainer>
+                <div className={styles.header}>
+                    {prevDate >= minDate
+                        ? <Link to={buildPath(toTimelineId(prevDate))} className={styles.nav}>
+                            <FontAwesomeIcon icon="angle-double-left"/>
                         </Link>
-                        {maxDate >= nextDate
-                            ? <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
-                                <FontAwesomeIcon icon="angle-double-right"/>
-                            </Link>
-                            : <div className={styles.invalidNav}>
-                                <FontAwesomeIcon icon="angle-double-right"/>
-                            </div>
-                        }
-                    </div>
-                </Container>
-            </div>
+                        : <div className={styles.invalidNav}>
+                            <FontAwesomeIcon icon="angle-double-left"/>
+                        </div>
+                    }
+                    <Link to='/timelines' className={styles.nav}>
+                        <h3 className={styles.date}>
+                            <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(timeline.date)}</h3>
+                    </Link>
+                    {maxDate >= nextDate
+                        ? <Link to={buildPath(toTimelineId(nextDate))} className={styles.nav}>
+                            <FontAwesomeIcon icon="angle-double-right"/>
+                        </Link>
+                        : <div className={styles.invalidNav}>
+                            <FontAwesomeIcon icon="angle-double-right"/>
+                        </div>
+                    }
+                </div>
+            </SinglePaneContainer>
 
-            {timeline.totalMinutes > 0 &&
-            <div className={styles.section}>
-                <ExpandableContainer
-                    title={"会議録"}
-                    localStorageKey={EXPAND_MINUTES_KEY}
-                    sizeLimit={2}
-                >
-                    {minutesList.map((minutes) => {
-                        return <MinutesCard
-                            to={buildPath(minutes.id)}
-                            name={minutes.name}
-                            topics={minutes.topics}
-                            hasNews={minutes.totalNews > 0}
-                            date={formatDate(minutes.startDateTime)}
-                        />
-                    })}
-                </ExpandableContainer>
-            </div>
-            }
+            <TwoPaneContainer>
+                {(timeline.totalMinutes > 0 || timeline.totalBills > 0) &&
+                <Container>
+                    {timeline.totalMinutes > 0 &&
+                    <div className={styles.section}>
+                        <ExpandableContainer
+                            title={"会議録"}
+                            localStorageKey={EXPAND_MINUTES_KEY}
+                            sizeLimit={2}
+                        >
+                            {minutesList.map((minutes) => {
+                                return <MinutesCard
+                                    to={buildPath(minutes.id)}
+                                    name={minutes.name}
+                                    topics={minutes.topics}
+                                    hasNews={minutes.totalNews > 0}
+                                    date={formatDate(minutes.startDateTime)}
+                                />
+                            })}
+                        </ExpandableContainer>
+                    </div>}
 
-            {timeline.totalBills > 0 &&
-            <div className={styles.section}>
-                <ExpandableContainer
-                    title={"法律案"}
-                    localStorageKey={EXPAND_BILL_KEY}
-                    sizeLimit={2}
-                >
-                    {billList.map((bill) => {
-                        return <BillCard
-                            title={bill.billNumber}
-                            description={bill.name}
-                            aliases={bill.aliases}
-                            to={buildPath(bill.id)}
-                            isPassed={bill.isPassed}
-                            hasNews={bill.totalNews > 0}
-                            left={true}
-                        />
-                    })}
-                </ExpandableContainer>
-            </div>
-            }
+                    {timeline.totalBills > 0 &&
+                    <div className={styles.section}>
+                        <ExpandableContainer
+                            title={"法律案"}
+                            localStorageKey={EXPAND_BILL_KEY}
+                            sizeLimit={2}
+                        >
+                            {billList.map((bill) => {
+                                return <BillCard
+                                    title={bill.billNumber}
+                                    description={bill.name}
+                                    aliases={bill.aliases}
+                                    to={buildPath(bill.id)}
+                                    isPassed={bill.isPassed}
+                                    hasNews={bill.totalNews > 0}
+                                    left={true}
+                                />
+                            })}
+                        </ExpandableContainer>
+                    </div>}
+                </Container>}
 
-            {timeline.totalNews > 0 &&
-            <div className={styles.section}>
-                <ExpandableContainer
-                    title={"今日のニュース"}
-                    localStorageKey={EXPAND_NEWS_KEY}
-                    sizeLimit={2}
-                >
-                    {newsList.map((news) => {
-                        return <NewsCard
-                            href={news.url}
-                            thumbnail={news.thumbnail}
-                            title={news.title}
-                            publisher={news.publisher}
-                            publishedAt={formatDate(news.publishedAt)}
-                            isPaid={news.isPaid}
-                        />
-                    })}
-                </ExpandableContainer>
-            </div>
-            }
+                {timeline.totalNews > 0 &&
+                <Container>
+                    {timeline.totalNews > 0 &&
+                    <div className={styles.section}>
+                        <ExpandableContainer
+                            title={"今日のニュース"}
+                            localStorageKey={EXPAND_NEWS_KEY}
+                            sizeLimit={2}
+                        >
+                            {newsList.map((news) => {
+                                return <NewsCard
+                                    href={news.url}
+                                    thumbnail={news.thumbnail}
+                                    title={news.title}
+                                    publisher={news.publisher}
+                                    publishedAt={formatDate(news.publishedAt)}
+                                    isPaid={news.isPaid}
+                                />
+                            })}
+                        </ExpandableContainer>
+                    </div>}
+                </Container>}
+            </TwoPaneContainer>
+
+            <SinglePaneContainer>
+                <Share title={formatDateWithDay(timeline.date)} postPath={buildPath(timeline.id)}/>
+            </SinglePaneContainer>
         </Layout>
     )
 }
@@ -126,6 +134,7 @@ export const query = graphql`
     query($timelineId: ID!){
         politylink {
             Timeline(filter:{id:$timelineId}){
+                id
                 date {year, month, day}
                 totalBills
                 totalMinutes

@@ -11,6 +11,19 @@
     flex-wrap: wrap;
 }
 
+.singlePane {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1300px;
+}
+
+.twoPane {
+    composes: singlePane;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .button {
     margin: 10px auto;
     width: 30%;
