@@ -3,21 +3,39 @@ import styles from "./container.module.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const Container = ({title, children}) => {
-    return <div className={styles.default}>
-        {title !== undefined &&
-        <p className={styles.title}>{title}</p>
-        }
-        {children}
-    </div>
+    return (
+        <div className={styles.default}>
+            {title !== undefined &&
+            <p className={styles.title}>{title}</p>}
+            {children}
+        </div>
+    )
 }
 
 export const FlexContainer = ({title, children}) => {
-    return (<div className={styles.flex}>
-        {title !== undefined &&
-        <p className={styles.title}>{title}</p>
-        }
-        {children}
-    </div>)
+    return (
+        <div className={styles.flex}>
+            {title !== undefined &&
+            <p className={styles.title}>{title}</p>}
+            {children}
+        </div>
+    )
+}
+
+export const SinglePaneContainer = ({children}) => {
+    return (
+        <div className={styles.singlePane}>
+            {children}
+        </div>
+    )
+}
+
+export const TwoPaneContainer = ({children}) => {
+    return (
+        <div className={styles.twoPane}>
+            {children}
+        </div>
+    )
 }
 
 export class ExpandableContainer extends React.Component {
