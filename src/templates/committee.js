@@ -1,7 +1,7 @@
 import React from "react"
 import {graphql} from "gatsby"
 import styles from "./committee.module.css"
-import {Container, ExpandableContainer} from "../components/container"
+import {Container, ExpandableContainer, SinglePaneContainer, TwoPaneContainer} from "../components/container"
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
@@ -22,44 +22,52 @@ export default function Committee({data}) {
     return (
         <Layout>
             <SEO title={committee.name} description={getCommitteeDescription(committee)}/>
-            <Container><ParentPath to={'/committees'} text={'委員会一覧'}/></Container>
-            <div className={styles.section}>
+            <SinglePaneContainer><ParentPath to={'/committees'} text={'委員会一覧'}/></SinglePaneContainer>
+
+            <TwoPaneContainer>
                 <Container>
-                    <h2 className={styles.name}>{committee.name}</h2>
-                    <div className={styles.description}>
-                        <p>{committee.description}</p>
-                        {committee.topics != null &&
+                    <div className={styles.section}>
                         <Container>
-                            {committee.topics.map((topic) => {
-                                return <p className={styles.topic}>{formatTopicSentence(topic)}</p>
-                            })}
-                        </Container>}
+                            <h2 className={styles.name}>{committee.name}</h2>
+                            <div className={styles.description}>
+                                <p>{committee.description}</p>
+                                {committee.topics != null &&
+                                <Container>
+                                    {committee.topics.map((topic) => {
+                                        return <p className={styles.topic}>{formatTopicSentence(topic)}</p>
+                                    })}
+                                </Container>}
+                            </div>
+                        </Container>
                     </div>
                 </Container>
-            </div>
 
-            {minutesList.length > 0 &&
-            <div className={styles.section}>
-                <ExpandableContainer
-                    title={"会議録一覧"}
-                    localStorageKey={EXPAND_MINUTES_KEY}
-                    sizeLimit={5}
-                >
-                    {minutesList.map((minutes) => {
-                        return <MinutesCard
-                            to={buildPath(minutes.id)}
-                            key={minutes.id}
-                            name={minutes.name}
-                            topics={minutes.topics}
-                            hasNews={minutes.totalNews > 0}
-                            date={formatDate(minutes.startDateTime)}
-                        />
-                    })}
-                </ExpandableContainer>
-            </div>
-            }
+                {minutesList.length > 0 &&
+                <Container>
+                    <div className={styles.section}>
+                        <ExpandableContainer
+                            title={"会議録一覧"}
+                            localStorageKey={EXPAND_MINUTES_KEY}
+                            sizeLimit={5}
+                        >
+                            {minutesList.map((minutes) => {
+                                return <MinutesCard
+                                    to={buildPath(minutes.id)}
+                                    key={minutes.id}
+                                    name={minutes.name}
+                                    topics={minutes.topics}
+                                    hasNews={minutes.totalNews > 0}
+                                    date={formatDate(minutes.startDateTime)}
+                                />
+                            })}
+                        </ExpandableContainer>
+                    </div>
+                </Container>}
+            </TwoPaneContainer>
 
-            <Container><Share title={committee.name} postPath={buildPath(committee.id)}/></Container>
+            <SinglePaneContainer>
+                <Share title={committee.name} postPath={buildPath(committee.id)}/>
+            </SinglePaneContainer>
         </Layout>
     )
 }
