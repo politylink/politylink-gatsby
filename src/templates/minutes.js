@@ -84,7 +84,7 @@ export default function Minutes({data}) {
                         <ExpandableContainer
                             title={"発言者"}
                             localStorageKey={EXPAND_MEMBER_KEY}
-                            sizeLimit={6}
+                            sizeLimit={7}
                         >
                             {minutes.beAttendedByMembers.map((member) => {
                                 return <MemberCard
