@@ -106,7 +106,7 @@ export default function Timeline({data, pageContext}) {
                         <ExpandableContainer
                             title={"今日のニュース"}
                             localStorageKey={EXPAND_NEWS_KEY}
-                            sizeLimit={2}
+                            sizeLimit={5}
                         >
                             {newsList.map((news) => {
                                 return <NewsCard
