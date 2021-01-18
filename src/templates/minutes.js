@@ -28,20 +28,23 @@ import ParentPath from "../components/parentPath";
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
     const newsList = sortNewsList(minutes.news)
-    const committeePath = buildPath(minutes.belongedToCommittee.id)
+    const committeePath = minutes.belongedToCommittee === null ? null : buildPath(minutes.belongedToCommittee.id)
 
     return (
         <Layout>
             <SEO title={minutes.name} description={getMinutesDescription(minutes)}/>
-            <SinglePaneContainer><ParentPath to={committeePath} text={'会議録一覧'}/></SinglePaneContainer>
+            {!(committeePath == null) &&
+            <SinglePaneContainer><ParentPath to={committeePath} text={'会議録一覧'}/></SinglePaneContainer>}
 
             <TwoPaneContainer>
                 <Container>
                     <div className={styles.section}>
                         <Container>
-                            <Link className={styles.link} to={committeePath}>
-                                <h2 className={styles.name}>{minutes.name}</h2>
-                            </Link>
+                            {committeePath == null
+                                ? <h2 className={styles.name}>{minutes.name}</h2>
+                                : <Link className={styles.link} to={committeePath}>
+                                    <h2 className={styles.name}>{minutes.name}</h2>
+                                </Link>}
                             <Link className={styles.link} to={buildPath(toTimelineId(toJsDate(minutes.startDateTime)))}>
                                 <p className={styles.date}>
                                     <FontAwesomeIcon icon="calendar-alt"/> {formatDateWithDay(minutes.startDateTime)}
@@ -81,7 +84,7 @@ export default function Minutes({data}) {
                         <ExpandableContainer
                             title={"発言者"}
                             localStorageKey={EXPAND_MEMBER_KEY}
-                            sizeLimit={7}
+                            sizeLimit={6}
                         >
                             {minutes.beAttendedByMembers.map((member) => {
                                 return <MemberCard
