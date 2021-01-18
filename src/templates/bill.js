@@ -108,7 +108,7 @@ export default function Bill({data}) {
                         <ExpandableContainer
                             title={"関連ニュース"}
                             localStorageKey={EXPAND_NEWS_KEY}
-                            sizeLimit={2}
+                            sizeLimit={5}
                         >
                             {newsList.map((news) => {
                                 return <NewsCard
