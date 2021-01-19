@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Layout from "../components/layout"
 import styles from "./index.module.css"
 import SEO from "../components/seo";
+import Share from "../components/share";
 
 export default function Landing() {
     return (
@@ -89,6 +90,23 @@ export default function Landing() {
                         </div>
                     </div>
                     <div className={styles.content}>
+                        <img className={styles.contentImage} src={"/content_calender.png"} alt={"法律案カレンダー"} width={464}
+                             height={485} loading="lazy" decoding="async"/>
+                        <div className={styles.contentText}>
+                            <Link to={"/calender"} className={styles.contentLink}>
+                                <h4 className={styles.h4}>
+                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 法律案カレンダー
+                                </h4>
+                            </Link>
+                            <p className={styles.p}>
+                                今国会では、どのような法律案が審議されているのでしょうか？
+                                <br/><br/>
+                                直近の国会に提出された法律案の審議状況を、一覧形式で比較することができます。
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles.content}>
                         <div className={styles.contentText}>
                             <h4 className={styles.h4}>その他</h4>
                             <p className={styles.p}>
@@ -100,6 +118,7 @@ export default function Landing() {
                             </p>
                         </div>
                     </div>
+                    <Share title={"PolityLink"} postPath={"/"}/>
                 </div>
             </div>
         </Layout>
