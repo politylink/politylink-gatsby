@@ -1,6 +1,6 @@
 import {navigate} from "gatsby";
 import {buildPath} from "../utils/urlutils";
-import {formatJsDate} from "../utils/dateutils";
+import {formatJsDate, toJsDate} from "../utils/dateutils";
 import React from "react";
 import classNames from 'classnames';
 import Calendar from "react-calendar";
@@ -22,8 +22,8 @@ export const TimelineCalendar = props => {
             onChange={props.onChange}
             value={props.date}
             view={"month"}
-            minDate={new Date(2020, 0, 1)}
-            maxDate={new Date()}
+            minDate={toJsDate(props.minDate)}
+            maxDate={toJsDate(props.maxDate)}
             tileClassName={({date, view}) => setDietDate({date, view}, props.dietDates)}
             onClickDay={(value) => navigate(buildPath(`Timeline:${formatJsDate(value, "")}`))}
         />

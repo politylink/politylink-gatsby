@@ -46,6 +46,8 @@ export default class App extends React.Component {
                             onChange={this.onChange}
                             date={this.state.date}
                             dietDates={this.dietDates}
+                            minDate={this.props.data.politylink.Timeline[0].date}
+                            maxDate={this.props.data.politylink.Timeline[this.props.data.politylink.Timeline.length - 1].date}
                         />
                     </div>
                 </Container>
@@ -57,7 +59,7 @@ export default class App extends React.Component {
 export const query = graphql`
     {
         politylink {
-            Timeline (orderBy:id_desc) {
+            Timeline (orderBy:date_asc) {
                 id
                 date { year, month, day }
                 totalBills
