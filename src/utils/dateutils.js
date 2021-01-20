@@ -1,5 +1,5 @@
 const toJsDate = (gqlDate) => {
-    return new Date(gqlDate.year, gqlDate.month - 1, gqlDate.day)
+    return gqlDate ? new Date(gqlDate.year, gqlDate.month - 1, gqlDate.day) : new Date(null)
 }
 
 const offsetDate = (jsDate, offset) => {
