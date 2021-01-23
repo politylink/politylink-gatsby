@@ -11,47 +11,30 @@ import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
 import {SearchFilter} from "../components/search"
 import ReactTooltip from 'react-tooltip';
 
-export const getLatestRound = (bills) => {
-    const latestBillNumber = bills[bills.length - 1].billNumber;
-    return latestBillNumber.match(/\d+/)[0];
-}
-
-export const getBillClassName = (billType) => {
-    if (billType === "参法") {
-        return "sanhou"
-    } else if (billType === "衆法") {
-        return "shuhou"
-    } else {
-        return "kakuhou"
-    }
-}
-
 export const getType = (bill) => {
     return bill.billNumber.match(/.法/)[0];
 }
 
 export const appearAfterRoundStart = (bill, roundStartDate) => {
     const roundStart = roundStartDate.getTime();
-    return toJsDate(bill.submittedDate).getTime() >= roundStart || toJsDate(bill.proclaimedDate).getTime() >= roundStart || toJsDate(bill.passedRepresentativesDate).getTime() >= roundStart || toJsDate(bill.passedCouncilorsDate).getTime() >= roundStart
+    return toJsDate(bill.submittedDate).getTime() >= roundStart
+        || toJsDate(bill.proclaimedDate).getTime() >= roundStart
+        || toJsDate(bill.passedRepresentativesDate).getTime() >= roundStart
+        || toJsDate(bill.passedCouncilorsDate).getTime() >= roundStart
 }
 
-export const getGroups = (bills, round, filterPassed, roundStart) => {
+export const getGroups = (bills) => {
     return bills
-        .filter((bill) => {
-            return appearAfterRoundStart(bill, roundStart) && (!filterPassed || bill.isPassed)
-        })
         .map((bill, index) => {
-            const deliberationPeriod = bill.proclaimedDate.day ? (toJsDate(bill.proclaimedDate) - toJsDate(bill.submittedDate)) / 86400000 + "日" : "未公布"
-            const startDate = bill.submittedDate.day ? toJsDate(bill.submittedDate) : null;
-            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: deliberationPeriod, startDate: startDate, endDate: toJsDate(bill.proclaimedDate), proclaimed: bill.proclaimedDate.day, billType: getType(bill) }
+            const deliberationPeriod = bill.proclaimedDate ? (toJsDate(bill.proclaimedDate) - toJsDate(bill.submittedDate)) / 86400000 + "日" : "未公布"
+            const startDate = toJsDate(bill.submittedDate);
+            const endDate = toJsDate(bill.proclaimedDate);
+            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: deliberationPeriod, startDate: startDate, endDate: endDate, proclaimed: bill.proclaimedDate, billType: getType(bill), category: bill.category }
         });
 }
 
-export const getItems = (bills, round, filterPassed, roundStart) => {
+export const getItems = (bills) => {
     const nested_items = bills
-        .filter((bill) => {
-            return appearAfterRoundStart(bill, roundStart) && (!filterPassed || bill.isPassed)
-        })
         .map((bill, index) => {
             return [
                 { id: null, group: index, title: "", start_time: toJsDate(bill.submittedDate), end_time: toJsDate(bill.submittedDate), color: 'rgb(158, 14, 206)', itemProps: { style: {background: '#93c47dff', border: 0, cursor: "auto"}} },
@@ -60,9 +43,9 @@ export const getItems = (bills, round, filterPassed, roundStart) => {
                 { id: null, group: index, title: "", start_time: toJsDate(bill.proclaimedDate), end_time: toJsDate(bill.proclaimedDate), itemProps: { style: {background: '#c27ba0ff', border: 0, cursor: "auto"}} }]
         });
     const flat_items = [].concat(...nested_items);
-    return flat_items.map((bill, index) => {
-        bill["id"] = index;
-        return bill;
+    return flat_items.map((item, index) => {
+        item["id"] = index;
+        return item;
     })
 }
 
@@ -90,12 +73,15 @@ export default class App extends React.Component {
     }
 
     render() {
-        const roundStart = new Date(2020, 9, 26);
-        //const roundEnd = new Date(2020, 12, 5);
-        const latestRound = getLatestRound(this.props.data.politylink.Bill);
+        const diet = this.props.data.politylink.Diet[0];
+        const timeStart = toJsDate(diet.startDate);
+        const latestRound = diet.number;
+        const bills = diet.bills.filter((bill) => {
+            return appearAfterRoundStart(bill, timeStart) && (!this.state.filterPassed || bill.isPassed)
+        });
 
-        const groups = getGroups(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
-        const items = getItems(this.props.data.politylink.Bill, latestRound, this.state.filterPassed, roundStart);
+        const groups = getGroups(bills);
+        const items = getItems(bills);
 
         let groupRenderer = ({ group, isRightSidebar }) => {
             if (isRightSidebar) {
@@ -107,7 +93,7 @@ export default class App extends React.Component {
             } else {
                 return (
                     <div className="rct-sidebar-row-item">
-                        <span className={getBillClassName(group.billType)}>{group.billType}</span>
+                        <span className={group.category.toLowerCase()}>{group.billType}</span>
                         <Link data-tip={group.title + "<br />"+ group.tip} to={buildPath(group.internalId)}>
                             <span>{group.title}</span>
                         </Link>
@@ -117,7 +103,7 @@ export default class App extends React.Component {
                 )
             }
           }
-        const timeStart = roundStart;
+
         let timeEnd = new Date(Math.max.apply(null, items.map(item => item.end_time).filter(date => date)));
         timeEnd.setDate(timeEnd.getDate() + 10);
 
@@ -167,17 +153,23 @@ export default class App extends React.Component {
 export const query = graphql`
     {
         politylink {
-            Bill (orderBy:[submittedDate_asc]) {
-                id
+            Diet (orderBy:[startDate_desc], first:1) {
                 name
-                billNumber
-                submittedDate {year, month, day}
-                passedRepresentativesCommitteeDate {year, month, day}
-                passedRepresentativesDate {year, month, day}
-                passedCouncilorsCommitteeDate {year, month, day}
-                passedCouncilorsDate {year, month, day}
-                proclaimedDate {year, month, day}
-                isPassed
+                number
+                startDate {year, month, day}
+                bills (orderBy:[submittedDate_asc]) {
+                    id
+                    name
+                    category
+                    billNumber
+                    submittedDate {year, month, day}
+                    passedRepresentativesCommitteeDate {year, month, day}
+                    passedRepresentativesDate {year, month, day}
+                    passedCouncilorsCommitteeDate {year, month, day}
+                    passedCouncilorsDate {year, month, day}
+                    proclaimedDate {year, month, day}
+                    isPassed
+                }
             }
         }
     }
