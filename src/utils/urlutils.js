@@ -10,7 +10,7 @@ const buildPath = (politylink_id) => {
 
 const buildImagePath = (politylink_id) => {
     const res = politylink_id.split(':')
-    return `https://politylink.s3-ap-northeast-1.amazonaws.com/${res[0].toLowerCase()}/${res[1]}.jpg`
+    return `https://image.politylink.jp/${res[0].toLowerCase()}/${res[1]}.jpg`
 }
 
 module.exports.buildPath = buildPath
