@@ -51,7 +51,7 @@ module.exports = {
                 hostname: "politylink.jp",
             },
         },
-        `gatsby-plugin-offline`,
+        `gatsby-plugin-remove-serviceworker`,
         {
             resolve: `gatsby-plugin-sitemap`,
             options: {
