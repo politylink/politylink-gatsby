@@ -116,6 +116,7 @@ export default function Timeline({data, pageContext}) {
                                     publisher={news.publisher}
                                     publishedAt={formatDate(news.publishedAt)}
                                     isPaid={news.isPaid}
+                                    key={news.id}
                                 />
                             })}
                         </ExpandableContainer>
@@ -156,6 +157,7 @@ export const query = graphql`
                     startDateTime {year, month, day, formatted}
                 }
                 news {
+                    id
                     title
                     url
                     isPaid
