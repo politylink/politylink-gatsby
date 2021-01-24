@@ -12,7 +12,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy": "npm run -n \"-r dotenv/config\" && gatsby-plugin-s3 deploy --yes"
+    "deploy": "npm run -n \"-r dotenv/config\" && gatsby-plugin-s3 deploy --yes && aws cloudfront create-invalidation --distribution-id E2BZL0LNXZYLSA --paths \"/*\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
