@@ -32,6 +32,7 @@ export default class App extends React.Component {
     }
 
     dietDates = getDietDates(this.props.data.politylink.Timeline);
+    timelines = this.props.data.politylink.Timeline;
 
     render() {
         return (
@@ -46,8 +47,8 @@ export default class App extends React.Component {
                             onChange={this.onChange}
                             date={this.state.date}
                             dietDates={this.dietDates}
-                            minDate={this.props.data.politylink.Timeline[0].date}
-                            maxDate={this.props.data.politylink.Timeline[this.props.data.politylink.Timeline.length - 1].date}
+                            minDate={this.timelines[0].date}
+                            maxDate={this.timelines[this.timelines.length - 1].date}
                         />
                     </div>
                 </Container>
