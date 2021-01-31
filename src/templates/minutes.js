@@ -71,7 +71,7 @@ export default function Minutes({data}) {
 
                     <div className={styles.section}>
                         <FlexContainer
-                            title={"公式リンク"}
+                            title={"リンク"}
                         >
                             {minutes.urls.map((url) => {
                                 return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
