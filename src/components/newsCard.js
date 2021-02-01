@@ -24,7 +24,7 @@ export default function NewsCard(props) {
 
     return (
         <a className={styles.card} href={props.href} target="_blank" rel="noopener noreferrer">
-            <img className={styles.thumbnail} src={thumbnail} alt={"thumbnail"}/>
+            <img className={styles.thumbnail} src={thumbnail} alt={props.id}/>
             <div className={styles.body}>
                 <p className={styles.title}>{props.title}</p>
                 <p className={styles.info}>
