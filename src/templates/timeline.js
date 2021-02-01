@@ -110,6 +110,7 @@ export default function Timeline({data, pageContext}) {
                         >
                             {newsList.map((news) => {
                                 return <NewsCard
+                                    id={news.id}
                                     href={news.url}
                                     thumbnail={news.thumbnail}
                                     title={news.title}

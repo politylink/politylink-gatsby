@@ -112,6 +112,7 @@ export default function Bill({data}) {
                         >
                             {newsList.map((news) => {
                                 return <NewsCard
+                                    id={news.id}
                                     href={news.url}
                                     thumbnail={news.thumbnail}
                                     title={news.title}
@@ -152,6 +153,7 @@ export const query = graphql`
                     startDateTime { year, month, day, formatted }
                 }
                 news {
+                    id
                     title
                     url
                     isPaid

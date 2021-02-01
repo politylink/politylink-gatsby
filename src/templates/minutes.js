@@ -127,6 +127,7 @@ export default function Minutes({data}) {
                         >
                             {newsList.map((news) => {
                                 return <NewsCard
+                                    id={news.id}
                                     href={news.url}
                                     thumbnail={news.thumbnail}
                                     title={news.title}
@@ -174,6 +175,7 @@ export const query = graphql`
                     name
                 }
                 news {
+                    id
                     title
                     url
                     isPaid
