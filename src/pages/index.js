@@ -36,6 +36,23 @@ export default function Landing() {
                         できること
                     </h3>
                     <div className={styles.content}>
+                        <img className={styles.contentImage} src={"/content_timeline.png"} alt={"国会タイムライン"} width={464}
+                             height={485} loading="lazy" decoding="async"/>
+                        <div className={styles.contentText}>
+                            <Link to={"/timelines"} className={styles.contentLink}>
+                                <h4 className={styles.h4}>
+                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 国会タイムライン
+                                </h4>
+                            </Link>
+                            <p className={styles.p}>
+                                今日はどんな会議が開催されたか？成立した法律案はあるか？
+                                <br/><br/>
+                                国会に関する最新情報をその日のニュース記事と一緒にチェックできます。
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles.content}>
                         <img className={styles.contentImage} src={"/content_bill.png"} alt={"法律案ページ"} width={464}
                              height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
@@ -73,23 +90,6 @@ export default function Landing() {
                         </div>
                     </div>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content_timeline.png"} alt={"国会タイムライン"} width={464}
-                             height={485} loading="lazy" decoding="async"/>
-                        <div className={styles.contentText}>
-                            <Link to={"/timelines"} className={styles.contentLink}>
-                                <h4 className={styles.h4}>
-                                    <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 国会タイムライン
-                                </h4>
-                            </Link>
-                            <p className={styles.p}>
-                                今日はどんな会議が開催されたか？成立した法律案はあるか？
-                                <br/><br/>
-                                国会に関する最新情報をその日のニュース記事と一緒にチェックできます。
-                                <br/>
-                            </p>
-                        </div>
-                    </div>
-                    <div className={styles.content}>
                         <img className={styles.contentImage} src={"/content_calender.png"} alt={"法律案カレンダー"} width={464}
                              height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
@@ -112,9 +112,11 @@ export default function Landing() {
                             <p className={styles.p}>
                                 PolityLinkでは集積・整理した政治データをGraphQL APIとして一般公開しています。
                                 <a href={"https://graphql.politylink.jp/"}>GraphQL Playground</a>から好きなデータをクエリできるほか、
-                                Pythonでデータを取得するためのGraphQLClientも<a href={"https://pypi.org/project/politylink/"}>ライブラリ</a>で公開しています。
+                                Pythonでデータを取得するためのGraphQLClientも<a
+                                href={"https://pypi.org/project/politylink/"}>ライブラリ</a>で公開しています。
                                 <br/><br/>
-                                また<a href={"https://twitter.com/politylink"}>Twitter</a>や<a href={"https://politylink.jp/rss.xml"}>RSS</a>と連携し、国会の最新情報を日々発信しています。
+                                また<a href={"https://twitter.com/politylink"}>Twitter</a>や<a
+                                href={"https://politylink.jp/rss.xml"}>RSS</a>と連携し、国会の最新情報を日々発信しています。
                             </p>
                         </div>
                     </div>
