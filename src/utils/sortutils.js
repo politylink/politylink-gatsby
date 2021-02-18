@@ -1,21 +1,43 @@
 export const sortMinutesList = (minutesList) => {
-    return sortDesc(minutesList, minutes => minutes.startDateTime.formatted + minutes.totalNews)
+    return sortStrDesc(minutesList, minutes => minutes.startDateTime.formatted + minutes.totalNews)
 }
 
 export const sortNewsList = (newsList) => {
-    return sortDesc(newsList, news => news.publishedAt.formatted)
+    return sortStrDesc(newsList, news => news.publishedAt.formatted)
 }
 
 export const sortBillList = (billList) => {
-    return sortDesc(billList, bill => bill.submittedDate.formatted)
+    return sortStrDesc(billList, bill => bill.submittedDate.formatted)
 }
 
 export const sortActivityList = (activityList) => {
-    return sortDesc(activityList, activity => activity.datetime.formatted)
+    return sortStrDesc(activityList, activity => activity.datetime.formatted)
 }
 
-const sortDesc = (list, mapFunc) => {
+export const sortBillUrlList = (urlList) => {
+    const titleOrder = ["本文", "議案情報", "経過", "概要PDF", "新旧対照表PDF"]
+    return sortUrlList(urlList, titleOrder)
+}
+
+export const sortMinutesUrlList = (urlList) => {
+    const titleOrder = ["審議中継", "本文", "概要PDF", "質疑項目", "委員会経過", "国会審議映像検索システム", "自動文字起こし"]
+    return sortUrlList(urlList, titleOrder)
+}
+
+const sortUrlList = (urlList, titleOrder) => {
+    const weightMap = new Map(titleOrder.map((x, i) => [x, i + 1]))
+    const mapFunc = url => weightMap.get(url.title) || Number.MAX_SAFE_INTEGER
+    return sortIntAsc(urlList, mapFunc)
+}
+
+const sortStrDesc = (list, mapFunc) => {
     return list.sort((a, b) => {
         return mapFunc(b).localeCompare(mapFunc(a))
+    })
+}
+
+const sortIntAsc = (list, mapFunc) => {
+    return list.sort((a, b) => {
+        return mapFunc(a) - mapFunc(b);
     })
 }
