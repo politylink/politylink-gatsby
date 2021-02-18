@@ -12,7 +12,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import {getMemberDescription} from "../utils/seoutils";
 import LinkCard from "../components/linkCard";
-import {sortActivityList, sortMemberUrlList} from "../utils/sortutils";
+import {sortActivityList, sortActivityUrlList, sortMemberUrlList} from "../utils/sortutils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
