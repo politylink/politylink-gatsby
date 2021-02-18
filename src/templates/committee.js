@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import MinutesCard from "../components/minutesCard";
 import {formatTopicSentence} from "../utils/formatutils";
-import {formatDate} from "../utils/dateutils";
+import {formatDateWithDay} from "../utils/dateutils";
 import {sortMinutesList} from "../utils/sortutils";
 import {buildPath} from "../utils/urlutils";
 import {getCommitteeDescription} from "../utils/seoutils";
@@ -57,7 +57,7 @@ export default function Committee({data}) {
                                     name={minutes.name}
                                     topics={minutes.topics}
                                     hasNews={minutes.totalNews > 0}
-                                    date={formatDate(minutes.startDateTime)}
+                                    date={formatDateWithDay(minutes.startDateTime)}
                                 />
                             })}
                         </ExpandableContainer>

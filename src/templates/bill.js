@@ -13,7 +13,7 @@ import LinkCard from "../components/linkCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import MinutesCard from "../components/minutesCard"
-import {formatDate} from "../utils/dateutils"
+import {formatDate, formatDateWithDay} from "../utils/dateutils"
 import {buildPath} from "../utils/urlutils";
 import {getBillDescription} from "../utils/seoutils";
 import {sortMinutesList, sortNewsList} from "../utils/sortutils";
@@ -97,7 +97,7 @@ export default function Bill({data}) {
                                     name={minutes.name}
                                     topics={minutes.topics}
                                     hasNews={minutes.totalNews > 0}
-                                    date={formatDate(minutes.startDateTime)}
+                                    date={formatDateWithDay(minutes.startDateTime)}
                                 />
                             })}
                         </ExpandableContainer>
