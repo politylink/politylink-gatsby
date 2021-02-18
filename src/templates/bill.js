@@ -16,7 +16,7 @@ import MinutesCard from "../components/minutesCard"
 import {formatDate, formatDateWithDay} from "../utils/dateutils"
 import {buildPath} from "../utils/urlutils";
 import {getBillDescription} from "../utils/seoutils";
-import {sortMinutesList, sortNewsList} from "../utils/sortutils";
+import {sortBillUrlList, sortMinutesList, sortNewsList} from "../utils/sortutils";
 import NewsCard from "../components/newsCard";
 import {EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import Share from "../components/share";
@@ -53,6 +53,7 @@ export default function Bill({data}) {
     }
     const minutesList = sortMinutesList(bill.beDiscussedByMinutes)
     const newsList = sortNewsList(bill.news)
+    const urlList = sortBillUrlList(bill.urls)
 
     return (
         <Layout>
@@ -75,7 +76,7 @@ export default function Bill({data}) {
                         <FlexContainer
                             title={"公式リンク"}
                         >
-                            {bill.urls.map((url) => {
+                            {urlList.map((url) => {
                                 return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
                             })}
                         </FlexContainer>

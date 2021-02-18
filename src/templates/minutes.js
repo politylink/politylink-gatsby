@@ -17,7 +17,7 @@ import {formatLongSentence, formatTopicSentence} from "../utils/formatutils"
 import {buildPath} from "../utils/urlutils";
 import {getMinutesDescription} from "../utils/seoutils";
 import NewsCard from "../components/newsCard";
-import {sortNewsList} from "../utils/sortutils";
+import {sortMinutesUrlList, sortNewsList} from "../utils/sortutils";
 import {formatDate, formatDateWithDay, toJsDate, toTimelineId} from "../utils/dateutils";
 import {EXPAND_BILL_KEY, EXPAND_MEMBER_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import MemberCard from "../components/memberCard";
@@ -28,6 +28,7 @@ import ParentPath from "../components/parentPath";
 export default function Minutes({data}) {
     const minutes = data.politylink.Minutes[0]
     const newsList = sortNewsList(minutes.news)
+    const urlList = sortMinutesUrlList(minutes.urls)
     const committeePath = minutes.belongedToCommittee === null ? null : buildPath(minutes.belongedToCommittee.id)
 
     return (
@@ -73,7 +74,7 @@ export default function Minutes({data}) {
                         <FlexContainer
                             title={"リンク"}
                         >
-                            {minutes.urls.map((url) => {
+                            {urlList.map((url) => {
                                 return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
                             })}
                         </FlexContainer>
