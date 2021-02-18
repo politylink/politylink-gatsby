@@ -12,7 +12,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import {getMemberDescription} from "../utils/seoutils";
 import LinkCard from "../components/linkCard";
-import {sortActivityList} from "../utils/sortutils";
+import {sortActivityList, sortMemberUrlList} from "../utils/sortutils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import Share from "../components/share";
 import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
@@ -28,6 +28,7 @@ export default function Member({data}) {
     const house = member.house === 'REPRESENTATIVES' ? '衆' : '参'
     const tags = [house].concat(member.tags)
     const activityList = sortActivityList(member.activities)
+    const urlList = sortMemberUrlList(member.urls)
 
     return (
         <Layout>
@@ -55,12 +56,12 @@ export default function Member({data}) {
 
                     <div className={styles.section}>
                         <FlexContainer
-                            title={"公式リンク"}
+                            title={"リンク"}
                         >
                             {member.website &&
                             <LinkCard href={member.website} title={'公式サイト'} domain={formatDomain(member.website)}/>
                             }
-                            {member.urls.map((url) => {
+                            {urlList.map((url) => {
                                 return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
                             })}
                         </FlexContainer>
@@ -77,17 +78,18 @@ export default function Member({data}) {
                             sizeLimit={3}
                         >
                             {activityList.map((activity) => {
+                                const urlList = sortActivityUrlList(activity.urls)
                                 if (activity.minutes != null) {
                                     return <MinutesActivityCard
                                         datetime={activity.datetime}
                                         minutes={activity.minutes}
-                                        urls={activity.urls}
+                                        urls={urlList}
                                     />
                                 } else if (activity.bill != null) {
                                     return <BillActivityCard
                                         datetime={activity.datetime}
                                         bill={activity.bill}
-                                        urls={activity.urls}
+                                        urls={urlList}
                                     />
                                 } else {
                                     return null;

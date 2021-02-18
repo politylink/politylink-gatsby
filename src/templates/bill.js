@@ -74,7 +74,7 @@ export default function Bill({data}) {
 
                     <div className={styles.section}>
                         <FlexContainer
-                            title={"公式リンク"}
+                            title={"リンク"}
                         >
                             {urlList.map((url) => {
                                 return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
