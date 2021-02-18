@@ -15,12 +15,22 @@ export const sortActivityList = (activityList) => {
 }
 
 export const sortBillUrlList = (urlList) => {
-    const titleOrder = ["本文", "議案情報", "経過", "概要PDF", "新旧対照表PDF"]
+    const titleOrder = ["本文", "議案情報", "経過", "概要", "概要PDF", "新旧対照表PDF"]
     return sortUrlList(urlList, titleOrder)
 }
 
 export const sortMinutesUrlList = (urlList) => {
-    const titleOrder = ["審議中継", "本文", "概要PDF", "質疑項目", "委員会経過", "国会審議映像検索システム", "自動文字起こし"]
+    const titleOrder = ["本文", "審議中継", "概要PDF", "質疑項目", "委員会経過", "国会審議映像検索システム", "自動文字起こし"]
+    return sortUrlList(urlList, titleOrder)
+}
+
+export const sortMemberUrlList = (urlList) => {
+    const titleOrder = ["議員情報", "国会審議映像検索システム"]
+    return sortUrlList(urlList, titleOrder)
+}
+
+export const sortActivityUrlList = (urlList) => {
+    const titleOrder = ["本文", "審議中継"]
     return sortUrlList(urlList, titleOrder)
 }
 
