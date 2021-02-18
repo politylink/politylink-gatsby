@@ -66,8 +66,8 @@ export default class App extends React.Component {
         this.setState({date: value});
     }
 
-    handleFilterClick() {
-        const newVal = !this.state.filterPassed
+    handleFilterClick(event) {
+        const newVal = event.target.checked
         typeof window !== 'undefined' && localStorage.setItem(CALENDAR_PASSED_KEY, newVal.toString());
         this.setState({filterPassed: newVal})
     }

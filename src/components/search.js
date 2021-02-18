@@ -18,7 +18,7 @@ export const SearchFilter = (props) => {
         <label className={styles.filter}>
             <input
                 type="checkbox"
-                defaultChecked={props.checked}
+                checked={props.checked}
                 onChange={props.handleChange}
             />
             {props.label}

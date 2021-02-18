@@ -23,12 +23,13 @@ export default class App extends React.Component {
     }
 
     handleTextInput(event) {
-        typeof window !== 'undefined' && localStorage.setItem(BILL_QUERY_KEY, event.target.value);
-        this.setState({filterText: event.target.value});
+        const newVal = event.target.value
+        typeof window !== 'undefined' && localStorage.setItem(BILL_QUERY_KEY, newVal);
+        this.setState({filterText: newVal});
     }
 
-    handleFilterClick() {
-        const newVal = !this.state.filterPassed
+    handleFilterClick(event) {
+        const newVal = event.target.checked
         typeof window !== 'undefined' && localStorage.setItem(BILL_PASSED_KEY, newVal.toString());
         this.setState({filterPassed: newVal})
     }
