@@ -74,6 +74,7 @@ export default class App extends React.Component {
                             isPassed={bill.isPassed}
                             hasNews={bill.totalNews > 0}
                             to={buildPath(bill.id)}
+                            key={bill.id}
                         />;
                     })}
                 </FlexContainer>
