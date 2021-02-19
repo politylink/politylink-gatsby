@@ -39,7 +39,7 @@ export default function Landing() {
                         <img className={styles.contentImage} src={"/content_timeline.png"} alt={"国会タイムライン"} width={464}
                              height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
-                            <Link to={"/timelines"} className={styles.contentLink}>
+                            <Link to='/timelines' className={styles.contentLink}>
                                 <h4 className={styles.h4}>
                                     <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 国会タイムライン
                                 </h4>
@@ -56,7 +56,7 @@ export default function Landing() {
                         <img className={styles.contentImage} src={"/content_bill.png"} alt={"法律案ページ"} width={464}
                              height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
-                            <Link to={"/bills"} className={styles.contentLink}>
+                            <Link to='/bills' className={styles.contentLink}>
                                 <h4 className={styles.h4}>
                                     <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 法律案ページ
                                 </h4>
@@ -76,7 +76,7 @@ export default function Landing() {
                         <img className={styles.contentImage} src={"/content_member.png"} alt={"議員ページ"} width={464}
                              height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
-                            <Link to={"/members"} className={styles.contentLink}>
+                            <Link to='/members' className={styles.contentLink}>
                                 <h4 className={styles.h4}>
                                     <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 議員ページ
                                 </h4>
@@ -93,7 +93,7 @@ export default function Landing() {
                         <img className={styles.contentImage} src={"/content_calender.png"} alt={"法律案カレンダー"} width={464}
                              height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
-                            <Link to={"/calender"} className={styles.contentLink}>
+                            <Link to='/calender' className={styles.contentLink}>
                                 <h4 className={styles.h4}>
                                     <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 法律案カレンダー
                                 </h4>
