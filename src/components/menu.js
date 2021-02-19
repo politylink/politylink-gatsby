@@ -1,4 +1,5 @@
-import {slide as Menu} from 'react-burger-menu'
+import {slide as Menu} from "react-burger-menu";
+import {Link} from "gatsby";
 import React from "react";
 
 const styles = {
@@ -49,13 +50,13 @@ const styles = {
 export default function HamburgerMenu() {
     return (
         <Menu right noOverlay styles={styles}>
-            <a className="menu-item" href="/bills">法律案一覧</a>
-            <a className="menu-item" href="/members">議員一覧</a>
-            <a className="menu-item" href="/committees">委員会一覧</a>
-            <a className="menu-item" href="/timelines">国会タイムライン</a>
-            <a className="menu-item" href="/calender">法律案カレンダー</a>
-            <a className="menu-item" href="/articles">開発者ブログ</a>
-            <a className="menu-item" href="/about">PolityLinkについて</a>
+            <Link to='/bills' className='menu-item'>法律案一覧</Link>
+            <Link to='/members' className='menu-item'>議員一覧</Link>
+            <Link to='/committees' className='menu-item'>委員会一覧</Link>
+            <Link to='/timelines' className='menu-item'>国会タイムライン</Link>
+            <Link to='/calender' className='menu-item'>法律案カレンダー</Link>
+            <Link to='/articles' className='menu-item'>開発者ブログ</Link>
+            <Link to='/about' className='menu-item'>PolityLinkについて</Link>
         </Menu>
     );
 }
