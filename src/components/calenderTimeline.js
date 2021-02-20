@@ -25,12 +25,12 @@ export const CalenderTimeline = props => {
             <TimelineHeaders>
                 <SidebarHeader>
                     {({ getRootProps }) => {
-                        return <div {...getRootProps()} style={{ "margin": "auto" }}><span>第{props.round}回国会審議法律案</span></div>
+                        return <div {...getRootProps()} style={{ "margin": "auto", "text-align": "center", "width": "400px" }}><span>第{props.round}回国会審議法律案</span></div>
                     }}
                 </SidebarHeader>
                 <SidebarHeader variant="right">
                     {({ getRootProps }) => {
-                        return <div {...getRootProps()} style={{ "margin": "auto" }}>期間</div>
+                        return <div {...getRootProps()} style={{ "margin": "auto", "text-align": "center", "width": "70px" }}>日数</div>
                     }}
                 </SidebarHeader>
                 <DateHeader unit="primaryHeader" />
