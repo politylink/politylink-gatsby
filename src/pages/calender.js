@@ -26,10 +26,10 @@ export const appearAfterRoundStart = (bill, roundStartDate) => {
 export const getGroups = (bills) => {
     return bills
         .map((bill, index) => {
-            const deliberationPeriod = bill.proclaimedDate ? (toJsDate(bill.proclaimedDate) - toJsDate(bill.submittedDate)) / 86400000 + "日" : "未公布"
+            const rightTitle = bill.isPassed ? "成立" : "審議中";
             const startDate = toJsDate(bill.submittedDate);
             const endDate = toJsDate(bill.proclaimedDate);
-            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: deliberationPeriod, startDate: startDate, endDate: endDate, proclaimed: bill.proclaimedDate, billType: getType(bill), category: bill.category }
+            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: rightTitle, startDate: startDate, endDate: endDate, proclaimed: bill.proclaimedDate, billType: getType(bill), category: bill.category, isPassed: bill.isPassed }
         });
 }
 
@@ -86,7 +86,7 @@ export default class App extends React.Component {
         let groupRenderer = ({ group, isRightSidebar }) => {
             if (isRightSidebar) {
                 return (
-                    <div style={{"color": group.proclaimed ? "black" : "gray"}}>
+                    <div style={{"color": group.isPassed ? "black" : "gray"}}>
                         {group.rightTitle}
                     </div>
                 )

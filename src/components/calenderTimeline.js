@@ -30,7 +30,7 @@ export const CalenderTimeline = props => {
                 </SidebarHeader>
                 <SidebarHeader variant="right">
                     {({ getRootProps }) => {
-                        return <div {...getRootProps()} style={{ "margin": "auto", "text-align": "center", "width": "70px" }}>日数</div>
+                        return <div {...getRootProps()} style={{ "margin": "auto", "text-align": "center", "width": "70px" }}>審議状況</div>
                     }}
                 </SidebarHeader>
                 <DateHeader unit="primaryHeader" />
