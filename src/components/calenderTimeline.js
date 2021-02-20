@@ -15,7 +15,7 @@ export const CalenderTimeline = props => {
             items={props.items}
             defaultTimeStart={props.defaultTimeStart.getTime()}
             defaultTimeEnd={props.defaultTimeEnd.getTime()}
-            sidebarWidth={210}
+            sidebarWidth={400}
             rightSidebarWidth={70}
             traditionalZoom={true}
             lineHeight={25}

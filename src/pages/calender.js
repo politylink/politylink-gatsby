@@ -110,7 +110,7 @@ export default class App extends React.Component {
         return (
             <Layout>
                 <SEO title={getCalenderTimelineTitle()} description={getCalenderTimelineDescription()}/>
-                <Container>
+                <div style={{maxWidth: `1080px`, margin:  `0 auto`}}>
                 <div className="calendar-title">
                     <p style={{ textAlign: `center`, fontWeight: `bold` }}>法律案カレンダー</p>
                 </div>
@@ -144,7 +144,7 @@ export default class App extends React.Component {
                             round={latestRound}
                         />
                     </div>
-                </Container>
+                </div>
             </Layout>
         )
     }
