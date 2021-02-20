@@ -4,7 +4,6 @@ import {buildPath} from "../utils/urlutils";
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import {getCalenderTimelineTitle, getCalenderTimelineDescription} from "../utils/seoutils";
-import {Container} from "../components/container";
 import {CalenderTimeline} from "../components/calenderTimeline";
 import {toJsDate} from "../utils/dateutils"
 import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
