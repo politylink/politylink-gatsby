@@ -26,10 +26,15 @@ export const appearAfterRoundStart = (bill, roundStartDate) => {
 export const getGroups = (bills) => {
     return bills
         .map((bill, index) => {
-            const rightTitle = bill.isPassed ? "成立" : "審議中";
+            const rightTitle = bill.isPassed ? "成立" :
+                bill.passedRepresentativesDate ? "衆議院可決" :
+                    bill.passedCouncilorsDate ? "参議院可決" : "提出";
+            const rightColor = bill.isPassed ? "#c27ba0ff" :
+            bill.passedRepresentativesDate ? "#6d9eebff" :
+                bill.passedCouncilorsDate ? "#8e7cc3ff" : "grey";
             const startDate = toJsDate(bill.submittedDate);
             const endDate = toJsDate(bill.proclaimedDate);
-            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: rightTitle, startDate: startDate, endDate: endDate, proclaimed: bill.proclaimedDate, billType: getType(bill), category: bill.category, isPassed: bill.isPassed }
+            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: rightTitle, startDate: startDate, endDate: endDate, proclaimed: bill.proclaimedDate, billType: getType(bill), category: bill.category, isPassed: bill.isPassed, rightColor: rightColor }
         });
 }
 
@@ -86,8 +91,10 @@ export default class App extends React.Component {
         let groupRenderer = ({ group, isRightSidebar }) => {
             if (isRightSidebar) {
                 return (
-                    <div style={{"color": group.isPassed ? "black" : "gray"}}>
-                        {group.rightTitle}
+                    <div style={{"textAlign": "left"}}>
+                        <span style={{ "color": group.rightColor, "fontWeight": "bold" }}>
+                            {group.rightTitle}
+                        </span>
                     </div>
                 )
             } else {
