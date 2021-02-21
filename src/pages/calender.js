@@ -29,11 +29,22 @@ export const getGroups = (bills) => {
                 bill.passedRepresentativesDate ? "衆議院可決" :
                     bill.passedCouncilorsDate ? "参議院可決" : "提出";
             const rightColor = bill.isPassed ? "#c27ba0ff" :
-            bill.passedRepresentativesDate ? "#6d9eebff" :
-                bill.passedCouncilorsDate ? "#8e7cc3ff" : "grey";
+                bill.passedRepresentativesDate ? "#6d9eebff" :
+                    bill.passedCouncilorsDate ? "#8e7cc3ff" : "grey";
             const startDate = toJsDate(bill.submittedDate);
             const endDate = toJsDate(bill.proclaimedDate);
-            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: rightTitle, startDate: startDate, endDate: endDate, proclaimed: bill.proclaimedDate, billType: getType(bill), category: bill.category, isPassed: bill.isPassed, rightColor: rightColor }
+            return {
+                id: index,
+                title: bill.name,
+                internalId: bill.id,
+                tip: bill.billNumber,
+                rightTitle: rightTitle,
+                rightColor: rightColor,
+                startDate: startDate,
+                endDate: endDate,
+                billType: getType(bill),
+                category: bill.category,
+            }
         });
 }
 
