@@ -38,7 +38,7 @@ export const CalenderTimeline = props => {
                 unit="month"
                 labelFormat="M月"
                 height={40}
-                intervalRenderer={({ getIntervalProps, intervalContext}) => {
+                intervalRenderer={({ getIntervalProps, intervalContext }) => {
                     return <div {...getIntervalProps()} className="rct-dateHeader">
                     {intervalContext.intervalText}
                     </div>
