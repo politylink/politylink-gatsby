@@ -1,14 +1,13 @@
 import React from "react"
 import { graphql, Link } from 'gatsby'
-import {buildPath} from "../utils/urlutils";
-import SEO from "../components/seo"
-import Layout from "../components/layout"
-import {getCalenderTimelineTitle, getCalenderTimelineDescription} from "../utils/seoutils";
-import {Container} from "../components/container";
-import {CalenderTimeline} from "../components/calenderTimeline";
-import {toJsDate} from "../utils/dateutils"
-import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
-import {SearchFilter} from "../components/search"
+import {buildPath} from "../../utils/urlutils";
+import SEO from "../../components/seo"
+import Layout from "../../components/layout"
+import {getCalendarTimelineTitle, getCalendarTimelineDescription} from "../../utils/seoutils";
+import {CalendarTimeline} from "../../components/billsCalendarTimeline";
+import {toJsDate} from "../../utils/dateutils"
+import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../../utils/constants";
+import {SearchFilter} from "../../components/search"
 import ReactTooltip from 'react-tooltip';
 
 export const getType = (bill) => {
@@ -26,10 +25,26 @@ export const appearAfterRoundStart = (bill, roundStartDate) => {
 export const getGroups = (bills) => {
     return bills
         .map((bill, index) => {
-            const deliberationPeriod = bill.proclaimedDate ? (toJsDate(bill.proclaimedDate) - toJsDate(bill.submittedDate)) / 86400000 + "日" : "未公布"
+            const rightTitle = bill.isPassed ? "成立" :
+                bill.passedRepresentativesDate ? "衆議院可決" :
+                    bill.passedCouncilorsDate ? "参議院可決" : "提出";
+            const rightColor = bill.isPassed ? "#c27ba0ff" :
+                bill.passedRepresentativesDate ? "#6d9eebff" :
+                    bill.passedCouncilorsDate ? "#8e7cc3ff" : "grey";
             const startDate = toJsDate(bill.submittedDate);
             const endDate = toJsDate(bill.proclaimedDate);
-            return { id: index, title: bill.name, internalId: bill.id, tip: bill.billNumber, rightTitle: deliberationPeriod, startDate: startDate, endDate: endDate, proclaimed: bill.proclaimedDate, billType: getType(bill), category: bill.category }
+            return {
+                id: index,
+                title: bill.name,
+                internalId: bill.id,
+                tip: bill.billNumber,
+                rightTitle: rightTitle,
+                rightColor: rightColor,
+                startDate: startDate,
+                endDate: endDate,
+                billType: getType(bill),
+                category: bill.category,
+            }
         });
 }
 
@@ -86,8 +101,10 @@ export default class App extends React.Component {
         let groupRenderer = ({ group, isRightSidebar }) => {
             if (isRightSidebar) {
                 return (
-                    <div style={{"color": group.proclaimed ? "black" : "gray"}}>
-                        {group.rightTitle}
+                    <div style={{"textAlign": "left"}}>
+                        <span style={{ "color": group.rightColor, "fontWeight": "bold" }}>
+                            {group.rightTitle}
+                        </span>
                     </div>
                 )
             } else {
@@ -109,8 +126,8 @@ export default class App extends React.Component {
 
         return (
             <Layout>
-                <SEO title={getCalenderTimelineTitle()} description={getCalenderTimelineDescription()}/>
-                <Container>
+                <SEO title={getCalendarTimelineTitle()} description={getCalendarTimelineDescription()}/>
+                <div style={{maxWidth: `1080px`, margin:  `0 auto`}}>
                 <div className="calendar-title">
                     <p style={{ textAlign: `center`, fontWeight: `bold` }}>法律案カレンダー</p>
                 </div>
@@ -134,7 +151,7 @@ export default class App extends React.Component {
                     </div>
                 </div>
                     <div style={{ textAlign: `right`, margin: `10px 0 10px`, padding: `0` }}>
-                        <CalenderTimeline
+                        <CalendarTimeline
                             onChange={this.onChange}
                             groups={groups}
                             items={items}
@@ -144,7 +161,7 @@ export default class App extends React.Component {
                             round={latestRound}
                         />
                     </div>
-                </Container>
+                </div>
             </Layout>
         )
     }

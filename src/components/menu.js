@@ -54,7 +54,7 @@ export default function HamburgerMenu() {
             <Link to='/members' className='menu-item'>議員一覧</Link>
             <Link to='/committees' className='menu-item'>委員会一覧</Link>
             <Link to='/timelines' className='menu-item'>国会タイムライン</Link>
-            <Link to='/calender' className='menu-item'>法律案カレンダー</Link>
+            <Link to='/bills/calendar' className='menu-item'>法律案カレンダー</Link>
             <Link to='/articles' className='menu-item'>開発者ブログ</Link>
             <Link to='/about' className='menu-item'>PolityLinkについて</Link>
         </Menu>

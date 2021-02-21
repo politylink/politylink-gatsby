@@ -4,7 +4,7 @@ import {formatJsDate, toJsDate} from "../utils/dateutils";
 import React from "react";
 import classNames from 'classnames';
 import Calendar from "react-calendar";
-import "./calendar.css";
+import "./timelineCalendar.css";
 
 export const setDietDate = ({date, view}, dietDates) => {
     const fDate = formatJsDate(date, "/")
