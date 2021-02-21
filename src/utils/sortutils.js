@@ -20,7 +20,7 @@ export const sortBillUrlList = (urlList) => {
 }
 
 export const sortMinutesUrlList = (urlList) => {
-    const titleOrder = ["本文", "審議中継", "概要PDF", "質疑項目", "委員会経過", "国会審議映像検索システム", "自動文字起こし"]
+    const titleOrder = ["本文", "審議中継", "国会審議映像検索システム", "概要PDF", "質疑項目", "委員会経過", "自動文字起こし"]
     return sortUrlList(urlList, titleOrder)
 }
 
