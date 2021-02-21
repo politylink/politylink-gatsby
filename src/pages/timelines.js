@@ -4,7 +4,7 @@ import SEO from "../components/seo"
 import Layout from "../components/layout"
 import {getTimelinesDescription, getTimelinesTitle} from "../utils/seoutils";
 import {Container} from "../components/container";
-import {TimelineCalendar} from "../components/calendar";
+import {TimelineCalendar} from "../components/timelineCalendar";
 import {formatDate} from "../utils/dateutils"
 import {CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
 

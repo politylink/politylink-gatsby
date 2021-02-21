@@ -6,9 +6,9 @@ import Timeline, {
     SidebarHeader,
     TimelineHeaders
   } from "react-calendar-timeline";
-import "./calenderTimeline.css"
+import "./billsCalendarTimeline.css"
 
-export const CalenderTimeline = props => {
+export const CalendarTimeline = props => {
     return (
         <Timeline
             groups={props.groups}

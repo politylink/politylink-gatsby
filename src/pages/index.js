@@ -90,10 +90,10 @@ export default function Landing() {
                         </div>
                     </div>
                     <div className={styles.content}>
-                        <img className={styles.contentImage} src={"/content_calender.png"} alt={"法律案カレンダー"} width={464}
+                        <img className={styles.contentImage} src={"/content_calendar.png"} alt={"法律案カレンダー"} width={464}
                              height={485} loading="lazy" decoding="async"/>
                         <div className={styles.contentText}>
-                            <Link to='/calender' className={styles.contentLink}>
+                            <Link to='/bills/calendar' className={styles.contentLink}>
                                 <h4 className={styles.h4}>
                                     <FontAwesomeIcon icon="arrow-circle-right" size="lg" color="#174a5c"/> 法律案カレンダー
                                 </h4>

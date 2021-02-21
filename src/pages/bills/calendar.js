@@ -1,13 +1,13 @@
 import React from "react"
 import { graphql, Link } from 'gatsby'
-import {buildPath} from "../utils/urlutils";
-import SEO from "../components/seo"
-import Layout from "../components/layout"
-import {getCalenderTimelineTitle, getCalenderTimelineDescription} from "../utils/seoutils";
-import {CalenderTimeline} from "../components/calenderTimeline";
-import {toJsDate} from "../utils/dateutils"
-import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
-import {SearchFilter} from "../components/search"
+import {buildPath} from "../../utils/urlutils";
+import SEO from "../../components/seo"
+import Layout from "../../components/layout"
+import {getCalendarTimelineTitle, getCalendarTimelineDescription} from "../../utils/seoutils";
+import {CalendarTimeline} from "../../components/billsCalendarTimeline";
+import {toJsDate} from "../../utils/dateutils"
+import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../../utils/constants";
+import {SearchFilter} from "../../components/search"
 import ReactTooltip from 'react-tooltip';
 
 export const getType = (bill) => {
@@ -126,7 +126,7 @@ export default class App extends React.Component {
 
         return (
             <Layout>
-                <SEO title={getCalenderTimelineTitle()} description={getCalenderTimelineDescription()}/>
+                <SEO title={getCalendarTimelineTitle()} description={getCalendarTimelineDescription()}/>
                 <div style={{maxWidth: `1080px`, margin:  `0 auto`}}>
                 <div className="calendar-title">
                     <p style={{ textAlign: `center`, fontWeight: `bold` }}>法律案カレンダー</p>
@@ -151,7 +151,7 @@ export default class App extends React.Component {
                     </div>
                 </div>
                     <div style={{ textAlign: `right`, margin: `10px 0 10px`, padding: `0` }}>
-                        <CalenderTimeline
+                        <CalendarTimeline
                             onChange={this.onChange}
                             groups={groups}
                             items={items}
