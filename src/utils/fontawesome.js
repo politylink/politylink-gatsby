@@ -11,7 +11,9 @@ import {
     faPlus,
     faUser,
     faMicrophone,
-    faStickyNote
+    faStickyNote,
+    faFilePdf,
+    faVideo
 } from "@fortawesome/free-solid-svg-icons";
 
 // Prevent fontawesome from dynamically adding its css since
@@ -30,5 +32,7 @@ library.add(
     faAngleDown,
     faAngleUp,
     faMicrophone,
-    faStickyNote
+    faStickyNote,
+    faFilePdf,
+    faVideo
 );
