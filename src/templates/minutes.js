@@ -26,10 +26,31 @@ import ParentPath from "../components/parentPath";
 
 
 export default function Minutes({data}) {
+
+    const getMemberCards = (minutes) => {
+        if (minutes.speakers != null) {
+            return minutes.speakers.map((text, index) => {
+                const name = text.split('(')[0]
+                const id = minutes.speakerIds[index]
+                return id ? <MemberCard title={name} to={buildPath(id)}/> : null;
+            }).filter(e => e);
+        }
+
+        // ToDo: remove after backfilling minutes.speakers
+        if (minutes.beAttendedByMembers != null) {
+            return minutes.beAttendedByMembers.map((member) => {
+                return <MemberCard title={member.name} to={buildPath(member.id)}/>;
+            })
+        }
+
+        return [];
+    }
+
     const minutes = data.politylink.Minutes[0]
     const newsList = sortNewsList(minutes.news)
     const urlList = sortMinutesUrlList(minutes.urls)
     const committeePath = minutes.belongedToCommittee === null ? null : buildPath(minutes.belongedToCommittee.id)
+    const memberCards = getMemberCards(minutes)
 
     return (
         <Layout>
@@ -80,19 +101,14 @@ export default function Minutes({data}) {
                         </FlexContainer>
                     </div>
 
-                    {minutes.beAttendedByMembers.length > 0 &&
+                    {memberCards.length > 0 &&
                     <div className={styles.section}>
                         <ExpandableContainer
-                            title={"発言者"}
+                            title={minutes.speakers != null ? "説明・質疑者" : "発言者"}
                             localStorageKey={EXPAND_MEMBER_KEY}
                             sizeLimit={7}
                         >
-                            {minutes.beAttendedByMembers.map((member) => {
-                                return <MemberCard
-                                    title={member.name}
-                                    to={buildPath(member.id)}
-                                />;
-                            })}
+                            {memberCards}
                         </ExpandableContainer>
                     </div>}
                 </Container>
@@ -155,6 +171,8 @@ export const query = graphql`
                 name
                 summary
                 topics
+                speakers
+                speakerIds
                 urls{
                     url
                     title
