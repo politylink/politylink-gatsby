@@ -44,12 +44,25 @@
     background-color: teal;
 }
 
+.body {
+    display: flex;
+    margin: 5px 10px;
+}
+
+.wordcloud {
+    width: 25%;
+    min-width: 120px;
+    height: 100px;
+    object-fit: cover;
+}
+
 .topics {
-    margin: 10px 20px;
+    width: 75%;
+    margin: 0 5px 0 20px;
     padding: 0;
 }
 
 .topic {
     font-size: small;
-    margin: 0 1.5rem;
+    margin: 0;
 }

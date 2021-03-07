@@ -58,6 +58,7 @@ export default function Committee({data}) {
                                     topics={minutes.topics}
                                     hasNews={minutes.totalNews > 0}
                                     date={formatDateWithDay(minutes.startDateTime)}
+                                    wordcloud={minutes.wordcloud}
                                 />
                             })}
                         </ExpandableContainer>
@@ -85,6 +86,7 @@ export const query = graphql`
                     id
                     name
                     topics
+                    wordcloud
                     totalNews
                     startDateTime{ year, month, day, formatted }
                 }

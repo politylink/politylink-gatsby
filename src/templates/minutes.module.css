@@ -34,3 +34,12 @@
 .section {
     margin: 5px 10px 25px 10px;
 }
+
+.wordcloud {
+    margin: 0 auto;
+    display: block;
+    width: 90%;
+    max-width: 500px;
+    object-fit: cover;
+    border-radius: 5%;
+}

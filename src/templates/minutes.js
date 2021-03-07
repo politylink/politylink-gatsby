@@ -75,6 +75,13 @@ export default function Minutes({data}) {
                         </Container>
                     </div>
 
+                    {minutes.wordcloud != null &&
+                    <div className={styles.section}>
+                        <Container>
+                            <img className={styles.wordcloud} src={minutes.wordcloud} alt={minutes.id}/>
+                        </Container>
+                    </div>}
+
                     <div className={styles.section}>
                         <Container className={styles.section}>
                             <div className={styles.summary}>
@@ -173,6 +180,7 @@ export const query = graphql`
                 topics
                 speakers
                 speakerIds
+                wordcloud
                 urls{
                     url
                     title
