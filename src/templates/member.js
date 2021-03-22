@@ -84,6 +84,7 @@ export default function Member({data}) {
                                         datetime={activity.datetime}
                                         minutes={activity.minutes}
                                         urls={urlList}
+                                        keyphrases={activity.keyphrases}
                                     />
                                 } else if (activity.bill != null) {
                                     return <BillActivityCard
@@ -153,6 +154,7 @@ export const query = graphql`
                         url
                         title
                     }
+                    keyphrases
                 }
             }
         }
