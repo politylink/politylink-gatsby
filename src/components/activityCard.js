@@ -9,9 +9,7 @@ export const MinutesActivityCard = (props) => {
     return (<p className={styles.activity}>
         {formatDate(props.datetime)}
         <div>
-            {' '}
-            <FontAwesomeIcon icon="microphone" size="sm"/>
-            {' '}
+            &nbsp;<FontAwesomeIcon icon="microphone" size="sm"/>{' '}
             <Link className={styles.link}
                   to={buildPath(props.minutes.id)}>{props.minutes.name}</Link>
             で発言しました
@@ -32,9 +30,7 @@ export const MinutesActivityCard = (props) => {
 export const BillActivityCard = (props) => {
     return (<p className={styles.activity}>
         {formatDate(props.datetime)}
-        {' '}
-        <FontAwesomeIcon icon="sticky-note" size="sm"/>
-        {' '}
+        {' '}<FontAwesomeIcon icon="sticky-note" size="sm"/>{' '}
         <Link className={styles.link}
               to={buildPath(props.bill.id)}>{props.bill.name}</Link>
         を提出しました
