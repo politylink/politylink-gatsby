@@ -54,6 +54,8 @@ export default class App extends React.Component {
                         {filteredMembers.map((member) => {
                             return <MemberCard
                                 title={member.name}
+                                id={member.id}
+                                key={member.id}
                                 to={buildPath(member.id)}
                             />;
                         })}

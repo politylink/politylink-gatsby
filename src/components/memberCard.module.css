@@ -19,6 +19,13 @@
     justify-content: center;
 }
 
+.image {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .title {
     height: 40%;
     text-align: center;
