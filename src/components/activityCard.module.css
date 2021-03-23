@@ -1,7 +1,12 @@
-.activity {
+.minutes_activity {
     width: 100%;
     margin: 3px 20px;
     display: flex;
+}
+
+.bill_activity {
+    width: 100%;
+    margin: 3px 20px;
 }
 
 .link {

@@ -6,7 +6,7 @@ import {Link} from "gatsby";
 import {buildPath} from "../utils/urlutils";
 
 export const MinutesActivityCard = (props) => {
-    return (<p className={styles.activity}>
+    return (<p className={styles.minutes_activity}>
         {formatDate(props.datetime)}
         <div>
             &nbsp;<FontAwesomeIcon icon="microphone" size="sm"/>{' '}
@@ -28,7 +28,7 @@ export const MinutesActivityCard = (props) => {
 }
 
 export const BillActivityCard = (props) => {
-    return (<p className={styles.activity}>
+    return (<p className={styles.bill_activity}>
         {formatDate(props.datetime)}
         {' '}<FontAwesomeIcon icon="sticky-note" size="sm"/>{' '}
         <Link className={styles.link}
