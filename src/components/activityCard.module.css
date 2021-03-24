@@ -1,15 +1,14 @@
-.minutes_activity {
+.activity {
     width: 100%;
     margin: 3px 20px;
     display: flex;
 }
 
-.bill_activity {
-    width: 100%;
-    margin: 3px 20px;
-}
-
 .link {
     color: #333
+}
+
+.keyphrases {
+    font-size: 0.8rem;
 }
 
