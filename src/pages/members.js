@@ -12,7 +12,6 @@ import {isMatch} from "../utils/searchutils";
 import {getMembersDescription} from "../utils/seoutils";
 import styles from "./members.module.css"
 
-
 export default class App extends React.Component {
     constructor(props) {
         super(props)
@@ -51,15 +50,16 @@ export default class App extends React.Component {
                 </FlexContainer>
                 <div className={styles.container}>
                     <FlexContainer>
-                        {filteredMembers.map((member) => {
-                            return <MemberCard
-                                title={member.name}
-                                id={member.id}
-                                key={member.id}
-                                tags={member.tags}
-                                to={buildPath(member.id)}
-                            />;
-                        })}
+                            {filteredMembers.map((member) => {
+                                return <MemberCard
+                                    title={member.name}
+                                    id={member.id}
+                                    key={member.id}
+                                    tags={member.tags}
+                                    house={member.house}
+                                    to={buildPath(member.id)}
+                                />;
+                            })}
                     </FlexContainer>
                 </div>
             </Layout>
@@ -75,6 +75,7 @@ export const query = graphql`
                 name
                 nameHira
                 tags
+                house
             }
         }
     }
