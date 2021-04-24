@@ -32,14 +32,15 @@ export default function Minutes({data}) {
             return minutes.speakers.map((text, index) => {
                 const name = text.split('(')[0]
                 const id = minutes.speakerIds[index]
-                return id ? <MemberCard title={name} id={id} to={buildPath(id)}/> : null;
+                const tags = minutes.beAttendedByMembers.find(minute => minute.id === id).tags;
+                return id ? <MemberCard title={name} id={id} tags={tags} to={buildPath(id)}/> : null;
             }).filter(e => e);
         }
 
         // ToDo: remove after backfilling minutes.speakers
         if (minutes.beAttendedByMembers != null) {
             return minutes.beAttendedByMembers.map((member) => {
-                return <MemberCard title={member.name} id={member.id} to={buildPath(member.id)}/>;
+                return <MemberCard title={member.name} id={member.id} tags={member.tags} to={buildPath(member.id)}/>;
             })
         }
 
@@ -200,6 +201,7 @@ export const query = graphql`
                 beAttendedByMembers{
                     id
                     name
+                    tags
                 }
                 news {
                     id

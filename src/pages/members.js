@@ -56,6 +56,7 @@ export default class App extends React.Component {
                                 title={member.name}
                                 id={member.id}
                                 key={member.id}
+                                tags={member.tags}
                                 to={buildPath(member.id)}
                             />;
                         })}
