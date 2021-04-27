@@ -30,3 +30,22 @@ export const getTwitterScreenName = (url) => {
     const parts = url.split('/');
     return parts[parts.length - 1];
 }
+
+export const translateBillActionType = (type) => {
+    switch (type) {
+        case 'BILL_EXPLANATION':
+            return '趣旨説明'
+        case 'AMENDMENT_EXPLANATION':
+            return '修正案趣旨説明'
+        case 'SUPPLEMENTARY_EXPLANATION':
+            return '附帯決議趣旨説明'
+        case 'QUESTION':
+            return '質疑'
+        case 'DEBATE':
+            return '討論'
+        case 'VOTE':
+            return '採決'
+        case 'REPORT':
+            return '委員長報告'
+    }
+}

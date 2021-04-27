@@ -51,3 +51,11 @@ const sortIntAsc = (list, mapFunc) => {
         return mapFunc(a) - mapFunc(b);
     })
 }
+
+export const sortBillActions = (billActions) => {
+    const typeOrder = ["REPORT", "BILL_EXPLANATION", "AMENDMENT_EXPLANATION",
+        "SUPPLEMENTARY_EXPLANATION", "QUESTION", "DEBATE", "VOTE"]
+    const weightMap = new Map(typeOrder.map((x, i) => [x, i + 1]))
+    const mapFunc = billAction => weightMap.get(billAction.type) || Number.MAX_SAFE_INTEGER
+    return sortIntAsc(billActions, mapFunc)
+}
