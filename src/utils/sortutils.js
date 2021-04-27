@@ -52,10 +52,12 @@ const sortIntAsc = (list, mapFunc) => {
     })
 }
 
+const extractOrder = (urls) => {
+    return parseInt(urls[0].url.split('/').slice(-1)[0])
+}
+
 export const sortBillActions = (billActions) => {
-    const typeOrder = ["REPORT", "BILL_EXPLANATION", "AMENDMENT_EXPLANATION",
-        "SUPPLEMENTARY_EXPLANATION", "QUESTION", "DEBATE", "VOTE"]
-    const weightMap = new Map(typeOrder.map((x, i) => [x, i + 1]))
-    const mapFunc = billAction => weightMap.get(billAction.type) || Number.MAX_SAFE_INTEGER
+    const mapFunc = billAction => extractOrder(billAction.urls)
     return sortIntAsc(billActions, mapFunc)
 }
+
