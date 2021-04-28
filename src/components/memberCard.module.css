@@ -23,7 +23,6 @@
     height: 40px;
     width: 40px;
     object-fit: cover;
-    border-radius: 50%;
 }
 
 .title {
@@ -46,4 +45,5 @@
     padding: 0;
     font-size: 0.6rem;
     line-height: 0.6rem;
+    color: #ccc;
 }

@@ -13,13 +13,12 @@ export default function MemberCard(props) {
                     <img className={styles.image} src={buildImagePath(props.id)} alt={'顔写真'} />
                 </LazyLoad>
             </div>
-            {props.tags && <div>
-                <p className={styles.subtitletext}>{house}・{props.tags[0]}</p>
-            </div>}
             <div className={styles.title}>
                 <p className={styles.titletext}>{props.title}</p>
             </div>
-
+            {props.tags && <div>
+                <p className={styles.subtitletext}>{house}・{props.tags[0]}</p>
+            </div>}
         </Link>
     );
 }
