@@ -26,7 +26,7 @@
 }
 
 .title {
-    height: 35%;
+    height: 25%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -45,5 +45,5 @@
     padding: 0;
     font-size: 0.6rem;
     line-height: 0.6rem;
-    color: #ccc;
+    color: #777;
 }
