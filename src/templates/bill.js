@@ -159,7 +159,7 @@ export const query = graphql`
                     wordcloud
                     totalNews
                     startDateTime { year, month, day, formatted }
-                    billActions(filter:{belongedToBill:{id:$billId}}) { type, urls { url } }
+                    billActions(filter:{belongedToBill:{id:$billId}}) { type,  belongedToSpeech { orderInMinutes } }
                 }
                 news {
                     id

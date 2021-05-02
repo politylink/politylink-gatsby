@@ -52,12 +52,9 @@ const sortIntAsc = (list, mapFunc) => {
     })
 }
 
-const extractOrder = (urls) => {
-    return parseInt(urls[0].url.split('/').slice(-1)[0])
-}
-
 export const sortBillActions = (billActions) => {
-    const mapFunc = billAction => extractOrder(billAction.urls)
-    return sortIntAsc(billActions, mapFunc)
+    return billActions.sort((a, b) => {
+        return a.belongedToSpeech.orderInMinutes - b.belongedToSpeech.orderInMinutes
+    })
 }
 
