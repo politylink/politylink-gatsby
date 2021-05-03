@@ -46,15 +46,13 @@ const sortStrDesc = (list, mapFunc) => {
     })
 }
 
+export const sortBillActions = (billActions) => {
+    return sortIntAsc(billActions, billAction => billAction.belongedToSpeech.orderInMinutes)
+}
+
 const sortIntAsc = (list, mapFunc) => {
     return list.sort((a, b) => {
         return mapFunc(a) - mapFunc(b);
-    })
-}
-
-export const sortBillActions = (billActions) => {
-    return billActions.sort((a, b) => {
-        return a.belongedToSpeech.orderInMinutes - b.belongedToSpeech.orderInMinutes
     })
 }
 
