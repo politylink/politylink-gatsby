@@ -16,7 +16,7 @@ export default function MemberCard(props) {
             <div className={styles.title}>
                 <p className={styles.titletext}>{props.title}</p>
             </div>
-            {props.tags && <div>
+            {props.tags.length >= 1 && <div>
                 <p className={styles.subtitletext}>{house}・{props.tags[0]}</p>
             </div>}
         </Link>
