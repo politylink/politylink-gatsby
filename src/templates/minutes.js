@@ -32,8 +32,8 @@ export default function Minutes({data}) {
             return minutes.speakers.map((text, index) => {
                 const name = text.split('(')[0];
                 const id = minutes.speakerIds[index];
-                if (id) {
-                    const member = minutes.beAttendedByMembers.find(member => member.id === id);
+                const member = minutes.beAttendedByMembers.find(member => member.id === id);
+                if (member) {
                     return <MemberCard title={name} id={id} tags={member.tags} house={member.house} to={buildPath(id)}/>
                 } else {
                     return null;
