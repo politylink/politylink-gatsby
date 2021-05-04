@@ -58,7 +58,9 @@ export default function Bill({data}) {
     return (
         <Layout>
             <SEO title={bill.name} description={getBillDescription(bill)}/>
-            <SinglePaneContainer><ParentPath to={'/bills'} text={'法律案一覧'}/></SinglePaneContainer>
+            <SinglePaneContainer>
+                <ParentPath to={'/bills'} text={'法律案一覧'}/>
+            </SinglePaneContainer>
             <TwoPaneContainer>
                 <Container>
                     <div className={styles.section}>
@@ -100,6 +102,7 @@ export default function Bill({data}) {
                                     hasNews={minutes.totalNews > 0}
                                     date={formatDateWithDay(minutes.startDateTime)}
                                     wordcloud={minutes.wordcloud}
+                                    billActions={minutes.billActions}
                                 />
                             })}
                         </ExpandableContainer>
@@ -127,7 +130,9 @@ export default function Bill({data}) {
                     </div>}
                 </Container>}
             </TwoPaneContainer>
-            <SinglePaneContainer><Share title={bill.name} postPath={buildPath(bill.id)}/></SinglePaneContainer>
+            <SinglePaneContainer>
+                <Share title={bill.name} postPath={buildPath(bill.id)}/>
+            </SinglePaneContainer>
         </Layout>
     )
 }
@@ -154,6 +159,12 @@ export const query = graphql`
                     wordcloud
                     totalNews
                     startDateTime { year, month, day, formatted }
+                    billActions(filter:{belongedToBill:{id:$billId}}) {
+                        type
+                        belongedToSpeech {
+                            orderInMinutes
+                        }
+                    }
                 }
                 news {
                     id

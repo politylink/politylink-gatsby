@@ -11,15 +11,6 @@
     background: #fff;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.headerBadge {
-    display: flex;
-}
-
 .name {
     font-weight: bold;
     margin: 5px 5px 1px 5px;
@@ -32,16 +23,28 @@
 }
 
 .badge {
-    margin: 3px 1px auto 0;
+    margin: 3px 3px auto 0;
     padding: 0 5px;
     font-size: small;
-    text-align: right;
+    text-align: center;
 }
 
 .newsBadge {
     composes: badge;
     color: white;
     background-color: teal;
+}
+
+.header {
+    display: flex;
+    margin: 0 0 2px 0;
+    justify-content: flex-start
+}
+
+.billActionBadge {
+    composes: badge;
+    color: white;
+    background-color: #c27ba0ff;
 }
 
 .body {
