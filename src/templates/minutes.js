@@ -23,6 +23,7 @@ import {EXPAND_BILL_KEY, EXPAND_MEMBER_KEY, EXPAND_NEWS_KEY} from "../utils/cons
 import MemberCard from "../components/memberCard";
 import Share from "../components/share";
 import ParentPath from "../components/parentPath";
+import MinutesTimelineCard from "../components/minutesTimelineCard";
 
 
 export default function Minutes({data}) {
@@ -120,8 +121,20 @@ export default function Minutes({data}) {
                     </div>}
                 </Container>
 
-                {(minutes.discussedBills.length > 0 || newsList.length > 0) &&
+                {(minutes.discussedBills.length > 0 || newsList.length > 0 || minutes.billActions.length > 0) &&
                 <Container>
+                    {minutes.billActions.length > 0 &&
+                    <div className={styles.section}>
+                        <Container title={"タイムライン"}>
+                            <div className={styles.timeline}>
+                            <MinutesTimelineCard
+                                billActions={minutes.billActions}
+                            />
+                            </div>
+                        </Container>
+                    </div>
+                    }
+
                     {minutes.discussedBills.length > 0 &&
                     <div className={styles.section}>
                         <ExpandableContainer
@@ -200,6 +213,17 @@ export const query = graphql`
                 beAttendedByMembers{
                     id
                     name
+                }
+                billActions{
+                    type
+                    belongedToSpeech {
+                        orderInMinutes
+                        ndlUrl
+                    }
+                    belongedToBill {
+                        name
+                        id
+                    }
                 }
                 news {
                     id

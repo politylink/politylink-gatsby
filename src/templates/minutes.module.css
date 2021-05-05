@@ -43,3 +43,9 @@
     object-fit: cover;
     border-radius: 5%;
 }
+
+.timeline {
+    max-width: 800px;
+    max-height: 600px;
+    overflow: scroll;
+}
