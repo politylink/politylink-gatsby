@@ -1,5 +1,5 @@
 const {buildPath} = require(`./src/utils/urlutils`)
-const {toJsDate, formatDateWithDay} = require(`./src/utils/dateutils`)
+const {toJsDate, formatDateWithDay, formatDate} = require(`./src/utils/dateutils`)
 
 const path = require(`path`)
 
@@ -25,7 +25,7 @@ exports.createPages = async ({actions, graphql}) => {
             context: {
                 billId: id,
                 title: name,
-                description: formatBillRssText(name),
+                description: formatBillRssText(name, proclaimedDate),
                 date: toJsDate(proclaimedDate),
                 rss: proclaimedDate && true
             },
@@ -181,6 +181,6 @@ const formatTimelineRssText = (timeline) => {
     return `国会開催日です。現時点で${minutesStr}が登録されています。`;
 }
 
-const formatBillRssText = (name) => {
-    return `${name}が公布されました。法律案成立までの詳細情報を PolityLink で確認できます。`;
+const formatBillRssText = (name, date) => {
+    return `${name}が${formatDate(date)}に公布されました。詳細情報を PolityLink で確認できます。`;
 }
