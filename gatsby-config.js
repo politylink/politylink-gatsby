@@ -107,7 +107,7 @@ module.exports = {
                       allSitePage(
                         limit: 15
                         sort: { fields: context___date, order: DESC }
-                        filter: { context: { rss: { eq: true } } }
+                        filter: { context: { rss: { eq: true }, timelineId: { ne: null } } }
                       ) {
                         edges {
                           node {
@@ -122,8 +122,43 @@ module.exports = {
                       }
                     }
                   `,
-                        output: "/rss.xml",
-                        title: "PolityLink RSS Feed",
+                        output: "/timeline_rss.xml",
+                        title: "PolityLink Timeline RSS Feed",
+                    },
+                    {
+                        serialize: ({query: {site, allSitePage}}) => {
+                            return allSitePage.edges.map(({node}) => {
+                                return {
+                                    title: node.context.title,
+                                    description: node.context.description,
+                                    date: new Date(node.context.date), //(formatString: "ddd, DD MMM YYYY, h:mm:ss +0900")
+                                    url: site.siteMetadata.siteUrl + node.path,
+                                    guid: site.siteMetadata.siteUrl + node.path,
+                                }
+                            })
+                        },
+                        query: `
+                    {
+                      allSitePage(
+                        limit: 15
+                        sort: { fields: context___date, order: DESC }
+                        filter: { context: { rss: { eq: true }, billId: { ne: null } } }
+                      ) {
+                        edges {
+                          node {
+                            path
+                            context {
+                                title
+                                date
+                                description
+                            }
+                          }
+                        }
+                      }
+                    }
+                  `,
+                        output: "/bill_rss.xml",
+                        title: "PolityLink Bill RSS Feed",
                     }
                 ]
             }

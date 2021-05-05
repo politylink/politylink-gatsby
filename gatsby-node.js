@@ -1,5 +1,5 @@
 const {buildPath} = require(`./src/utils/urlutils`)
-const {toJsDate, formatDateWithDay, formatDate} = require(`./src/utils/dateutils`)
+const {toJsDate, formatDateWithDay} = require(`./src/utils/dateutils`)
 
 const path = require(`path`)
 
@@ -11,17 +11,23 @@ exports.createPages = async ({actions, graphql}) => {
     {
         politylink {
             Bill {
-                id
+                id,
+                name,
+                proclaimedDate {year, month, day}
             }
         }
     }
     `)
-    billResult.data.politylink.Bill.forEach(({id}) => {
+    billResult.data.politylink.Bill.forEach(({id, name, proclaimedDate}) => {
         createPage({
             path: buildPath(id),
             component: path.resolve(`./src/templates/bill.js`),
             context: {
                 billId: id,
+                title: name,
+                description: formatBillRssText(name),
+                date: toJsDate(proclaimedDate),
+                rss: proclaimedDate && true
             },
         })
     })
@@ -131,7 +137,7 @@ exports.createPages = async ({actions, graphql}) => {
                 timelineMinDate: minDate.data.politylink.Timeline[0].date,
                 timelineMaxDate: maxDate.data.politylink.Timeline[0].date,
                 title: `国会タイムライン@${formatDateWithDay(timeline.date)}`,
-                description: formatRssText(timeline),
+                description: formatTimelineRssText(timeline),
                 date: toJsDate(timeline.date),
                 rss: timeline.totalMinutes > 0
             },
@@ -164,13 +170,17 @@ exports.createPages = async ({actions, graphql}) => {
     })
 }
 
-const formatRssText = (timeline) => {
+const formatTimelineRssText = (timeline) => {
     if (timeline.totalMinutes === 0) {
         return null;
     }
-    const minutesNameList = timeline.minutes.map(minute => minute.name)
+    const minutesNameList = timeline.minutes.map(minute => minute.name);
     const minutesStr = timeline.totalMinutes <= 3
         ? minutesNameList.join("、")
-        : minutesNameList.slice(0, 2).concat([`他${timeline.totalMinutes - 2}件`]).join("、")
-    return `国会開催日です。現時点で${minutesStr}が登録されています。`
+        : minutesNameList.slice(0, 2).concat([`他${timeline.totalMinutes - 2}件`]).join("、");
+    return `国会開催日です。現時点で${minutesStr}が登録されています。`;
+}
+
+const formatBillRssText = (name) => {
+    return `${name}が公布されました。法律案成立までの詳細情報を PolityLink で確認できます。`;
 }
