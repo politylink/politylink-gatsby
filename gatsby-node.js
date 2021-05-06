@@ -1,5 +1,5 @@
 const {buildPath} = require(`./src/utils/urlutils`)
-const {toJsDate, formatDateWithDay, formatDate} = require(`./src/utils/dateutils`)
+const {toJsDate, formatDateWithDay} = require(`./src/utils/dateutils`)
 
 const path = require(`path`)
 
@@ -27,7 +27,7 @@ exports.createPages = async ({actions, graphql}) => {
                 title: name,
                 description: formatBillRssText(name, proclaimedDate),
                 date: toJsDate(proclaimedDate),
-                rss: proclaimedDate && true
+                rss: Boolean(proclaimedDate)
             },
         })
     })
@@ -182,5 +182,5 @@ const formatTimelineRssText = (timeline) => {
 }
 
 const formatBillRssText = (name, date) => {
-    return `${name}が${formatDate(date)}に公布されました。詳細情報を PolityLink で確認できます。`;
+    return `${name}が${formatDateWithDay(date)}に公布されました。詳細情報をPolityLinkで確認できます。`;
 }
