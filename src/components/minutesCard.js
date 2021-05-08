@@ -6,9 +6,7 @@ import {sortBillActions} from "../utils/sortutils";
 
 export default function MinutesCard(props) {
     const topics = props.topics ? trimTopics(props.topics, 3) : ['議題未登録']
-    let billActions = []
-    if (props.billActions != null)
-        billActions = sortBillActions(props.billActions)
+    const billActions = props.billActions ? sortBillActions(props.billActions) : []
     return (
         <Link className={styles.card} to={props.to}>
             <div>
