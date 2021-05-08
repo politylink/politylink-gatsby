@@ -13,7 +13,7 @@ export default function MinutesCard(props) {
                 <div className={styles.header}>
                     {billActions.reduce((result, billAction) => {
                         const billActionType = translateBillActionType(billAction.type)
-                        if (billActionType != null) {
+                        if (billActionType) {
                             result.push(<div className={styles.billActionBadge}> {billActionType}</div>)
                         }
                         return result
