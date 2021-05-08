@@ -2,23 +2,34 @@
     box-sizing: border-box;
 }
 
+.linkBadges {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 5px 0 5px 0;
+}
+
 .linkBadge {
-    margin: 3px 3px auto 0;
+    margin: 0 20px 10px 0;
     padding: 0 5px;
-    font-size: large;
-    text-align: center;
-    color: black;
-    background-color: white;
+    background: #fff;
     box-shadow: 0 2px 4px #ccc;
-    border-style: solid;
-    border-width: 3px;
-    border-color: silver;
     text-decoration: none;
+    color: #333;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ddd;
 }
 
 .linkBadge:hover {
     background-color: #474e5d;
     color: white;
+}
+
+.linkBadgeText {
+    font-size: large;
+    text-align: center;
+    margin: 0
 }
 
 .timeline {
@@ -27,6 +38,7 @@
     margin: 0 auto;
     background-color: #474e5d;
     font-family: Helvetica, sans-serif;
+    padding: 0;
 }
 
 .timeline::after {

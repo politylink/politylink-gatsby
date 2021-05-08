@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./minutesCard.module.css"
 import {Link} from "gatsby"
-import {trimTopics, translateBillActionType} from "../utils/formatutils";
+import {translateBillActionType, trimTopics} from "../utils/formatutils";
 import {sortBillActions} from "../utils/sortutils";
 
 export default function MinutesCard(props) {
@@ -15,8 +15,7 @@ export default function MinutesCard(props) {
                 <div className={styles.header}>
                     {billActions.reduce((result, billAction) => {
                         const billActionType = translateBillActionType(billAction.type)
-                        {
-                            billActionType != null &&
+                        if (billActionType != null) {
                             result.push(<div className={styles.billActionBadge}> {billActionType}</div>)
                         }
                         return result
