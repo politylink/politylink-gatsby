@@ -43,3 +43,11 @@
     object-fit: cover;
     border-radius: 5%;
 }
+
+.timeline {
+    max-width: 800px;
+    max-height: 300px;
+    overflow: scroll;
+    border: solid;
+    border-color: gray;
+}
