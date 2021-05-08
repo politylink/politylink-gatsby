@@ -46,6 +46,8 @@
 
 .timeline {
     max-width: 800px;
-    max-height: 600px;
+    max-height: 300px;
     overflow: scroll;
+    border: solid;
+    border-color: gray;
 }

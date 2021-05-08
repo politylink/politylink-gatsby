@@ -123,18 +123,6 @@ export default function Minutes({data}) {
 
                 {(minutes.discussedBills.length > 0 || newsList.length > 0 || minutes.billActions.length > 0) &&
                 <Container>
-                    {minutes.billActions.length > 0 &&
-                    <div className={styles.section}>
-                        <Container title={"タイムライン"}>
-                            <div className={styles.timeline}>
-                            <MinutesTimelineCard
-                                billActions={minutes.billActions}
-                            />
-                            </div>
-                        </Container>
-                    </div>
-                    }
-
                     {minutes.discussedBills.length > 0 &&
                     <div className={styles.section}>
                         <ExpandableContainer
@@ -154,6 +142,18 @@ export default function Minutes({data}) {
                             })}
                         </ExpandableContainer>
                     </div>}
+
+                    {minutes.billActions.length > 0 &&
+                    <div className={styles.section}>
+                        <Container title={"タイムライン"}>
+                            <div className={styles.timeline}>
+                                <MinutesTimelineCard
+                                    billActions={minutes.billActions}
+                                />
+                            </div>
+                        </Container>
+                    </div>
+                    }
 
                     {newsList.length > 0 &&
                     <div className={styles.section}>
