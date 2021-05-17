@@ -15,9 +15,9 @@ export default function BillCardV2(props) {
                     return <div className={styles.tagBadge}>{tag}</div>;
                 })}
             </div>
-            <p className={styles.name}>{props.name}</p>
+            <div className={styles.name}>{props.name}</div>
             <div className={styles.fragment} dangerouslySetInnerHTML={{__html: props.fragment}}/>
-            <p className={styles.date}>{props.last_updated_date}</p>
+            <div className={styles.date}>{props.last_updated_date}</div>
         </Link>
     );
 }

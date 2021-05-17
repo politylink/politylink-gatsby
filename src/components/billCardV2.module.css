@@ -11,10 +11,6 @@
     border-color: #ddd;
 }
 
-.flex {
-    display: flex;
-}
-
 .badges {
     display: flex;
     margin: 5px 0;
