@@ -1,0 +1,89 @@
+.card {
+    align-items: center;
+    margin: 0 10px 12px 10px;
+    width: 800px;
+    background: #fff;
+    box-shadow: 0 1px 3px #ccc;
+    text-decoration: none;
+    color: #333;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ddd;
+}
+
+.badges {
+    display: flex;
+    margin: 5px 0;
+}
+
+.badge {
+    margin: 3px 10px 3px 3px;
+    font-size: 14px;
+    text-align: right;
+    color: #7B7B7B;
+}
+
+.statusBadge {
+    composes: badge;
+    padding: 0 5px;
+    color: #ffffff;
+}
+
+.status0 {
+    composes: statusBadge;
+    background: #93c47dff;
+}
+
+.status1 {
+    composes: statusBadge;
+    background: #76a5afff;
+}
+
+.status2 {
+    composes: statusBadge;
+    background: #6d9eebff;
+}
+
+.status3 {
+    composes: statusBadge;
+    background: #6fa8dcff;
+}
+
+.status4 {
+    composes: statusBadge;
+    background: #8e7cc3ff;
+}
+
+.status5 {
+    composes: statusBadge;
+    background: #c27ba0ff;
+}
+
+.tagBadge {
+    composes: badge;
+    padding: 0 5px;
+    background-color: #EEEEEE;
+}
+
+.name {
+    margin: 5px 5px;
+    font-weight: normal;
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+.fragment {
+    margin: 5px 15px;
+    font-size: small;
+    color: #7B7B7B;
+}
+
+.date {
+    margin: 3px;
+    padding: 0;
+    color: #999;
+    text-align: right;
+    font-size: small;
+}
+
+

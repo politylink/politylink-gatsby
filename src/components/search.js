@@ -13,6 +13,18 @@ export const SearchBox = (props) => {
     )
 }
 
+export const SearchBoxKey = (props) => {
+    return (
+        <input
+            className={styles.box}
+            type="text"
+            defaultValue={props.value}
+            placeholder={props.placeholder}
+            onKeyPress={props.handleKeyPress}
+        />
+    )
+}
+
 export const SearchFilter = (props) => {
     return (
         <label className={styles.filter}>
