@@ -8,8 +8,11 @@ import {buildPath} from "../../utils/urlutils";
 import {SearchBoxKey} from "../../components/search";
 
 const getInitialQuery = () => {
-    const url = new URL(window.location);
-    return url.searchParams.get("q") || "";
+    if (typeof window !== 'undefined') {
+        const url = new URL(window.location);
+        return url.searchParams.get("q") || "";
+    }
+    return "";
 };
 
 const IndexPage = () => {
@@ -36,9 +39,11 @@ const IndexPage = () => {
                             setBills([])
                             const query = event.target.value
                             setQuery(query)
-                            const url = new URL(window.location);
-                            url.searchParams.set('q', query);
-                            window.history.pushState({}, '', url);
+                            if (typeof window !== 'undefined') {
+                                const url = new URL(window.location);
+                                url.searchParams.set('q', query);
+                                window.history.pushState({}, '', url);
+                            }
                         }
                     }}
                 />
