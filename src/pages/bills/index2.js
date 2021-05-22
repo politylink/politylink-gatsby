@@ -20,7 +20,7 @@ const IndexPage = () => {
     const [query, setQuery] = useState(getInitialQuery())
 
     useEffect(() => {
-        fetch(`https://api.politylink.jp/bills?q=${encodeURI(query)}&items=5&fragment=100`)
+        fetch(`https://api.politylink.jp/bills?q=${encodeURI(query)}&items=10&fragment=100`)
             .then(response => response.json())
             .then(resultData => {
                 setBills(resultData)

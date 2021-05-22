@@ -20,7 +20,7 @@
     margin: 3px 10px 3px 3px;
     font-size: 14px;
     text-align: right;
-    color: #7B7B7B;
+    color: #333;
 }
 
 .statusBadge {
@@ -69,13 +69,14 @@
     margin: 5px 5px;
     font-weight: normal;
     flex-grow: 1;
-    font-size: 16px;
+    font-size: 20px;
+    color: #333;
 }
 
 .fragment {
     margin: 5px 15px;
-    font-size: small;
-    color: #7B7B7B;
+    font-size: 14px;
+    color: #626262;
 }
 
 .date {
