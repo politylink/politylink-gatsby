@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.filter {
+    width: 300px;
+    margin: 10px auto;
+}
