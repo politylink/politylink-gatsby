@@ -54,7 +54,7 @@ const IndexPage = () => {
 
     useEffect(() => {
         const urlParamStr = buildUrlParamStr(query, categories)
-        fetch('http://192.168.3.3:5000/bills?items=5&fragment=100&' + urlParamStr)
+        fetch('https://api.politylink.jp/bills?items=5&fragment=100&' + urlParamStr)
             .then(response => response.json())
             .then(resultData => {
                 setBills(resultData)
