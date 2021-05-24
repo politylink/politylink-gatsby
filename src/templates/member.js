@@ -29,10 +29,11 @@ export default function Member({data}) {
     const tags = [house].concat(member.tags)
     const activityList = sortActivityList(member.activities)
     const urlList = sortMemberUrlList(member.urls)
+    const imagePath = buildImagePath(member.id, 'jpg')
 
     return (
         <Layout>
-            <SEO title={member.name} description={getMemberDescription(member)} image={buildImagePath(member.id)}/>
+            <SEO title={member.name} description={getMemberDescription(member)} image={imagePath}/>
             <SinglePaneContainer>
                 <ParentPath to={'/members'} text={'議員一覧'}/>
             </SinglePaneContainer>
@@ -41,7 +42,7 @@ export default function Member({data}) {
                     <div className={styles.section}>
                         <Container>
                             <div className={styles.imageDiv}>
-                                <img className={styles.image} src={buildImagePath(member.id)} alt={'顔写真'}/>
+                                <img className={styles.image} src={imagePath} alt={'顔写真'}/>
                             </div>
                             <FlexContainer>
                                 <h2 className={styles.name}>{member.name}</h2>
