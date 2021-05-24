@@ -57,7 +57,8 @@ export default function Bill({data}) {
 
     return (
         <Layout>
-            <SEO image={buildImagePath(bill.id, 'png')} title={bill.name} description={getBillDescription(bill)}/>
+            <SEO image={buildImagePath(bill.id, 'png')} twitterType={`summary_large_image`}
+                 title={bill.name} description={getBillDescription(bill)}/>
             <SinglePaneContainer>
                 <ParentPath to={'/bills'} text={'法律案一覧'}/>
             </SinglePaneContainer>
