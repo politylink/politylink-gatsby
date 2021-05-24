@@ -8,14 +8,14 @@ export const ProgressArrow = (props) => {
     return (
         <div>
             <div className={styles.title}>
-                {props.title.split("\n").map((key) => {
-                    return <p className={styles.p}>{key}</p>
+                {props.title.split("\n").map((key, index) => {
+                    return <p className={styles.p} key={index}>{key}</p>
                 })}
             </div>
             <div className={styles.arrow}>
                 <div className={bodyStyles[props.color % bodyStyles.length]}>
-                    {props.value.split("\n").map((key) => {
-                        return <p className={styles.p}>{key}</p>
+                    {props.value.split("\n").map((key, index) => {
+                        return <p className={styles.p} key={index}>{key}</p>
                     })}
                 </div>
                 <div className={tailStyles[props.color % tailStyles.length]}></div>
@@ -27,8 +27,8 @@ export const ProgressArrow = (props) => {
 export default function ProgressBadge(props) {
     return (
         <div className={styles.badge}>
-            {props.arrows.map(({title, value, color}) => {
-                return <ProgressArrow title={title} value={value} color={color}/>;
+            {props.arrows.map(({title, value, color}, index) => {
+                return <ProgressArrow title={title} value={value} color={color} key={index}/>;
             })}
         </div>
     );

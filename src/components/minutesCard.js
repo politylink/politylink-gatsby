@@ -11,10 +11,10 @@ export default function MinutesCard(props) {
         <Link className={styles.card} to={props.to}>
             <div>
                 <div className={styles.header}>
-                    {billActions.reduce((result, billAction) => {
+                    {billActions.reduce((result, billAction, index) => {
                         const billActionType = translateBillActionType(billAction.type)
                         if (billActionType) {
-                            result.push(<div className={styles.billActionBadge}> {billActionType}</div>)
+                            result.push(<div className={styles.billActionBadge} key={index}> {billActionType}</div>)
                         }
                         return result
                     }, [])}
@@ -28,8 +28,8 @@ export default function MinutesCard(props) {
                     {props.wordcloud != null &&
                     <img className={styles.wordcloud} src={props.wordcloud} alt={props.id}/>}
                     <ul className={styles.topics}>
-                        {topics.map((topic) => {
-                            return <li className={styles.topic}>{topic}</li>
+                        {topics.map((topic, index) => {
+                            return <li className={styles.topic} key={index}>{topic}</li>
                         })}
                     </ul>
                 </div>

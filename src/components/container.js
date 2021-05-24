@@ -65,8 +65,8 @@ export class ExpandableContainer extends React.Component {
 
     getHeaderIcon() {
         return this.state.expanded
-            ? <FontAwesomeIcon icon="angle-up" size="x" text/>
-            : <FontAwesomeIcon icon="angle-down" size="x" text/>
+            ? <FontAwesomeIcon icon="angle-up" size="1x" text="Close"/>
+            : <FontAwesomeIcon icon="angle-down" size="1x" text="Open"/>
     }
 
     getButtonText() {
