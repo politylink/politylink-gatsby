@@ -14,7 +14,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import MinutesCard from "../components/minutesCard"
 import {formatDate, formatDateWithDay} from "../utils/dateutils"
-import {buildPath} from "../utils/urlutils";
+import {buildImagePath, buildPath} from "../utils/urlutils";
 import {getBillDescription} from "../utils/seoutils";
 import {sortBillUrlList, sortMinutesList, sortNewsList} from "../utils/sortutils";
 import NewsCard from "../components/newsCard";
@@ -57,7 +57,7 @@ export default function Bill({data}) {
 
     return (
         <Layout>
-            <SEO title={bill.name} description={getBillDescription(bill)}/>
+            <SEO image={buildImagePath(bill.id, 'png')} title={bill.name} description={getBillDescription(bill)}/>
             <SinglePaneContainer>
                 <ParentPath to={'/bills'} text={'法律案一覧'}/>
             </SinglePaneContainer>

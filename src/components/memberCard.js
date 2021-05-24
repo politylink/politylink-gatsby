@@ -10,7 +10,7 @@ export default function MemberCard(props) {
         <Link className={styles.card} to={props.to}>
             <div className={styles.icon}>
                 <LazyLoad once height={40}>
-                    <img className={styles.image} src={buildImagePath(props.id)} alt={'顔写真'} />
+                    <img className={styles.image} src={buildImagePath(props.id, 'jpg')} alt={'顔写真'} />
                 </LazyLoad>
             </div>
             <div className={styles.title}>

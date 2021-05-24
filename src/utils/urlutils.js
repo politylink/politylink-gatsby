@@ -8,9 +8,9 @@ const buildPath = (politylink_id) => {
     return '/' + res[0].toLowerCase() + '/' + res[1]
 }
 
-const buildImagePath = (politylink_id) => {
+const buildImagePath = (politylink_id, ext) => {
     const res = politylink_id.split(':')
-    return `https://image.politylink.jp/${res[0].toLowerCase()}/${res[1]}.jpg`
+    return `https://image.politylink.jp/${res[0].toLowerCase()}/${res[1]}.${ext}`
 }
 
 module.exports.buildPath = buildPath
