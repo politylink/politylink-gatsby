@@ -79,7 +79,7 @@ export default function Bill({data}) {
                             title={"リンク"}
                         >
                             {urlList.map((url) => {
-                                return <LinkCard href={url.url} title={url.title} domain={url.domain}/>
+                                return <LinkCard href={url.url} title={url.title} domain={url.domain} key={url.id}/>
                             })}
                         </FlexContainer>
                     </div>
@@ -103,6 +103,7 @@ export default function Bill({data}) {
                                     date={formatDateWithDay(minutes.startDateTime)}
                                     wordcloud={minutes.wordcloud}
                                     billActions={minutes.billActions}
+                                    key={minutes.id}
                                 />
                             })}
                         </ExpandableContainer>
@@ -124,6 +125,7 @@ export default function Bill({data}) {
                                     publisher={news.publisher}
                                     publishedAt={formatDate(news.publishedAt)}
                                     isPaid={news.isPaid}
+                                    key={news.id}
                                 />
                             })}
                         </ExpandableContainer>
@@ -148,6 +150,7 @@ export const query = graphql`
                 reason
                 firstHouse
                 urls {
+                    id
                     url
                     title
                     domain
