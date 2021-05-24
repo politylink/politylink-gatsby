@@ -27,8 +27,8 @@ export const ProgressArrow = (props) => {
 export default function ProgressBadge(props) {
     return (
         <div className={styles.badge}>
-            {props.arrows.map(({title, value, color}) => {
-                return <ProgressArrow title={title} value={value} color={color} key={title}/>;
+            {props.arrows.map(({title, value, color}, index) => {
+                return <ProgressArrow title={title} value={value} color={color} key={index}/>;
             })}
         </div>
     );
