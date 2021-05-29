@@ -79,11 +79,22 @@
     color: #626262;
 }
 
+.icons {
+    display: flex;
+    margin: 5px 0;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.icon {
+    margin: 0 10px;
+    color: #999;
+}
+
 .date {
-    margin: 3px;
+    margin: 0 10px;
     padding: 0;
     color: #999;
-    text-align: right;
     font-size: small;
 }
 
