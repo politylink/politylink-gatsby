@@ -88,11 +88,14 @@ const IndexPage = () => {
                     {bills.map((bill) => {
                         return <BillCardV2
                             name={bill.name}
-                            bill_number_short={bill.bill_number_short}
+                            billNumberShort={bill.bill_number_short}
                             fragment={bill.fragment}
                             status={bill.status_label}
                             tags={bill.tags}
-                            last_updated_date={bill.last_updated_date}
+                            lastUpdatedDate={bill.last_updated_date}
+                            totalNews={bill.total_news}
+                            totalMinutes={bill.total_minutes}
+                            totalPdfs={bill.total_pdfs}
                             to={buildPath(bill.id)}
                             key={bill.id}
                         />;
