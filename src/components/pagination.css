@@ -1,0 +1,23 @@
+.paginationClassName {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.paginationClassName > li {
+    display: inline-block;
+}
+
+.paginationClassName > li > a {
+    padding: 6px 12px;
+}
+
+.paginationClassName > li > a:hover {
+    text-decoration: underline;
+}
+
+.activeClassName > a {
+    font-weight: bold;
+}
