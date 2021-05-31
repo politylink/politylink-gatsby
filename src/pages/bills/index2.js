@@ -6,7 +6,7 @@ import {Container, FlexContainer} from "../../components/container";
 import styles from "./index2.module.css"
 import BillCardV2 from "../../components/billCardV2";
 import {buildPath} from "../../utils/urlutils";
-import {SearchBoxKey} from "../../components/search";
+import {SearchBoxKey, SearchResult} from "../../components/search";
 import Select from "react-select";
 import Pagination from "../../components/pagination";
 
@@ -87,6 +87,7 @@ const IndexPage = () => {
                         }
                     }}
                 />
+                <SearchResult value={totalBills + '件'}/>
             </FlexContainer>
             <div className={styles.main}>
                 <FlexContainer>
