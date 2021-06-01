@@ -1,6 +1,6 @@
 import {navigate} from "gatsby";
-import {buildPath} from "../utils/urlutils";
-import {formatJsDate, toJsDate} from "../utils/dateutils";
+import {buildPath} from "../utils/urlUtils";
+import {formatJsDate, toJsDate} from "../utils/dateUtils";
 import React from "react";
 import classNames from 'classnames';
 import Calendar from "react-calendar";

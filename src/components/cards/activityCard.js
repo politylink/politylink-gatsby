@@ -1,9 +1,9 @@
 import styles from "./activityCard.module.css";
 import React from "react";
-import {formatDate} from "../utils/dateutils";
+import {formatDate} from "../../utils/dateUtils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "gatsby";
-import {buildPath} from "../utils/urlutils";
+import {buildPath} from "../../utils/urlUtils";
 
 export const MinutesActivityCard = (props) => {
     return (<div className={styles.activity}>

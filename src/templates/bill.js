@@ -8,19 +8,19 @@ import {
     FlexContainer,
     SinglePaneContainer,
     TwoPaneContainer
-} from "../components/container"
-import LinkCard from "../components/linkCard"
-import Layout from "../components/layout"
+} from "../components/layouts/container"
+import LinkCard from "../components/cards/linkCard"
+import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
-import MinutesCard from "../components/minutesCard"
-import {formatDate, formatDateWithDay} from "../utils/dateutils"
-import {buildImagePath, buildPath} from "../utils/urlutils";
-import {getBillDescription} from "../utils/seoutils";
-import {sortBillUrlList, sortMinutesList, sortNewsList} from "../utils/sortutils";
-import NewsCard from "../components/newsCard";
+import MinutesCard from "../components/cards/minutesCard"
+import {formatDate, formatDateWithDay} from "../utils/dateUtils"
+import {buildImagePath, buildPath} from "../utils/urlUtils";
+import {getBillDescription} from "../utils/seoUtils";
+import {sortBillUrlList, sortMinutesList, sortNewsList} from "../utils/sortUtils";
+import NewsCard from "../components/cards/newsCard";
 import {EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
 import Share from "../components/share";
-import ParentPath from "../components/parentPath";
+import ParentPath from "../components/navigations/parentPath";
 
 export const formatArrowDate = (date) => {
     if (date == null || date.year == null || date.month == null || date.day == null) {

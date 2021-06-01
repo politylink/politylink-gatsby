@@ -1,11 +1,11 @@
 import React from "react"
 import { graphql, Link } from 'gatsby'
-import {buildPath} from "../../utils/urlutils";
+import {buildPath} from "../../utils/urlUtils";
 import SEO from "../../components/seo"
-import Layout from "../../components/layout"
-import {getCalendarTimelineTitle, getCalendarTimelineDescription} from "../../utils/seoutils";
+import Layout from "../../components/layouts/layout"
+import {getCalendarTimelineTitle, getCalendarTimelineDescription} from "../../utils/seoUtils";
 import {CalendarTimeline} from "../../components/billsCalendarTimeline";
-import {toJsDate} from "../../utils/dateutils"
+import {toJsDate} from "../../utils/dateUtils"
 import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../../utils/constants";
 import {SearchFilter} from "../../components/search"
 import ReactTooltip from 'react-tooltip';

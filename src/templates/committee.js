@@ -1,18 +1,18 @@
 import React from "react"
 import {graphql} from "gatsby"
 import styles from "./committee.module.css"
-import {Container, ExpandableContainer, SinglePaneContainer, TwoPaneContainer} from "../components/container"
-import Layout from "../components/layout";
+import {Container, ExpandableContainer, SinglePaneContainer, TwoPaneContainer} from "../components/layouts/container"
+import Layout from "../components/layouts/layout";
 import SEO from "../components/seo";
-import MinutesCard from "../components/minutesCard";
-import {formatTopicSentence} from "../utils/formatutils";
-import {formatDateWithDay} from "../utils/dateutils";
-import {sortMinutesList} from "../utils/sortutils";
-import {buildPath} from "../utils/urlutils";
-import {getCommitteeDescription} from "../utils/seoutils";
+import MinutesCard from "../components/cards/minutesCard";
+import {formatTopicSentence} from "../utils/formatUtils";
+import {formatDateWithDay} from "../utils/dateUtils";
+import {sortMinutesList} from "../utils/sortUtils";
+import {buildPath} from "../utils/urlUtils";
+import {getCommitteeDescription} from "../utils/seoUtils";
 import {EXPAND_MINUTES_KEY} from "../utils/constants";
 import Share from "../components/share";
-import ParentPath from "../components/parentPath";
+import ParentPath from "../components/navigations/parentPath";
 
 
 export default function Committee({data}) {

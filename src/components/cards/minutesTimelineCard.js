@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./minutesTimelineCard.module.css"
-import {translateBillActionType} from "../utils/formatutils";
-import {sortBillActions} from "../utils/sortutils";
+import {translateBillActionType} from "../../utils/formatUtils";
+import {sortBillActions} from "../../utils/sortUtils";
 
 /**
  * split BillActions into subsets for minutes timeline

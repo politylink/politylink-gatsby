@@ -1,5 +1,5 @@
-const {buildPath} = require(`./src/utils/urlutils`)
-const {toJsDate, formatDateWithDay} = require(`./src/utils/dateutils`)
+const {buildPath} = require(`./src/utils/urlUtils`)
+const {toJsDate, formatDateWithDay} = require(`./src/utils/dateUtils`)
 
 const path = require(`path`)
 

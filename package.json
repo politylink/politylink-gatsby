@@ -11,7 +11,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "test": "jest",
     "deploy": "npm run -n \"-r dotenv/config\" && gatsby-plugin-s3 deploy --yes && aws cloudfront create-invalidation --distribution-id E2BZL0LNXZYLSA --paths \"/*\""
   },
   "dependencies": {
@@ -46,7 +46,12 @@
     "react-twitter-widgets": "^1.9.5"
   },
   "devDependencies": {
-    "prettier": "2.0.5"
+    "babel-jest": "^27.0.2",
+    "babel-preset-gatsby": "^0.12.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.0.3",
+    "prettier": "2.0.5",
+    "react-test-renderer": "^17.0.2"
   },
   "repository": {
     "type": "git",

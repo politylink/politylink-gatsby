@@ -1,9 +1,9 @@
 import React from "react"
-import Layout from "../components/layout"
+import Layout from "../components/layouts/layout"
 import {Link} from "gatsby";
-import {Container} from "../components/container";
+import {Container} from "../components/layouts/container";
 import SEO from "../components/seo";
-import {getArticlesDescription, getArticlesTitle} from "../utils/seoutils";
+import {getArticlesDescription, getArticlesTitle} from "../utils/seoUtils";
 
 export default function Members() {
     return (

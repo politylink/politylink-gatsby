@@ -1,15 +1,15 @@
 import React from "react"
 import {graphql} from 'gatsby'
-import BillCard from "../../components/billCard"
-import {FlexContainer} from "../../components/container"
+import BillCard from "../../components/cards/billCard"
+import {FlexContainer} from "../../components/layouts/container"
 import {SearchBox, SearchFilter, SearchResult} from "../../components/search"
 import SEO from "../../components/seo"
-import Layout from "../../components/layout"
-import {buildPath} from "../../utils/urlutils";
+import Layout from "../../components/layouts/layout"
+import {buildPath} from "../../utils/urlUtils";
 import {BILL_PASSED_KEY, BILL_QUERY_KEY} from "../../utils/constants";
-import {getBillsDescription} from "../../utils/seoutils";
-import {joinNullableStringList} from "../../utils/formatutils";
-import {isMatch} from "../../utils/searchutils";
+import {getBillsDescription} from "../../utils/seoUtils";
+import {joinNullableStringList} from "../../utils/formatUtils";
+import {isMatch} from "../../utils/searchUtils";
 
 export default class App extends React.Component {
     constructor(props) {

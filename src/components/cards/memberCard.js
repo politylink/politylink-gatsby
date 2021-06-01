@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import { buildImagePath } from "../utils/urlutils";
+import { buildImagePath } from "../../utils/urlUtils";
 import styles from "./memberCard.module.css";
 import LazyLoad from 'react-lazyload';
 
