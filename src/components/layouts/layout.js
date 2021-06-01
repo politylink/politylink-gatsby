@@ -1,8 +1,8 @@
 import React from "react"
 import {Link} from "gatsby"
 import styles from "./layout.module.css"
-import HamburgerMenu from "./menu";
-import "../utils/fontawesome";
+import HamburgerMenu from "../navigations/hamburgerMenu";
+import "../../utils/fontawesome";
 
 export default function Layout(props) {
     return (

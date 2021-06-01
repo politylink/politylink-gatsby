@@ -1,59 +1,28 @@
 import React, {useEffect, useState} from "react"
-import Layout from "../../components/layout";
+import Layout from "../../components/layouts/layout";
 import SEO from "../../components/seo";
-import {getBillsDescription} from "../../utils/seoutils";
-import {Container, FlexContainer} from "../../components/container";
+import {getBillsDescription} from "../../utils/seoUtils";
+import {Container, FlexContainer} from "../../components/layouts/container";
 import styles from "./index2.module.css"
-import BillCardV2 from "../../components/billCardV2";
-import {buildPath} from "../../utils/urlutils";
+import BillCardV2 from "../../components/cards/billCardV2";
+import {buildPath} from "../../utils/urlUtils";
 import {SearchBoxKey, SearchResult} from "../../components/search";
 import Select from "react-select";
-import Pagination from "../../components/pagination";
+import Pagination from "../../components/navigations/pagination";
+import {
+    buildUrlParamStr,
+    categoryOptions,
+    getInitialCategories,
+    getInitialPage,
+    getInitialQuery
+} from "../../utils/apiUtils";
 
-const getInitialQuery = () => {
-    if (typeof window !== 'undefined') {
-        const url = new URL(window.location);
-        return url.searchParams.get("q") || "";
-    }
-    return "";
-};
-
-const getInitialCategories = () => {
-    const categories = []
-    if (typeof window !== 'undefined') {
-        const categoryValues = new URL(window.location).searchParams.getAll("category")
-        for (const categoryValue of categoryValues) {
-            for (const category of categoryOptions) {
-                if (category.value === categoryValue) {
-                    categories.push(category)
-                }
-            }
-        }
-    }
-    return categories;
-}
-
-const categoryOptions = [
-    {value: 'KAKUHOU', label: '閣法'},
-    {value: 'SHUHOU', label: '衆法'},
-    {value: 'SANHOU', label: '参法'},
-];
-
-const buildUrlParamStr = (query, categories, page) => {
-    const param = [];
-    param.push(`q=${encodeURI(query)}`)
-    for (const category of categories) {
-        param.push(`category=${encodeURI(category.value)}`)
-    }
-    param.push(`page=${page}`)
-    return param.join('&')
-}
 
 const IndexPage = () => {
     const [bills, setBills] = useState([])
     const [query, setQuery] = useState(getInitialQuery())
     const [categories, setCategories] = useState(getInitialCategories());
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(getInitialPage());
     const [totalBills, setTotalBills] = useState(0);
 
     useEffect(() => {

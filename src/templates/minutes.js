@@ -8,22 +8,22 @@ import {
     FlexContainer,
     SinglePaneContainer,
     TwoPaneContainer
-} from "../components/container"
-import Layout from "../components/layout"
+} from "../components/layouts/container"
+import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
-import LinkCard from "../components/linkCard"
-import BillCard from "../components/billCard"
-import {formatLongSentence, formatTopicSentence} from "../utils/formatutils"
-import {buildPath} from "../utils/urlutils";
-import {getMinutesDescription} from "../utils/seoutils";
-import NewsCard from "../components/newsCard";
-import {sortMinutesUrlList, sortNewsList} from "../utils/sortutils";
-import {formatDate, formatDateWithDay, toJsDate, toTimelineId} from "../utils/dateutils";
+import LinkCard from "../components/cards/linkCard"
+import BillCard from "../components/cards/billCard"
+import {formatLongSentence, formatTopicSentence} from "../utils/formatUtils"
+import {buildPath} from "../utils/urlUtils";
+import {getMinutesDescription} from "../utils/seoUtils";
+import NewsCard from "../components/cards/newsCard";
+import {sortMinutesUrlList, sortNewsList} from "../utils/sortUtils";
+import {formatDate, formatDateWithDay, toJsDate, toTimelineId} from "../utils/dateUtils";
 import {EXPAND_BILL_KEY, EXPAND_MEMBER_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
-import MemberCard from "../components/memberCard";
+import MemberCard from "../components/cards/memberCard";
 import Share from "../components/share";
-import ParentPath from "../components/parentPath";
-import MinutesTimelineCard from "../components/minutesTimelineCard";
+import ParentPath from "../components/navigations/parentPath";
+import MinutesTimelineCard from "../components/cards/minutesTimelineCard";
 
 
 export default function Minutes({data}) {

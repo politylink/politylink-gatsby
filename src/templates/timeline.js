@@ -2,16 +2,16 @@ import React from "react"
 import {graphql, Link} from "gatsby"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "./timeline.module.css"
-import {Container, ExpandableContainer, SinglePaneContainer, TwoPaneContainer} from "../components/container"
-import Layout from "../components/layout"
-import BillCard from "../components/billCard"
-import {buildPath} from "../utils/urlutils";
-import NewsCard from "../components/newsCard";
-import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sortutils";
-import MinutesCard from "../components/minutesCard";
+import {Container, ExpandableContainer, SinglePaneContainer, TwoPaneContainer} from "../components/layouts/container"
+import Layout from "../components/layouts/layout"
+import BillCard from "../components/cards/billCard"
+import {buildPath} from "../utils/urlUtils";
+import NewsCard from "../components/cards/newsCard";
+import {sortBillList, sortMinutesList, sortNewsList} from "../utils/sortUtils";
+import MinutesCard from "../components/cards/minutesCard";
 import {EXPAND_BILL_KEY, EXPAND_MINUTES_KEY, EXPAND_NEWS_KEY} from "../utils/constants";
-import {formatDate, formatDateWithDay, offsetDate, toJsDate, toTimelineId} from "../utils/dateutils";
-import {getTimelineDescription, getTimelineTitle} from "../utils/seoutils";
+import {formatDate, formatDateWithDay, offsetDate, toJsDate, toTimelineId} from "../utils/dateUtils";
+import {getTimelineDescription, getTimelineTitle} from "../utils/seoUtils";
 import SEO from "../components/seo";
 import Share from "../components/share";
 

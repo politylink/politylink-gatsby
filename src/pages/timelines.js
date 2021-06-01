@@ -1,11 +1,11 @@
 import React from "react"
 import {graphql} from 'gatsby'
 import SEO from "../components/seo"
-import Layout from "../components/layout"
-import {getTimelinesDescription, getTimelinesTitle} from "../utils/seoutils";
-import {Container} from "../components/container";
+import Layout from "../components/layouts/layout"
+import {getTimelinesDescription, getTimelinesTitle} from "../utils/seoUtils";
+import {Container} from "../components/layouts/container";
 import {TimelineCalendar} from "../components/timelineCalendar";
-import {formatDate} from "../utils/dateutils"
+import {formatDate} from "../utils/dateUtils"
 import {CALENDAR_TIMESTAMP_KEY} from "../utils/constants";
 
 

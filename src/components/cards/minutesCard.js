@@ -1,8 +1,8 @@
 import React from "react"
 import styles from "./minutesCard.module.css"
 import {Link} from "gatsby"
-import {translateBillActionType, trimTopics} from "../utils/formatutils";
-import {sortBillActions} from "../utils/sortutils";
+import {translateBillActionType, trimTopics} from "../../utils/formatUtils";
+import {sortBillActions} from "../../utils/sortUtils";
 
 export default function MinutesCard(props) {
     const topics = props.topics ? trimTopics(props.topics, 3) : ['議題未登録']

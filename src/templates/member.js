@@ -7,19 +7,19 @@ import {
     FlexContainer,
     SinglePaneContainer,
     TwoPaneContainer
-} from "../components/container"
-import Layout from "../components/layout";
+} from "../components/layouts/container"
+import Layout from "../components/layouts/layout";
 import SEO from "../components/seo";
-import {getMemberDescription} from "../utils/seoutils";
-import LinkCard from "../components/linkCard";
-import {sortActivityList, sortActivityUrlList, sortMemberUrlList} from "../utils/sortutils";
+import {getMemberDescription} from "../utils/seoUtils";
+import LinkCard from "../components/cards/linkCard";
+import {sortActivityList, sortActivityUrlList, sortMemberUrlList} from "../utils/sortUtils";
 import {EXPAND_ACTIVITY_KEY} from "../utils/constants";
 import Share from "../components/share";
-import {BillActivityCard, MinutesActivityCard} from "../components/activityCard";
-import {buildImagePath, buildPath} from "../utils/urlutils";
+import {BillActivityCard, MinutesActivityCard} from "../components/cards/activityCard";
+import {buildImagePath, buildPath} from "../utils/urlUtils";
 import SocialLinks from "../components/socialLinks";
-import {formatDomain, getTwitterScreenName} from "../utils/formatutils";
-import ParentPath from "../components/parentPath";
+import {formatDomain, getTwitterScreenName} from "../utils/formatUtils";
+import ParentPath from "../components/navigations/parentPath";
 import {Timeline} from 'react-twitter-widgets'
 
 

@@ -1,15 +1,15 @@
 import React from "react"
 import {graphql} from 'gatsby'
-import MemberCard from "../components/memberCard"
-import {FlexContainer} from "../components/container"
+import MemberCard from "../components/cards/memberCard"
+import {FlexContainer} from "../components/layouts/container"
 import {SearchBox, SearchResult} from "../components/search"
 import SEO from "../components/seo"
-import Layout from "../components/layout"
-import {buildPath} from "../utils/urlutils";
+import Layout from "../components/layouts/layout"
+import {buildPath} from "../utils/urlUtils";
 import {MEMBER_QUERY_KEY} from "../utils/constants";
-import {joinNullableStringList} from "../utils/formatutils";
-import {isMatch} from "../utils/searchutils";
-import {getMembersDescription} from "../utils/seoutils";
+import {joinNullableStringList} from "../utils/formatUtils";
+import {isMatch} from "../utils/searchUtils";
+import {getMembersDescription} from "../utils/seoUtils";
 import styles from "./members.module.css"
 
 export default class App extends React.Component {

@@ -10,7 +10,7 @@ export default function Pagination(props) {
             breakLabel={'...'}
             pageCount={props.pageCount}
             marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
+            pageRangeDisplayed={2}
             onPageChange={props.onPageChange}
             containerClassName={'paginationClassName'}
             activeClassName={'activeClassName'}
