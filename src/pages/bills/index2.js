@@ -6,7 +6,7 @@ import {Container, FlexContainer} from "../../components/layouts/container";
 import styles from "./index2.module.css"
 import BillCardV2 from "../../components/cards/billCardV2";
 import {buildPath} from "../../utils/urlUtils";
-import {SearchBoxKey, SearchResult} from "../../components/search";
+import {EnterSearchBox, SearchResult} from "../../components/search";
 import Select from "react-select";
 import Pagination from "../../components/navigations/pagination";
 import {
@@ -16,44 +16,46 @@ import {
     getInitialPage,
     getInitialQuery
 } from "../../utils/apiUtils";
+import {navigate} from '@reach/router';
 
 
 const IndexPage = () => {
-    const [bills, setBills] = useState([])
-    const [query, setQuery] = useState(getInitialQuery())
-    const [categories, setCategories] = useState(getInitialCategories());
-    const [page, setPage] = useState(getInitialPage());
+    const urlStr = typeof window !== 'undefined' ? window.location : 'https://politylink.jp';
+    const [bills, setBills] = useState([]);
+    const [query, setQuery] = useState(getInitialQuery(urlStr));
+    const [categories, setCategories] = useState(getInitialCategories(urlStr));
+    const [page, setPage] = useState(getInitialPage(urlStr));
     const [totalBills, setTotalBills] = useState(0);
 
     useEffect(() => {
+        console.log('useEffect')
         const urlParamStr = buildUrlParamStr(query, categories, page)
         fetch('https://api.politylink.jp/bills?items=5&fragment=100&' + urlParamStr)
             .then(response => response.json())
-            .then(resultData => {
-                setTotalBills(resultData['totalBills'])
-                setBills(resultData['bills']);
-            })
+            .then(data => {
+                setBills(data['bills']);
+                setTotalBills(data['totalBills'])
+            });
         if (typeof window !== 'undefined') {
             const url = new URL(window.location);
-            const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`
-            window.history.pushState({}, '', newUrlStr);
+            const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`;
+            navigate(newUrlStr, {replace: true});  // TODO: enable browser back
         }
-    }, [query, categories, page])
+    }, [query, categories, page]);
 
 
     return (
         <Layout>
             <SEO description={getBillsDescription()}/>
             <FlexContainer>
-                <SearchBoxKey
+                <EnterSearchBox
                     placeholder="第201回国会以降の法律案を検索"
                     value={query}
-                    handleKeyPress={(event) => {
-                        if (event.key === "Enter") {
-                            setBills([])
-                            const query = event.target.value
-                            setQuery(query)
-                        }
+                    handleQuery={(query) => {
+                        setQuery(query);
+                        setPage(1);
+                        setBills([]);
+                        setTotalBills(0);
                     }}
                 />
                 <SearchResult value={totalBills + '件'}/>
@@ -79,7 +81,10 @@ const IndexPage = () => {
                 <div className={styles.filter}>
                     <Select
                         defaultValue={categories}
-                        onChange={setCategories}
+                        onChange={(props) => {
+                            setCategories(props);
+                            setPage(1);
+                        }}
                         options={categoryOptions}
                         isMulti={true}
                         placeholder={"種類を指定"}
@@ -88,10 +93,12 @@ const IndexPage = () => {
             </div>
             <Container>
                 <Pagination
+                    page={page}
                     pageCount={Math.ceil(totalBills / 5)}
-                    onPageChange={(data) => setPage(data.selected + 1)}
+                    onPageChange={setPage}
                 />
             </Container>
-        </Layout>)
+        </Layout>
+    );
 }
 export default IndexPage

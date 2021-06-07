@@ -4,36 +4,26 @@ export const categoryOptions = [
     {value: 'SANHOU', label: '参法'},
 ];
 
-
-export const getInitialQuery = () => {
-    if (typeof window !== 'undefined') {
-        const url = new URL(window.location);
-        return url.searchParams.get("q") || "";
-    }
-    return "";
-};
-
-export const getInitialCategories = () => {
+export const getInitialCategories = (urlStr) => {
     const categories = []
-    if (typeof window !== 'undefined') {
-        const categoryValues = new URL(window.location).searchParams.getAll("category")
-        for (const categoryValue of categoryValues) {
-            for (const category of categoryOptions) {
-                if (category.value === categoryValue) {
-                    categories.push(category)
-                }
+    const categoryValues = new URL(urlStr).searchParams.getAll("category")
+    for (const categoryValue of categoryValues) {
+        for (const category of categoryOptions) {
+            if (category.value === categoryValue) {
+                categories.push(category)
             }
         }
     }
     return categories;
 }
 
-export const getInitialPage = () => {
-    if (typeof window !== 'undefined') {
-        const url = new URL(window.location);
-        return parseInt(url.searchParams.get("page") || '1');
-    }
-    return 1;
+
+export const getInitialQuery = (urlStr) => {
+    return new URL(urlStr).searchParams.get("q") || "";
+};
+
+export const getInitialPage = (urlStr) => {
+    return parseInt(new URL(urlStr).searchParams.get("page") || '1');
 }
 
 
