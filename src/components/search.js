@@ -13,14 +13,20 @@ export const SearchBox = (props) => {
     )
 }
 
-export const SearchBoxKey = (props) => {
+export const EnterSearchBox = (props) => {
     return (
         <input
             className={styles.box}
             type="text"
+            key={props.value}  // to trigger render
             defaultValue={props.value}
             placeholder={props.placeholder}
-            onKeyPress={props.handleKeyPress}
+            onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                    const query = event.target.value;
+                    props.handleQuery(query)
+                }
+            }}
         />
     )
 }
