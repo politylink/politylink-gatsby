@@ -9,6 +9,7 @@
     border-style: solid;
     border-width: 1px;
     border-color: #ddd;
+    align-self: start;
 }
 
 .badges {
