@@ -6,17 +6,22 @@ import {Container, FlexContainer} from "../../components/layouts/container";
 import styles from "./index2.module.css"
 import BillCardV2 from "../../components/cards/billCardV2";
 import {buildPath} from "../../utils/urlUtils";
-import {EnterSearchBox, SearchResult} from "../../components/search";
-import Select from "react-select";
+import {EnterSearchBox, SearchResult} from "../../components/filters/search";
 import Pagination from "../../components/navigations/pagination";
 import {
     buildUrlParamStr,
     categoryOptions,
+    dietOptions,
     getInitialCategories,
+    getInitialDiets,
     getInitialPage,
-    getInitialQuery
+    getInitialQuery,
+    getInitialStatuses,
+    getInitialSubmittedDiets,
+    statusOptions
 } from "../../utils/apiUtils";
 import {navigate} from '@reach/router';
+import MultiSelect from "../../components/filters/multiSelect";
 
 
 const IndexPage = () => {
@@ -24,12 +29,14 @@ const IndexPage = () => {
     const [bills, setBills] = useState([]);
     const [query, setQuery] = useState(getInitialQuery(urlStr));
     const [categories, setCategories] = useState(getInitialCategories(urlStr));
+    const [statuses, setStatuses] = useState(getInitialStatuses(urlStr));
+    const [diets, setDiets] = useState(getInitialDiets(urlStr));
+    const [submittedDiets, setSubmittedDiets] = useState(getInitialSubmittedDiets(urlStr));
     const [page, setPage] = useState(getInitialPage(urlStr));
     const [totalBills, setTotalBills] = useState(0);
 
     useEffect(() => {
-        console.log('useEffect')
-        const urlParamStr = buildUrlParamStr(query, categories, page)
+        const urlParamStr = buildUrlParamStr(query, categories, statuses, diets, submittedDiets, page)
         fetch('https://api.politylink.jp/bills?items=5&fragment=100&' + urlParamStr)
             .then(response => response.json())
             .then(data => {
@@ -41,7 +48,7 @@ const IndexPage = () => {
             const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`;
             navigate(newUrlStr, {replace: true});  // TODO: enable browser back
         }
-    }, [query, categories, page]);
+    }, [query, categories, statuses, diets, submittedDiets, page]);
 
 
     return (
@@ -78,16 +85,42 @@ const IndexPage = () => {
                         />;
                     })}
                 </FlexContainer>
-                <div className={styles.filter}>
-                    <Select
-                        defaultValue={categories}
+                <div className={styles.filters}>
+                    <MultiSelect
+                        options={categoryOptions}
+                        currentOptions={categories}
                         onChange={(props) => {
                             setCategories(props);
                             setPage(1);
                         }}
-                        options={categoryOptions}
-                        isMulti={true}
                         placeholder={"種類を指定"}
+                    />
+                    <MultiSelect
+                        options={statusOptions}
+                        currentOptions={statuses}
+                        onChange={(props) => {
+                            setStatuses(props);
+                            setPage(1);
+                        }}
+                        placeholder={"審議状況を指定"}
+                    />
+                    <MultiSelect
+                        options={dietOptions}
+                        currentOptions={diets}
+                        onChange={(props) => {
+                            setDiets(props);
+                            setPage(1);
+                        }}
+                        placeholder={"審議回次を指定"}
+                    />
+                    <MultiSelect
+                        options={dietOptions}
+                        currentOptions={submittedDiets}
+                        onChange={(props) => {
+                            setSubmittedDiets(props);
+                            setPage(1);
+                        }}
+                        placeholder={"提出回次を指定"}
                     />
                 </div>
             </div>

@@ -2,7 +2,7 @@ import React from "react"
 import {graphql} from 'gatsby'
 import MemberCard from "../components/cards/memberCard"
 import {FlexContainer} from "../components/layouts/container"
-import {SearchBox, SearchResult} from "../components/search"
+import {SearchBox, SearchResult} from "../components/filters/search"
 import SEO from "../components/seo"
 import Layout from "../components/layouts/layout"
 import {buildPath} from "../utils/urlUtils";
