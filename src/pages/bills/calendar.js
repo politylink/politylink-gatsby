@@ -7,7 +7,7 @@ import {getCalendarTimelineTitle, getCalendarTimelineDescription} from "../../ut
 import {CalendarTimeline} from "../../components/billsCalendarTimeline";
 import {toJsDate} from "../../utils/dateUtils"
 import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../../utils/constants";
-import {SearchFilter} from "../../components/search"
+import {SearchFilter} from "../../components/filters/search"
 import ReactTooltip from 'react-tooltip';
 
 export const getType = (bill) => {
