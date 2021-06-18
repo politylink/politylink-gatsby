@@ -1,101 +1,142 @@
-import React from "react"
-import {graphql} from 'gatsby'
-import BillCard from "../../components/cards/billCard"
-import {FlexContainer} from "../../components/layouts/container"
-import {SearchBox, SearchFilter, SearchResult} from "../../components/filters/search"
-import SEO from "../../components/seo"
-import Layout from "../../components/layouts/layout"
-import {buildPath} from "../../utils/urlUtils";
-import {BILL_PASSED_KEY, BILL_QUERY_KEY} from "../../utils/constants";
+import React, {useEffect, useState} from "react"
+import Layout from "../../components/layouts/layout";
+import SEO from "../../components/seo";
 import {getBillsDescription} from "../../utils/seoUtils";
-import {joinNullableStringList} from "../../utils/formatUtils";
-import {isMatch} from "../../utils/searchUtils";
+import {Container, FlexContainer} from "../../components/layouts/container";
+import styles from "./index2.module.css"
+import BillCardV2 from "../../components/cards/billCardV2";
+import {buildPath} from "../../utils/urlUtils";
+import {EnterSearchBox, SearchResult} from "../../components/filters/search";
+import Pagination from "../../components/navigations/pagination";
+import {
+    buildUrlParamStr,
+    categoryOptions,
+    dietOptions,
+    getInitialCategories,
+    getInitialDiets,
+    getInitialPage,
+    getInitialQuery,
+    getInitialStatuses,
+    getInitialSubmittedDiets,
+    statusOptions
+} from "../../utils/apiUtils";
+import {navigate} from '@reach/router';
+import MultiSelect from "../../components/filters/multiSelect";
+import {useMediaQuery} from "react-responsive";
 
-export default class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            filterText: (typeof window !== 'undefined' && localStorage.getItem(BILL_QUERY_KEY)) || '',
-            filterPassed: (typeof window !== 'undefined' && localStorage.getItem(BILL_PASSED_KEY) === 'true') || false,
+
+const IndexPage = () => {
+    const urlStr = typeof window !== 'undefined' ? window.location : 'https://politylink.jp';
+    const [bills, setBills] = useState([]);
+    const [query, setQuery] = useState(getInitialQuery(urlStr));
+    const [categories, setCategories] = useState(getInitialCategories(urlStr));
+    const [statuses, setStatuses] = useState(getInitialStatuses(urlStr));
+    const [diets, setDiets] = useState(getInitialDiets(urlStr));
+    const [submittedDiets, setSubmittedDiets] = useState(getInitialSubmittedDiets(urlStr));
+    const [page, setPage] = useState(getInitialPage(urlStr));
+    const [totalBills, setTotalBills] = useState(0);
+    const isDesktop = useMediaQuery({query: '(min-width: 1200px)'})
+
+    useEffect(() => {
+        const urlParamStr = buildUrlParamStr(query, categories, statuses, diets, submittedDiets, page)
+        const fragmentSize = isDesktop ? 100 : 50
+        fetch(`https://api.politylink.jp/bills?items=5&fragment=${fragmentSize}&${urlParamStr}`)
+            .then(response => response.json())
+            .then(data => {
+                setBills(data['bills']);
+                setTotalBills(data['totalBills'])
+            });
+        if (typeof window !== 'undefined') {
+            const url = new URL(window.location);
+            const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`;
+            navigate(newUrlStr, {replace: true});  // TODO: enable browser back
         }
-        this.handleTextInput = this.handleTextInput.bind(this);
-        this.handleFilterClick = this.handleFilterClick.bind(this);
-    }
+    }, [query, categories, statuses, diets, submittedDiets, page]);
 
-    handleTextInput(event) {
-        const newVal = event.target.value
-        typeof window !== 'undefined' && localStorage.setItem(BILL_QUERY_KEY, newVal);
-        this.setState({filterText: newVal});
-    }
 
-    handleFilterClick(event) {
-        const newVal = event.target.checked
-        typeof window !== 'undefined' && localStorage.setItem(BILL_PASSED_KEY, newVal.toString());
-        this.setState({filterPassed: newVal})
-    }
-
-    filterBills(bills) {
-        return (bills
-                .filter((bill) => {
-                    const joinedText = bill.billNumber + bill.name + bill.reason
-                        + joinNullableStringList(bill.aliases) + joinNullableStringList(bill.tags)
-                    return isMatch(this.state.filterText, joinedText)
-                })
-                .filter((bill) => {
-                    return bill.isPassed || !this.state.filterPassed
-                })
-        );
-    }
-
-    render() {
-        const filteredBills = this.filterBills(this.props.data.politylink.Bill)
-        return (
-            <Layout>
-                <SEO description={getBillsDescription()}/>
+    return (
+        <Layout>
+            <SEO description={getBillsDescription()}/>
+            <FlexContainer>
+                <EnterSearchBox
+                    placeholder="第201回国会以降の法律案を検索"
+                    value={query}
+                    handleQuery={(query) => {
+                        setQuery(query);
+                        setPage(1);
+                        setBills([]);
+                        setTotalBills(0);
+                    }}
+                />
+                <SearchResult value={totalBills + '件'}/>
+            </FlexContainer>
+            <div className={styles.main}>
                 <FlexContainer>
-                    <SearchBox
-                        handleChange={this.handleTextInput}
-                        value={this.state.filterText}
-                        placeholder="第201回国会以降の法律案を検索"
-                    />
-                    <SearchFilter
-                        handleChange={this.handleFilterClick}
-                        checked={this.state.filterPassed}
-                        label={'成立した法律案のみを表示'}
-                    />
-                    <SearchResult value={filteredBills.length + '件表示'}/>
-                </FlexContainer>
-                <FlexContainer>
-                    {filteredBills.map((bill) => {
-                        return <BillCard
-                            title={bill.billNumber}
-                            description={bill.name}
-                            aliases={bill.aliases}
-                            isPassed={bill.isPassed}
-                            hasNews={bill.totalNews > 0}
+                    {bills.map((bill) => {
+                        return <BillCardV2
+                            name={bill.name}
+                            billNumberShort={bill.billNumberShort}
+                            fragment={bill.fragment}
+                            status={bill.statusLabel}
+                            tags={bill.tags}
+                            lastUpdatedDate={bill.lastUpdatedDate}
+                            totalNews={bill.totalNews}
+                            totalMinutes={bill.totalMinutes}
+                            totalPdfs={bill.totalPdfs}
                             to={buildPath(bill.id)}
                             key={bill.id}
                         />;
                     })}
                 </FlexContainer>
-            </Layout>
-        )
-    }
+                {isDesktop &&
+                <div className={styles.filters}>
+                    <MultiSelect
+                        options={categoryOptions}
+                        currentOptions={categories}
+                        onChange={(props) => {
+                            setCategories(props);
+                            setPage(1);
+                        }}
+                        placeholder={"種類を指定"}
+                    />
+                    <MultiSelect
+                        options={statusOptions}
+                        currentOptions={statuses}
+                        onChange={(props) => {
+                            setStatuses(props);
+                            setPage(1);
+                        }}
+                        placeholder={"審議状況を指定"}
+                    />
+                    <MultiSelect
+                        options={dietOptions}
+                        currentOptions={diets}
+                        onChange={(props) => {
+                            setDiets(props);
+                            setPage(1);
+                        }}
+                        placeholder={"審議回次を指定"}
+                    />
+                    <MultiSelect
+                        options={dietOptions}
+                        currentOptions={submittedDiets}
+                        onChange={(props) => {
+                            setSubmittedDiets(props);
+                            setPage(1);
+                        }}
+                        placeholder={"提出回次を指定"}
+                    />
+                </div>
+                }
+            </div>
+            <Container>
+                <Pagination
+                    page={page}
+                    pageCount={Math.ceil(totalBills / 5)}
+                    onPageChange={setPage}
+                />
+            </Container>
+        </Layout>
+    );
 }
-
-export const query = graphql`
-    {
-        politylink {
-            Bill (orderBy:[submittedDate_desc]) {
-                id
-                name
-                billNumber
-                reason
-                aliases
-                tags
-                isPassed
-                totalNews
-            }
-        }
-    }
-`
+export default IndexPage
