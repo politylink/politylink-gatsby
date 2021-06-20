@@ -1,5 +1,9 @@
 import {formatDate, formatDateWithDay} from "./dateUtils";
 
+export const getBillsTitle = () => {
+    return `法律案一覧`
+}
+
 export const getBillsDescription = () => {
     return "国会に提出された法律案を検索し、法律案の内容や審議状況を確認できます。"
 }

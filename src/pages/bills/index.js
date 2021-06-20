@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react"
 import Layout from "../../components/layouts/layout";
 import SEO from "../../components/seo";
-import {getBillsDescription} from "../../utils/seoUtils";
+import {getBillDescription, getBillsDescription, getBillsTitle} from "../../utils/seoUtils";
 import {Container, FlexContainer} from "../../components/layouts/container";
-import styles from "./index2.module.css"
+import styles from "./index.module.css"
 import BillCardV2 from "../../components/cards/billCardV2";
-import {buildPath} from "../../utils/urlUtils";
+import {buildImagePath, buildPath} from "../../utils/urlUtils";
 import {EnterSearchBox, SearchResult} from "../../components/filters/search";
 import Pagination from "../../components/navigations/pagination";
 import {
@@ -56,7 +56,9 @@ const IndexPage = () => {
 
     return (
         <Layout>
-            <SEO description={getBillsDescription()}/>
+            <SEO image={`https://politylink.jp/bills.png`} twitterType={`summary_large_image`} pageType={`website`}
+                 title={getBillsTitle()} description={getBillsDescription()}/>
+            <SEO/>
             <FlexContainer>
                 <EnterSearchBox
                     placeholder="第201回国会以降の法律案を検索"
