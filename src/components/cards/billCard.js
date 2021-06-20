@@ -13,8 +13,6 @@ export default function BillCard(props) {
                 </div>
             </div>
             <p className={styles.description}>{props.description}</p>
-            {props.aliases && props.aliases.length > 0 &&
-            <p className={styles.aliases}>（{props.aliases.join(", ")}）</p>}
         </Link>
     )
 }

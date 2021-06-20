@@ -35,7 +35,7 @@ const IndexPage = () => {
     const [submittedDiets, setSubmittedDiets] = useState(getInitialSubmittedDiets(urlStr));
     const [page, setPage] = useState(getInitialPage(urlStr));
     const [totalBills, setTotalBills] = useState(0);
-    const isDesktop = useMediaQuery({query: '(min-width: 1200px)'})
+    const isDesktop = useMediaQuery({query: '(min-width: 1100px)'})
 
     useEffect(() => {
         const urlParamStr = buildUrlParamStr(query, categories, statuses, diets, submittedDiets, page)

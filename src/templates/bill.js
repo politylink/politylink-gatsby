@@ -67,8 +67,6 @@ export default function Bill({data}) {
                     <div className={styles.section}>
                         <Container>
                             <h2 className={styles.name}>{bill.name}</h2>
-                            {bill.aliases && bill.aliases.length > 0 &&
-                            <p className={styles.aliases}>通称: {bill.aliases.join(", ")}</p>}
                             <h3 className={styles.number}>{bill.billNumber}</h3>
                             <p className={styles.reason}>{bill.reason}</p>
                             <ProgressBadge arrows={arrows}/>

@@ -89,7 +89,6 @@ export default function Timeline({data, pageContext}) {
                                 return <BillCard
                                     title={bill.billNumber}
                                     description={bill.name}
-                                    aliases={bill.aliases}
                                     to={buildPath(bill.id)}
                                     isPassed={bill.isPassed}
                                     hasNews={bill.totalNews > 0}
