@@ -11,14 +11,16 @@ export default function MinutesCard(props) {
         <Link className={styles.card} to={props.to}>
             <div>
                 <div className={styles.header}>
-                    {billActions.reduce((result, billAction, index) => {
-                        const billActionType = translateBillActionType(billAction.type)
-                        if (billActionType) {
-                            result.push(<div className={styles.billActionBadge} key={index}> {billActionType}</div>)
-                        }
-                        return result
-                    }, [])}
-                    {props.hasNews && <div className={styles.newsBadge}>{'ニュース'}</div>}
+                    <div className={styles.badges}>
+                        {props.hasNews && <div className={styles.newsBadge}>{'ニュース'}</div>}
+                        {billActions.reduce((result, billAction, index) => {
+                            const billActionType = translateBillActionType(billAction.type)
+                            if (billActionType) {
+                                result.push(<div className={styles.billActionBadge} key={index}> {billActionType}</div>)
+                            }
+                            return result
+                        }, [])}
+                    </div>
                 </div>
 
                 <p className={styles.name}>{props.name}</p>
