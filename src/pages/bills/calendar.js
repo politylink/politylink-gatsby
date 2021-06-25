@@ -1,9 +1,9 @@
 import React from "react"
-import { graphql, Link } from 'gatsby'
+import {graphql, Link} from 'gatsby'
 import {buildPath} from "../../utils/urlUtils";
 import SEO from "../../components/seo"
 import Layout from "../../components/layouts/layout"
-import {getCalendarTimelineTitle, getCalendarTimelineDescription} from "../../utils/seoUtils";
+import {getCalendarTimelineDescription, getCalendarTimelineTitle} from "../../utils/seoUtils";
 import {CalendarTimeline} from "../../components/billsCalendarTimeline";
 import {toJsDate} from "../../utils/dateUtils"
 import {CALENDAR_PASSED_KEY, CALENDAR_TIMESTAMP_KEY} from "../../utils/constants";
@@ -52,10 +52,39 @@ export const getItems = (bills) => {
     const nested_items = bills
         .map((bill, index) => {
             return [
-                { id: null, group: index, title: "", start_time: toJsDate(bill.submittedDate), end_time: toJsDate(bill.submittedDate), color: 'rgb(158, 14, 206)', itemProps: { style: {background: '#93c47dff', border: 0, cursor: "auto"}} },
-                { id: null, group: index, title: "", start_time: toJsDate(bill.passedRepresentativesDate), end_time: toJsDate(bill.passedRepresentativesDate), itemProps: { style: {background: '#6d9eebff', border: 0, cursor: "auto"}} },
-                { id: null, group: index, title: "", start_time: toJsDate(bill.passedCouncilorsDate), end_time: toJsDate(bill.passedCouncilorsDate), itemProps: { style: {background: '#8e7cc3ff', border: 0, cursor: "auto"}}},
-                { id: null, group: index, title: "", start_time: toJsDate(bill.proclaimedDate), end_time: toJsDate(bill.proclaimedDate), itemProps: { style: {background: '#c27ba0ff', border: 0, cursor: "auto"}} }]
+                {
+                    id: null,
+                    group: index,
+                    title: "",
+                    start_time: toJsDate(bill.submittedDate),
+                    end_time: toJsDate(bill.submittedDate),
+                    color: 'rgb(158, 14, 206)',
+                    itemProps: {style: {background: '#93c47dff', border: 0, cursor: "auto"}}
+                },
+                {
+                    id: null,
+                    group: index,
+                    title: "",
+                    start_time: toJsDate(bill.passedRepresentativesDate),
+                    end_time: toJsDate(bill.passedRepresentativesDate),
+                    itemProps: {style: {background: '#6d9eebff', border: 0, cursor: "auto"}}
+                },
+                {
+                    id: null,
+                    group: index,
+                    title: "",
+                    start_time: toJsDate(bill.passedCouncilorsDate),
+                    end_time: toJsDate(bill.passedCouncilorsDate),
+                    itemProps: {style: {background: '#8e7cc3ff', border: 0, cursor: "auto"}}
+                },
+                {
+                    id: null,
+                    group: index,
+                    title: "",
+                    start_time: toJsDate(bill.proclaimedDate),
+                    end_time: toJsDate(bill.proclaimedDate),
+                    itemProps: {style: {background: '#c27ba0ff', border: 0, cursor: "auto"}}
+                }]
         });
     const flat_items = [].concat(...nested_items);
     return flat_items.map((item, index) => {
@@ -98,11 +127,11 @@ export default class App extends React.Component {
         const groups = getGroups(bills);
         const items = getItems(bills);
 
-        let groupRenderer = ({ group, isRightSidebar }) => {
+        let groupRenderer = ({group, isRightSidebar}) => {
             if (isRightSidebar) {
                 return (
                     <div style={{"textAlign": "left"}}>
-                        <span style={{ "color": group.rightColor, "fontWeight": "bold" }}>
+                        <span style={{"color": group.rightColor, "fontWeight": "bold"}}>
                             {group.rightTitle}
                         </span>
                     </div>
@@ -111,7 +140,7 @@ export default class App extends React.Component {
                 return (
                     <div className="rct-sidebar-row-item">
                         <span className={group.category.toLowerCase()}>{group.billType}</span>
-                        <Link data-tip={group.title + "<br />"+ group.tip} to={buildPath(group.internalId)}>
+                        <Link to={buildPath(group.internalId)}>
                             <span>{group.title}</span>
                         </Link>
                         <p>{group.tip}</p>
@@ -119,7 +148,7 @@ export default class App extends React.Component {
                     </div>
                 )
             }
-          }
+        }
 
         let timeEnd = new Date(Math.max.apply(null, items.map(item => item.end_time).filter(date => date)));
         timeEnd.setDate(timeEnd.getDate() + 10);
@@ -127,30 +156,50 @@ export default class App extends React.Component {
         return (
             <Layout>
                 <SEO title={getCalendarTimelineTitle()} description={getCalendarTimelineDescription()}/>
-                <div style={{maxWidth: `1080px`, margin:  `0 auto`}}>
-                <div className="calendar-title">
-                    <p style={{ textAlign: `center`, fontWeight: `bold` }}>法律案カレンダー</p>
-                </div>
-                <div className="calendar-title-filter">
-                    <SearchFilter
-                        handleChange={this.handleFilterClick}
-                        checked={this.state.filterPassed}
-                        label={'成立した法律案のみを表示'}
-                    />
-                </div>
-                <div className="calendar-title-legend">
-                    <div style={{ textAlign: `right`, margin: `10px 0` }}>
-                        <p style={{ color: `#93c47dff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline` }}>■ </p>
-                        <p style={{ fontSize: `0.8em`, display: `inline` }}>提出</p>
-                        <p style={{ color: `#6d9eebff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
-                        <p style={{ fontSize: `0.8em`, display: `inline` }}>衆議院可決</p>
-                        <p style={{ color: `#8e7cc3ff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
-                        <p style={{ fontSize: `0.8em`, display: `inline` }}>参議院可決</p>
-                        <p style={{ color: `#c27ba0ff`, paddingLeft: `15px`, fontSize: `0.8em`, display: `inline`}}>■ </p>
-                        <p style={{ fontSize: `0.8em`, display: `inline` }}>公布</p>
+                <div style={{maxWidth: `1080px`, margin: `0 auto`}}>
+                    <div className="calendar-title">
+                        <p style={{textAlign: `center`, fontWeight: `bold`}}>法律案カレンダー</p>
                     </div>
-                </div>
-                    <div style={{ textAlign: `right`, margin: `10px 0 10px`, padding: `0` }}>
+                    <div className="calendar-title-filter">
+                        <SearchFilter
+                            handleChange={this.handleFilterClick}
+                            checked={this.state.filterPassed}
+                            label={'成立した法律案のみを表示'}
+                        />
+                    </div>
+                    <div className="calendar-title-legend">
+                        <div style={{textAlign: `right`, margin: `10px 0`}}>
+                            <p style={{
+                                color: `#93c47dff`,
+                                paddingLeft: `15px`,
+                                fontSize: `0.8em`,
+                                display: `inline`
+                            }}>■ </p>
+                            <p style={{fontSize: `0.8em`, display: `inline`}}>提出</p>
+                            <p style={{
+                                color: `#6d9eebff`,
+                                paddingLeft: `15px`,
+                                fontSize: `0.8em`,
+                                display: `inline`
+                            }}>■ </p>
+                            <p style={{fontSize: `0.8em`, display: `inline`}}>衆議院可決</p>
+                            <p style={{
+                                color: `#8e7cc3ff`,
+                                paddingLeft: `15px`,
+                                fontSize: `0.8em`,
+                                display: `inline`
+                            }}>■ </p>
+                            <p style={{fontSize: `0.8em`, display: `inline`}}>参議院可決</p>
+                            <p style={{
+                                color: `#c27ba0ff`,
+                                paddingLeft: `15px`,
+                                fontSize: `0.8em`,
+                                display: `inline`
+                            }}>■ </p>
+                            <p style={{fontSize: `0.8em`, display: `inline`}}>公布</p>
+                        </div>
+                    </div>
+                    <div style={{textAlign: `right`, margin: `10px 0 10px`, padding: `0`}}>
                         <CalendarTimeline
                             onChange={this.onChange}
                             groups={groups}
