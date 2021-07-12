@@ -4,6 +4,9 @@ export const CATEGORY_KEY = 'category'
 export const STATUS_KEY = 'status'
 export const DIET_KEY = 'diet'
 export const SUBMITTED_DIET_KEY = 'sdiet'
+export const SUBMITTED_GROUP_KEY = 'sbgroup'
+export const SUPPORTED_GROUP_KEY = 'spgroup'
+export const OPPOSED_GROUP_KEY = 'opgroup'
 
 
 export const categoryOptions = [
@@ -19,6 +22,15 @@ export const statusOptions = [
     {value: '3', label: '参議院委員会可決'},
     {value: '4', label: '参議院本会議可決'},
     {value: '5', label: '公布'},
+]
+
+export const groupOptions = [
+    {value: '0', label: '自由民主党・無所属の会'},
+    {value: '1', label: '立憲民主党・無所属'},
+    {value: '2', label: '公明党'},
+    {value: '3', label: '日本共産党'},
+    {value: '4', label: '日本維新の会・無所属の会'},
+    {value: '5', label: '国民民主党・無所属クラブ'},
 ]
 
 export const dietOptions = [200, 201, 202, 203, 204].map(x => {
@@ -54,6 +66,18 @@ export const getInitialSubmittedDiets = (urlStr) => {
     return getInitialOptions(urlStr, SUBMITTED_DIET_KEY, dietOptions);
 }
 
+export const getInitialSubmittedGroups = (urlStr) => {
+    return getInitialOptions(urlStr, SUBMITTED_GROUP_KEY, groupOptions);
+}
+
+export const getInitialSupportedGroups = (urlStr) => {
+    return getInitialOptions(urlStr, SUPPORTED_GROUP_KEY, groupOptions);
+}
+
+export const getInitialOpposedGroups = (urlStr) => {
+    return getInitialOptions(urlStr, OPPOSED_GROUP_KEY, groupOptions);
+}
+
 export const getInitialQuery = (urlStr) => {
     return new URL(urlStr).searchParams.get(QUERY_KEY) || "";
 };
@@ -62,8 +86,8 @@ export const getInitialPage = (urlStr) => {
     return parseInt(new URL(urlStr).searchParams.get(PAGE_KEY) || '1');
 }
 
-
-export const buildUrlParamStr = (query, categories, statuses, diets, submittedDiets, page) => {
+export const buildUrlParamStr = (query, categories, statuses, diets, submittedDiets,
+                                 submittedGroups, supportedGroups, opposedGroups, page) => {
     const param = [];
     param.push(`${QUERY_KEY}=${encodeURI(query)}`)
     for (const category of categories) {
@@ -75,8 +99,17 @@ export const buildUrlParamStr = (query, categories, statuses, diets, submittedDi
     for (const diet of diets) {
         param.push(`${DIET_KEY}=${diet.value}`)
     }
-    for (const submittedDiet of submittedDiets) {
-        param.push(`${SUBMITTED_DIET_KEY}=${submittedDiet.value}`)
+    for (const diet of submittedDiets) {
+        param.push(`${SUBMITTED_DIET_KEY}=${diet.value}`)
+    }
+    for (const group of submittedGroups) {
+        param.push(`${SUBMITTED_GROUP_KEY}=${group.value}`)
+    }
+    for (const group of supportedGroups) {
+        param.push(`${SUBMITTED_GROUP_KEY}=${group.value}`)
+    }
+    for (const group of opposedGroups) {
+        param.push(`${OPPOSED_GROUP_KEY}=${group.value}`)
     }
     param.push(`${PAGE_KEY}=${page}`)
     return param.join('&')
