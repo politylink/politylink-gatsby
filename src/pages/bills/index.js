@@ -14,10 +14,14 @@ import {
     dietOptions,
     getInitialCategories,
     getInitialDiets,
+    getInitialOpposedGroups,
     getInitialPage,
     getInitialQuery,
     getInitialStatuses,
     getInitialSubmittedDiets,
+    getInitialSubmittedGroups,
+    getInitialSupportedGroups,
+    groupOptions,
     statusOptions
 } from "../../utils/apiUtils";
 import {navigate} from '@reach/router';
@@ -33,13 +37,17 @@ const IndexPage = () => {
     const [statuses, setStatuses] = useState(getInitialStatuses(urlStr));
     const [diets, setDiets] = useState(getInitialDiets(urlStr));
     const [submittedDiets, setSubmittedDiets] = useState(getInitialSubmittedDiets(urlStr));
+    const [submittedGroups, setSubmittedGroups] = useState(getInitialSubmittedGroups(urlStr));
+    const [supportedGroups, setSupportedGroups] = useState(getInitialSupportedGroups(urlStr));
+    const [opposedGroups, setOpposedGroups] = useState(getInitialOpposedGroups(urlStr));
     const [page, setPage] = useState(getInitialPage(urlStr));
     const [totalBills, setTotalBills] = useState(0);
     const isDesktop = useMediaQuery({query: '(min-width: 1100px)'})
 
     useEffect(() => {
-        const urlParamStr = buildUrlParamStr(query, categories, statuses, diets, submittedDiets, page)
-        const fragmentSize = isDesktop ? 100 : 50
+        const urlParamStr = buildUrlParamStr(query, categories, statuses, diets, submittedDiets,
+            submittedGroups, supportedGroups, opposedGroups, page);
+        const fragmentSize = isDesktop ? 100 : 50;
         fetch(`https://api.politylink.jp/bills?items=5&fragment=${fragmentSize}&${urlParamStr}`)
             .then(response => response.json())
             .then(data => {
@@ -51,7 +59,7 @@ const IndexPage = () => {
             const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`;
             navigate(newUrlStr, {replace: true});  // TODO: enable browser back
         }
-    }, [query, categories, statuses, diets, submittedDiets, page]);
+    }, [query, categories, statuses, diets, submittedDiets, submittedGroups, supportedGroups, opposedGroups, page]);
 
 
     return (
@@ -126,6 +134,33 @@ const IndexPage = () => {
                             setPage(1);
                         }}
                         placeholder={"提出回次を指定"}
+                    />
+                    <MultiSelect
+                        options={groupOptions}
+                        currentOptions={submittedGroups}
+                        onChange={(props) => {
+                            setSubmittedGroups(props);
+                            setPage(1);
+                        }}
+                        placeholder={"提出会派を指定"}
+                    />
+                    <MultiSelect
+                        options={groupOptions}
+                        currentOptions={supportedGroups}
+                        onChange={(props) => {
+                            setSupportedGroups(props);
+                            setPage(1);
+                        }}
+                        placeholder={"賛成会派を指定"}
+                    />
+                    <MultiSelect
+                        options={groupOptions}
+                        currentOptions={opposedGroups}
+                        onChange={(props) => {
+                            setOpposedGroups(props);
+                            setPage(1);
+                        }}
+                        placeholder={"反対会派を指定"}
                     />
                 </div>
                 }
