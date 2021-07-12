@@ -106,7 +106,7 @@ export const buildUrlParamStr = (query, categories, statuses, diets, submittedDi
         param.push(`${SUBMITTED_GROUP_KEY}=${group.value}`)
     }
     for (const group of supportedGroups) {
-        param.push(`${SUBMITTED_GROUP_KEY}=${group.value}`)
+        param.push(`${SUPPORTED_GROUP_KEY}=${group.value}`)
     }
     for (const group of opposedGroups) {
         param.push(`${OPPOSED_GROUP_KEY}=${group.value}`)
