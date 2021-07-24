@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import Layout from "../../components/layouts/layout";
 import SEO from "../../components/seo";
-import {getBillsDescription, getBillsTitle} from "../../utils/seoUtils";
+import {getMembersDescription, getMembersTitle} from "../../utils/seoUtils";
 import {Container, FlexContainer} from "../../components/layouts/container";
 import styles from "./index2.module.css"
 import MemberCardV2 from "../../components/cards/memberCardV2";
@@ -48,8 +48,8 @@ const IndexPage = () => {
 
     return (
         <Layout>
-            <SEO image={`https://politylink.jp/bills.png`} twitterType={`summary_large_image`} pageType={`website`}
-                 title={getBillsTitle()} description={getBillsDescription()}/>
+            <SEO image={`https://politylink.jp/members.png`} twitterType={`summary_large_image`} pageType={`website`}
+                 title={getMembersTitle()} description={getMembersDescription()}/>
             <FlexContainer>
                 <EnterSearchBox
                     placeholder="名前、政党名、プロフィールで検索"
