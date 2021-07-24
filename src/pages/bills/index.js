@@ -9,7 +9,7 @@ import {buildPath} from "../../utils/urlUtils";
 import {EnterSearchBox, SearchResult} from "../../components/filters/search";
 import Pagination from "../../components/navigations/pagination";
 import {
-    buildUrlParamStr,
+    buildBillUrlParamStr,
     categoryOptions,
     dietOptions,
     getInitialCategories,
@@ -45,7 +45,7 @@ const IndexPage = () => {
     const isDesktop = useMediaQuery({query: '(min-width: 1100px)'})
 
     useEffect(() => {
-        const urlParamStr = buildUrlParamStr(query, categories, statuses, diets, submittedDiets,
+        const urlParamStr = buildBillUrlParamStr(query, categories, statuses, diets, submittedDiets,
             submittedGroups, supportedGroups, opposedGroups, page);
         const fragmentSize = isDesktop ? 100 : 50;
         fetch(`https://api.politylink.jp/bills?items=5&fragment=${fragmentSize}&${urlParamStr}`)

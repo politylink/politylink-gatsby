@@ -4,6 +4,7 @@ export const CATEGORY_KEY = 'category'
 export const STATUS_KEY = 'status'
 export const DIET_KEY = 'diet'
 export const SUBMITTED_DIET_KEY = 'sdiet'
+export const GROUP_KEY = 'group'
 export const SUBMITTED_GROUP_KEY = 'sbgroup'
 export const SUPPORTED_GROUP_KEY = 'spgroup'
 export const OPPOSED_GROUP_KEY = 'opgroup'
@@ -66,6 +67,10 @@ export const getInitialSubmittedDiets = (urlStr) => {
     return getInitialOptions(urlStr, SUBMITTED_DIET_KEY, dietOptions);
 }
 
+export const getInitialGroups = (urlStr) => {
+    return getInitialOptions(urlStr, GROUP_KEY, groupOptions);
+}
+
 export const getInitialSubmittedGroups = (urlStr) => {
     return getInitialOptions(urlStr, SUBMITTED_GROUP_KEY, groupOptions);
 }
@@ -86,8 +91,8 @@ export const getInitialPage = (urlStr) => {
     return parseInt(new URL(urlStr).searchParams.get(PAGE_KEY) || '1');
 }
 
-export const buildUrlParamStr = (query, categories, statuses, diets, submittedDiets,
-                                 submittedGroups, supportedGroups, opposedGroups, page) => {
+export const buildBillUrlParamStr = (query, categories, statuses, diets, submittedDiets,
+                                     submittedGroups, supportedGroups, opposedGroups, page) => {
     const param = [];
     param.push(`${QUERY_KEY}=${encodeURI(query)}`)
     for (const category of categories) {
@@ -110,6 +115,16 @@ export const buildUrlParamStr = (query, categories, statuses, diets, submittedDi
     }
     for (const group of opposedGroups) {
         param.push(`${OPPOSED_GROUP_KEY}=${group.value}`)
+    }
+    param.push(`${PAGE_KEY}=${page}`)
+    return param.join('&')
+}
+
+export const buildMemberUrlParamStr = (query, groups, page) => {
+    const param = [];
+    param.push(`${QUERY_KEY}=${encodeURI(query)}`)
+    for (const group of groups) {
+        param.push(`${GROUP_KEY}=${group.value}`)
     }
     param.push(`${PAGE_KEY}=${page}`)
     return param.join('&')
