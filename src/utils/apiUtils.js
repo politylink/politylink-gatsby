@@ -8,6 +8,7 @@ export const GROUP_KEY = 'group'
 export const SUBMITTED_GROUP_KEY = 'sbgroup'
 export const SUPPORTED_GROUP_KEY = 'spgroup'
 export const OPPOSED_GROUP_KEY = 'opgroup'
+export const HOUSE_KEY = 'house'
 
 
 export const categoryOptions = [
@@ -32,6 +33,11 @@ export const groupOptions = [
     {value: '3', label: '日本共産党'},
     {value: '4', label: '日本維新の会・無所属の会'},
     {value: '5', label: '国民民主党・無所属クラブ'},
+]
+
+export const houseOptions = [
+    {value: '0', label: '衆議院'},
+    {value: '1', label: '参議院'},
 ]
 
 export const dietOptions = [200, 201, 202, 203, 204].map(x => {
@@ -83,6 +89,10 @@ export const getInitialOpposedGroups = (urlStr) => {
     return getInitialOptions(urlStr, OPPOSED_GROUP_KEY, groupOptions);
 }
 
+export const getInitialHouses = (urlStr) => {
+    return getInitialOptions(urlStr, HOUSE_KEY, houseOptions);
+}
+
 export const getInitialQuery = (urlStr) => {
     return new URL(urlStr).searchParams.get(QUERY_KEY) || "";
 };
@@ -120,11 +130,14 @@ export const buildBillUrlParamStr = (query, categories, statuses, diets, submitt
     return param.join('&')
 }
 
-export const buildMemberUrlParamStr = (query, groups, page) => {
+export const buildMemberUrlParamStr = (query, groups, houses, page) => {
     const param = [];
     param.push(`${QUERY_KEY}=${encodeURI(query)}`)
     for (const group of groups) {
         param.push(`${GROUP_KEY}=${group.value}`)
+    }
+    for (const house of houses) {
+        param.push(`${HOUSE_KEY}=${house.value}`)
     }
     param.push(`${PAGE_KEY}=${page}`)
     return param.join('&')
