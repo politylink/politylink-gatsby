@@ -10,9 +10,11 @@ import Pagination from "../../components/navigations/pagination";
 import {
     buildMemberUrlParamStr,
     getInitialGroups,
+    getInitialHouses,
     getInitialPage,
     getInitialQuery,
-    groupOptions
+    groupOptions,
+    houseOptions
 } from "../../utils/apiUtils";
 import {navigate} from '@reach/router';
 import MultiSelect from "../../components/filters/multiSelect";
@@ -25,12 +27,13 @@ const IndexPage = () => {
     const [members, setMembers] = useState([]);
     const [query, setQuery] = useState(getInitialQuery(urlStr));
     const [groups, setGroups] = useState(getInitialGroups(urlStr));
+    const [houses, setHouses] = useState(getInitialHouses(urlStr));
     const [page, setPage] = useState(getInitialPage(urlStr));
     const [totalMembers, setTotalMembers] = useState(0);
     const isDesktop = useMediaQuery({query: '(min-width: 1100px)'})
 
     useEffect(() => {
-        const urlParamStr = buildMemberUrlParamStr(query, groups, page);
+        const urlParamStr = buildMemberUrlParamStr(query, groups, houses, page);
         const fragmentSize = isDesktop ? 100 : 50;
         fetch(`https://api.politylink.jp/members?items=5&fragment=${fragmentSize}&${urlParamStr}`)
             .then(response => response.json())
@@ -43,7 +46,7 @@ const IndexPage = () => {
             const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`;
             navigate(newUrlStr, {replace: true});  // TODO: enable browser back
         }
-    }, [query, groups, page]);
+    }, [query, groups, houses, page]);  // eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (
@@ -52,7 +55,7 @@ const IndexPage = () => {
                  title={getMembersTitle()} description={getMembersDescription()}/>
             <FlexContainer>
                 <EnterSearchBox
-                    placeholder="名前、政党名、プロフィールで検索"
+                    placeholder="名前、プロフィールで検索"
                     value={query}
                     handleQuery={(query) => {
                         setQuery(query);
@@ -78,6 +81,15 @@ const IndexPage = () => {
                 </FlexContainer>
                 {isDesktop &&
                 <div className={styles.filters}>
+                    <MultiSelect
+                        options={houseOptions}
+                        currentOptions={houses}
+                        onChange={(props) => {
+                            setHouses(props);
+                            setPage(1);
+                        }}
+                        placeholder={"議会を指定"}
+                    />
                     <MultiSelect
                         options={groupOptions}
                         currentOptions={groups}

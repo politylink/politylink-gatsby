@@ -59,7 +59,7 @@ const IndexPage = () => {
             const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`;
             navigate(newUrlStr, {replace: true});  // TODO: enable browser back
         }
-    }, [query, categories, statuses, diets, submittedDiets, submittedGroups, supportedGroups, opposedGroups, page]);
+    }, [query, categories, statuses, diets, submittedDiets, submittedGroups, supportedGroups, opposedGroups, page]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (
