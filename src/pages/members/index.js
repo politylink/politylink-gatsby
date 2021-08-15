@@ -1,82 +1,118 @@
-import React from "react"
-import {graphql} from 'gatsby'
-import MemberCard from "../../components/cards/memberCard"
-import {FlexContainer} from "../../components/layouts/container"
-import {SearchBox, SearchResult} from "../../components/filters/search"
-import SEO from "../../components/seo"
-import Layout from "../../components/layouts/layout"
-import {buildPath} from "../../utils/urlUtils";
-import {MEMBER_QUERY_KEY} from "../../utils/constants";
-import {joinNullableStringList} from "../../utils/formatUtils";
-import {isMatch} from "../../utils/searchUtils";
-import {getMembersDescription} from "../../utils/seoUtils";
+import React, {useEffect, useState} from "react"
+import Layout from "../../components/layouts/layout";
+import SEO from "../../components/seo";
+import {getMembersDescription, getMembersTitle} from "../../utils/seoUtils";
+import {Container, FlexContainer} from "../../components/layouts/container";
 import styles from "./index.module.css"
+import MemberCardV2 from "../../components/cards/memberCardV2";
+import {EnterSearchBox, SearchResult} from "../../components/filters/search";
+import Pagination from "../../components/navigations/pagination";
+import {
+    buildMemberUrlParamStr,
+    getInitialGroups,
+    getInitialHouses,
+    getInitialPage,
+    getInitialQuery,
+    groupOptions,
+    houseOptions
+} from "../../utils/apiUtils";
+import {navigate} from '@reach/router';
+import MultiSelect from "../../components/filters/multiSelect";
+import {useMediaQuery} from "react-responsive";
+import {buildPath} from "../../utils/urlUtils";
+import {formatMemberName} from "../../utils/formatUtils";
 
-export default class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            filterText: (typeof window !== 'undefined' && localStorage.getItem(MEMBER_QUERY_KEY)) || '',
+
+const IndexPage = () => {
+    const urlStr = typeof window !== 'undefined' ? window.location : 'https://politylink.jp';
+    const [members, setMembers] = useState([]);
+    const [query, setQuery] = useState(getInitialQuery(urlStr));
+    const [groups, setGroups] = useState(getInitialGroups(urlStr));
+    const [houses, setHouses] = useState(getInitialHouses(urlStr));
+    const [page, setPage] = useState(getInitialPage(urlStr));
+    const [totalMembers, setTotalMembers] = useState(0);
+    const isDesktop = useMediaQuery({query: '(min-width: 1100px)'})
+
+    useEffect(() => {
+        const urlParamStr = buildMemberUrlParamStr(query, groups, houses, page);
+        const fragmentSize = isDesktop ? 100 : 50;
+        fetch(`https://api.politylink.jp/members?items=5&fragment=${fragmentSize}&${urlParamStr}`)
+            .then(response => response.json())
+            .then(data => {
+                setMembers(data['members']);
+                setTotalMembers(data['totalMembers'])
+            });
+        if (typeof window !== 'undefined') {
+            const url = new URL(window.location);
+            const newUrlStr = `${url.origin}${url.pathname}?${urlParamStr}`;
+            navigate(newUrlStr, {replace: true});  // TODO: enable browser back
         }
-        this.handleTextInput = this.handleTextInput.bind(this);
-    }
+    }, [query, groups, houses, page]);  // eslint-disable-line react-hooks/exhaustive-deps
 
-    handleTextInput(event) {
-        typeof window !== 'undefined' && localStorage.setItem(MEMBER_QUERY_KEY, event.target.value);
-        this.setState({filterText: event.target.value});
-    }
 
-    filterMembers(members) {
-        return (members
-                .filter((member) => {
-                    const joinedText = member.name + member.nameHira + joinNullableStringList(member.tags)
-                    return isMatch(this.state.filterText, joinedText)
-                })
-        );
-    }
-
-    render() {
-        const filteredMembers = this.filterMembers(this.props.data.politylink.Member)
-        return (
-            <Layout>
-                <SEO description={getMembersDescription()}/>
+    return (
+        <Layout>
+            <SEO image={`https://politylink.jp/members.png`} twitterType={`summary_large_image`} pageType={`website`}
+                 title={getMembersTitle()} description={getMembersDescription()}/>
+            <FlexContainer>
+                <EnterSearchBox
+                    placeholder="名前、プロフィールで検索"
+                    value={query}
+                    handleQuery={(query) => {
+                        setQuery(query);
+                        setPage(1);
+                        setMembers([]);
+                        setTotalMembers(0);
+                    }}
+                />
+                <SearchResult value={totalMembers + '件'}/>
+            </FlexContainer>
+            <div className={styles.main}>
                 <FlexContainer>
-                    <SearchBox
-                        handleChange={this.handleTextInput}
-                        value={this.state.filterText}
-                        placeholder="国会議員を検索"
-                    />
-                    <SearchResult value={filteredMembers.length + '件表示'}/>
+                    {members.map((member) => {
+                        return <MemberCardV2
+                            id={member.id}
+                            name={formatMemberName(member.name, member.nameHira, isDesktop)}
+                            fragment={member.fragment}
+                            to={buildPath(member.id)}
+                            key={member.id}
+                            activity={member.activity}
+                            group={member.group}
+                            house={member.house}
+                        />;
+                    })}
                 </FlexContainer>
-                <div className={styles.container}>
-                    <FlexContainer>
-                            {filteredMembers.map((member) => {
-                                return <MemberCard
-                                    title={member.name}
-                                    id={member.id}
-                                    key={member.id}
-                                    tags={member.tags}
-                                    house={member.house}
-                                    to={buildPath(member.id)}
-                                />;
-                            })}
-                    </FlexContainer>
+                {isDesktop &&
+                <div className={styles.filters}>
+                    <MultiSelect
+                        options={houseOptions}
+                        currentOptions={houses}
+                        onChange={(props) => {
+                            setHouses(props);
+                            setPage(1);
+                        }}
+                        placeholder={"議会を指定"}
+                    />
+                    <MultiSelect
+                        options={groupOptions}
+                        currentOptions={groups}
+                        onChange={(props) => {
+                            setGroups(props);
+                            setPage(1);
+                        }}
+                        placeholder={"会派を指定"}
+                    />
                 </div>
-            </Layout>
-        )
-    }
+                }
+            </div>
+            <Container>
+                <Pagination
+                    page={page}
+                    pageCount={Math.ceil(totalMembers / 5)}
+                    onPageChange={setPage}
+                />
+            </Container>
+        </Layout>
+    );
 }
-
-export const query = graphql`
-    {
-        politylink {
-            Member(orderBy:[nameHira_asc]) {
-                id
-                name
-                nameHira
-                tags
-                house
-            }
-        }
-    }
-`
+export default IndexPage
