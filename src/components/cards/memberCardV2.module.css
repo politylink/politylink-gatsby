@@ -22,18 +22,61 @@
     width: 100px;
     object-fit: cover;
     border-radius: 50%;
-    margin: 10px 10px;
+    margin: 0 10px;
+}
+
+.group {
+    margin: 0 10px;
+    padding: 0 5px;
+    color: white;
+    background: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+.groupJimin {
+    composes: group;
+    background: #000000;
+}
+
+.groupRikken {
+    composes: group;
+    background: #004098;
+}
+
+.groupKomei {
+    composes: group;
+    background: #dc7eb0;
+}
+
+.groupKyosan {
+    composes: group;
+    background: #db001b;
+}
+
+.groupIshin {
+    composes: group;
+    background: #5ab02e;
+}
+
+.groupKokumin {
+    composes: group;
+    background: #ebbf2d;
 }
 
 .mainText {
     margin: 5px
 }
 
+.house {
+    font-size: 14px;
+    color: #333;
+}
+
 .name {
     font-weight: bold;
     font-size: 20px;
     color: #333;
-    padding: 10px 0;
 }
 
 .fragment {
@@ -43,7 +86,7 @@
 }
 
 .activity {
-    margin: 5px 10px;
+    margin: 10px 10px 5px 10px;
     background-color: #f0f0f0;
     color: #333333;
     padding: 10px 20px;

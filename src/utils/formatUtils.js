@@ -51,3 +51,11 @@ export const translateBillActionType = (type) => {
             return null;
     }
 }
+
+export const formatMemberName = (name, nameHira, isDesktop) => {
+    if (isDesktop) {
+        return `${name}（${nameHira}）`
+    } else {
+        return name
+    }
+}
