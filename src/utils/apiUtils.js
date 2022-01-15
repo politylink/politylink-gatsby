@@ -40,7 +40,7 @@ export const houseOptions = [
     {value: '1', label: '参議院'},
 ]
 
-export const dietOptions = [200, 201, 202, 203, 204].map(x => {
+export const dietOptions = [200, 201, 202, 203, 204, 205, 206, 207].map(x => {
     return {value: x.toString(), label: `第${x}回国会`}
 })
 
