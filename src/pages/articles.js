@@ -13,6 +13,12 @@ export default function Members() {
                 <p> PolityLink開発者が実際にPolityLinkを使ってみて分かったことなどを不定期で記事にしています。</p>
                 <ul>
                     <li>
+                        <a href="https://note.com/m2ku/n/n119151281282">
+                            法律案で振り返る第204回国会（閣法編）
+                        </a>
+                        <span> (2021/07/19) </span>
+                    </li>
+                    <li>
                         <a href="https://qiita.com/teo/items/4cf64f06fa105aa12d7e">
                             PolityLink を支える GraphQL テクノロジー
                         </a>
@@ -25,14 +31,12 @@ export default function Members() {
                         <span> (2020/12/30) </span>
                     </li>
                     <li>
-
                         <a href="https://note.com/m2ku/n/na228266a9174">
                             政治のポータルサイトPolityLinkを作った話
                         </a>
                         <span> (2020/12/10) </span>
                     </li>
                     <li>
-
                         <Link to='/article/review_203_bills'>
                             法律案で振り返る第203回国会
                         </Link>
